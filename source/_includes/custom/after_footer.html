@@ -3,3 +3,22 @@
 {% endcomment %}
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(function() {
+  $('.entry-content').each(function(i){
+    var _i = i;
+    $(this).find('img.fancybox').each(function(){
+      var img = $(this);
+      var title = img.attr("title");
+      var classes = img.attr("class");
+      img.removeAttr("class");
+      img.wrap('<a href="'+this.src+'" class="' + classes + '" rel="gallery'+_i+'" />');
+      if (title != "")
+      {
+        img.parent().attr("title", title);
+      }
+    });
+  });
+  $('.fancybox').fancybox();
+});
+</script>
