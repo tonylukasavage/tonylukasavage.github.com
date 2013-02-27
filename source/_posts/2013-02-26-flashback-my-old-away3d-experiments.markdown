@@ -4,6 +4,7 @@ title: "Flashback: My Old Away3D Experiments"
 date: 2013-02-26 22:08
 comments: true
 categories: [Flash, AS3, Away3D]
+published: false
 ---
 
 Back before before joining the [Appcelerator](http://www.appcelerator.com/) team about a year and a half ago, I was working a typical 9 to 5 enterprise development job. While this was nothing more than a paycheck, it did afford me copious amounts of time to experiment on personal projects before I finally fell in love with cross-platform mobile development. My first true love in this experimental coding was interactive 3D using Flash and [Away3D](http://away3d.com/).
