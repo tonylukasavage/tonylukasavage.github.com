@@ -12,29 +12,35 @@ var github = (function(){
   }
   return {
     showRepos: function(options){
-      $.ajax({
-          url: "https://api.github.com/users/"+options.user+"/repos?callback=?"
-        , type: 'jsonp'
-        , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
-        , success: function(data) {
-          var repos = [];
-          if (!data || !data.data) { return; }
-          for (var i = 0; i < data.data.length; i++) {
-            if (options.skip_forks && data.data[i].fork) { continue; }
-            repos.push(data.data[i]);
-          }
-          repos.sort(function(a, b) {
-            var aDate = new Date(a.pushed_at).valueOf(),
-                bDate = new Date(b.pushed_at).valueOf();
+      render(options.target, [
+        { html_url: 'https://github.com/appcelerator/alloy', name: 'Alloy', description: 'Alloy is an Titanium-based MVC framework for developing cross-platform applications' },
+        { html_url: 'https://github.com/tonylukasavage/pathmenu.js', name: 'pathmenu.js', description: 'Path menu interface for Appcelerator Titanium' },
+        { html_url: 'https://github.com/tonylukasavage/Gonzo', name: 'Gonzo', description: 'A lightweight editor made specifically for markdown' }
+      ]);
 
-            if (aDate === bDate) { return 0; }
-            return aDate > bDate ? -1 : 1;
-          });
+      // $.ajax({
+      //     url: "https://api.github.com/users/"+options.user+"/repos?callback=?"
+      //   , type: 'jsonp'
+      //   , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+      //   , success: function(data) {
+      //     var repos = [];
+      //     if (!data || !data.data) { return; }
+      //     for (var i = 0; i < data.data.length; i++) {
+      //       if (options.skip_forks && data.data[i].fork) { continue; }
+      //       repos.push(data.data[i]);
+      //     }
+      //     repos.sort(function(a, b) {
+      //       var aDate = new Date(a.pushed_at).valueOf(),
+      //           bDate = new Date(b.pushed_at).valueOf();
 
-          if (options.count) { repos.splice(options.count); }
-          render(options.target, repos);
-        }
-      });
+      //       if (aDate === bDate) { return 0; }
+      //       return aDate > bDate ? -1 : 1;
+      //     });
+
+      //     if (options.count) { repos.splice(options.count); }
+      //     render(options.target, repos);
+      //   }
+      // });
     }
   };
 })();
