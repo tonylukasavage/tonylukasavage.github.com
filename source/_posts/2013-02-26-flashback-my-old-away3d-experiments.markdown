@@ -13,6 +13,20 @@ I had always been a back-end dev, mostly C/C++, working on Linux servers for abo
 
 While I never really became much more than a novice-intermediate 3D developer, I did crank out of a bunch of cool looking demos, not to mention made tons of friends and contacts in the Flash/Flex/AS3 world. If it wasn't for those guys, I wouldn't be the Twitter junkie I am today, which directly led to my current job with Appcelerator (_just ask [this guy](https://twitter.com/fusion94)_). In short, these seemingly purposeless experiments led to the most amazing experiences thus far in my professional career.
 
-And without further ado, dug up from the archives of my [old blog](http://savagelook.com/blog/) I present most of the aforementioned experiments in Flash and Away3D. Enjoy!
+And without further ado, dug up from the archives of my [old blog](http://savagelook.com/blog/) I present the aforementioned experiments in Flash and Away3D. Enjoy!
 
-{% img fancybox http://who-is-awesome.com/who-is-awesome.jpg 120 %}
+<a class="fancybox.iframe" href="/demos/face_picking/sandbox.html" >{% img left /images/face_picking.jpg 150 150 %}</a>
+
+<a class="fancybox.iframe" href="/demos/materials/sandbox.html" >{% img left /images/materials.jpg 150 150 %}</a>
+
+<a class="fancybox.iframe" href="/demos/normals_align/sandbox.html" >{% img left /images/normals2.jpg 150 150 %}</a>
+
+<a class="fancybox.iframe" href="/demos/text_demo/text_demo.html" >{% img left /images/text.jpg 150 150 %}</a>
+
+<a class="fancybox.iframe" href="/demos/augmented_reality/sandbox.html" >{% img left /images/camaro.jpg 150 150 %}</a>
+
+<a class="fancybox.iframe" href="/demos/carousel/sandbox.html" >{% img left /images/carousel.jpg 150 150 %}</a>
+
+<a class="fancybox.iframe" href="/projects/savagelook_1.0/index.html" >{% img left /images/savagelook_1.0.jpg 150 150 %}</a>
+
+
