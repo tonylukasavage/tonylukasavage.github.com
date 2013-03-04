@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of text_demo</title>
+	<nodes>
+		<node label="src">
+			<node label="arial.3DS" url="source/arial.3DS"/>
+			<node icon="imageIcon" label="arial.png" url="source/arial.png.html"/>
+			<node icon="swfIcon" label="arial.swf" url="source/arial.swf"/>
+			<node label="arial_new.3DS" url="source/arial_new.3DS"/>
+			<node icon="mxmlIcon" label="AwayUIC.mxml" url="source/AwayUIC.mxml.html"/>
+			<node icon="mxmlAppIcon" selected="true" label="text_demo.mxml" url="source/text_demo.mxml.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 67K)" url="text_demo.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

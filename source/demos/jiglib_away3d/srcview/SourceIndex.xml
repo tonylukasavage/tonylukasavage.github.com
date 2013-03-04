@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of jiglib_away3d</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="AwayUIC.mxml" icon="mxmlIcon" url="source/AwayUIC.mxml.html"/>
+			<node selected="true" label="jiglib_away3d.mxml" icon="mxmlAppIcon" url="source/jiglib_away3d.mxml.html"/>
+			<node label="shadow.png" icon="imageIcon" url="source/shadow.png.html"/>
+			<node label="water.jpg" icon="imageIcon" url="source/water.jpg.html"/>
+		</node>
+	</nodes>
+</index>

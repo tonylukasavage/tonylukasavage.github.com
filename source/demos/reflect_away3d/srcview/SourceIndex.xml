@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of reflect_away3d</title>
+	<nodes>
+		<node label="src">
+			<node icon="imageIcon" label="earth.jpg" url="source/earth.jpg.html"/>
+			<node icon="mxmlAppIcon" selected="true" label="reflect_away3d.as" url="source/reflect_away3d.as.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 812K)" url="reflect_away3d.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

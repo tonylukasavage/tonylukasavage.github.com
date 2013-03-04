@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of SwatchLoaderTest</title>
+	<nodes>
+		<node label="src">
+			<node label="ase">
+				<node label="Alligator eraser.ase" url="source/ase/Alligator eraser.ase"/>
+				<node label="Chocolate Mint Teal.ase" url="source/ase/Chocolate Mint Teal.ase"/>
+				<node label="cl_giant_goldfish.ase" url="source/ase/cl_giant_goldfish.ase"/>
+				<node label="cl_gray.ase" url="source/ase/cl_gray.ase"/>
+				<node label="Graphite daisies.ase" url="source/ase/Graphite daisies.ase"/>
+				<node label="Island Pie.ase" url="source/ase/Island Pie.ase"/>
+				<node label="monazi.ase" url="source/ase/monazi.ase"/>
+				<node label="Moon sliver.ase" url="source/ase/Moon sliver.ase"/>
+				<node label="Sundried Tomato And Olive Bread In Little Italy.ase" url="source/ase/Sundried Tomato And Olive Bread In Little Italy.ase"/>
+				<node label="The Architect.ase" url="source/ase/The Architect.ase"/>
+			</node>
+			<node icon="packageIcon" label="com.savagelook" expanded="true">
+				<node icon="actionScriptIcon" label="SwatchLoader.as" url="source/com/savagelook/SwatchLoader.as.html"/>
+			</node>
+			<node icon="mxmlAppIcon" selected="true" label="SwatchLoaderTest.as" url="source/SwatchLoaderTest.as.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 8K)" url="SwatchLoaderTest.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>
