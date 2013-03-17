@@ -11,6 +11,8 @@ published: true
 
 Back before before joining the [Appcelerator](http://www.appcelerator.com/) team about a year and a half ago, I was working a typical 9 to 5 enterprise development job. While this was nothing more than a paycheck, it did afford me copious amounts of time to experiment on personal projects before I finally fell in love with cross-platform mobile development. My first true love in this experimental coding was interactive 3D using Flash and [Away3D](http://away3d.com/).
 
+<!-- more -->
+
 I had always been a back-end dev, mostly C/C++, working on Linux servers for about the first 7 years of my career. With these experiments, I wanted to get way out of my comfort zone. I wanted to not just learn a new programming language and tooling, but entirely new concepts for interacting with computers. To this end, I dove head-long into learning Away3D with the express purpose of developing demos that had no goal other than pure coding fun.
 
 <a class="fancybox.iframe" href="/demos/cash/cash.html" ><img src="/images/cash.jpg" style="width:33%; float:right; margin-right:10px;"></a>
