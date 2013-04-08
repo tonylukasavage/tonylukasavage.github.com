@@ -4,12 +4,12 @@ title: "Inspecting SQLite databases on Android and iOS"
 date: 2013-04-08 10:30
 comments: true
 categories: [mobile, ios, android, sqlite]
-published: false
+published: true
 ---
 
 {% img right /images/sqlite_logo.png %}
 
-One aspect of the [Alloy MVC framework](https://github.com/appcelerator/alloy) for building cross-platform mobile apps is simple integration with local storage via SQLite databases. SQLite is a powerful and relatively simple way to store data for offline use, or just to cache remote data speed up interactions. Unfortunately, the current data and structure of SQLite databases can sometimes be tricky to ascertain when housed on mobile devices, emulators, and simulators. This is especially true when developing for multiple platforms and having gone through multiple iterations of your data structure.
+One aspect of my current project, the [Alloy MVC framework](https://github.com/appcelerator/alloy) for building cross-platform mobile apps, is simple integration with local storage via SQLite databases. SQLite is a powerful and relatively simple way to store data for offline use, or just to cache remote data to speed up interactions. Unfortunately, the current data and structure of SQLite databases can sometimes be tricky to ascertain when housed on mobile devices, emulators, and simulators. This is especially true when developing for multiple platforms and having gone through multiple iterations of your data structure.
 
 <!-- more -->
 
@@ -99,7 +99,7 @@ sqlite> .help
 <a name="android"></a>
 ## Android
 
-_This section assumes you have an android SDK toolkit on your path._
+<div class="info">INFO: This section assumes you have an android SDK toolkit on your path.</div>
 
 The nice thing about the Android interface is that we can use a single command to find the SQLite databases on both emulators and devices. Assuming you have an open emulator and/or connected Android devices, execute `adb devices` to get a listing of their serial numbers.
 
@@ -157,7 +157,7 @@ Now you've got yourself full access to the live SQLite database on your Android 
 <a name="ios"></a>
 ## iOS
 
-_These instructions are relevant to OS X 10.8.2. I'll be happy to update if there's differences in earlier versions._
+<div class="info">INFO: These instructions are relevant to OS X 10.8.2, other versions may vary.</div>
 
 Unlike Android, you'll have to take a different approach in locating your SQLite database(s) depending on whether you are inspecting a simulator or device. It's actually pretty easy on the simulator. Devices, on the other hand, are a bit more of a pain in the ass to work with with respect to SQLite databases. So it goes with iOS.
 
@@ -205,7 +205,7 @@ You can now hop to the [inspecting your SQLite database](#inspecting) section to
 
 ### Device
 
-_This section assumes you have XCode 4+_
+<div class="info">INFO: This section assumes you have XCode 4+.</div>
 
 It's unfortunate, but on iOS we don't really have a good CLI method for accessing the on-device SQLite database like we do with Android. For this, we'll need to crack open Xcode, and more specifically Organizer. 
 
