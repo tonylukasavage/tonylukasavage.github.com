@@ -3,7 +3,7 @@ layout: post
 title: "Flashback: My Old Away3D Experiments"
 date: 2013-02-26 22:08
 comments: true
-categories: [Flash, AS3, Away3D]
+categories: [flash, as3, away3D]
 published: true
 ---
 

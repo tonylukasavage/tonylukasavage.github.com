@@ -3,7 +3,7 @@ layout: post
 title: "Inspecting SQLite databases on Android and iOS"
 date: 2013-03-17 12:30
 comments: true
-categories: mobile, ios, android, sqlite
+categories: [mobile, ios, android, sqlite]
 published: false
 ---
 
