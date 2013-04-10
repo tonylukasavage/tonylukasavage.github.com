@@ -20,7 +20,7 @@
 .success {
   position:relative;
   padding:15px;
-  margin:1em 0 3em;
+  margin:1em 0 1em;
   color:#fff;
   background:#5a8f00; /* default background for browsers without gradient support */
   /* css3 */
@@ -36,14 +36,14 @@
 .warning {
   position:relative;
   padding:15px;
-  margin:1em 0 3em;
+  margin:1em 0 1em;
   color:#fff;
-  background:#f3961c; /* default background for browsers without gradient support */
+  background:#e3860c; /* default background for browsers without gradient support */
   /* css3 */
-  background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
-  background:-moz-linear-gradient(#f9d835, #f3961c);
-  background:-o-linear-gradient(#f9d835, #f3961c);
-  background:linear-gradient(#f9d835, #f3961c);
+  background:-webkit-gradient(linear, 0 0, 0 100%, from(#e9c825), to(#e3860c));
+  background:-moz-linear-gradient(#e9c825, #e3860c);
+  background:-o-linear-gradient(#e9c825, #e3860c);
+  background:linear-gradient(#e9c825, #e3860c);
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
@@ -52,7 +52,7 @@
 .error {
   position:relative;
   padding:15px;
-  margin:1em 0 3em;
+  margin:1em 0 1em;
   color:#fff;
   background:#c81e2b; /* default background for browsers without gradient support */
   /* css3 */
@@ -128,12 +128,12 @@
   padding:15px;
   margin:1em 0 3em;
   color:#fff;
-  background:#f3961c; /* default background for browsers without gradient support */
+  background:#e3860c; /* default background for browsers without gradient support */
   /* css3 */
-  background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
-  background:-moz-linear-gradient(#f9d835, #f3961c);
-  background:-o-linear-gradient(#f9d835, #f3961c);
-  background:linear-gradient(#f9d835, #f3961c);
+  background:-webkit-gradient(linear, 0 0, 0 100%, from(#e9c825), to(#e3860c));
+  background:-moz-linear-gradient(#e9c825, #e3860c);
+  background:-o-linear-gradient(#e9c825, #e3860c);
+  background:linear-gradient(#e9c825, #e3860c);
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
@@ -146,7 +146,7 @@
   left:50px; /* controls horizontal position */
   border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
   border-style:solid;
-  border-color:#f3961c transparent; 
+  border-color:#e3860c transparent; 
     /* reduce the damage in FF3.0 */
     display:block; 
     width:0;  
