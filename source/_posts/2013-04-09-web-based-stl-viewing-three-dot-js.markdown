@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Web-based STL Viewing: Three.js, WebGL, DataView, and ArrayBuffer"
-date: 2013-04-09 21:24
+title: "Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays"
+date: 2013-04-10 10:50
 comments: true
 categories: javascript, 3d printing, three.js, webgl
-published: false
+published: true
 ---
 
 <a class="fancybox.iframe" href="/images/github_stl.png" ><img src="/images/github_stl.png" style="width:33%; float:right; margin-left:10px;"></a>
