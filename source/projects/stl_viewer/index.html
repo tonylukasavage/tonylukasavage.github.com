@@ -22,16 +22,16 @@
             var camera, scene, renderer,
             geometry, material, mesh, light1, stats;
 
-function trim (str) {
-    str = str.replace(/^\s+/, '');
-    for (var i = str.length - 1; i >= 0; i--) {
-        if (/\S/.test(str.charAt(i))) {
-            str = str.substring(0, i + 1);
-            break;
-        }
-    }
-    return str;
-}
+            function trim (str) {
+                str = str.replace(/^\s+/, '');
+                for (var i = str.length - 1; i >= 0; i--) {
+                    if (/\S/.test(str.charAt(i))) {
+                        str = str.substring(0, i + 1);
+                        break;
+                    }
+                }
+                return str;
+            }
 
             // Notes:
             // - STL file format: http://en.wikipedia.org/wiki/STL_(file_format)
@@ -216,7 +216,7 @@ function trim (str) {
 
             function init() {
 
-                Detector.addGetWebGLMessage();
+                //Detector.addGetWebGLMessage();
 
                 scene = new THREE.Scene();
 
@@ -266,9 +266,6 @@ function trim (str) {
                 stats.domElement.style.position = 'absolute';
                 stats.domElement.style.top = '0px';
                 document.body.appendChild(stats.domElement);
-
-
-
             }
 
             function animate() {
