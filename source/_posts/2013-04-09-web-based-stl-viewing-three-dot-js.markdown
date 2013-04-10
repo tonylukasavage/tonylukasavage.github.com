@@ -9,9 +9,13 @@ published: false
 
 <a class="fancybox.iframe" href="/images/github_stl.png" ><img src="/images/github_stl.png" style="width:33%; float:right; margin-left:10px;"></a>
 
+**Get the full demo:** [jsstl on Github](https://github.com/tonylukasavage/jsstl)
+
 Recently Github announced that they were [integrating a web-based STL viewer into their interface](https://github.com/blog/1465-stl-file-viewing). The [STL file format](http://en.wikipedia.org/wiki/STL_\(file_format\)) has become very well known as of late do to the growing popularity of 3D printing among makers. STL is the format of choice for most 3D printing devices and is as such the format used by almost all accompanying software. So whether you want to print, manage STL files, or convert them to some other format, you need to get to know them well. 
 
-Seeing as how I'm not a maker but I am intrigued by the 3D printing process, about a year ago I implemented a pure Javascript STL parser (both ascii and binary format) and web-based renderer. It's far from polished, but more than usable. Go ahead and check it out [on Github]().
+<!-- more -->
+
+Seeing as how I'm not a maker but I am intrigued by the 3D printing process, about a year ago I implemented a pure Javascript STL parser (both ascii and binary format) and web-based renderer. It's far from polished, but more than usable. Go ahead and check it out [on Github](https://github.com/tonylukasavage/jsstl). It makes use of a few cool technologies, including [Javascript typed arrays](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays), WebGL, and [three.js](http://threejs.org/).
 
 ## Binary Parsing
 
@@ -19,9 +23,9 @@ Parsing the ascii format of STL files was pretty straight forward based on the [
 
 <div class="warning">Javascript typed arrays are a relatively new addition to some major browsers (see also, IE). Check compatibility here: <a href="http://caniuse.com/typedarrays">caniuse.com/typedarrays</a></div>
 
-I won't go into it all too deeply here, other than to say that they make binary possible in Javascript. ArrayBuffers represent a generic, fixed-length data buffer, in this case used to store the binary data in a binary formatted STL file. The DataView in turn exposes a low-level interface for reading, manipulating, and writing ArrayBuffers. Both are used in conjunction to read and pull apart the binary STL into a format that can be used by the web-based rendering engine. 
+I won't go into it all too deeply here, other than to say that they make binary parsing possible in Javascript. ArrayBuffers represent a generic, fixed-length data buffer, in this case used to store the data from a binary formatted STL file. The DataView in turn exposes a low-level interface for reading, manipulating, and writing ArrayBuffers. Both are used in conjunction to read and pull apart the binary STL into a format that can be used by the web-based rendering engine. 
 
-This small snippet below shows how a binary STL file can start to be read using the DataView. Be sure to check out the APIs for [DataView](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/DataView) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/ArrayBuffer) to get the full scope of what they can do.
+This small snippet below shows how a binary STL file can be read using the DataView. Be sure to check out the APIs for [DataView](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/DataView) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/ArrayBuffer) to get the full scope of what they can do.
 
 {% codeblock lang:javascript %}
 // "stl" represents a raw STL binary read from HTTP response data
@@ -95,14 +99,15 @@ mesh = new THREE.Mesh(
 ));
 {% endcodeblock %}
 
-And that's it. The hard part was done creating that `geo` object. We now have the `mesh` object to which we can add to a prepared three.js scene. For the full code, check the [repo]().
+And that's it. The hard part was done creating that `geo` object. We now have the `mesh` object to which we can add to a prepared three.js scene. For the full code, check the [repo](https://github.com/tonylukasavage/jsstl).
 
 ## The Result
 
-To keep things interesting, naturally I chose a weird, frankenstein of an STL in [octocat](http://www.thingiverse.com/thing:10367) that I found on [thingiverse.com](http://www.thingiverse.com) for my testing. I did this for 2 reasons.
+To keep things interesting, naturally I chose a weird, frankenstein of an STL in [octocat](http://www.thingiverse.com/thing:10367) that I found on [thingiverse.com](http://www.thingiverse.com) for my testing. I did this for 3 reasons.
 
 1. It was too unusual and cool to pass up.
 2. It had both the ascii and binary format available. 
+3. It's composed of almost 38,000 triangles. I wanted to see how well a web-based 3D renderer could handle a complex model. 
 
 So without further ado, here's the end result, provided [your browser supports it](http://caniuse.com/typedarrays). Feel free to use, bend, mold, and/or steal this code as you like. A [digital high five](https://twitter.com/tonylukasavage) would be nice, but is not required. 
 
