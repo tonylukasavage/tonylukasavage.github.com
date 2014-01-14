@@ -3,7 +3,7 @@ layout: post
 title: "Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays"
 date: 2013-04-10 10:50
 comments: true
-categories: javascript, 3d printing, three.js, webgl
+categories: [javascript, 3d printing, three.js, webgl]
 published: true
 ---
 
@@ -11,7 +11,7 @@ published: true
 
 **Get the full demo:** [jsstl on Github](https://github.com/tonylukasavage/jsstl)
 
-Recently Github announced that they were [integrating a web-based STL viewer into their interface](https://github.com/blog/1465-stl-file-viewing). The [STL file format](http://en.wikipedia.org/wiki/STL_\(file_format\)) has become very well known as of late do to the growing popularity of 3D printing among makers. STL is the format of choice for most 3D printing devices and is as such the format used by almost all accompanying software. So whether you want to print, manage STL files, or convert them to some other format, you need to get to know them well. 
+Recently Github announced that they were [integrating a web-based STL viewer into their interface](https://github.com/blog/1465-stl-file-viewing). The [STL file format](http://en.wikipedia.org/wiki/STL_\(file_format\)) has become very well known as of late do to the growing popularity of 3D printing among makers. STL is the format of choice for most 3D printing devices and is as such the format used by almost all accompanying software. So whether you want to print, manage STL files, or convert them to some other format, you need to get to know them well.
 
 <!-- more -->
 
@@ -23,7 +23,7 @@ Parsing the ascii format of STL files was pretty straight forward based on the [
 
 <div class="warning">Javascript typed arrays are a relatively new addition to some major browsers (see also, IE). Check compatibility here: <a href="http://caniuse.com/typedarrays">caniuse.com/typedarrays</a></div>
 
-I won't go into it all too deeply here, other than to say that they make binary parsing possible in Javascript. ArrayBuffers represent a generic, fixed-length data buffer, in this case used to store the data from a binary formatted STL file. The DataView in turn exposes a low-level interface for reading, manipulating, and writing ArrayBuffers. Both are used in conjunction to read and pull apart the binary STL into a format that can be used by the web-based rendering engine. 
+I won't go into it all too deeply here, other than to say that they make binary parsing possible in Javascript. ArrayBuffers represent a generic, fixed-length data buffer, in this case used to store the data from a binary formatted STL file. The DataView in turn exposes a low-level interface for reading, manipulating, and writing ArrayBuffers. Both are used in conjunction to read and pull apart the binary STL into a format that can be used by the web-based rendering engine.
 
 This small snippet below shows how a binary STL file can be read using the DataView. Be sure to check out the APIs for [DataView](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/DataView) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/ArrayBuffer) to get the full scope of what they can do.
 
@@ -32,13 +32,13 @@ This small snippet below shows how a binary STL file can be read using the DataV
 var parseStlBinary = function(stl) {
 	// create three.js geometry object, discussed later
 	var geo = new THREE.Geometry();
-	
+
 	// The stl binary is read into a DataView for processing
     var dv = new DataView(stl, 80); // 80 == unused header
     var isLittleEndian = true;
 
-    // Read a 32 bit unsigned integer 
-    var triangles = dv.getUint32(0, isLittleEndian); 
+    // Read a 32 bit unsigned integer
+    var triangles = dv.getUint32(0, isLittleEndian);
 
     var offset = 4;
     for (var i = 0; i < triangles; i++) {
@@ -65,9 +65,9 @@ var parseStlBinary = function(stl) {
 
         // there's also a Uint16 "attribute byte count" that we
         // don't need, it should always be zero.
-        offset += 2;   
+        offset += 2;
 
-        // Create a new face for from the vertices and the normal             
+        // Create a new face for from the vertices and the normal
         geo.faces.push(new THREE.Face3(i*3, i*3+1, i*3+2, normal));
     }
 
@@ -86,7 +86,7 @@ It's not dumb luck that I chose to use this terrific library, I've used it befor
 So needless to say I was already primed to use it again. In the STL viewer I would be using it to render the 3D triangle information from the STL files into faces of a mesh. This turned out to be pretty easy with three.js. The snippet below shows how I took the data I read from the STL in the [Binary Parsing](#parsing) section above and then used it to render a series of triangles that would compose a mesh of the STL object.
 
 {% codeblock lang:javascript %}
-mesh = new THREE.Mesh( 
+mesh = new THREE.Mesh(
     // the "geo" object we filled with normals and vertices above
     geo,
 
@@ -106,9 +106,9 @@ And that's it. The hard part was done creating that `geo` object. We now have th
 To keep things interesting, naturally I chose a weird, frankenstein of an STL in [octocat](http://www.thingiverse.com/thing:10367) that I found on [thingiverse.com](http://www.thingiverse.com) for my testing. I did this for 3 reasons.
 
 1. It was too unusual and cool to pass up.
-2. It had both the ascii and binary format available. 
-3. It's composed of almost 38,000 triangles. I wanted to see how well a web-based 3D renderer could handle a complex model. 
+2. It had both the ascii and binary format available.
+3. It's composed of almost 38,000 triangles. I wanted to see how well a web-based 3D renderer could handle a complex model.
 
-So without further ado, here's the end result, provided [your browser supports it](http://caniuse.com/typedarrays). Feel free to use, bend, mold, and/or steal this code as you like. A [digital high five](https://twitter.com/tonylukasavage) would be nice, but is not required. 
+So without further ado, here's the end result, provided [your browser supports it](http://caniuse.com/typedarrays). Feel free to use, bend, mold, and/or steal this code as you like. A [digital high five](https://twitter.com/tonylukasavage) would be nice, but is not required.
 
 <iframe src="/projects/stl_viewer/index.html" width="100%" height="300"></iframe>
