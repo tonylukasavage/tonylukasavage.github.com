@@ -15,7 +15,8 @@ var github = (function(){
       render(options.target, [
         { html_url: 'https://github.com/appcelerator/alloy', name: 'Alloy', description: 'Titanium-based MVC framework for developing cross-platform applications' },
         { html_url: 'https://github.com/tonylukasavage/ti-mocha', name: 'ti-mocha', description: 'Mocha test support for Appcelerator Titanium' },
-        { html_url: 'https://github.com/appcelerator/hyperloop', name: 'hyperloop', description: 'Write Javascript, get native code for anything' }
+        { html_url: 'https://github.com/appcelerator/hyperloop', name: 'hyperloop', description: 'Write Javascript, get native code for anything' },
+        { html_url: 'https://github.com/tonylukasavage/jsstl', name: 'jsstl', description: 'Parse and render STL files in pure Javascript' }
       ]);
 
       // $.ajax({
