@@ -23,8 +23,6 @@ But no longer. [ti-mocha](https://github.com/tonylukasavage/ti-mocha) resolves t
 
 You've got one less reason to not be unit testing your Titanium apps. So grab [ti-mocha](http://tonylukasavage.com/ti-mocha/), get to it, and let me know what you think.
 
-
-
 ## Resources & Links
 
 * ti-mocha [website](http://tonylukasavage.com/ti-mocha/) and [github](https://github.com/tonylukasavage/ti-mocha)
