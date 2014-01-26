@@ -1,0 +1,53 @@
+---
+layout: post
+title: "F*ck You, Show Me"
+date: 2014-01-24 10:48
+comments: true
+categories: ['rant', 'bug reporting']
+published: false
+---
+
+{% img right http://1.bp.blogspot.com/_518ml9CpccA/S1yBZEPKawI/AAAAAAAACwI/wne0NNFcUOE/s400/castaway.jpg 250 250 castaway %}
+
+Resolving bug reports is like trying to rescue developers lost on a desert island. Sometimes you get the privilege of rescuing the developer who started a signal fire you couldn't possible miss, kindled by reproducible test cases and detailed specifics of their environment. They make the rescue easy and still thank you profusely for the aid. In the end, everyone involved is happy. But this isn't always the case...<!-- more -->
+
+Sometimes you have to resuce the developer who makes no effort on their own to get off the island. They're just sitting in the sand, arms folded, pissed off at the world for getting marooned. This developer essentially throws a message in a bottle into the sea, the entire contents reading:
+
+> I'm lost. Find me.
+
+When the maintainer of the "offending" software project actually manages to find the message, they often tweet cynical things like this:
+
+<blockquote class="twitter-tweet" lang="en"><p>“It failed” or “there was an error” is not a bug report</p>&mdash; Tony Lukasavage (@tonylukasavage) <a href="https://twitter.com/tonylukasavage/statuses/426714081102675968">January 24, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+And while there is a minute, fleeting catharsis to complaining into the void of twitter, nothing is achieved. The stranded developer is still stuck. The maintainer's project has not improved and they still need to wonder if the poorly-defined report is legitimate.
+
+It is at this point that I paraphrase the immortal wisdom of Henry Hill, as delivered through the genius of Martin Scorcese's "Goodfellas":
+
+> Fuck you, show me.
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/5ydqjqZ_3oc?rel=0&start=0&end=22&autoplay=0" frameborder="0" allowfullscreen></iframe>
+
+Trouble with the framework?
+
+> Fuck you, show me.
+
+An uncaught exception crashed your app?
+
+> Fuck you, show me.
+
+You're stuck on what you think is a bug and your client is expecting a deliverable ASAP?
+
+> Fuck you, show me.
+
+Am I really this callous with the bug-reporting-challenged? No, not even close, as I still want to harbor a notion of inclusivity and even education on this task that is the lifeblood of an open source project. So maybe that's not _exactly_ how you should phrase it. Perhaps in practice it sounds a little more like (but the sentiment is the same):
+
+> You haven't provided enough information for anyone to help you troubleshoot. Please provide the details of your development environment, as well as a reproducible test case that manifests the bug you are reporting, and an explanation of what the expected behavior is if it's not clear.
+
+And without the aforementioned requirements, I <span style="color:#a00; font-weight:bold;">will not assist</span> with the bug. Why the hard line on bug reporting? Because standing firm on this point is best for everyone.
+
+* The reporter, in the end, will get their problem solved faster. Providing sufficient details also assures that the issue doesn't get pushed into the maintainer's "archive"; an archive that is often never revisited with popular enough projects.
+* The maintainer gets a bug resolved without having to employ mind-reading, which is reward enough in itself. In addition, well-written bug reports make it much easier for maintainers to write tests that will prevent regressions in the future, thereby creating an increasingly stable project.
+* The project's community of developers wins too. Well written bug reports allow the maintainer(s) to move through bugs quickly and spend more time focusing on improvements and features.
+
+Don't get stuck on a desert island only to get blown off by a gangster-quoting maintainer. Write minimal, detailed, reproducible bug reports.
