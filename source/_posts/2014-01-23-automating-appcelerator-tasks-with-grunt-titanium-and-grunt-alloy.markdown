@@ -7,9 +7,7 @@ categories: [titanium, alloy, grunt, node.js, javascript, testing, mobile]
 published: true
 ---
 
-{% githubrepo tonylukasavage/grunt-titanium %}
-
-{% githubrepo tonylukasavage/grunt-alloy %}
+{% img right /images/grunt.png 150 150 gruntjs %}
 
 If you follow me on [twitter](https://twitter.com/tonylukasavage), my current love affair with task management via the node.js module [grunt](http://gruntjs.com/) is no secret. Long story short, it is a deliciously simple way to automate development tasks, with a multitude of those tasks (like [linting](https://github.com/gruntjs/grunt-contrib-jshint), [minification](https://github.com/gruntjs/grunt-contrib-uglify), [file watching](https://npmjs.org/package/grunt-contrib-watch), etc...) already done for you. I could babble on about it here, but I think a tweet of mine best encapsulates my experience with it.<!-- more -->
 
@@ -24,6 +22,10 @@ For a crash course in...
 * Titanium and Alloy, check out Appcelerator's [guides](http://docs.appcelerator.com/titanium/latest/) and get to building top-of-the-line, cross-platform, **native** mobile apps quickly and easily.
 
 In the meantime, though, check out these few examples of how you can use grunt-titanium and grunt-alloy to super-charge your development workflow. Bear in mind that these are excerpts from a Gruntfile.js implementation, so again, read up on grunt and check out the grunt-titanium and grunt-alloy repos to fully understand how to use these examples.
+
+{% githubrepo tonylukasavage/grunt-titanium %}
+
+{% githubrepo tonylukasavage/grunt-alloy %}
 
 ## Create and build a Titanium app
 
