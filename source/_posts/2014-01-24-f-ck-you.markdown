@@ -4,7 +4,7 @@ title: "F*ck You, Show Me"
 date: 2014-01-24 10:48
 comments: true
 categories: ['rant', 'bug reporting']
-published: false
+published: true
 ---
 
 {% img right http://1.bp.blogspot.com/_518ml9CpccA/S1yBZEPKawI/AAAAAAAACwI/wne0NNFcUOE/s400/castaway.jpg 250 250 castaway %}
@@ -40,14 +40,16 @@ You're stuck on what you think is a bug and your client is expecting a deliverab
 
 > Fuck you, show me.
 
-Am I really this callous with the bug-reporting-challenged? No, not even close, as I still want to harbor a notion of inclusivity and even education on this task that is the lifeblood of an open source project. So maybe that's not _exactly_ how you should phrase it. Perhaps in practice it sounds a little more like (but the sentiment is the same):
+Am I really this callous with the bug-reporting-challenged? No, not even close. I want to harbor a notion of inclusivity and even education on this task that is the lifeblood of an open source project. So maybe that's not _exactly_ how you should phrase it. Perhaps in practice it sounds a little more like:
 
 > You haven't provided enough information for anyone to help you troubleshoot. Please provide the details of your development environment, as well as a reproducible test case that manifests the bug you are reporting, and an explanation of what the expected behavior is if it's not clear.
 
-And without the aforementioned requirements, I <span style="color:#a00; font-weight:bold;">will not assist</span> with the bug. Why the hard line on bug reporting? Because standing firm on this point is best for everyone.
+But the sentiment is the same. And without the aforementioned requirements, I <span style="color:#a00; font-weight:bold;">will not assist</span> with the bug. Why the hard line on bug reporting? Because standing firm on this point is best for everyone.
 
-* The reporter, in the end, will get their problem solved faster. Providing sufficient details also assures that the issue doesn't get pushed into the maintainer's "archive"; an archive that is often never revisited with popular enough projects.
-* The maintainer gets a bug resolved without having to employ mind-reading, which is reward enough in itself. In addition, well-written bug reports make it much easier for maintainers to write tests that will prevent regressions in the future, thereby creating an increasingly stable project.
+* The reporter, in the end, will get their problem solved faster. Providing sufficient details also assures that the issue doesn't get pushed into the maintainer's "archive"; an archive that is sometimes never revisited.
+* The maintainer gets a bug resolved without having to employ mind-reading, which is reward enough in itself. In addition, well-written bug reports make it much easier for maintainers to write tests that will prevent regressions in the future, thereby increasing the stability of the project.
 * The project's community of developers wins too. Well written bug reports allow the maintainer(s) to move through bugs quickly and spend more time focusing on improvements and features.
 
 Don't get stuck on a desert island only to get blown off by a gangster-quoting maintainer. Write minimal, detailed, reproducible bug reports.
+
+_Feel free to link the shit out of this on issue lists, Q&A boards, forums, etc... <span style="color:#a00; font-weight:bold;">Spread the word</a>._
