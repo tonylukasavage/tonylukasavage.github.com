@@ -3,7 +3,7 @@ layout: post
 title: "Hack yourself"
 date: 2014-04-07 11:35
 comments: true
-pulished: false
+published: false
 categories:
 ---
 
