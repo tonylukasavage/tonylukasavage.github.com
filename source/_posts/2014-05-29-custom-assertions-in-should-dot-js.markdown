@@ -7,14 +7,18 @@ categories: [node.js,javascript,should.js,testing]
 published: false
 ---
 
-[should.js](https://github.com/visionmedia/should.js/) is my assertion library of choice when unit testing my [node.js](http://nodejs.org/) and [Titanium](http://www.appcelerator.com/titanium/) projects, for a few reasons:
+[should.js][] is my assertion library of choice when unit testing my [node.js][] and [Titanium][] projects, for a few reasons:
 
-1. Works flawlessly with [mocha](http://visionmedia.github.io/mocha/). Not a surprise since they have the same [author](https://github.com/visionmedia).
+1. Works flawlessly with [mocha][]. Not a surprise since they have the same [author][tj].
 2. Works in node.js, browser, and Titanium.
-3. Extremely readable and <span style="color:#a00;font-weight:bold;">expressive</span>.
+3. Extremely readable and <span class="readme">expressive</span>.
 4. Extendable to be even better at #3, if you know how.
 
-Here I'd like to explain exactly how you can do #4. Let's take a simple case. Let's say you have a configuration file that must abide by this format:
+Here I'd like to explain exactly how you can do #4. I was originally inspired by [this post][inspiration], but the method therein made available only a small subset of should.js's assertion functionality. To quote Freddy Mercury, **_♫ I want it all, and I want it now. ♫_**
+
+## Test Case
+
+Let's say you have a configuration file that must abide by this format:
 
 ### config.json
 {% codeblock lang:javascript %}
@@ -25,7 +29,9 @@ Here I'd like to explain exactly how you can do #4. Let's take a simple case. Le
 }
 {% endcodeblock %}
 
-We'd like to strictly enforce that format using assertions. Lots of them. A ridiculous amount in fact. Yes, it could be done much more tersely, but it helps express the point of customization. Let's do it in a mocha [BDD](http://en.wikipedia.org/wiki/Behavior-driven_development) structure.
+We'd like to strictly enforce that format using assertions. Lots of them. A ridiculous amount in fact. Yes, it could be done much more tersely, but it helps express the point of customization. Let's do it in a mocha [BDD][] structure.
+
+## No Custom Assertions
 
 ### test.js
 {% codeblock lang:javascript %}
@@ -54,15 +60,17 @@ describe('config', function() {
 });
 {% endcodeblock %}
 
-Here we're effectively asserting the format of the configuration, but we're losing a bit of the expressiveness of should.js in the process. In addition, what if we want to validate the config at the beginning of many tests and keep it [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself)?
-
-We've essentially got 11 lines of assertion code when what we really just want to say
+Here we're effectively asserting the format of the configuration, but we're losing a bit of the expressiveness of should.js in the process. We've essentially got 11 lines of assertion code when what we really just want to say is
 
 > this object should be a valid config
 
-So let's do exactly that by creating a <span style="color:#a00;font-weight:bold;">custom assertion</span> within should.js. And let's go one step further and show how this custom assertion can be placed in a separate module, making our tests as simple, clean, and expressive as possible.
+In addition, what if we want to validate the config at the beginning of many tests and keep it [DRY][]? It's undoubtedly getting messy fast here.
 
-I'm going to explain some of the should.js assertion internals inline, but for more details I'd highly suggest perusing the [source code](https://github.com/visionmedia/should.js), particularly the [extensions](https://github.com/visionmedia/should.js/tree/master/lib/ext).
+## Custom Assertions
+
+Let's say "this object is a valid config" _exactly_ that by creating a <span class="readme">custom assertion</span> within should.js. And let's go one step further and show how this custom assertion can be placed in a separate module. This will make our tests as simple, clean, and expressive as possible.
+
+I'm going to explain some of the should.js assertion internals inline, but for more details I'd highly suggest perusing the [source code][should.js], particularly the [extensions][].
 
 ### assertions.js
 {% codeblock lang:javascript %}
@@ -126,10 +134,43 @@ describe('config', function() {
 });
 {% endcodeblock %}
 
-Aaaaaahhh, now that is <span style="color:#a00;font-weight:bold;">nice</span>. I would hope it's pretty clear now how custom assertions can improve the readability and scalability of your test suites. It becomes even more abundantly clear as your test suites grow. But just in case you aren't convinced, here's a few more examples of using custom assertions in should.js to execute critical testing while preserving maximal expressiveness.
+Aaaaaahhh, now that is _<span class="readme">nice</span>_. It should be pretty clear at this point how custom assertions can improve the readability and scalability of your test suites. It becomes clearer as your test suites grow.
+
+## Examples
+
+Just in case you aren't convinced, here's a few more examples of using custom assertions in should.js to execute critical testing while preserving maximal expressiveness.
 
 ### Titanium Proxies
+
+Remember, [Titanium proxies don't play well with should.js][tiproxy], so you need to wrap them manually before running assertions.
+
+#### assertion code
 
 {% codeblock lang:javascript %}
 var should = require('should');
 {% endcodeblock %}
+
+#### usage
+
+{% codeblock lang:javascript %}
+should(Ti.UI.createWindow()).
+{% endcodeblock %}
+
+
+
+## Resources & Links
+
+* should.js on [github][should.js] and lots of assertion [examples][extensions]
+* mocha [website][mocha] and [github](https://github.com/visionmedia/mocha)
+* ["Custom assertions with should.js"][inspiration] by Andrew Swerlick
+
+[inspiration]: http://beyondoverload.wordpress.com/2012/01/19/custom-assertions-with-should-js/
+[should.js]: https://github.com/visionmedia/should.js
+[extensions]: https://github.com/visionmedia/should.js/tree/master/lib/ext
+[node.js]: http://nodejs.org/
+[Titanium]: http://www.appcelerator.com/titanium/
+[mocha]: http://visionmedia.github.io/mocha/
+[tj]: https://github.com/visionmedia
+[BDD]: http://en.wikipedia.org/wiki/Behavior-driven_development
+[DRY]: http://en.wikipedia.org/wiki/Don't_repeat_yourself
+[tiproxy]: http://tonylukasavage.com/ti-mocha/#caveats
