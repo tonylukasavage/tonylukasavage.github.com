@@ -148,12 +148,20 @@ Remember, [Titanium proxies don't play well with should.js][tiproxy], so you nee
 
 {% codeblock lang:javascript %}
 var should = require('should');
+should.Assertion.add('TitaniumProxy', function() {
+	should.exist(this.obj);
+	should(this.obj).be.an.Object;
+	should(this.obj.applyProperties).be.a.Function;
+}, true);
 {% endcodeblock %}
 
 #### usage
 
 {% codeblock lang:javascript %}
-should(Ti.UI.createWindow()).
+var should = require('should'),
+	win = Ti.UI.createWindow();
+
+should(win).be.a.TitaniumProxy;
 {% endcodeblock %}
 
 
