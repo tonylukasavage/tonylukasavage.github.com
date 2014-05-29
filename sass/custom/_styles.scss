@@ -1,7 +1,7 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
-#theHeader { 
+#theHeader {
 }
 
 .info {
@@ -91,10 +91,10 @@
   left:50px; /* controls horizontal position */
   border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
   border-style:solid;
-  border-color:#075698 transparent; 
+  border-color:#075698 transparent;
     /* reduce the damage in FF3.0 */
-    display:block; 
-    width:0;  
+    display:block;
+    width:0;
 }
 
 .successbox {
@@ -120,10 +120,10 @@
   left:50px; /* controls horizontal position */
   border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
   border-style:solid;
-  border-color:#5a8f00 transparent; 
+  border-color:#5a8f00 transparent;
     /* reduce the damage in FF3.0 */
-    display:block; 
-    width:0;  
+    display:block;
+    width:0;
 }
 
 .warningbox {
@@ -149,10 +149,10 @@
   left:50px; /* controls horizontal position */
   border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
   border-style:solid;
-  border-color:#e3860c transparent; 
+  border-color:#e3860c transparent;
     /* reduce the damage in FF3.0 */
-    display:block; 
-    width:0;  
+    display:block;
+    width:0;
 }
 
 .errorbox {
@@ -178,8 +178,13 @@
   left:50px; /* controls horizontal position */
   border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
   border-style:solid;
-  border-color:#c81e2b transparent; 
+  border-color:#c81e2b transparent;
     /* reduce the damage in FF3.0 */
-    display:block; 
-    width:0;  
+    display:block;
+    width:0;
+}
+
+.readme {
+  color: #a00;
+  font-weight: bold;
 }
