@@ -14,9 +14,13 @@ var github = (function(){
     showRepos: function(options){
       render(options.target, [
         { html_url: 'https://github.com/appcelerator/alloy', name: 'Alloy', description: 'Titanium-based MVC framework for developing cross-platform applications' },
-        { html_url: 'https://github.com/tonylukasavage/ti-mocha', name: 'ti-mocha', description: 'Mocha test support for Appcelerator Titanium' },
         { html_url: 'https://github.com/appcelerator/hyperloop', name: 'hyperloop', description: 'Write Javascript, get native code for anything' },
-        { html_url: 'https://github.com/tonylukasavage/jsstl', name: 'jsstl', description: 'Parse and render STL files in pure Javascript' }
+        { html_url: 'https://github.com/tonylukasavage/ti-mocha', name: 'ti-mocha', description: 'Mocha test support for Appcelerator Titanium' },
+        { html_url: 'https://github.com/tonylukasavage/ti-commonjs', name: 'ti-commonjs', description: 'node.js-style commonjs implementation for Titanium 3.X' },
+        { html_url: 'https://github.com/tonylukasavage/tiapp.xml', name: 'tiapp.xml.js', description: 'Titanium tiapp.xml parsing and manipulation API' },
+        { html_url: 'https://github.com/tonylukasavage/grunt-titanium', name: 'grunt-titanium', description: 'grunt plugin for Titanium CLI' },
+        { html_url: 'https://github.com/tonylukasavage/grunt-alloy', name: 'grunt-alloy', description: 'grunt plugin for Titanium Alloy framework' },
+        { html_url: 'https://github.com/tonylukasavage/bolts', name: 'bolts', description: 'An opinionated bootstrap for node.js projects' }
       ]);
 
       // $.ajax({
