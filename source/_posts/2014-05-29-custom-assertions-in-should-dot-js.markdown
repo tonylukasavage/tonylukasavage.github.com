@@ -68,7 +68,7 @@ In addition, what if we want to validate the config at the beginning of many tes
 
 ## Custom Assertions
 
-Let's say "this object is a valid config" _exactly_ that by creating a <span class="readme">custom assertion</span> within should.js. And let's go one step further and show how this custom assertion can be placed in a separate module. This will make our tests as simple, clean, and expressive as possible.
+Let's say "this object is a valid config" _exactly_ by creating a <span class="readme">custom assertion</span> within should.js. And let's go one step further and show how this custom assertion can be placed in a separate module. This will make our tests as simple, clean, and expressive as possible.
 
 I'm going to explain some of the should.js assertion internals inline, but for more details I'd highly suggest perusing the [source code][should.js], particularly the [extensions][].
 
@@ -144,12 +144,12 @@ Just in case you aren't convinced, here's a few more examples of using custom as
 
 Remember, [Titanium proxies don't play well with should.js][tiproxy], so you need to wrap them manually before running assertions.
 
-#### assertion code
+#### assertions.js
 
 {% codeblock lang:javascript %}
 var should = require('should');
 should.Assertion.add('TitaniumProxy', function() {
-	should.exist(this.obj);
+	this.params = { operator: 'to be a Titanium proxy' };
 	should(this.obj).be.an.Object;
 	should(this.obj.applyProperties).be.a.Function;
 }, true);
@@ -158,12 +158,75 @@ should.Assertion.add('TitaniumProxy', function() {
 #### usage
 
 {% codeblock lang:javascript %}
-var should = require('should'),
+var assertions = require('./assertions'),
+	should = require('should'),
 	win = Ti.UI.createWindow();
 
 should(win).be.a.TitaniumProxy;
 {% endcodeblock %}
 
+### Format Validation
+
+Here's a simple case of validating that a given object is an XML string using [xmldom](https://github.com/jindw/xmldom).
+
+#### assertions.js
+
+{% codeblock lang:javascript %}
+var should = require('should'),
+	DOMParser = require('xmldom').DOMParser;
+
+should.Assertion.add('Xml', function(str) {
+	this.params = { operator: 'to be a valid XML string' };
+	this.obj.should.be.a.String;
+	(function() {
+		new DOMParser().parseFromString(str);
+	}).should.not.throw();
+}, true);
+{% endcodeblock %}
+
+#### usage
+
+{% codeblock lang:javascript %}
+var assertions = require('./assertions'),
+	should = require('should');
+
+var xml = '<root><node/></root>';
+xml.should.be.XML;
+{% endcodeblock %}
+
+### Complex matchers
+
+You can even do some really complex validating using functions instead of getters. Here's an example of asserting that a chunk of Javascript will be be minified into an expected string using [uglifyjs](https://github.com/mishoo/UglifyJS2).
+
+#### assertions.js
+
+{% codeblock lang:javascript %}
+var should = require('should'),
+	UglifyJS = require("uglify-js");
+
+should.Assertion.add('minifyTo', function(str) {
+	this.params = { operator: 'to be a valid XML string',
+		expected: str,
+		showDiff: true
+	};
+
+	this.obj.should.be.a.String;
+	(function() {
+		var result = UglifyJS.minify('test.js').code;
+		result.should.equal(str);
+	}).should.not.throw();
+}, false);
+{% endcodeblock %}
+
+#### usage
+
+{% codeblock lang:javascript %}
+var assertions = require('./assertions'),
+	should = require('should');
+
+var code = 'var  foo = "bar"; var quux = 123;';
+code.should.minifyTo('var foo="bar",quux=123;');
+{% endcodeblock %}
 
 
 ## Resources & Links
