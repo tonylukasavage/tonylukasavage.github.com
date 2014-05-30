@@ -4,7 +4,6 @@ title: "Custom assertions in should.js"
 date: 2014-05-29 14:47
 comments: true
 categories: [node.js,javascript,should.js,testing]
-published: false
 ---
 
 [should.js][] is my assertion library of choice when unit testing my [node.js][] and [Titanium][] projects, for a few reasons:
@@ -13,6 +12,8 @@ published: false
 2. Works in node.js, browser, and Titanium.
 3. Extremely readable and <span class="readme">expressive</span>.
 4. Extendable to be even better at #3, if you know how.
+
+<!-- more -->
 
 Here I'd like to explain exactly how you can do #4. I was originally inspired by [this post][inspiration], but the method therein made available only a small subset of should.js's assertion functionality. To quote Freddy Mercury, **_♫ I want it all, and I want it now. ♫_**
 
