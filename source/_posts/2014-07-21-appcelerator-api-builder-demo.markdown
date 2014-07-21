@@ -3,7 +3,7 @@ layout: post
 title: "Appcelerator API Builder Demo"
 date: 2014-07-21 15:47
 comments: true
-categories: appcelerator, titanium
+categories: [appcelerator, titanium]
 ---
 
 For the last few months I've deviated from my usual [Alloy](http://www.appcelerator.com/platform/alloy/) duties at Appcelerator. I've instead been working on an internal project at with [Dawson Toth](https://twitter.com/dawsontoth), [Simon Murtha Smith](https://twitter.com/smurthas), and [Jeff Haynie](https://twitter.com/jhaynie) (since he so quickly gets bored of being CEO). We've had a few names for it so far, but for the sake of this post I'll refer to it as **API Builder**.
