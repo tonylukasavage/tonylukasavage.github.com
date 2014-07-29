@@ -6,7 +6,7 @@ comments: true
 categories: [appcelerator, titanium]
 ---
 
-For the last few months I've deviated from my usual [Alloy](http://www.appcelerator.com/platform/alloy/) duties at Appcelerator. I've instead been working on an internal project at with [Dawson Toth](https://twitter.com/dawsontoth), [Simon Murtha Smith](https://twitter.com/smurthas), and [Jeff Haynie](https://twitter.com/jhaynie) (since he so quickly gets bored of being CEO). We've had a few names for it so far, but for the sake of this post I'll refer to it as **API Builder**.
+For the last few months I've deviated from my usual [Alloy](http://www.appcelerator.com/platform/alloy/) duties at Appcelerator. I've instead been working on an internal project with [Dawson Toth](https://twitter.com/dawsontoth), [Simon Murtha Smith](https://twitter.com/smurthas), and [Jeff Haynie](https://twitter.com/jhaynie) (since he so quickly gets bored of being CEO). We've had a few names for it so far, but for the sake of this post I'll refer to it as **API Builder**.
 
 In short, it bridges the gap between app and API development, taking the functional links of the [Appcelerator Platform's](http://www.appcelerator.com/platform/appcelerator-platform/) offerings and turning them into a powerful, cohesive chain. The following screencast is a (very early) preview where I'll show you the following:
 
