@@ -206,7 +206,7 @@ var should = require('should'),
 	UglifyJS = require("uglify-js");
 
 should.Assertion.add('minifyTo', function(str) {
-	this.params = { operator: 'to be a valid XML string',
+	this.params = { operator: 'to minify to `' + str + '`',
 		expected: str,
 		showDiff: true
 	};
