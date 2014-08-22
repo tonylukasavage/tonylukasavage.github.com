@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Flash Player 10.1"
+date: 2010-06-10 08:55
+comments: false
+categories: [archive, away3d, flash player 10.1]
+published: true
+---
+
+I was checking in on a <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/dab6061d8a064d57?hl=en" target="_blank">performance thread</a> I started on the <a href="http://groups.google.com/group/away3d-dev" target="_blank">Away3D development mailing list</a> and came upon a tidbit that is quite exciting.  One of the users informed me that Flash Player 10.1 was expected to be a big "game changer" in terms of performance for Away3D.  Always skeptical, I had to check it out myself.
+
+I checked my demo in my last post and was getting around 27 FPS.  I then updated to the <a href="http://labs.adobe.com/downloads/flashplayer10.html" target="_blank">pre-release of Flash Player 10.1</a> and reloaded the demo.  I was shocked to see my average frame per second jump to almost 40!  <strong>Without changing a bit of code I got a 30% boost in performance.</strong> Very cool.  Can't wait to see what's next as 3D in Flash becomes more mature.
