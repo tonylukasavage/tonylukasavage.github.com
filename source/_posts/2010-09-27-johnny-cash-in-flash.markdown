@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Johnny Cash in Flash"
+date: 2010-09-27 09:56
+comments: false
+categories: [archive, actionscript3, away3d, away3dlite, soundmixer, google api, php, as3]
+published: true
+---
+
+<p style="text-align: center;"><a href="/demos/cash/cash.html" class="fancybox.iframe"><img title="face_picking" src="/images/cash.jpg" alt="" width="559" height="421" /></a></p>
+
+→ <a class="fancybox.iframe" href="/demos/cash/cash.html">Click here</a> or the image above for the demo.
+&rarr; View the <a href="/demos/cash/srcview/index.html">source code</a>.
+<b>NOTE:</b> You'll need to download <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a>, <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a>, and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> to compile the code.
+
+Inspired by the legendary Johnny Cash I decided to dive into a few AS3 development topics I haven't gotten to yet to create a 3d equalizer and tribute to the Man in Black.  Those topics, along with some other more familiar ones, include:
+<ul>
+	<li>Playing audio in Flash with Sound and SoundChannel</li>
+	<li>Using the <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/media/SoundMixer.html" target="_blank">SoundMixer</a> to generate values based on the audio</li>
+	<li>Searching for images with the Google API via <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a></li>
+	<li>Creating a PHP proxy for beating <a href="http://www.onegiantmedia.com/as3---load-a-remote-image-from-any-domain-with-no-security-sandbox-errors" target="_blank">Flash cross-domain security issues</a></li>
+	<li>Using <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> for speedy 3d visualization (I even get 15 FPS on my phone!)</li>
+	<li>Using <a href="http://www.closier.nl/prefab/" target="_blank">Prefab</a> to export 3d models as native AS3 code for Away3d or Away3dLite.</li>
+</ul>
+This demo has a good bit more code than I usually post up.  It also uses a couple external libraries, namely <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a> (3d rendering), <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a> (Google API), and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> (super useful AS3 utilities).  Rather than overwhelm you with mountains of tutorial-like rambling, instead I'll leave this demo here to be enjoyed, make the source code available, and break down each of these topics into smaller tutorials/guides in the near future.
+
+Sometimes your muse doesn't need to be even slightly related to your field of creativity.  In fact, that can often make for the most interesting inspiration.
