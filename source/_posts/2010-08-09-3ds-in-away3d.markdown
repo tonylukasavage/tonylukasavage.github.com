@@ -1,0 +1,16 @@
+---
+layout: post
+title: "3DS in Away3D"
+date: 2010-08-09 21:28
+comments: false
+categories: [archive, away3d, 3ds, performance]
+published: true
+---
+
+<p style="text-align: center;"><a href="/demos/3ds_load/sandbox.html" class="fancybox.iframe"><img title="3DS Load Demo" src="/images/torusknot1.jpg" alt="" width="423" height="349" /></a></p>
+
+I'm starting to cook up a few game ideas with some friends of mine and I wanted to get a sense of what Away3D could really do.  To start, I made this very basic example of Away3D loading a fairly high poly 3DS file with minimal animation.  More specifically, it's a rotating, 2880 poly, torus knot with a wire frame material.  While Away3D isn't really made to handle models with this many polys, it gives me an idea of how it will handle a total polycount of about 3000.
+
+<strong>Featured Away3D code</strong>: Max3DS.load() and WireColorMaterial
+
+Click the image above to access the example.  You can right click on the example and click "view source" to,  you guessed it, view the source.
