@@ -3,11 +3,13 @@ layout: post
 title: "Away3dLite: Face linking, take 2"
 date: 2010-06-25 21:51
 comments: false
-categories: [archive, away3d, code demos, away3dlite, facelink]
-published: false
+categories: [archive, away3d, away3dlite, facelink]
+published: true
 ---
 
-<p style="text-align: left;"><a href="http://www.savagelook.com/demos/normals_align/sandbox.html" target="_self" rel="shadowbox;height=600;width=800;"><img class="aligncenter size-full wp-image-97" title="normals2" src="http://savagelook.com/blog/wp-content/uploads/2010/06/normals2.jpg" alt="" width="433" height="320" /></a>It was great.  I had a moment of triumph.  In my meager 3D and Away3D experience I managed to get face linking functionality into Away3DLite.  Proud of myself, I posted my success at the <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/960780192fbb77bd" target="_blank">Away3D Dev</a> list.  But my party was soon rained on by one of the Away3D developers, Peter Kapelyan, who immediately informed that my linked objects weren't aligning as they should be.  It felt a lot like that scene in National Lampoon's Christmas Vacation where Clark finally gets the lights lit on his house, only to have his father-in-law inform him that the little lights weren't twinkling...</p>
+<p style="text-align: center;"><a href="/demos/normals_align/sandbox.html" class="fancybox.iframe"><img title="normals_align" src="/images/normals2.jpg" alt="" width="433" height="320" /></a></p>
+
+It was great.  I had a moment of triumph.  In my meager 3D and Away3D experience I managed to get face linking functionality into Away3DLite.  Proud of myself, I posted my success at the <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/960780192fbb77bd" target="_blank">Away3D Dev</a> list.  But my party was soon rained on by one of the Away3D developers, Peter Kapelyan, who immediately informed that my linked objects weren't aligning as they should be.  It felt a lot like that scene in National Lampoon's Christmas Vacation where Clark finally gets the lights lit on his house, only to have his father-in-law inform him that the little lights weren't twinkling...</p>
 <p style="text-align: center;"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="src" value="http://www.youtube.com/v/nsaxNehMibg" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://www.youtube.com/v/nsaxNehMibg"></embed></object>
 
 <p style="text-align: left;">I know Peter, thanks for noticing.</p>
