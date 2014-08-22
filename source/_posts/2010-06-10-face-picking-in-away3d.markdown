@@ -7,7 +7,7 @@ categories: [archive, away3d, code demos, face picking, screenvertex]
 published: true
 ---
 
-<p style="text-align: center;"><a href="/demos/face_picking/sandbox.html" target="_self" rel="shadowbox;height=600;width=800;"><img class="aligncenter size-full wp-image-21" title="face_picking" src="/images/face_picking.jpg" alt="" width="445" height="331" /></a></p>
+<p style="text-align: center;"><a href="/demos/face_picking/sandbox.html" class="fancybox.iframe"><img title="face_picking" src="/images/face_picking.jpg" alt="" width="445" height="331" /></a></p>
 
 Here's a quick demo of individual face picking and manipulation in Away3D.  Using your mouse you can click to select any visible face of the sphere to change its color, as well as receive information about the face itself.  The face's number, 3D coordinates, and screen coordinates will appear in the upper left hand portion of the view.
 
