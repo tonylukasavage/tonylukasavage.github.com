@@ -1,0 +1,235 @@
+---
+layout: post
+title: "Box2DFlashAS3 v2.1a HelloWorld"
+date: 2010-08-18 14:34
+comments: false
+categories: [archive, box2d, actionscript3, box2dflashas3, as3]
+published: true
+---
+
+<p style="text-align: center;"><a href="/demos/box2d/box2d.swf" class="fancybox.iframe"><img title="box2d" src="/images/box2d.jpg" alt="" width="516" height="487" /></a></p>
+
+Click the image above for the demo.
+<a href="/demos/box2d/srcview/index.html" target="_self">Click here</a> or right click on the demo to view the source code.
+
+Inspired by <a href="http://www.youtube.com/watch?v=mnyynpq-TXo" target="_blank">this clip</a> of Box2D running on Android, I decided to dive into this 2D physics engine I have heard so much about.  While the version of Box2D I used is the AS3 version called <a href="http://www.box2dflash.org/" target="_blank">Box2DFlashAS3</a>, the <a href="http://www.box2d.org/" target="_blank">original version</a> is written in C++.  Basically it very simply lets you apply 2D physics to your objects, or "bodies," in AS3.
+
+Most of the examples and tutorials I saw were lacking 2 things:
+<ol>
+	<li> A way to apply sprites to my "bodies" without the use of a flash project (FLA) file.</li>
+	<li>Code that was compatible with the latest version of Box2DFlashAS3, v2.1a at the time of this post.</li>
+</ol>
+So to resolve that situation, or to account for my search engine deficiency, I present the HelloWorld example from the Box2DFlashAS3 2.1a distribution modified to be pure AS3:
+
+``` as3
+package {
+  /*
+   * Tony Lukasavage - SavageLook.com - 8/18/2010
+   * Box2DFlashAS3 2.1a HelloWorld example, minus the need for an accompanying FLA
+   *
+   * This the basic Box2DFlashAS3 HelloWorld.as file from the source distribution
+   * with some adjustments made so that you do not need an FLA file to compile and
+   * run the code.  A simple bonus for us pure AS3 guys.  Also a few minor modifications
+   * are made to account for changes between version 2.0 and 2.1, like adding a type
+   * for body definitions.  Finally, I threw in an click handler to toggle between
+   * normal and debug drawing.
+   *
+   */
+
+  import Box2D.Collision.*;
+  import Box2D.Collision.Shapes.*;
+  import Box2D.Common.Math.*;
+  import Box2D.Dynamics.*;
+
+  import __AS3__.vec.Vector;
+
+  import com.adobe.viewsource.ViewSource;
+
+  import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.events.MouseEvent;
+  import flash.geom.Matrix;
+  import flash.text.TextField;
+  import flash.text.TextFormat;
+
+  [SWF(width="800", height="600", frameRate="30")]
+  public class box2d extends Sprite
+  {
+    private var _world:b2World;
+    private var _velocityIterations:int = 10;
+    private var _positionIterations:int = 10;
+    private var _timeStep:Number = 1.0 / 30.0;
+    private var _showDebug:Boolean = true;
+    private var _debugSprite:Sprite;
+    private var _bodySprites:Vector. = new Vector.();
+
+    // Box2D uses meters for measurement, AS3 uses pixels.  1 meter = 30 pixels
+    public var _worldRatio:int = 30;
+
+    public function box2d()
+    {
+      // Add event for main loop
+      addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
+      stage.addEventListener(MouseEvent.CLICK, onClick );
+
+      // add background gradient
+      var bg:Sprite = new Sprite();
+      var matrix:Matrix = new Matrix();
+      matrix.createGradientBox(stage.stageWidth, stage.stageHeight, Math.PI/2, 0, 0);
+      bg.graphics.beginGradientFill("linear", [0x9999ff, 0xffffff], [1, 1], [0, 255], matrix);
+      bg.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
+      bg.graphics.endFill();
+      addChild(bg);
+
+      // Define the gravity vector
+      var gravity:b2Vec2 = new b2Vec2(0.0, 10.0);
+
+      // Allow bodies to sleep
+      var doSleep:Boolean = true;
+
+      // Construct a world object
+      _world = new b2World(gravity, doSleep);
+
+      // set debug draw
+      var debugDraw:b2DebugDraw = new b2DebugDraw();
+      _debugSprite = new Sprite();
+      addChild(_debugSprite);
+      debugDraw.SetSprite(_debugSprite);
+      debugDraw.SetDrawScale(_worldRatio);
+      debugDraw.SetFillAlpha(0.5);
+      debugDraw.SetLineThickness(2);
+      debugDraw.SetAlpha(1);
+      debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+      _world.SetDebugDraw(debugDraw);
+
+      // Vars used to create bodies
+      var body:b2Body;
+      var bodyDef:b2BodyDef;
+      var boxShape:b2PolygonShape;
+      var circleShape:b2CircleShape;
+
+      // Adding sprite variable for dynamically creating body userData
+      var sprite:Sprite;
+      var groundHeight:int = 60;
+
+      sprite = new Sprite();
+      sprite.graphics.lineStyle(1);
+      sprite.graphics.beginFill(0x444444);
+      sprite.graphics.drawRect(-stage.stageWidth/2, -groundHeight/2, stage.stageWidth, groundHeight);
+      sprite.graphics.endFill();
+
+      bodyDef = new b2BodyDef();
+      bodyDef.type = b2Body.b2_staticBody;
+      bodyDef.position.Set(stage.stageWidth / _worldRatio / 2, (stage.stageHeight - sprite.height/2) / _worldRatio);
+      bodyDef.userData = sprite;
+      addChild(bodyDef.userData);
+
+      boxShape = new b2PolygonShape();
+      boxShape.SetAsBox(sprite.width/_worldRatio/2, sprite.height/_worldRatio/2);
+
+      var fixtureDef:b2FixtureDef = new b2FixtureDef();
+      fixtureDef.shape = boxShape;
+      fixtureDef.friction = 0.3;
+      fixtureDef.density = 0; // static bodies require zero density
+
+      body = _world.CreateBody(bodyDef);
+      body.CreateFixture(fixtureDef);
+
+      // Add some objects
+      for (var i:int = 1; i < 20; i++) {
+        // create generic body definition
+        bodyDef = new b2BodyDef();
+        bodyDef.type = b2Body.b2_dynamicBody;
+        bodyDef.position.x = Math.random() * 15 + 5;
+        bodyDef.position.y = Math.random() * 10;
+        var rX:Number = Math.random() + 0.5;
+        var rY:Number = Math.random() + 1;
+        var spriteX:Number = rX * 30 * 2;
+        var spriteY:Number = rY * 30 * 2;
+
+        // Box
+        if (Math.random() < 0.5) {
+          sprite = new Sprite();
+          sprite.graphics.lineStyle(1);
+          sprite.graphics.beginFill(0xff6666);
+          sprite.graphics.drawRect(-spriteX/2, -spriteY/2, spriteX, spriteY);
+          sprite.graphics.endFill();
+          bodyDef.userData = sprite;
+
+          boxShape = new b2PolygonShape();
+          boxShape.SetAsBox(rX, rY);
+
+          fixtureDef.shape = boxShape;
+          fixtureDef.density = 1.0;
+          fixtureDef.friction = 0.5;
+          fixtureDef.restitution = 0.2;
+
+          body = _world.CreateBody(bodyDef);
+          body.CreateFixture(fixtureDef);
+        }
+        // Circle
+        else {
+          sprite = new Sprite();
+          sprite.graphics.lineStyle(1);
+          sprite.graphics.beginFill(0x44ff44);
+          sprite.graphics.drawCircle(0, 0, spriteX/2);
+          sprite.graphics.endFill();
+          bodyDef.userData = sprite;
+
+          circleShape = new b2CircleShape(rX);
+
+          fixtureDef.shape = circleShape;
+          fixtureDef.density = 1.0;
+          fixtureDef.friction = 0.5;
+          fixtureDef.restitution = 0.2;
+
+          body = _world.CreateBody(bodyDef);
+          body.CreateFixture(fixtureDef);
+        }
+
+        _bodySprites.push(bodyDef.userData as Sprite);
+        addChild(bodyDef.userData);
+      }
+
+      // enable view source
+      ViewSource.addMenuItem(this, "srcview/index.html");
+      var text:TextField = new TextField();
+      text.text = "Right click to view source";
+      text.setTextFormat(new TextFormat("arial", 14, 0, true));
+      text.x = 20;
+      text.y = 20;
+      text.width = 200;
+      addChild(text);
+    }
+
+    public function onClick(e:MouseEvent):void {
+      _showDebug = !_showDebug;
+      if (!_showDebug) {
+        _debugSprite.graphics.clear();
+      }
+      for each (var sprite:Sprite in _bodySprites) {
+        sprite.visible = !_showDebug;
+      }
+    }
+
+    public function Update(e:Event):void{
+      _world.Step(_timeStep, _velocityIterations, _positionIterations);
+      if (_showDebug) {
+        _world.DrawDebugData();
+      }
+
+      // Go through body list and update sprite positions/rotations
+      for (var bb:b2Body = _world.GetBodyList(); bb; bb = bb.GetNext()){
+        if (bb.GetUserData() is Sprite){
+          var sprite:Sprite = bb.GetUserData() as Sprite;
+          sprite.x = bb.GetPosition().x * 30;
+          sprite.y = bb.GetPosition().y * 30;
+          sprite.rotation = bb.GetAngle() * (180/Math.PI);
+        }
+      }
+    }
+  }
+}
+```
+
+Very cool stuff that adds lots of possibilities to your Flash projects.  I can't wait to start playing with the more complex aspects like joints, buoyancy and breakable bodies.  More intensely awesome demos sure to follow.
