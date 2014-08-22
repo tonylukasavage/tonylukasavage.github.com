@@ -1,0 +1,276 @@
+---
+layout: post
+title: "JigLib Flash and Away3D"
+date: 2010-09-07 16:00
+comments: false
+categories: [archive, actionscript3, away3d, jiglib, as3, away3dlite]
+published: true
+---
+
+<p style="text-align: center;"><a href="/demos/jiglib_away3d/jiglib_away3d.html" class="fancybox.iframe"><img title="jiglib_away3d" src="/images/jiglib_big.jpg" alt="" width="556" height="323" /></a></p>
+
+&rarr; Click the above image or <a href="/demos/jiglib_away3d/jiglib_away3d.html">here</a> to play the demo
+&rarr; <a href="/demos/jiglib_away3d/srcview/index.html">View the source code</a>
+
+<h1>The Overview</h1>
+Toying around with <a href="http://www.jiglibflash.com/blog/" target="_blank">JigLib Flash</a> in <a href="http://away3d.com" target="_blank">Away3D</a> today was both interesting and sobering.  For those who don't know, JigLib is a 3D physics engine, and JigLib Flash is the AS3 port of it.  While my expectations weren't too high since this is complex mathematical processing in Flash, I was hoping for a little more.  Don't get me wrong, though, there's some very cool potential here.  Be sure to check the tutorials and demos added by people who didn't give up quite as quickly as me: <a href="http://www.jiglibflash.com/blog/2009/07/23/collection-of-jiglibflash-examplestutorials-3d-physic-engine/" target="_blank">JigLib Flash demos and tutorials</a>.  I particularly enjoyed some of the car physics demos using this library.
+
+I was setting out to do a basic Jenga-like game.  Its just a tower of zig zagging blocks, 3 blocks to a row, 18 rows total.  It quickly became evident that this just wasn't going to happen.  After about 4 rows of blocks the frame rate dropped down into single digits and there was tons of "jitter" among the blocks in the scene.  I assume the jitter has to do with the fact that Flash can't process the collisions fast enough and Jiglib is trying to correct rigid body penetrations.  I did A LOT of tinkering with the <a href="http://code.google.com/p/jiglibflash/source/browse/trunk/fp10/src/jiglib/cof/JConfig.as" target="_blank">JConfig</a> settings, which are a group of static settings that manipulate how the physics is calculated, but couldn't make it work for me.  In the end, I think JigLib Flash just needs a lot of work on "stacking" and rigid bodies with many simultaneous points of contact.
+
+OK, now that I've had my purge of frustration, let me at least talk about a half decent example of Away3D and JigLib running very well together.  In the demo at the top of this post I just have a whole bunch of spheres falling into a box with JigLib taking care of the collisions.  It works very well and even maintains a good frame rate.  So good in fact that I even took the time to add some simple shadows to the falling spheres.
+
+<h1>The Code</h1>
+&rarr; <a href="/demos/jiglib_away3d/srcview/index.html">full source code (download link at bottom)</a>
+jiglib_away3d.mxml:
+<div style="height:400px; overflow:auto;">
+
+``` as3
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*"
+	            creationComplete="init();" frameRate="60" height="600" width="800"
+	            viewSourceURL="srcview/index.html">
+    <mx:Script>
+    	<![CDATA[
+    		import away3d.primitives.Plane;
+    		import away3d.core.base.Mesh;
+    		import __AS3__.vec.Vector;
+    		import away3d.materials.BitmapMaterial;
+    		import jiglib.physics.RigidBody;
+    		import jiglib.plugin.away3d.*;
+    		import mx.core.UIComponent;
+    		import away3d.primitives.Sphere;
+    		import away3d.core.math.Number3D;
+    		import away3d.core.utils.Cast;
+
+    		private var _physics:Away3DPhysics;
+    		private var _shadows:Vector.<Plane> = new Vector.<Plane>();
+    		private var _bodies:Vector.<RigidBody> = new Vector.<RigidBody>();
+    		[Embed("shadow.png")] private var pngShadow:Class;
+    		[Embed("water.jpg")] private var jpgPaper:Class;
+
+	    	private function init():void {
+	    		if (stage) {
+					initAway3D();
+				} else {
+					this.addEventListener(Event.ADDED_TO_STAGE, function(e:Event):void { initAway3D(); });
+				}
+	    	}
+
+	    	private function initAway3D():void {
+	    		stage.quality = flash.display.StageQuality.LOW;
+	    		stage.scaleMode = StageScaleMode.NO_SCALE;
+	    		_drawBackground();
+
+	    		// prepare physics
+	    		var walls:Vector.<RigidBody> = new Vector.<RigidBody>();
+	    		_physics = new Away3DPhysics(away3dMain.view, 5);
+	    		walls.push(_physics.createCube({width:1000, height:10, depth:1000}));
+	    		walls.push(_physics.createCube({width:10, height:1000, depth:1000}));
+	    		walls.push(_physics.createCube({width:1000, height:1000, depth:10}));
+	    		walls.push(_physics.createCube({width:10, height:1000, depth:1000}));
+
+	    		var sprite:Sprite = new Sprite();
+	    		var matrix:Matrix = new Matrix();
+	    		matrix.createGradientBox(512,512,0,0,0);
+	    		sprite.graphics.beginGradientFill("radial", [0xdddddd,0x000000], [1,1], [0,255], matrix);
+	    		sprite.graphics.drawRect(0,0,512,512);
+	    		sprite.graphics.endFill();
+	    		var bmd:BitmapData = new BitmapData(512,512,false);
+	    		bmd.draw(sprite);
+	    		var mat:BitmapMaterial = new BitmapMaterial(bmd);
+
+	    		for (var j:uint = 0; j < walls.length; j++) {
+	    			var body:RigidBody = walls[j];
+	    			var mesh:Mesh = Away3dMesh(body.skin).mesh;
+	    			body.movable = false;
+					mesh.material = mat;
+					mesh.ownCanvas = true;
+					mesh.pushback = true;
+
+					switch(j) {
+						case 1:
+							body.x = 505;
+							body.y = 495;
+							break;
+						case 2:
+							body.z = 505;
+							body.y = 495;
+							break;
+						case 3:
+							body.x = -505;
+							body.y = 495;
+							break;
+					}
+	    		}
+
+				var paper:BitmapMaterial = new BitmapMaterial(Cast.bitmap(jpgPaper));
+				for (var i:int = 0; i < 20; i++) {
+					var sphere:RigidBody = _physics.createSphere({radius:30, segmentsW:6, segmentsH:6});
+					_bodies.push(sphere);
+					sphere.x = 100 - Math.random() * 200;
+					sphere.y = 700 + Math.random() * 3000;
+					sphere.z = 200 - Math.random() * 100;
+					sphere.material.restitution = 1;
+
+					// This is how to access the engine specific mesh/do3d
+					_physics.getMesh(sphere).material = paper;
+
+					var plane:Plane = new Plane({material:new BitmapMaterial(Cast.bitmap(pngShadow)), height:80, width:80, bothsides:true});
+					plane.ownCanvas = true;
+					plane.pushback = true;
+					plane.filters = [new BlurFilter(8,8)];
+					plane.blendMode = BlendMode.SUBTRACT;
+					away3dMain.view.scene.addChild(plane);
+					_shadows.push(plane);
+				}
+
+				// create away3d scene
+				away3dMain.title = "SavageLook.com -- Away3D JigLib Demo";
+				away3dMain.camera.position = new Number3D(0, 700, -1500);
+				away3dMain.camera.lookAt(new Number3D(0,0,0));
+
+				// assign pre and post render functions
+				away3dMain.preRender = function():void {
+					for (var k:uint = 0; k < _shadows.length; k++) {
+						if (_shadows[k].x > 505 || _shadows[k].x < -505 || _shadows[k].z > 505 || _shadows[k].z < -505 || _bodies[k].y < -10) {
+							_shadows[k].visible = false;
+						} else {
+							_shadows[k].x = _bodies[k].x;
+							_shadows[k].z = _bodies[k].z;
+						}
+					}
+					_physics.step();
+				};
+				away3dMain.postRender = function():void { trace("postRender"); };
+	    	}
+
+	    	private function _drawBackground():void {
+	    		var sprite:Sprite = new Sprite();
+	    		var ui:UIComponent = new UIComponent();
+	    		var matrix:Matrix = new Matrix();
+
+	    		matrix.createGradientBox(this.width, this.height, Math.PI/2, 0, 0);
+	    		sprite.graphics.beginGradientFill("linear", [0x888888, 0xffffff], [1,1], [0,255], matrix);
+	    		sprite.graphics.drawRect(0, 0, this.width, this.height);
+	    		sprite.graphics.endFill();
+	    		ui.addChild(sprite);
+	    		this.addChildAt(ui, 0);
+	    	}
+    	]]>
+    </mx:Script>
+	<local:AwayUIC id="away3dMain"  x="0" y="0" height="600" width="800"/>
+</mx:Application>
+```
+</div>
+
+AwayUIC.mxml:
+<div style="height:400px; overflow:auto;">
+
+``` as3
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import away3d.debug.AwayStats;
+			import away3d.core.math.Number3D;
+			import away3d.cameras.TargetCamera3D;
+            import away3d.containers.View3D;
+            import away3d.core.render.Renderer;
+
+            public var view:View3D;
+            public var camera:TargetCamera3D;
+            public var doRender:Boolean;
+            private var _title:String;
+            private var _link:String;
+            private var _titleText:TextField;
+
+            public var preRender:Function = null;
+            public var postRender:Function = null;
+
+            override protected function createChildren():void {
+                super.createChildren();
+                doRender = true;
+
+                // setup camera
+                camera = new TargetCamera3D();
+                camera.position = new Number3D(0, 0, -1000);
+				camera.lookAt(new Number3D(0,0,0));
+
+                // setup view
+                view = new View3D({camera:camera, renderer:Renderer.BASIC});
+                view.x = this.unscaledWidth/2;
+                view.y = this.unscaledHeight/2;
+                this.addChild(view);
+
+                // add stats and title
+                var stats:AwayStats = new AwayStats(view);
+                this.addChild(stats);
+                _title = "SavageLook.com";
+                _link = "http://savagelook.com/blog";
+                _setText();
+
+                this.addEventListener(Event.ENTER_FRAME, function(e:Event):void { _render(); });
+            }
+
+            private function _setText():void {
+            	if (_titleText == null) {
+            		_titleText = new TextField();
+            		this.addChild(_titleText);
+            	}
+
+                _titleText.text = _title;
+                _titleText.setTextFormat(new TextFormat("arial", 14, 0xffffff, false, false, false, _link));
+                _titleText.x = 150;
+                _titleText.y = 10;
+                _titleText.width = _titleText.textWidth * 1.1;
+                _titleText.filters = [new DropShadowFilter()];
+            }
+
+            public function get link():String {
+            	return _link;
+            }
+
+            public function set link(value:String):void {
+            	_link = value;
+            	_setText();
+            }
+
+            public function get title():String {
+            	return _title;
+            }
+
+            public function set title(value:String):void {
+            	_title = value;
+            	_setText();
+            }
+
+            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+                super.updateDisplayList(unscaledWidth, unscaledHeight);
+                view.x = unscaledWidth/2;
+                view.y = unscaledHeight/2;
+
+                if (view.stage) {
+                	_render();
+            	}
+            }
+
+            private function _render():void {
+            	if (doRender) {
+	            	if (preRender != null) {
+	            		preRender();
+	            	}
+	            	view.render();
+	            	if (postRender != null) {
+	            		postRender();
+	            	}
+            	}
+            }
+        ]]>
+	</mx:Script>
+</mx:UIComponent>
+```
+
+</div>
+
+<h1>The Summary</h1>
+My hasty opinion in this case is that JigLib is fun to play with, but don't get excited about doing anything super complex... yet.  I follow a few of the developers and contributors and they are constantly working on it.  They even just recently added support for <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> so you can use all that quick rendering goodness along with it.  I fully intend to follow this project closely as it matures.
