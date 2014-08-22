@@ -3,7 +3,7 @@ layout: post
 title: "Flash Player 10.1"
 date: 2010-06-10 08:55
 comments: false
-categories: [archive, away3d, flash player 10.1]
+categories: [archive, away3d, flash]
 published: true
 ---
 

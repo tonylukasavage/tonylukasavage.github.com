@@ -3,7 +3,7 @@ layout: post
 title: "Face picking in Away3D"
 date: 2010-06-10 22:43
 comments: false
-categories: [archive, away3d, code demos, face picking, screenvertex]
+categories: [archive, away3d, face picking, screenvertex]
 published: true
 ---
 
