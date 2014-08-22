@@ -1,0 +1,133 @@
+---
+layout: post
+title: "Reflection in AS3"
+date: 2010-08-25 15:41
+comments: false
+categories: [archive, actionscript3, as3, reflection, generatefilterrect]
+published: true
+---
+
+Inspired by this <a href="http://www.adobe.com/devnet/flash/articles/reflect_class_as3.html" target="_blank">tutorial on reflections in AS3</a> at adobe devnet, I decided to play with reflections in Actionscript3.  As usual I can never follow a tutorial or step by step process without constantly trying to tweak it.
+
+In my process of tweaking I found a slight short coming in the example given.  While it does a fantastic job of handling standard DisplayObjects, I found that things get a little messed up when you add filters to these objects.  Notice how the edges of the first image are cut off and sharp, whereas the the second image that accounts for the filters' impact on DisplayObjects' dimensions looks smooth:
+<div style="margin-left: auto; margin-right: auto; width: 450px;">
+
+</div>
+In my efforts to remedy this problem I came across a very useful function for BitmapData called <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/display/BitmapData.html#generateFilterRect()" target="_blank">generateFilterRect()</a>.  Given a Rectangle and a BitmapFilter this function will return the Rectangle that would actually encompass the DisplayObject along with its filter.  With a simple bit of iteration we can traverse an object's list of filters and determine what the max dimensions will be.  Here's the function I added to take care of it:
+
+``` as3
+private function _createReflectionBitmapData(obj:Sprite):BitmapData {
+  var filterRect:Rectangle;
+  var width:Number = obj.width;
+  var height:Number = obj.height;
+  var bmd:BitmapData = new BitmapData(width, height, true, 0xffffff);
+  var matrix:Matrix = new Matrix();
+
+  // filters can cause a display object to render outside of its rectangle
+  for each (var filter:BitmapFilter in obj.filters) {
+    filterRect = bmd.generateFilterRect(bmd.rect, filter);
+    width = filterRect.width > width ? filterRect.width : width;
+    height = filterRect.height > height ? filterRect.height : height;
+  }
+
+  // create, invert, and position relfection bitmapdata
+  bmd = new BitmapData(width, height, true, 0xffffff);
+  matrix.createBox(1, -1, 0, (width - obj.width)/2, height - (height - obj.height)/2);
+  bmd.draw(obj, matrix);
+
+  return bmd;
+}
+```
+
+The end result is BitmapData that contains our inverted DisplayObject, now properly sized and positioned.  We can now pass this into a Bitmap object and continue on with the code in the tutorial mentioned at the beginning of this post.  Or... you can use my stripped down and less functional version to get a simple view of how reflections are achieved in AS3:
+
+``` as3
+package
+{
+  import flash.display.Bitmap;
+  import flash.display.BitmapData;
+  import flash.display.DisplayObject;
+  import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.filters.BitmapFilter;
+  import flash.filters.GlowFilter;
+  import flash.geom.Matrix;
+  import flash.geom.Rectangle;
+
+  /**
+   * ...
+   * @author Tony Lukasavage - SavageLook.com
+   */
+  public class Main extends Sprite
+  {
+    public function Main():void
+    {
+      if (stage) init();
+      else addEventListener(Event.ADDED_TO_STAGE, init);
+    }
+
+    private function init(e:Event = null):void
+    {
+      removeEventListener(Event.ADDED_TO_STAGE, init);
+
+      // create main glow circle
+      var obj:Sprite = new Sprite();
+      var matrix:Matrix = new Matrix();
+      var radius:Number = 100;
+      matrix.createGradientBox(radius*2, radius*2, Math.PI / 2);
+      obj.graphics.beginGradientFill("linear", [0x888888, 0xffffff], [1, 1], [0, 255], matrix);
+      obj.graphics.drawCircle(radius, radius, radius);
+      obj.graphics.endFill();
+      obj.x = stage.stageWidth / 2 - radius;
+      obj.y = stage.stageHeight / 2 - radius*1.5;
+      obj.filters = [new GlowFilter(0xffffff, 1, 20, 20, 2, 1)];
+      this.addChild(obj);
+
+      // create reflection
+      var bmd:BitmapData = _createReflectionBitmapData(obj);
+      var bitmapReflect:Bitmap = new Bitmap(bmd);
+      bitmapReflect.x = stage.stageWidth / 2 - bitmapReflect.width/2;
+      bitmapReflect.y = obj.y + radius*2;
+      this.addChild(bitmapReflect);
+
+      // create gradient for reflection
+      var grad:Sprite = new Sprite();
+      matrix.createGradientBox(bitmapReflect.width, bitmapReflect.height / 2, Math.PI / 2, 0, 0);
+      grad.graphics.beginGradientFill("linear", [0xffffff, 0xffffff], [1, 0], [0, 255], matrix);
+      grad.graphics.drawRect(0, 0, bitmapReflect.width, bitmapReflect.height);
+      grad.x = bitmapReflect.x;
+      grad.y = bitmapReflect.y;
+      grad.cacheAsBitmap = true;
+      bitmapReflect.cacheAsBitmap = true;
+      bitmapReflect.mask = grad;
+      this.addChild(grad);
+    }
+
+    private function _createReflectionBitmapData(obj:Sprite):BitmapData {
+      var filterRect:Rectangle;
+      var width:Number = obj.width;
+      var height:Number = obj.height;
+      var bmd:BitmapData = new BitmapData(width, height, true, 0xffffff);
+      var matrix:Matrix = new Matrix();
+
+      // filters can cause a display object to render outside of its rectangle
+      for each (var filter:BitmapFilter in obj.filters) {
+        filterRect = bmd.generateFilterRect(bmd.rect, filter);
+        width = filterRect.width > width ? filterRect.width : width;
+        height = filterRect.height > height ? filterRect.height : height;
+      }
+
+      // create, invert, and position relfection bitmapdata
+      bmd = new BitmapData(width, height, true, 0xffffff);
+      matrix.createBox(1, -1, 0, (width - obj.width)/2, height - (height - obj.height)/2);
+      bmd.draw(obj, matrix);
+
+      return bmd;
+    }
+  }
+}
+```
+
+And thats the basics.  If you want an in depth description of each step and how they are performed, I will again refer you to the <a href="http://www.adobe.com/devnet/flash/articles/reflect_class_as3.html" target="_blank">terrific tutorial by Ben Pritchard</a>.  In the meantime, enjoy your new found knowledge and start putting it to use.  Everyone else is.  Seriously.  Like every image anymore has a reflection under it.  This is really starting to irk my "swim against the current" side.  Oh well, nothing a glass of Jack can't cure.
+
+Is everyone doing this in Away3D?  No?  Well you can add me to the list soon ;)
