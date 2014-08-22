@@ -3,8 +3,8 @@ layout: post
 title: "Face picking in Away3D"
 date: 2010-06-10 22:43
 comments: false
-categories: [archive, away3d, code demos, face picking, screenvertex, blogroll]
-published: false
+categories: [archive, away3d, code demos, face picking, screenvertex]
+published: true
 ---
 
 <p style="text-align: center;"><a href="/demos/face_picking/sandbox.html" target="_self" rel="shadowbox;height=600;width=800;"><img class="aligncenter size-full wp-image-21" title="face_picking" src="/images/face_picking.jpg" alt="" width="445" height="331" /></a></p>
@@ -13,10 +13,9 @@ Here's a quick demo of individual face picking and manipulation in Away3D.  Usi
 
 Hopefully you'll find it useful.  As usual, you can right click and select "view source" to see the source code for the demo.
 
-<span style="text-decoration: underline;">Featured Away3D code</span>
-<ul>
-	<li>away3d.cameras.Camera3D.screen()</li>
-	<li>away3d.core.draw.ScreenVertex</li>
-	<li>away3d.core.draw.DrawTriangle</li>
-	<li>away3d.core.base.Mesh.faces</li>
-</ul>
+### Featured Away3D code
+
+* away3d.cameras.Camera3D.screen()
+* away3d.core.draw.ScreenVertex
+* away3d.core.draw.DrawTriangle
+* away3d.core.base.Mesh.faces
