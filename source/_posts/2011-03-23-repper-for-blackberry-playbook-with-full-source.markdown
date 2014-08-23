@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Repper for Blackberry Playbook with Full Source"
+date: 2011-03-23 09:09
+comments: false
+categories: [archive, blackberry, actionscript3, adobe air, playbook, repper, as3, flex]
+published: true
+---
+
+<h2>The Code</h2>
+<ul style="padding-top: 20px; padding-bottom: 20px;">
+	<li><a href="https://github.com/tonylukasavage/Repper-playbook" target="_blank">Repper-playbook on Github</a> -- Full source code and Flash Builder "Burrito" project files</li>
+</ul>
+
+
+<h2>The Overview</h2>
+I mentioned this week that if you hustle you can still get yourself a <a href="http://us.blackberry.com/developers/tablet/playbook_offer.jsp" target="_blank">free Blackberry Playbook</a>.  Just follow <a href="http://savagelook.com/blog/actionscript3/procrastinators-guide-to-a-free-blackberry-playbook">my procrastinator's guide</a> and you could very well still have enough time to make it.  I also made posted a while ago the incredibly simple process of porting <a href="https://market.android.com/details?id=air.Repper" target="_blank">Repper</a>, my fitness calculator mobile app written with <a href="http://labs.adobe.com/technologies/flexsdk_hero/" target="_blank">Flex "Hero"</a>, to the Playbook.  If that wasn't enough for you, here's one more bit of charity to motivate to try and beat that March 31st, 2011 deadline to submit an app for a free Playbook.
+
+In the <a href="https://github.com/tonylukasavage/Repper-playbook" target="_blank">Github link</a> at the top I've included the full source and project files for Flash Builder "Burrito" for Repper.  Yep, everything it took to make a Playbook app that was submitted and approved is included within.  Take a look, pull it down, load it up, and see how a simple, functional app can get you a free tablet.  If you are wondering what your time is worth in comparison to the effort necessary, the model that developers are likely to receive (16 GB) is being priced at $500.  Seems a fair trade for a few hours of your time.
+
+So now you have a guide to getting a Blackberry Playbook app submitted as quickly as possible and full source code for a project that has already been approved.  Pair that with the fact that I've not heard of one functional app not being approved, you are completely out of excuses to not cash in on this offer.  Dig in and get it done.
