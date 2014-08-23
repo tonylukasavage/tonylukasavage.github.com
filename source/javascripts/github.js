@@ -15,7 +15,7 @@ var github = (function(){
       render(options.target, [
         { html_url: 'https://github.com/appcelerator/alloy', name: 'Alloy', description: 'Titanium-based MVC framework for developing cross-platform applications' },
         { html_url: 'https://github.com/appcelerator/hyperloop', name: 'hyperloop', description: 'Write Javascript, get native code for anything' },
-        { html_url: 'https://github.com/tonylukasavage/triple', name: 'triple', description: 'REPL for Titanium' }
+        { html_url: 'https://github.com/tonylukasavage/triple', name: 'triple', description: 'REPL for Titanium' },
         { html_url: 'https://github.com/tonylukasavage/ti-mocha', name: 'ti-mocha', description: 'Mocha test support for Appcelerator Titanium' },
         { html_url: 'https://github.com/tonylukasavage/ti-commonjs', name: 'ti-commonjs', description: 'node.js-style commonjs implementation for Titanium 3.X' },
         { html_url: 'https://github.com/tonylukasavage/tiapp.xml', name: 'tiapp.xml.js', description: 'Titanium tiapp.xml parsing and manipulation API' },
