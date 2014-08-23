@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Forms with Appcelerator Titanium"
+date: 2011-10-14 07:49
+comments: false
+categories: [archive, appcelerator, mobile, commonjs]
+published: true
+---
+
+I don't cross post often from the <a href="http://developer.appcelerator.com/blog/" target="_blank">developer blog over at Appcelerator</a>, but people seem to be liking this screencast so I thought I'd share. I put together some code and a video showing off how you can you use cross platform design, modular Javascript, and of course, Titanium to deliver a simplified interface for creating forms in your mobile apps. Aside from it being easy for developers to implement, there's also a special focus on making the forms as easy to navigate as possible for the end user.
+
+I've tried not to overpopulate this blog with Appcelerator content ever since joining them as a platform evangelist. I think I've earned an Appcelerator post though after talking exclusively about PhoneGap and Adobe in my last one though. ;-)
+
+<iframe src="http://player.vimeo.com/video/30387041?title=0&amp;byline=0&amp;portrait=0" width="600" height="340" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+
+<h2>Additional Resources</h2>
+<ul>
+<li><a href="https://github.com/appcelerator-developer-relations/Forging-Titanium/tree/master/ep-010/Forms">Forms app on Github</a></li>
+<li><a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-1-commonjs-modules.html">Forging Titanium Episode 1: CommonJS Modules</a></li>
+</ul>
