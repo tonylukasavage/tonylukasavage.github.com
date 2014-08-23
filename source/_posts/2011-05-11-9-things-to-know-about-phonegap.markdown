@@ -4,7 +4,7 @@ title: "9 things to know about PhoneGap"
 date: 2011-05-11 14:07
 comments: false
 categories: [archive, mobile, phonegap, cordova]
-published: false
+published: true
 ---
 
 ## The People
