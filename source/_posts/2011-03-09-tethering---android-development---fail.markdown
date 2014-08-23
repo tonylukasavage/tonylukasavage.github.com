@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Tethering + Android Development = FAIL"
+date: 2011-03-09 21:34
+comments: false
+categories: [archive, macbook pro, android, apple, tether]
+published: true
+---
+
+So I wanted to update my <a href="http://www.boastr.de/" target="_blank">BetterTouchTool</a> version while I was on my work network.  You would think this was a simple thing, but the damn proxy seems to almost arbitrarily drop connections.  So to get around this I was planning to use my Droid X with the free <a href="http://www.junefabrics.com/android/" target="_blank">PdaNet</a> app and client to tether my MacBook Pro.  For details on how you can do this yourself, check out <a href="http://www.junefabrics.com/android/mac.php" target="_blank">this link</a>.
+
+But I hit a snag when initiating the tethered connection:
+
+<pre lang="plain">
+PdaNet: Unable to open interface (e00002c5)
+</pre>
+
+Really helpful and descriptive error, right?  There's another factor here, though.  I neglected to mention that I was actively developing in the Android SDK with Eclipse.  As it turns out, the Android Debug Bridge (adb) doesn't play nice with the PdaNet tether Android app.  In fact, it likely that it doesn't work with any other tether app since it takes full control of the USB debugging connection.
+
+So how do you fix it? Well, you can't really.  The best you can do is make sure you aren't doing both at the same time.  If you are developing in Eclipse for Android against a physical device via USB, you will have to do the following to be able to tether:
+
+<ol>
+<li>Close Eclipse</li>
+<li>Kill the adb process</li>
+<li>Restart your tether app</li>
+</ol>
+
+With those applications closed, you should be able to successfully tether your computer once again.  Hopefully this will save the someone the frustration of tracking down this error themselves.
