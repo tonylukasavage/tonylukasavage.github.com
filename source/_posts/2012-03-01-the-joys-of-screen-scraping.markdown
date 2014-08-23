@@ -1,0 +1,29 @@
+---
+layout: post
+title: "The Joys of Screen Scraping"
+date: 2012-03-01 15:14
+comments: false
+categories: [archive, android, mobile, php, knucklehead]
+published: true
+---
+
+<h2>Knucklehead Up and Running Again</h2>
+
+For about a week there my MMA fighter app for Android, <a href="https://market.android.com/details?id=com.savagelook.knucklehead" target="_blank">Knucklehead</a>, has been out of commission. The reason is that the site that I scrape for data, <a href="http://sherdog.com" target="_blank">Sherdog</a> was completely redesigned. I needed to rework a lot of my PHP-based screen scraping code to make it work. My PHP is rusty, but fortunately, my regular expression chops are always sharp. In any case, it's back to working order now.
+
+Maybe with a little luck I can get people to re-rate those 1-star ratings I got while it was down. If not, perhaps I can guilt people into giving me good ratings by saying that it's my newborn son's fault I didn't get to it sooner. I mean, really, are you going to give the father of this child a hard time? Don't be so heartless. :)
+
+<a href="/images/charlie.png"><img src="/images/charlie.png" alt="" title="charlie" width="600" height="400" class="alignnone size-full wp-image-3507" /></a>
+
+<h2 style="padding-top:20px;">Screen Scraping Tips</h2>
+
+As we all know, screen scraping is pretty much the most <span style="color:#a00">volatile</span> way to supply your apps with data. While no amount of planning can permanently future-proof your screen scraper, there's some things you can do to make it easier.
+
+<ul style="padding-bottom:20px;">
+    <li><strong>Define a data model for what you are scraping</strong>. What made my project relatively easy to get working again was that I had a clearly defined data model shared by both the backend and frontend. In my case, this is a LAMP stack and distributed Android app respectively. Now my users don't need to download a new version of my app in order to get the fix. It just works now.</li>
+    <li><strong>Code the scraper on a backend proxy</strong>, not in the app itself. That way, when your scraper inevitably gets broken at some point (after a year in my case), you only need to change the code in one place. This goes hand-in-hand with defining a data model.</li>
+    <li><strong>Keep it simple stupid</strong>. Don't over-architect a screen scraper. Most data processing code will change over time, but a screen scraper may need a total rewrite at some point. Put all your software engineering skills into controlling what leaves the scraper, but play it pretty loose with what the scraper is going to be processing.</li>
+    <li><strong>Using JSON? You better be using <a href="http://jsonlint.com" target="_blank">jsonlint.com</a> too</strong>. jsonlint.com can save you a lot of time and aggravation when it comes to creating and processing your scraped data. Not only does it validate your JSON, but it will also pretty print it so it's easy to read through yourself.</li>
+</ul>
+
+That's just a couple things that made fixing my scraper a lot less painful. You guys out there have any tips? I'd love to hear them. All things being equal, I hope I never have to screen scrape for data ever again. But since that's pretty unlikely, it's good to be prepared for the inevitable obstacles that scraping will present.
