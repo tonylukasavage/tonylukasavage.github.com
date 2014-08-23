@@ -1,0 +1,70 @@
+---
+layout: post
+title: "Appcelerator Charging for Integrated Debugging. PhoneGap Doing It For Free."
+date: 2011-06-15 08:16
+comments: false
+categories: [archive, mobile, weinre, phonegap, appcelerator]
+published: true
+---
+
+## Update 7/29/2011
+
+As of Titanium Studio 1.2.0, integrated mobile <strong>debugging is now free</strong>! Get it here: <a href="http://www.appcelerator.com/products/download/">http://www.appcelerator.com/products/download/</a>
+
+## Searching for the Silver Bullet
+
+So if you haven't already figured it out, I'm gunning to decide once and for all on a cross platform mobile development framework.  While all the Flash gurus I know are singing the praises of the latest versions of Adobe's mobile platform, I don't have the patience for an official release and docs to surface.  That leaves me with two options among the frameworks I've evaluated: <a href="http://www.phonegap.com/home/" target="_blank">PhoneGap</a> and <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a>.
+
+If you are interested in my past evaluations, check out these prior posts I wrote:
+<ul>
+	<li><a href="{% post_url 2011-04-20-a-deeper-look-at-appcelerator-and-phonegap %}">A Deeper Look at Appcelerator and PhoneGap</a></li>
+	<li><a href="{% post_url 2011-05-25-review--phonegap-is-web-based--appcelerator-is-pure-javascript %}">PhoneGap is Web-based. Appcelerator is Pure Javascript</a></li>
+	<li><a href="{% post_url 2011-01-18-review--appcelerator-vs--phonegap-vs--adobe-air %}">Appcelerator vs. PhoneGap vs. Adobe Air</a></li>
+</ul>
+Now judging by those past comparisons, it's pretty clear that each framework has its place.  It doesn't have to be one or the other.  Or does it?
+
+## I'm Only One Man
+
+There comes a time after evaluating platforms, tools, and anything else when you have to make a decision.  Especially is you are an indie developer like myself.  <strong>You can end up diluting your potential impact on your target field by trying to be a jack of all trades</strong>, master of none.  It turns out its a lot more effective to be a jack of all trades, master of at least one.
+
+So I keep circling back to "Appcelerator or PhoneGap?"  I've done the technical comparison and neither is the wrong choice in any respect.  Both have incredibly intelligent people spearheading their development, great productivity tools, and continuous updates and improvements to their framework.  So what does it come down to?
+<ul>
+	<li>Which one do I spend the most time in?</li>
+	<li>Which one do I start pouring my effort into?</li>
+	<li>Which one do I start contributing back to?</li>
+	<li>Which one do I think is looking out for me, the indie developer?</li>
+	<li>Which one, if it went belly up today, could I continue to use and bend to my needs?</li>
+</ul>
+As I asked these questions of myself, I found that I was leaning towards PhoneGap.  I will say, though, that this is in no small part to how strong the PhoneGap crew's Twitter presence is.  Here's a <a href="{% post_url 2011-05-11-9-things-to-know-about-phonegap %}">list of PhoneGap people to know</a>.  I am a Twitter junkie (<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>) and being able to ask questions and get near-immediate responses definitely swayed my thinking.  They do, in general, with their MIT/BSD license and github'ed everything seem like they side with the developers more than their competitor in this case.
+
+But damn are the native UI components and pure Javascript interface of Appcelerator sexy.  I'm not a web developer by trade, so the pure JS appeals to me more than needing to know the finer points of the HTML/CSS/JS stack.  And the tools they have are top notch.  But that's where my decision started to be made...
+
+## Making My Decision Easy
+
+I just needed a definitive nudge in either direction really. Something the resonated with me and said, "This is the framework you should be using."  Appcelerator gave me that nudge, but not in their direction.
+
+I just received an email from Appcelerator touting their new official release of their Titanium Studio.  Its a great piece of software that allows you to create an Appcelerator project and deploy it to multiple mobile platforms.  Sounds great, right?  I thought so too, until I read on.
+<blockquote>Upgrade to Titanium Indie or Titanium Professional to get a full mobile debugger.</blockquote>
+Just for reference, that means $49/month for the Indie subscription and $199/developer/month for the Professional subscription.  So at its cheapest rate, I'll be expected to pay <strong>almost $600 a year just to debug my mobile applications</strong>.  That is not something I'm willing to pay.
+
+On the other hand, PhoneGap is currently working with the author of <a href="http://pmuellr.github.com/weinre/" target="_blank">Weinre</a>, <a href="http://twitter.com/#!/pmuellr" target="_blank">Patrick Mueller</a>, to incorporate it into the PhoneGap project.  Yes, that's right, they are working to integrate mobile debugging into their framework for free.  Pretty clear to see what an OSS supporter like myself is going to like.
+
+## Cheap Bastard
+
+I know what you might be thinking, "Damn, he's a cheap bastard who isn't willing to shell out cash for decent software." Well, yeah, and I'll bet a lot of my readers are pretty much the same way.  But it goes beyond that. <del datetime="2011-06-15T16:51:08+00:00">It feels a bit like a bait and switch</del>.
+
+They offered Titanium Developer as a means to developer Appcelerator projects in the past.  Then they tell everyone that Titanium Studio is the future, so that's what you need to be developing in if you want to stay on the roadmap.  Then they effectively pull the plug on Titanium Developer, make Titanium Studio an official release, then start charging for what I consider to be basic IDE functionality.  Seems a little uncool.
+
+<span style="color:#ff0000;"><strong>EDIT</strong></span>: Kevin and Scott (see comments) are right.  <strong>This wasn't a "bait and switch"</strong>. Titanium Developer did not have this functionality, therefore it is not deceptive that the official release of Titanium Studio does not either.  I will miss it, but it was not at all deceptive.
+
+## Soooo...
+
+As you might imagine, <strong>my personal cross platform efforts will be using PhoneGap</strong>.  That's not to say I won't be involved in Appcelerator development.  I still think its a great way to develop iOS based apps when you or your team is lacking in Objective C and/or XCode experience.  <strong>Its fast, effective, and Appcelerator nailed the iOS platform</strong>.  They just rubbed me the wrong way at a critical time in my decision making process.  I encourage anyone reading this to not let my assessment make your decision for you as I think Appcelerator is a good fit for many.
+
+PhoneGap is the answer to almost all the questions I posed in my list above.  I just really like the team and the open nature of the project.  Plus, it lets me sharpen my web developer chops (<a href="{% post_url 2011-05-25-review--phonegap-is-web-based--appcelerator-is-pure-javascript %}">Appcelerator dev is not web dev</a>) while working in my primary focus of mobile development.  It's just a very good fit for me and the guys I work with on a regular basis.
+
+## In the End
+
+Its all up to an educated choice that plays to your personal strengths and proclivities.  In this case, both frameworks kinda did.  But due to an intense focus on community from PhoneGap, they are going to continue to win over developers like me.  Who knows, though, I'm a cheap bastard.  Maybe there's no money in catering to developers like me.
+
+While everyone needs to pay the mortgage, I somehow get the impression that the PhoneGap crew will be OK with it if they all aren't millionaires.  They strike me as guys who strive to maintain a resonance with developers.  In in that effort, I say they have excelled.
