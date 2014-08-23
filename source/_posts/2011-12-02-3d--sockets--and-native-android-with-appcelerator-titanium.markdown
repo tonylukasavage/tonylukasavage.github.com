@@ -13,7 +13,7 @@ Here's the 10 second summary of each part:
 
 <ol>
   <li>Create a <a href="http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide" target="_blank">native Android module</a> to determine a device's physical orientation as <a href="http://en.wikipedia.org/wiki/Azimuth#Navigation" target="_blank">azimuth</a>, pitch, and roll</li>
-  <li>Use the above data to animate and render a 3D model using a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium WebView</a> <canvas> and <a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js</a></li>
+  <li>Use the above data to animate and render a 3D model using a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium WebView</a> &lt;canvas&gt; and <a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js</a></li>
   <li>Represent this 3D model on multiple remote client devices simultaneously using high volume, realtime network communication via <a href="http://wiki.appcelerator.org/display/guides/Sockets" target="_blank">Titanium Sockets</a></li>
 </ol>
 
