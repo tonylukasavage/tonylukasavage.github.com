@@ -24,7 +24,7 @@ published: true
 
 <h3>HTML version</h3>
 
-``` html
+```
 <h2>Here's a header</h2>
 
 <p>Here's some content in a paragraph. And here's a link to <a href="http://www.google.com">Google</a> and another to my <a href="https://github.com/tonylukasavage">Github</a> account.</p>
@@ -49,7 +49,7 @@ published: true
 
 <h3>Markdown version</h3>
 
-``` markdown
+```
 ## Here's a header
 
 Here's some content in a paragraph. And here's a link to [Google][] and another to my [Github][] account.</p>
