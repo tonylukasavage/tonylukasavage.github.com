@@ -1,0 +1,132 @@
+---
+layout: post
+title: "Adobe &amp; PhoneGap: Makes Sense, Mostly"
+date: 2011-10-10 07:57
+comments: false
+categories: [archive, phonegap, mobile, adobe]
+published: true
+---
+
+<style>
+.pquote {
+			float: left;
+			width: 8em;
+color:#000;
+			background: #ddd;
+			font-weight: bold;
+font-size:18px;
+			padding: 0.5em 1em 0.5em 1em;
+			margin: 0 0.5em 0.5em 0;
+		}
+
+</style>
+<h2>Adobe Acquires Nitobi</h2>
+
+<p>So if you haven't heard yet, <a href="http://www.phonegap.com/2011/10/03/nitobi-enters-into-acquisition-agreement-with-adobe-2/">Adobe acquired Nitobi</a>, the company that is responsible for PhoneGap. This was announced at Adobe's big <a href="http://max.adobe.com/">MAX conference</a>. If you are unfamiliar with PhoneGap, then this post is going to be wildly uninteresting to you. At a high level, they provide a cross platform mobile development solution that leverages native webviews with HTML5, CSS, and Javascript to create native mobile apps.</p>
+
+<h2>Not Hard To See Coming</h2>
+
+<p>Well, for one thing, Adobe was obviously hedging its bets on Flash/Air's viability in the long term with mobile when they started introducing HTML5 capabilities through <a href="http://labs.adobe.com/technologies/edge/">Edge</a>. I mean, if Adobe's planning to offer interactive, Flash-like development with HTML5, who is going to believe that Flash itself has a real future with mobile? Or as Gizmodo put it, <a href="http://gizmodo.com/5826448/adobe-ditches-flash-for-adobe-edge">Adobe Edge may become the beginning of the end for Flash</a>. Yeah, it will likely always exist, but it is <em>not</em> the de facto standard for delivering interactive web (or mobile) content anymore.</p>
+
+<iframe width="630" height="473" src="http://www.youtube.com/embed/8FnNtX73v8k" frameborder="0" allowfullscreen></iframe>
+
+<p>And of course there's the whole Adobe Air for mobile thing. Android was obliging enough to make Air a first class citizen. Install Air, run Air apps... simple. And while the Adobe Air install is a bit hefty, it's hardly something worth worrying about with today's storage capabilities on mobile devices.</p>
+
+<blockquote class="pquote">
+	<p>"Flash has been labeled an outlaw and Air is smuggled in like an illegal immigrant"</p>
+</blockquote>
+
+<p>The more harrowing journey for Adobe has been iOS. Basically, Flash has been labeled an outlaw and Air is smuggled in like an illegal immigrant. There's been a staring contest between Adobe and Apple for a while now, but I think it's safe to say Adobe blinked. Apple has continually proven that is has the most marketable mobile devices available, and has done so without any back pedaling on what they will and will not allow (minus <a href="http://www.apple.com/pr/library/2010/09/09Statement-by-Apple-on-App-Store-Review-Guidelines.html">letting 3rd parties build apps</a>).</p>
+
+<p>Something had to give if Adobe was going to get a real foothold in the mobile world, and it obviously wasn't coming in the form of their current solutions. Enter PhoneGap...</p>
+
+<h2>But PhoneGap is not Without Its Challenges</h2>
+
+<p>PhoneGap fills a lot of holes for Adobe, but its going to need a lot of help itself. I think PhoneGap has gone about as far as it can on its own. It has achieved its goal of abstracting most native functionality for many different mobile platforms, but starting developers are wanting more. </p>
+
+<p>PhoneGap has no user interface components. This is <strong><em>not</em></strong> fun for new developers... or veteran ones for that matter. You need to build everything from scratch or go out and find a UI framework that works for you. The 2 front-runners, <a href="http://www.sencha.com/products/touch/">Sencha Touch</a> and <a href="http://jquerymobile.com/">jQuery Mobile</a>, bring their own glitches and idiosyncrasies. Also, now you find yourself learning 2 frameworks that have a noticeable lack of cross-over documentation. </p>
+
+<p>There's also a seemingly purposeful lack of direction in terms of tooling and best practices. New developers, often web developers, are left to their own devices to find the workflow that works best for them. There's no sanctioned IDE or set of tools suggested from PhoneGap to build your mobile apps. Infinite flexibility can be a real drag when you just want to know the most effective way to get things done.</p>
+
+<h2>But let's put this even more plainly...</h2>
+
+<p>What are the pros and cons of <b>PhoneGap</b>?</p>
+
+<table>
+<tr><td><span style="font-weight:bold; font-size:14px; color:#880000">Pros</span></td><td><span style="font-weight:bold; font-size:14px; color:#880000">Cons</span></td></tr>
+<tr>
+<td style="width:300px; vertical-align:top;">
+<ul><li>Terrific mobile platform compatibility</li>
+<li>It's an open, standards-based solution</li>
+<li>Ease of entry for existing web developers</li>
+<li>Large existing userbase for the above reason</li></ul>
+</td>
+<td style="width:300px; vertical-align:top;">
+<ul style="margin-bottom:0; padding-bottom:0;">
+<li>No clear direction on UI, tooling, or best practices</li>
+<li>performance is limited by webview</li>
+<li>Platform disparities</li>
+<li>Documentation is brief and sometimes lacking</li></ul>
+</td>
+</tr>
+</table>
+
+<p>And what are the pros and cons of <b>Adobe</b>?</p>
+
+<table>
+<tr><td><span style="font-weight:bold; font-size:14px; color:#880000">Pros</span></td><td><span style="font-weight:bold; font-size:14px; color:#880000">Cons</span></td></tr>
+<tr>
+<td style="width:300px; vertical-align:top;">
+<ul><li>High quality tools for integrating development and design workflows</li>
+<li>With Flash and Flex, they've been delivering visual and UI sugar for a long time now</li>
+<li>They've been rocking interaction before &lt;canvas&gt; was in diapers</li>
+<li>They run nearly identical user experiences on each platform via Flash/Air</li>
+<li>Their documentation is nothing if not expansive</li>
+<li>A vehemently loyal community</li></ul>
+</td>
+<td style="width:300px; vertical-align:top;">
+<ul><li>Weak mobile platform compatibility. Android made Air a first class citizen, but we all know the story with iOS. </li>
+<li>The majority of Adobe's tools and SDKs are closed and proprietary</li>
+<li>Has not seen a lot of fresh blood lured in by their current mobile development offerings</li>
+<li>You gotta pick up AS3 if you want to be effective</li></ul>
+</td>
+</tr>
+</table>
+
+<p>Anyone else seeing a pretty clear yin-yang thing going on here?</p>
+
+<h2>So What Does It All Mean?</h2>
+
+<p>Well, for one thing, it means <a href="http://arstechnica.com/open-source/news/2011/10/phonegap-to-become-an-apache-project-as-adobe-acquires-nitobi.ars">PhoneGap is becoming an Apache project</a>. Yep, they are donating PhoneGap to Apache, which puts them one step closer to their altruistic goal of PhoneGap itself becoming obsolete. PhoneGap's own Brian Leroux stated in his <a href="http://www.slideshare.net/brianleroux/phonegap-10">PhoneGap 1.0 presentation</a> that:</p>
+
+<blockquote>
+  <p style="font-weight:bold;">"The purpose of PhoneGap is for PhoneGap to cease to exist"</p>
+</blockquote>
+
+<p>Why, oh why, did Adobe buy it then? I think it's because they want to be your one stop shop for purchasing IDEs, frameworks, professional services, etc... Adobe is likely banking on the ongoing popularity of PhoneGap and web-based native mobile development. "Web-based native"... sounds a little like an oxymoron, but whatever.</p>
+
+<h2>A Match Made in Heaven, Right?</h2>
+
+<p>Sounds like a perfect match. The 2 companies seem to complement each other very well. But...</p>
+
+<p>There's just a few questions I still have regarding the acquisition. Rather than drone on any longer inserting my own conjecture, I'll just list my questions here and leave them as talking points for you, my readers. </p>
+
+<blockquote class="pquote" style="float:right;">
+	<p>"I can already hear the `It's back to AS1` complaints starting..."</p>
+</blockquote>
+
+<ul>
+<li>What happens to Flash/Air for mobile? It obviously won't be forsaken, but this can't sit real well with developers who have so far devoted themselves to this workflow.</li>
+<li>How does Adobe deal with the inevitability that current developers will revolt against using Javascript? I can already hear the "It's back to AS1" complaints starting...</li>
+<li>Does Adobe even have any interest in getting existing AS3 developers using PhoneGap? I know they are saying that they weill support both solutions, but come on, someone is gonna get more love than the other.</li>
+<li>How long until we finally see a defined workflow and IDE for PhoneGap. Is Dreamweaver integration the best we get?</li>
+<li>What will the PhoneGap guys do next? They are actively working to put themselves out of a job, so I'm curious what the next move is.  </li>
+</ul>
+
+<h2>What's Next?</h2>
+
+<p>I have no clue, but it's sure to be interesting. I'm hoping for good things on both sides as it's only going to make mobile development in general more exciting. </p>
+
+<p>Will Adobe's ability to create great tools translate to mobile success? Will PhoneGap's strict adherence to the open web model jive well with Adobe's history of closed, proprietary tools? Will the inevitable merge of the open web  and existing Adobe community be a bumpy one? </p>
+
+<p>Stay tuned...</p>
