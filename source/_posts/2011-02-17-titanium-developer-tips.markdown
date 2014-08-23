@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Titanium Developer Tips"
+date: 2011-02-17 11:46
+comments: false
+categories: [archive, titanium, mobile, appcelerator, titanium developer]
+published: true
+---
+
+<h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+First I want to start by pointing out that this <a href="http://developer.appcelerator.com/" target="_blank">Titanium Developer</a> info will likely be moot in a short amount of time.  <a href="http://www.aptana.com/" target="_blank">Titanium Appcelerator has recently acquired Aptana</a> and is likely to release an IDE with deployment integrated, thus making Titanium Developer obsolete.  It should be tremendous for the workflow, but the beta isn't due until March and there's no certainty as to when it will be an official release.  So for the time being, let's make due with Titanium Developer.
+
+This isn't a post on how to use Titanium Developer or develop apps with it.  For that information please reference Titanium's own documentation:
+<ul>
+	<li><a href="http://guides.appcelerator.com/en/getting_started.html" target="_blank">Getting Started with Appcelerator</a></li>
+	<li><a href="http://guides.appcelerator.com/en/app_structure.html" target="_blank">Appcelerator Application Project Structure</a></li>
+	<li><a href="http://developer.appcelerator.com/doc/mobile/guides" target="_blank">Appcelerator Programming Guides</a></li>
+</ul>
+Also remember that <span style="color: #ff0000;">Titanium Developer is not an IDE</span>, it is just a project and deployment platform.  For creating and editing content for your apps, you'll need your own IDE.  I'd suggest one that specializes in HTML, CSS, and Javascript.  <a href="http://macromates.com/" target="_blank">TextMate</a> seems to be the weapon of choice for Mac based Appcelerator developers (among others) and there's a bunch out there for other OSes, like <a href="http://www.aptana.com/" target="_blank">Aptana</a>, <a href="http://www.jetbrains.com/webstorm/" target="_blank">WebStorm</a>, <a href="http://notepad-plus-plus.org/" target="_blank">Notepad++</a>, <a href="http://www.jedit.org/" target="_blank">jEdit</a>, and many more.  Obviously I'd suggest Aptana as that's the new IDE of choice for Appcelerator.
+
+OK, enough back story, here's the things to consider when using Titanium Developer and some issues you may run into.  For reference, I was using Windows XP for Android development when most of this was uncovered.  I believe Appcelerator has a more natural focus on iOS workflow, so other Windows/Android developers will benefit most from this.   <strong>HUGE</strong> thanks goes out to Tony Guntharp and Chad Auld (<a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a> respectively).  Without their help I probably would have quit Appcelerator before I got started.
+<h1><span style="font-weight: bold; font-size: 16px;">Guide &amp; Troubleshooting</span></h1>
+<ul>
+	<li>First thing, be sure to follow the <a href="http://guides.appcelerator.com/en/getting_started.html" target="_blank">"Getting Started"</a> guide completely.  Most issues that arise with Titanium Developer are a direct result of not doing one of the things specifically mentioned in this guide.</li>
+	<li>Make sure you installed the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java JDK</a> (not just JRE) and that you add the JDK's bin directory to your PATH environment variable.  If you don't you are liable to run into some weird behavior in Titanium Developer including:
+<ul>
+	<li>[ERROR] JDK version 'javac' is not recognized as an internal or external command</li>
+	<li>Your <strong>Run Emulator</strong> and <strong>Run on Device</strong> tabs may just appear as blank, grayed out panels</li>
+	<li>Other errors relating to compiling your application</li>
+</ul>
+</li>
+	<li>Here's some things you <strong>MUST</strong> have if you want the <a href="https://github.com/appcelerator/KitchenSink" target="_blank">Kitchen Sink</a> app to run on Android
+<ul>
+	<li><strong>Latest Titanium Mobile SDK</strong> (1.5.1 at the time of this post): you can download and install it through the status updates in the upper right corner of Titanium Developer
+</li>
+	<li><strong>Kitchen Sink source code</strong>: Pull the source from Github for Kitchen Sink, don't use the Downloads section.  The Kitchen Sink installed but would force close immediately after the splash screen finished on my Droid X when using the 1.5.0-update2 download.  You can use your favorite git client (like <a href="http://code.google.com/p/tortoisegit/" target="_blank">TortoiseGIT</a> for me) or just download the source as a <a href="https://github.com/appcelerator/KitchenSink/zipball/master" target="_blank">ZIP</a> or <a href="https://github.com/appcelerator/KitchenSink/tarball/master" target="_blank">TAR.GZ</a>.</li>
+	<li><strong>Google APIs by Google Inc., Android API</strong>: You can download and install this using the Android SDK and AVD Manager that comes with your Android SDK installation.  It is available through <strong>Available Packages -> Third Party Add-ons -> Google Inc. add-ons
+
+</strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong></li>
+</ul>
+</li>
+	<li>Android 1.5 is no longer supported and 1.6 is going to be end-of-lifed for Appcelerator soon.  They also have no yet dug into Android Honeycomb.</li>
+	<li>Titanium Developer projects can have problems deploying caused by artifacts of old builds, old Titanium SDK versions, or iOS/Android SDK changes.  Here's a small list of brute force troubleshooting to try and get past these issues:
+<ul>
+	<li><strong>Uninstall apps before reinstalling</strong>: This isn't often necessary, but it is a good first measure to take when getting deployment or execution issues with an Appcelerator app.  Think of it like your sys admin telling you to reboot before he digs into the real troubleshooting.</li>
+	<li><strong>Restart Titanium Developer</strong>: see above</li>
+	<li><strong>Try deleting and re-importing your project</strong>: This will ensure that all of your profile and project specific settings are being properly applied to your project.</li>
+	<li><strong>Create a new project and copy your existing project's content into it</strong>: Yeah, it ain't pretty, but if the above doesn't work this might help.  A fresh project will sometimes fix any corrupted project settings.</li>
+	<li><strong>Delete the {PROJECT_PATH}/build/android and {PROJECT_PATH}/build/iphone folder</strong>: I've heard this advice but had no luck with it myself.  In fact I ran into even more errors when trying to emulate or run my project on a device.  Some, though, claim it will cause a full rebuild of your project in Titanium Developer and that it can often fix any build or deployment issues.  <span style="color: #ff0000;">Try at your own risk</span>.  I would make a backup of the directories you intend to delete.</li>
+</ul>
+</li>
+</ul>
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+While it may a bit of a bumpy road getting started, I have a feeling the investment in time will be worth it in the end.  If I was a patient person I would just wait until the new IDE beta came out and start working with he new, sanctioned workflow.  But I'm not a patient person.  Cross platform mobile development, with access to native components and near native performance, is just too cool to wait for.
