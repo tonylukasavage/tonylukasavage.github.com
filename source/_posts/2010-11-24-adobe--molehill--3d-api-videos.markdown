@@ -1,0 +1,44 @@
+---
+layout: post
+title: "Adobe \"Molehill\" 3D API Videos"
+date: 2010-11-24 11:32
+comments: false
+categories: [archive, away3d, away3dlite, molehill]
+published: true
+---
+
+In the wake of the <a href="http://adamkinney.posterous.com/molehill-video-new-flash-3d-api-from-adobemax" target="_blank">Adobe Flash "Molehill" 3D API</a> being unveiled at AdobeMax this year, interest in 3D Flash has exploded.  Rather than bore you with why I think this is so interesting (though I must mention that it uses the GPU), here's some videos to give you an idea of how incredible this API is going to be:
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/szaXvTsoeVs?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/szaXvTsoeVs?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/9LAN5GHm5eM?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/9LAN5GHm5eM?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+<script type="text/javascript"><!--
+google_ad_client = "pub-8526874234699762";
+/* 728x90, created 12/20/10 */
+google_ad_slot = "5105934733";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/tgwi0lWgX8w?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/tgwi0lWgX8w?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/m053MqzstVg?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/m053MqzstVg?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+<script type="text/javascript"><!--
+google_ad_client = "pub-8526874234699762";
+/* 728x90, created 12/20/10 */
+google_ad_slot = "5105934733";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/hCXxCD_GYTA?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/hCXxCD_GYTA?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/s0Nu1OaBXa8?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/s0Nu1OaBXa8?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+Yes, I know, it IS awesome.  But be patient kids, the word is a painfully vague "mid 2011" beta release.  In the meantime, though, start sharpening with your 3D Flash engine of choice because Adobe has already stated that its going to let the community build the engines.  And believe me, <a href="http://away3d.com" target="_blank">Away3D</a>, <a href="http://alternativaplatform.com/en/alternativa3d/" target="_blank">Alternativa</a>, and a handful of others will be waiting with their Molehill-ready engines as soon as it is released.
