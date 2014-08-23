@@ -41,7 +41,7 @@ The fundamental difference is that PhoneGap is a web based solution where Appcel
 		<td>Supports DOM based<br>JS libraries</td>
 		<td><img src="/images/yes.gif"/></td>
 		<td><img src="/images/no.jpg"/></td>
-                <td>JS libraries that reference the DOM, like <a href="http://jquery.com/" target="_blank">jQuery</a>, <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, or any of the new <a href="http://processingjs.org/" target="_blank"><canvas> based libs</a> will only work with Appcelerator Titanium webviews</td>
+                <td>JS libraries that reference the DOM, like <a href="http://jquery.com/" target="_blank">jQuery</a>, <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, or any of the new <a href="http://processingjs.org/" target="_blank">&lt;canvas&gt; based libs</a> will only work with Appcelerator Titanium webviews</td>
 	</tr>
 	<tr>
 		<td>Native Code</td>
@@ -57,7 +57,7 @@ The fundamental difference is that PhoneGap is a web based solution where Appcel
 	</tr>
 </table>
 
-<h2 style="margin-top:20px;">What Does This Mean?
+## What Does This Mean?
 <ul>
     <li>Web developers will have a much easier transition going to PhoneGap than they would Appcelerator Titanium.</li>
     <li>Application developers without serious web development chops will likely gravitate towards Appcelerator Titanium.  Why learn HTML, CSS, and Javascript when you can just learn Javascript?</li>
@@ -71,7 +71,6 @@ The fundamental difference is that PhoneGap is a web based solution where Appcel
         </ul>
     </li>
 </ul>
-<br><br>
 
-<h2 style="margin-top:20px;">Summary
+## Summary
 The above is a hyper-condensed review of the whole story.  As always, I encourage you to try both of these platforms.  They both excel in many areas and offer unique features.  Neither is the wrong choice, but depending on your scenario, one might be better suited than the other.
