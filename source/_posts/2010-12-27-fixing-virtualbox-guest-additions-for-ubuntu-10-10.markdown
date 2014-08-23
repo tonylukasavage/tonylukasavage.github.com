@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Fixing VirtualBox Guest Additions for Ubuntu 10.10"
+date: 2010-12-27 10:32
+comments: false
+categories: [archive, linux, ubuntu, virtualbox]
+published: true
+---
+
+So I have a Centos server project for which I need to do some C++ development.  I thought it would be logical to use Centos as my development desktop, inside <a href="http://www.virtualbox.org/">VirtualBox</a>.  This line of thinking was unfortunately flawed as <span style="color: #ff0000;">Centos sucks as a desktop</span>.  Don't get me wrong, I wouldn't build a server anymore that wasn't running Centos, but the desktop is just hopeless.
+
+Enter <a href="http://www.ubuntu.com/">Ubuntu 10.10</a>.  It was quick, simple, and straightforward to install and get running.  Things actually worked like you would expect they would, you know, like a normal desktop OS.  I installed <a href="http://www.eclipse.org/">Eclipse</a> and all the necessary C++ libraries I needed.  Now it came time to build the Guest Additions in VirtualBox for Ubuntu...
+
+Well, it appeared to work, but I couldn't use the auto-resize functionality of VirtualBox to change the size of the desktop.  Also, the screen resolution was stuck at 800x600.  As it turns out, the built-in guest additions for Ubuntu 10.10 don't work correctly.  In order to fix the situation you just need to execute the following on the command line:
+
+``` bash
+sudo apt-get update
+sudo apt-get install build-essential linux-headers-$(uname -r)
+sudo apt-get install virtualbox-ose-guest-x11
+```
+
+This will install the latest VirtualBox guest additions for Ubuntu 10.10.  All you have to do now is restart your VirtualBox instance of Ubuntu and you'll be all set.  You can now adjust your screen resolution to your liking and the VirtualBox auto-resize of the Ubuntu guest display will be working.
+
+Happy Ubuntu'ing!
