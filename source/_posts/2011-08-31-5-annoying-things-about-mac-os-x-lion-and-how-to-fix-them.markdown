@@ -1,0 +1,64 @@
+---
+layout: post
+title: "5 Annoying Things About Mac OS X Lion and How To Fix Them"
+date: 2011-08-31 07:38
+comments: false
+categories: [archive, mac, lion, apple]
+published: true
+---
+
+<h2>So you're running Mac OS X Lion...</h2>
+
+<p>Let me start by saying that among the <a href="http://www.apple.com/macosx/whats-new/features.html">250+ new features</a> added in Lion, there are some really useful ones. Some of my favorites include:</p>
+
+<ul>
+<li><strong>Accessible from App Store</strong> - The fact that the upgrade itself is accessible from the App Store is extremely convenient. Granted, you could argue that Lion is little more than the equivalent of a Windows Service Pack, which are free and automatically delivered. </li>
+<li><strong>Face Time</strong> - Face Time is no longer beta as it was with Snow Leopard and is fully integrated into Lion.</li>
+<li><strong>Document locking</strong> - This grants you the ability to lock documents to prevent unwanted modifications. Not groundbreaking (see 'read-only'), but the stuff Lion does behind the scenes, like automatically locking old documents, is pretty nice.</li>
+<li><strong>Full disk encryption</strong> - No more is only your Home path safe. As of Lion, FileVault has been totally revamped and your entire disk will now be encrypted. </li>
+<li><strong>Full screen apps</strong></li>
+<li><strong>Resize windows from any edge</strong></li>
+</ul>
+
+<p>In addition to these nicer features, Lion did some really annoying stuff to user interaction and the user interface. I'm all for change for the better, but most of these fall under the category of "If it ain't broke, don't fix it." Fortunately, there's ways to get back the settings you expect. Here's 5 I specifically ran into.</p>
+
+<h2>Unhide ~/Library</h2>
+
+<p>For whatever reason, Apple decided to hide your <i>~/Library</i> path. This is a real pain the ass if you find yourself in there a lot. For example, Appcelerator installs its SDK and other files in <i>~/Library/Application Support/Titanium</i>. I'm constantly tinkering in that directory and it would be nice to see it in Finder. </p>
+
+<p>Execute this line in Terminal and you'll have your <i>Library</i> visible once again. <strong>USERNAME</strong> is your username:</p>
+
+``` bash
+chflags nohidden /users/USERNAME/Library
+```
+
+<h2>Disable "Natural" scrolling</h2>
+
+<p>Lion has included "natural" scrolling. I use quotations around "natural" because it feels anything other than natural for the average user. The content you are scrolling will now move in the direction you scroll, which is essentially the opposite of how it has always worked.</p>
+
+<p>I have no problem with this functionality. What I do take issue with is that this was made the default behavior. To set scrolling back to the way most of us expect it, open <strong>System Settings</strong>, go to <strong>Trackpad/Mouse</strong>, and in the <strong>Scroll/Zoom</strong> tab uncheck <strong>"Scroll direction: natural"</strong>.</p>
+
+<p><img src="https://img.skitch.com/20110831-83ricxbahiq22edfpmfncnwp6c.jpg" alt="screen" title="" /></p>
+
+<h2>Fix 3 finger horizontal swipe navigation</h2>
+
+<p>The trackpad gesture I use more than any other is navigation using 3 finger swipes. I don't even remember the last time I manually pressed the back button in a browser. No wait, yes I do. It was when I got my MacBook Air and it had Lion on it.</p>
+
+<p>Turns out Apple mapped 2 finger horizontal swipes to its <strong>"Swipe between pages"</strong> functionality by default. Unfortunately, unless you switch this value to use 3 finger horizontal swipes, it won't work for browser navigation. Check out the image below to see how:</p>
+
+<p><img src="https://img.skitch.com/20110831-8unxrw8wbw5mum9ex61pmn4yha.jpg" alt="" title="" /></p>
+
+<h2>Get Rid of LaunchPad</h2>
+
+<p>If I wanted what is effectively a "Show Desktop" button combined with an applications list, I'd use Windows. Just remove that thing from your Dock and be done with it.</p>
+
+<p>Do yourself a favor. If you really want an effective way to find and run apps, check out <a href="http://www.alfredapp.com/">Alfred</a> or <a href="http://qsapp.com/">Quicksilver</a>. You can thank me later.</p>
+<div style="height:15px;"></div>
+
+<h2>Get a Fresh Restart</h2>
+
+<p>I don't know about you, but I reboot my Mac really infrequently. When I do, though, it's generally because I want a clean slate. I want all my apps closed and everything to go back to a fresh state. Lion disagrees with me.</p>
+
+<p>By default Lion will remember every app you had open and make sure everything is just as you left it when you restarted your computer. For those of you who would also like a fresh restart, open <strong>System Settings</strong> and go to <strong>General</strong>. In there you just need to uncheck the <strong>"Restore windows when quitting and re-opening apps"</strong> checkbox.</p>
+
+<p><img src="https://img.skitch.com/20110831-nugs2uasgdk7u3u51im5jw181m.jpg" alt="" title="" /></p>
