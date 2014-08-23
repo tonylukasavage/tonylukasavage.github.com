@@ -1,0 +1,99 @@
+---
+layout: post
+title: "A Whole Mess of Android Helpers"
+date: 2011-06-16 10:01
+comments: false
+categories: [archive, github, java, mobile, git, android]
+published: true
+---
+
+## Overview
+
+In my work on my MMA fighter Android app <a href="{% post_url 2011-06-08-knuckle-head--my-mma-fighter-app-for-android %}">Knuckle Head</a> I used a lot of Android functionality that I'm sure I'll use again.  Things like JSON processing, asynchronous tasks with ProgressDialogs, and single instance Toasts are all things that will inevitably show up in future work.  Because I'm just so generous, I decided to refactor them out of the Knuckle Head specific code and turn them into a Java package anyone could use.
+
+<span style="font-size:18px;">* Clone or download <a href="https://github.com/tonylukasavage/com.savagelook.android" target="_blank">com.savagelook.android on Github</a></span>
+<div style="height:15px;">&nbsp;</div>
+
+## The Classes
+Its a small collection so far, but sure to grow very quickly.  Here's a list of the classes included so far:
+
+<ul>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/JsonHelper.java">JsonHelper.java</a> - A collection of JSON handling functions. Includes Retrieving JSON from a remote URL.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/KeyValuePair.java">KeyValuePair.java</a> - A generic key/value pait class. Useful for populating Android Spinners.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/Lazy.java">Lazy.java</a> - A collection of static classes for operations I don't have a better home for.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/ToastSingleton.java">ToastSingleton.java</a> - I hate how Toasts in Android are shown sequentially. To prevent this I operate on a single instance of a Toast throughout my apps.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/Toaster.java">Toaster.java</a> - A class that utilizes ToastSingleton.java and delivers Toasts with convenient static functions.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java">UrlJsonAsyncTask.java</a> - This is a custom AsyncTask for a very common Android problem. I very often need to retrieve JSON from a remote URL, display a ProgressDialog while this occurs, operate on the data when it is returned, and then close the ProgressDialog. With this class that work is reduced down to just a few lines of code.</li>
+</ul>
+
+<span style="font-weight:bold; font-size:16px; padding:0px; margin:0px;">UrlJsonAsyncTask Example</span>
+If you had only have time for a quick look, be sure to check <a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java">UrlJsonAsyncTask.java</a>.  Using this class in side my Activity code reduced the line count drastically.  Since I was lazy about documentation for any of this, here's an example to reward my blog reader's.  This is straight from <a href="http://savagelook.com/blog/android/knuckle-head-my-mma-fighter-app-for-android">Knuckle Head</a> code.  You'll notice a few other classes mentioned above are also included.
+
+UrlJsonAsyncTask is not abstract like <a href="http://developer.android.com/reference/android/os/AsyncTask.html" target="_blank">AsyncTask</a>, most of the functionality has been implemented. You only need to implement onPostExecute(JSONObject) if you want to do something with the returned JSON.  In order for this to work, your JSON needs to return an object formatted like this:
+
+``` json
+{
+    "success":true|false,
+    "info":"error or warning message from server",
+    "data": {}
+}
+```
+
+<ul>
+<li><strong>success</strong> is a boolean indication from your JSON source whether or not the request was successful</li>
+<li><strong>info</strong> on error or warning, will contain an app user friendly message that can be delivered via Toast</li>
+<li><strong>data</strong> This is the actual JSON object or array that you will operate on given a successful request</li>
+</ul>
+<div style="height:15px;">&nbsp;</div>
+
+And this is how you would define your own UrlJsonAsyncTask.  In this case I am querying my server to get a list of fighter, or the profile of one particular fighter.  In either scenario, as stated in the JSON description above, the "data" attribute of my JSON is what I will pass to the target intent.
+
+``` java
+private class FighterSearchTask extends UrlJsonAsyncTask {
+    public FighterSearchTask(Context context) {
+        super(context);
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject json) {
+        try {
+            this.validateJson(json); // throws IOException, JSONException
+
+            // These 4 lines represent the actual post execute logic
+            Class<?> intentClass = json.getString("info").equals("list") ? FighterListActivity.class : FighterTabActivity.class;
+            Intent intent = new Intent(context, intentClass);
+            intent.putExtra("json", json.getString("data").toString());
+            startActivity(intent);
+        } catch (IOException e) {
+            // IOExceptions are custom and return JSON "info" in getMessage()
+            Toaster.toast(this.context, e.getMessage());
+        } catch (JSONException e) {
+            // Lazy.Ex.getStackTrace(Exception) is just a simple one liner for turning
+            // a stack trace into a String.
+            Log.e("YourTagName", Lazy.Ex.getStackTrace(e));
+
+            // JSONExceptions here are generally because your JSON is not formatted as
+            // per the description in the comments above. We don't want to show these
+            // errors to the user, so we give them a pre-defined error message to let
+            // them know something went wrong.
+            Toaster.toast(context, this.getMessageError());
+        } finally {
+            super.onPostExecute(json); // Must be called to close the ProgressDialog
+        }
+    }
+}
+```
+
+After you have created your subclass of UrlJsonAsyncTask, you can execute these following few lines of code anywhere to fire your task and have a ProgressDialog pop up until it either finishes successfully or or returns an error/warning message. There's tons of setters to customize your task. Check them out in the <a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java" target="_blank">source code</a>.
+
+``` java
+FighterSearchTask task = new FighterSearchTask(SearchActivity.this);
+task.setMessageLoading("Searching for fighters...");
+task.setConnectionParams(2000, 5000, 3); // connection timeout(ms), read timeout(ms), number of retries
+task.execute(url);
+```
+
+And voila, you got JSON from a remote URL with a ProgressDialog assuring your users that the data is in fact loading.  All of this is non-blocking so you are able to continue other operations or update the UI if necessary.
+
+## Summary
+So yeah, it's just another collection of a developer's reusable tools for getting stuff done, this time for Android.  If you do happen to peruse, or use, the code, let me know what you think.  Suggestions,criticisms, and of course contributions are more than welcome.
