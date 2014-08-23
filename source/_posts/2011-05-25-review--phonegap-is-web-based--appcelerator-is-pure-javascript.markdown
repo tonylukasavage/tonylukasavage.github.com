@@ -10,7 +10,7 @@ published: true
 ## What's The Difference?
 I've seen a lot of confusion out there on what the actual distinction is between <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> and <a href="http://www.appcelerator.com/" target="_blank">Appcelerator Titanium</a> in terms of programming.  Both state that they provide cross-platform mobile development frameworks driven by a Javascript core.  How different can they be?  Turns out, <strong>very</strong>.
 
-The fundamental difference is that PhoneGap is a web based solution where Appcelerator Titanium is a pure Javascript API that creates native code.  As I've gone over the <a href="http://savagelook.com/blog/portfolio/a-deeper-look-at-appcelerator-and-phonegap">differences between these 2 in detail</a> before, I'm going to very strictly stick to the topic of how their code works.  Since people seem to love charts so much, here's a quick review to show the divergence between the two frameworks:
+The fundamental difference is that PhoneGap is a web based solution where Appcelerator Titanium is a pure Javascript API that creates native code.  As I've gone over the differences between these 2 in detail before, I'm going to very strictly stick to the topic of how their code works.  Since people seem to love charts so much, here's a quick review to show the divergence between the two frameworks:
 
 <table border="1" class="compare_table" cellspacing="0">
 	<tr class="compare_title">
