@@ -32,7 +32,7 @@ There's always a `path`, and always a `callback`. No trickery needed in the API 
 
 > **fs.readFile(filename, [options], callback)**
 
-There's always a `filename`, there might `options`, and there should be a `callback`. So how exactly might we structure this under-the-hood. I won't regurgitate the node.js source code here, but let's instead see how we might use `maybeCallback` to set up this API.
+There's always a `filename`, there might `options`, and there should be a `callback`. So how exactly might we structure this under-the-hood? I won't regurgitate the node.js source code here, but let's instead see how we might use `maybeCallback` to set up this API.
 
 ```js
 function readFile(filename, options, callback) {
