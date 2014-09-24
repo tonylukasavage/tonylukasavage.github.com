@@ -20,6 +20,8 @@ function maybeCallback(callback) {
 }
 {% endcodeblock %}
 
+<!-- more -->
+
 Essentially, if you give it a function, it gives you the function back. Otherwise, it gives you back a new function that quietly does nothing, unless there's an error, in which case it throws that error. Simple, right?
 
 In node.js, it is a standard convention that the callback for an asynchronous function is the last argument. This is simple enough with concrete APIs, like say [fs.stat](http://nodejs.org/api/fs.html#fs_fs_stat_path_callback):
