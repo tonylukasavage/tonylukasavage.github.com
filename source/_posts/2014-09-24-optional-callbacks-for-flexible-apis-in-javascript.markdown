@@ -26,11 +26,11 @@ Essentially, if you give it a function, it gives you the function back. Otherwis
 
 In node.js, it is a standard convention that the callback for an asynchronous function is the last argument. This is simple enough with concrete APIs, like say [fs.stat](http://nodejs.org/api/fs.html#fs_fs_stat_path_callback):
 
-### fs.stat(path, callback)
+> **fs.stat(path, callback)**
 
 There's always a `path`, and always a `callback`. No trickery needed in the API creation. But what about an API like [fs.readFile](http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback)?
 
-### fs.readFile(filename, [options], callback)
+> **fs.readFile(filename, [options], callback)**
 
 There's always a `filename`, there might `options`, and there should be a `callback`. So how exactly might we structure this under-the-hood. I won't regurgitate the node.js source code here, but let's instead see how we might use `maybeCallback` to set up this API.
 
