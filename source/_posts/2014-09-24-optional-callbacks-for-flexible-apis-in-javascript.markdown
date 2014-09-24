@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Optional callbacks for flexible APIs in Javascript"
+title: "Callback Spotting: Flexible APIs in Javascript"
 date: 2014-09-24 11:53
 comments: true
 published: true
