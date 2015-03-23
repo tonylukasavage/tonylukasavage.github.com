@@ -64,7 +64,7 @@ Like I mentioned above, shoot me an [email](mailto:anthony.lukasavage@gmail.com)
 
 ## It's not like I'm dying or anything
 
-I'll be around. You know where to find me. I'll still be very active in the open source community. I'll even be likely to host the local [Pittsburgh Javascript meetup](http://www.meetup.com/Pittsburgh-JavaScript/) at the new offices in Station Square once we get set up. It's going to be a fun time!
+I'll be around. You know where to find me. I'll still be very active in the open source community. I'll even be likely to host the local [Pittsburgh Javascript meetup](http://www.meetup.com/Pittsburgh-JavaScript/) at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!
 
 In closing, I'll just leave you with this: _{% raw %}{{profound_philosophical_career_insight}}{% endraw %}_
 
