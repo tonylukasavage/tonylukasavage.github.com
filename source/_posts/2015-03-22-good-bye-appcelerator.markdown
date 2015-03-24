@@ -53,7 +53,7 @@ As many of you know, I've got a multitude of Appcelerator-based open source side
 <a name="coming"></a>
 ## Who's coming with me?
 
-Now that I'm moving on to Innovu and building a new team, I'm curious if there's anybody out there (or anyone you know) who would want to come work with me? Here's some purposely terse job descriptions. I hate overly-detailed, impossile-to-meet criteria for tech jobs.
+Now that I'm moving on to Innovu and building a new team, I'm curious if there's anybody out there (or anyone you know) who would want to come work with me? Here's some purposely terse job descriptions. I hate overly-detailed, impossible-to-meet criteria for tech jobs.
 
 Be smart. Want to learn. Play nice. Work hard. The rest is details.
 
