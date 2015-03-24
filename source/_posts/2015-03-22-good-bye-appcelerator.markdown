@@ -28,7 +28,7 @@ As I've said at least a dozen times in the last week, I've taken way more from m
 * [Chris Barber][] & [Dawson Toth][] - My insecure overachiever complex never allows me to get comfortable unless I think I'm the best developer in the room. Chris & Dawson never let me get comfortable.
 * [Kevin Whinnery][] - He's my spirit animal.
 * [Tony Guntharp][] - For taking a loud-mouthed mobile development blogger and giving him a chance to put his money where his mouth is.
-* [Aaron Saunders][] & [Fokke Zandenberg][] - The expanse of knowledge, contribution, and material these guys generated from the community over the years had most people assuming they were employees (and Fokke is now!). Thanks for setting the bar so high for the community.
+* [Aaron Saunders][] & [Fokke Zandbergen][] - The expanse of knowledge, contribution, and material these guys generated from the community over the years had most people assuming they were employees (and Fokke is now!). Thanks for setting the bar so high for the community.
 * **The Appcelerator Community** - Maybe I should have put you men and women first. The community is why I joined Appcelerator, and it's what drove me most days. When you build SDKs, frameworks, and tooling for a living, you celebrate vicariously through your community's innovations and successes. Fortunately for the engineers at Appcelerator, we got to enjoy these frequently. Keep on kicking ass.
 
 I'm sure there's a whole bunch of people I'm forgetting to thank, so to all of you, **THANK YOU!**
@@ -79,5 +79,5 @@ In closing, I'll just leave you with this: _{% raw %}{{profound_life_and_career_
 [Kevin Whinnery]: https://twitter.com/kevinwhinnery
 [Tony Guntharp]: https://twitter.com/fusion94
 [Aaron Saunders]: https://twitter.com/aaronksaunders
-[Fokke Zandenberg]: https://twitter.com/fokkezb
+[Fokke Zandbergen]: https://twitter.com/fokkezb
 [Pittsburgh Javascript meetup]: http://www.meetup.com/Pittsburgh-JavaScript/
