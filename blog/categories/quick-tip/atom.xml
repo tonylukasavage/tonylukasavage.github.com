@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: quick tip | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/quick-tip/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Android SDK Windows Installer + JDK 64 bit = FAIL]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/20/android-sdk-windows-installer---jdk-64-bit---fail/"/>
+    <updated>2010-12-20T23:34:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/20/android-sdk-windows-installer---jdk-64-bit---fail</id>
+    <content type="html"><![CDATA[<p>Just a quick tip, when installing the Android SDK via Windows installer with the 64 bit JDK installed, you may get a "Java SE Development Kit (JDK) not found" error.</p>
+
+<p>The problem is that the Android SDK is not recognizing the 64 bit JDK (duh).  In order to work around this, you can do one of two things:</p>
+
+<ol>
+<li>Uninstall the 64 bit JDK and install the 32 bit JDK</li>
+<li>Download the Android SDK Windows ZIP file instead of the installer</li>
+</ol>
+
+
+<p><span style="color:#ff0000;">I'd highly suggest the second option</span>, as it lets you keep the better version of the JDK and doesn't really require much more work.  Just download the ZIP file, extract it where ever you want (C:\android-sdk-windows), and then run the "SDK Manager.exe" to install all the SDK platforms to develop against.  After that, add the following 2 directories to your system path (you don't have to, but it'll make things easier from the command line):</p>
+
+<ul>
+<li>C:\android-sdk-windows\tools</li>
+<li>C:\android-sdk-windows\platform-tools</li>
+</ul>
+
+
+<p>Make sure you restart any open command lines to take advantage of the new PATH.  That's it.  You are now free to use your favorite workflow, be it native Java or Adobe Air mobile development.  Happy Androiding!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip - C# property with abstract getter, concrete setter]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/20/quick-tip---c--property-with-abstract-getter--concrete-setter/"/>
+    <updated>2010-12-20T21:09:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/20/quick-tip---c--property-with-abstract-getter--concrete-setter</id>
+    <content type="html"><![CDATA[<h2>The Problem</h2>
+
+<p>On a recent .NET project I was defining an abstract class in C# when I came upon a unusual case: I needed a property that had an abstract getter, but a concrete setter.  In other words, the getter needed to be implemented by all derived classes and the setter does not, in fact its defined in the abstract class.  Nothing I like more than a good object oriented programming quandry.</p>
+
+<p>Here's some code to help make sense of it:</p>
+
+<p>``` csharp
+public abstract class BaseClass
+{</p>
+
+<pre><code>private string _baseValue;
+public abstract string Value
+{
+    get;
+    // the "set" will cause a compile error.  You can't define the get or set inside
+    // of an abstract property.
+    set
+    {
+        _baseValue = value;
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>The Solution</h2>
+
+<p>While the above syntax will generate a compile time error, there is a fairly simple way to work around the issue.  Check out this code:</p>
+
+<p>``` csharp
+public abstract class BaseClass
+{</p>
+
+<pre><code>private string _baseValue;
+protected abstract string ValueGet();
+protected void ValueSet(string baseValue)
+{
+    _baseValue = baseValue;
+}
+
+public abstract string Value
+{
+    get
+    {
+        // as implemented by the derived class
+        return this.ValueGet();
+    }
+    set
+    {
+        // as implemented by BaseClass, or derived class override
+        this.ValueSet(value);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here we delegated the setting and getting of the property to separate protected methods within BaseClass.  Now that 2 methods are used we can assign whether or not they are abstract separately.  The getter must be implemented by the derived classes, the setter may or may not be.</p>
+
+<p>And that's it.  Obviously this code also works vice versa, with the setter being abstract and the getter being concrete.  It's nice because from the perspective of someone using your code, <span style="color:#ff0000;">nothing changes with regards to the public Value property</span>.  The use of protected methods to defer overriding and abstraction help you avoid writing any unnecessarily redundant code in your derived classes. It's a nice little trick to have in your pocket.</p>
+
+<p>Happy C# OOP'ing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: Deserializing XML to objects in C#]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/15/quick-tip--deserializing-xml-to-objects-in-c-/"/>
+    <updated>2010-12-15T11:41:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/15/quick-tip--deserializing-xml-to-objects-in-c-</id>
+    <content type="html"><![CDATA[<h2>The Overview</h2>
+
+<p>Here's a quick example of how you can deserialize XML into C# objects.  This will be brief, so feel free to ask questions in the comments for more details.</p>
+
+<p>We are going to write a small class and program to deserialize <a href="#objectsxml">objects.xml</a> into a <a href="#myobject">MyObject</a> object that can then be used in the main program, <a href="#program">Program</a>.  Its not rocket science, but <span style="color:#ff0000;">it beats the hell out of manually parsing XML</span> to get the information we need.</p>
+
+<h2>The Code</h2>
+
+<h3><a name="objectsxml">objects.xml</a></h3>
+
+<p>``` xml
+<ArrayOfMyObject>
+  <MyObject></p>
+
+<pre><code>&lt;name&gt;ObjectName&lt;/name&gt;
+&lt;intValue&gt;123&lt;/intValue&gt;
+&lt;timestamp&gt;2010-12-15T08:54:11&lt;/timestamp&gt;
+&lt;elementNameDifferentThanObjectPropertyName&gt;ridiculously long name&lt;/elementNameDifferentThanObjectPropertyName&gt;
+</code></pre>
+
+<p>  </MyObject>
+  <MyObject></p>
+
+<pre><code>&lt;name&gt;AnotherObject&lt;/name&gt;
+&lt;intValue&gt;235435&lt;/intValue&gt;
+&lt;timestamp&gt;2010-12-15T08:59:51&lt;/timestamp&gt;
+&lt;elementNameDifferentThanObjectPropertyName&gt;seriously, its way too long&lt;/elementNameDifferentThanObjectPropertyName&gt;
+</code></pre>
+
+<p>  </MyObject>
+  <MyObject></p>
+
+<pre><code>&lt;name&gt;TheLastObject&lt;/name&gt;
+&lt;intValue&gt;6543333&lt;/intValue&gt;
+&lt;timestamp&gt;2010-12-15T09:04:43&lt;/timestamp&gt;
+&lt;elementNameDifferentThanObjectPropertyName&gt;no way this is gonna be the property name&lt;/elementNameDifferentThanObjectPropertyName&gt;
+</code></pre>
+
+<p>  </MyObject>
+</ArrayOfMyObject>
+```</p>
+
+<h3><a name="myobject">MyObject.cs</a></h3>
+
+<p>``` csharp
+using System;
+using System.Xml.Serialization;</p>
+
+<p>namespace MyNamespace
+{</p>
+
+<pre><code>public class MyObject
+{
+    public string name;
+    public int intValue;
+    public DateTime timestamp;
+
+    [XmlElement("elementNameDifferentThanObjectPropertyName")]
+    public string extraValue;
+
+    public MixOrder()
+    {
+        name = "";
+        intValue= 0;
+        timestamp = new DateTime();
+        extraValue = "";
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Notice I used the XmlElement attribute for the XML field with the obscenely long name.  XmlElement specifically represents <a href="http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlelementattribute.aspx">System.Xml.Serialization.XmlElementAttribute</a>.  This allows us to assign an element or attribute of the XML to a public property of the deserialized object even if their names don't match.  This is useful in the case of undesirable XML element names that are hard to work with or break coding conventions.  Also, and more importantly, as the XML you deserialize changes over time, <span style="color:#ff0000;">you can just adjust the name of the XmlElement attribute if necessary without changing the functionality of the object</span>.</p>
+
+<h3><a name="program">Program.cs</a></h3>
+
+<p>``` csharp
+using System;
+using System.Xml;
+using System.Xml.Serialization;
+using MyNamespace;</p>
+
+<p>namespace TestConsoleApplication
+{</p>
+
+<pre><code>class Program
+{
+    static void Main(string[] args)
+    {
+        List&lt;MyObject&gt; myObjects = new List&lt;MyObject&gt;();
+        XmlSerializer serializer = new XmlSerializer(typeof(List&lt;MyObject&gt;));
+        XmlReader reader = XmlReader.Create("objects.xml");
+        myObjects = (List&lt;MyObject&gt;)serializer.Deserialize(reader);
+
+        // now you can perform operations on your list of MyObject objects,
+        // no manual XML parsing necessary.
+
+        Console.WriteLine("Press &lt;ENTER&gt; key to exit.");
+        Console.ReadLine();
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>I leave the processing of the object up to you, but the process is clear.  We create a XmlSerializer that corresponds to the type of our object, create a XmlReader for the XML, then use the serializer to deserialize the XML from the reader.  From there you have a successfully populated List<MyObject> list.  Do with it what you will.</p>
+
+<p>In the words of the Beastie Boys, "That's it, that's all, that's all there is."  See ya at the next quick tip.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of away3d_heightmap</title>
+	<nodes>
+		<node label="src">
+			<node icon="mxmlAppIcon" selected="true" label="away3d_heightmap.mxml" url="source/away3d_heightmap.mxml.html"/>
+			<node icon="mxmlIcon" label="Away3dUIComponent.mxml" url="source/Away3dUIComponent.mxml.html"/>
+			<node icon="actionScriptIcon" label="SavageLookSkinExtrude.as" url="source/SavageLookSkinExtrude.as.html"/>
+			<node icon="imageIcon" label="water.jpg" url="source/water.jpg.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 102K)" url="away3d_heightmap.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

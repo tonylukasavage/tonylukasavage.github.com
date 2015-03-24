@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: alchemy | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/alchemy/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Adobe Alchemy]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/23/adobe-alchemy/"/>
+    <updated>2010-08-23T07:26:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/23/adobe-alchemy</id>
+    <content type="html"><![CDATA[<p><a href="http://labs.adobe.com/" target="_blank">Adobe Labs</a> has a prerelease project called <a href="http://labs.adobe.com/technologies/alchemy/" target="_blank">Alchemy</a>, which allows you to compile C/C++ code into SWC libraries that are usable in your AS3 code.  For a former C/C++ coder like myself, this is music to my ears, but those without that background might be wondering why the hell you would even bother.  Well, there's 2 major points to consider:</p>
+
+<ul>
+    <li>You'll be able to use the existing mountains of C/C++ libraries in your AS3 without having to create a port.</li>
+    <li>To quote the Adobe Alchemy page:  <em>(Its) ideally suited for computation-intensive use cases, such as audio/video transcoding, data manipulation, XML parsing, cryptographic functions or physics simulation, performance can be considerably faster than ActionScript 3.0...</em></li>
+</ul>
+
+
+<p>Now before you go getting all excited to compile your favorite C/C++ library into an SWC, there are some things to consider:</p>
+
+<ul>
+    <li>The more OS and other library dependencies your compiling target has, the less likely it is to work.</li>
+    <li>This is a prerelease labs project, so expect bugs and lots of visits to the <a href="http://forums.adobe.com/community/labs/alchemy" target="_blank">Alchemy forums</a>.  This should probably not be used for production code.</li>
+    <li>Adobe has not made it clear whether or not they plan to continue development of Alchemy, or whether it will ever be rolled into an official release.</li>
+</ul>
+
+
+<p>If that hasn't scared you off I'd highly suggest going to the <a href="http://labs.adobe.com/technologies/alchemy/" target="_blank">Alchemy project page</a> to get your necessary downloads and then heading immediately to the <a href="http://labs.adobe.com/wiki/index.php/Alchemy:Documentation:Getting_Started" target="_blank">"Getting Started" page</a> to setup up your development environment.  See if you can get their basic stringecho.c program working.  Once you have built your environment and compiled your first SWC for use in your AS3 code, it's time to actually build your own Alchemy version of a C/C++ library.  Here's a few examples of libraries that have been successfully ported to AS3 via Alchemy:</p>
+
+<ul>
+    <li>OggVorbis and Crypto from the <a href="http://labs.adobe.com/wiki/index.php/Alchemy:Libraries" target="_blank">Alchemy ports page</a></li>
+    <li><a href="http://wiki.github.com/jesses/wck/box2d-flash-alchemy-port" target="_blank">Box2D Physics Engine</a></li>
+    <li><a href="http://www.libspark.org/svn/as3/FLARToolKit/branches/alchemy/" target="_blank">FLARToolkit Augmented Reality Library</a></li>
+    <li><a href="http://www.peternitsch.net/demo/aa-lib/index.html" target="_blank">aalib Ascii Art Library</a></li>
+</ul>
+
+
+<div style="margin-left: auto; margin-right: auto; width: 450px;">
+
+</div>
+
+
+<p>Now remember how I said you would inevitably run into bugs?  Yeah, that's gonna happen, it wasn't just a maybe.  Well, here's a list of bugs I've run into so far (in attempting to port <a href="http://www.ijg.org/" target="_blank">IJG's JPEG library</a>) and what I had to do to work around them.  And by "work around them" I mean "what people on the Alchemy forums did to work around them."</p>
+
+<ul>
+    <li>
+<h3 style="text-decoration: underline;">adl.exe stuck</h3>
+<pre lang="bash">checking whether we are cross compiling... \
+$FLEX_HOME/bin/adl.exe c:\\cygwin/tmp/t35f0.0/app.xml \
+2> /tmp/adl.trace &amp; echo $!</pre>
+Cygwin must installed at C:\cygwin because Swfbridge, which loads AIR apps on the fly during configure scripts, is hardcoded to reference C:\cygwin.  <br><br>If you are working on a Linux system and get a similar error, make sure that you can execute your $FLEX_HOME/bin/adl file successfully.  The executable for the standard Flex 3.2 SDK does not include a valid Linux ADL, only Windows and Mac.  For a Linux version, download the <a href="http://www.adobe.com/products/air/tools/sdk/" target="_blank">AIR SDK for Linux</a> and use its ADL.</li>
+    <li>
+<h3 style="text-decoration: underline;">Bad regex in achack/gcc</h3>
+<pre lang="bash">Compiler] Error #1084: Syntax error: expecting identifier before \
+leftbrace.
+    91011.achacks.as, Ln 1, Col 18:
+    package cmodule. {</pre>
+Change line 274 of $ALCHEMY_HOME/achacks/gcc in the following way:
+<pre lang="perl">#if($o =~ /([^\.]*)/)
+if($o =~ /([^\/\.]+)(\..*)*$/)</pre>
+or just replace $ALCHEMY_HOME/achacks/gcc with <a href="http://savagelook.com/misc/gcc">this fixed version</a>.</li>
+    <li>
+<h3 style="text-decoration: underline;">Missing asmachine.abc</h3>
+``` bash
+[Compiler] Error #1063: Unable to open file: \
+$ALCHEMY_HOME/avm2-libc/lib/asmachine.abc.
+```
+
+Don't compile shared libraries, only static.  You can usually set this in a configure script using "--enable-shared=no --enable-static=yes".  You can also pass the "-static" option to gcc directly when compiling.</li>
+</ul>
+
+
+<p>That's the list so far, but I'm sure there'll be more.  When all else fails, be sure to check the your /tmp directory for log files.  I hope its saves anyone reading this a few hours as thats how long it took me to track these all down as an Alchemy noob.  If you have the brains, guts, and patience to churn out an Alchemy port of a C/C++ library, leave a comment and let me know about it.  Hopefully if enough of us do some real head turning work with it Adobe will actually put some serious effort into an actual supported release.  Keep your fingers crossed.</p>
+]]></content>
+  </entry>
+  
+</feed>

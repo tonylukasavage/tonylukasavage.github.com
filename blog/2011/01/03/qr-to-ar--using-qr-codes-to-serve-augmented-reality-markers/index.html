@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>QR to AR: Using QR Codes to serve Augmented Reality Markers - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="The Demo Scan 1 of the 4 QR codes below with your mobile device. Here&#8217;s an Android Barcode app and a couple iPhone apps if you don&#8217;t &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/01/03/qr-to-ar--using-qr-codes-to-serve-augmented-reality-markers/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">QR to AR: Using QR Codes to serve Augmented Reality Markers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-03T07:58:00-05:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>The Demo</h1>
+
+
+<p>Scan 1 of the 4 QR codes below with your mobile device.  Here&#8217;s an <a href="http://www.androidzoom.com/android_applications/shopping/barcode-scanner_clh.html" target="_blank">Android Barcode app</a> and <a href="http://www.iphoneness.com/iphone-apps/5-best-barcode-iphone-applications/" target="_blank">a couple iPhone apps</a> if you don&#8217;t already have one.</p>
+
+<table cellpadding="10">
+  <tr>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt001.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt002.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt003.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt004.png"/></td>
+  </tr>
+</table>
+
+
+<p>The resulting link will take you to an augmented reality image marker.  It doesn&#8217;t mean much by itself, but take a look at what can be done with this <span style="color:#ff0000;">&#8220;QR to AR&#8221; method</span>:</p>
+
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="600" height="488" src="http://www.youtube.com/embed/bnY5aJSL4Bg" frameborder="0"></iframe>
+
+
+<h1>The Overview</h1>
+
+
+<p><strong>NOTE:</strong> If you are totally unfamiliar with augmented reality, check out these previous posts: <a href="http://savagelook.com/blog/away3d/away3d-augmented-reality">Augmented Reality</a> and <a href="http://savagelook.com/blog/away3d/away3dlite-augmented-reality-free-camaro">Augmented Reality with Away3dlite</a>.</p>
+
+<p>What&#8217;s one of the biggest blockers to augmented reality taking off?  <span style="color:#ff0000">The difficulty in distributing the augmented reality markers</span> necessary to make the technology work.  If you&#8217;ve seen an augmented reality site, you&#8217;ve read the off-putting instructions to print an image to a sheet of paper to hold in front of your webcam.  If you are a massive publication like Esquire, then its not so big of an issue.</p>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/wp2z36kKn0s?fs=1&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/wp2z36kKn0s?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+<p>But if you have no problem distributing AR markers, you probably aren&#8217;t reading this and don&#8217;t need my help.  But if you do, you might want to try the &#8220;QR to AR&#8221; method of distribution shown at the top of this post.  You should always offer the method of printing your AR marker, but with the widespread use of mobile technology, this is another viable method.</p>
+
+<p>In short, the positive is that this method is easy to distribute and is more likely to be tried than with the &#8220;print this marker&#8221; method.  The negative is that augmented reality is already a technology that depends heavily on a quality image.  Consider the following when attempting to use the &#8220;QR to AR&#8221; method:</p>
+
+<ul>
+<li>Mobile phones can add difficulty with their reflective and glowing surface</li>
+<li>Good lighting and webcam quality is critical for the best possible augmented reality experience</li>
+<li>Disable auto-orient on your device, if possible, otherwise the image will turn when your phone does</li>
+</ul>
+
+
+<p><span style="color:#ff0000;">This isn&#8217;t necessarily meant as a practical solution</span> to augmented reality marker distribution and use, just a simple attempt to think outside the box.  Hopefully it encourages people smarter than me to think of even more clever ways to bring augmented reality to the masses.</p>
+
+<p>Special thanks to all techs involved here: <a href="http://words.transmote.com/wp/flarmanager/">FLARManager</a>, <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en">FLARToolkit</a>, <a href="http://away3d.com/">Away3D</a>, and my trusty Droid X using the <a href="http://code.google.com/p/zxing/">Barcode Scanner app from Zxing</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-03T07:58:00-05:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/actionscript3/'>actionscript3</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/as3/'>as3</a>, <a class='category' href='/blog/categories/augmented-reality/'>augmented reality</a>, <a class='category' href='/blog/categories/away3d/'>away3d</a>, <a class='category' href='/blog/categories/flarmanager/'>flarmanager</a>, <a class='category' href='/blog/categories/flartoolkit/'>flartoolkit</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/qr/'>qr</a>, <a class='category' href='/blog/categories/qr-code/'>qr code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/01/01/cropping-and-compressing-video-with-virtualdub-and-xvid/" title="Previous Post: Cropping and Compressing Video with VirtualDub and Xvid">&laquo; Cropping and Compressing Video with VirtualDub and Xvid</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug/" title="Next Post: PHP Debugging on IntelliJ IDEA 10 with XDebug">PHP Debugging on IntelliJ IDEA 10 with XDebug &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

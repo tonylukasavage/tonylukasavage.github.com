@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: webcam | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/webcam/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Webcam Video in Actionscript3]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/11/webcam-video-in-actionscript3/"/>
+    <updated>2010-08-11T22:21:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/11/webcam-video-in-actionscript3</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/webcam/webcam.html" class="fancybox.iframe"><img title="webcam" src="http://tonylukasavage.github.com/images/webcamp.jpg" alt="" width="449" height="321" /></a></p>
+
+
+<p>Click the above picture for the webcam demo (webcam required).
+Right click on the demo, or <a href="http://tonylukasavage.github.com/demos/webcam/srcview/index.html" target="_self">click here for the source code</a>.</p>
+
+<p>This is a pretty simple demo compared to some of my other stuff, but it's a key point for a lot of them.  Knowing how to use the webcam independently of an existing library can open up lots of options beside augmented reality.  For that reason, I present this small demo showing off how easy it is to do so in Actionscript3.</p>
+
+<p>Here's a slightly modified excerpt from the full source code that is the meat and potatoes of the demo:</p>
+
+<p>``` as3
+var camera:Camera = Camera.getCamera();
+camera.setQuality(0,100);
+camera.setMode(800,600,60,true);</p>
+
+<p>var video:Video = new Video(800,600);
+video.attachCamera(camera);
+addChild(video);
+```</p>
+
+<p>As you can see, its as simple as creating a Camera object, attaching it to a Video object and adding the Video object to the main sprite.   The demo will show you how to manipulate image quality, camera frame rate, and viewport size.  For more details on all the properties and methods of each, check out the ASDocs on <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/media/Camera.html" target="_blank">Camera</a> and <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/media/Video.html" target="_blank">Video</a>.</p>
+
+<p>What can you do with this besides making yet another video chat application?  I don't know about you, but I'm planning an Away3DLite project that will involve multiple levels of "reflection" based on the images from the webcam.  It will be awesome.  Now I just need to figure out how I'm going to do it.  Details...</p>
+]]></content>
+  </entry>
+  
+</feed>

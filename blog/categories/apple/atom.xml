@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: apple | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/apple/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[5 Annoying Things About Mac OS X Lion and How To Fix Them]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/08/31/5-annoying-things-about-mac-os-x-lion-and-how-to-fix-them/"/>
+    <updated>2011-08-31T07:38:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/08/31/5-annoying-things-about-mac-os-x-lion-and-how-to-fix-them</id>
+    <content type="html"><![CDATA[<h2>So you're running Mac OS X Lion...</h2>
+
+
+
+
+<p>Let me start by saying that among the <a href="http://www.apple.com/macosx/whats-new/features.html">250+ new features</a> added in Lion, there are some really useful ones. Some of my favorites include:</p>
+
+
+
+
+<ul>
+<li><strong>Accessible from App Store</strong> - The fact that the upgrade itself is accessible from the App Store is extremely convenient. Granted, you could argue that Lion is little more than the equivalent of a Windows Service Pack, which are free and automatically delivered. </li>
+<li><strong>Face Time</strong> - Face Time is no longer beta as it was with Snow Leopard and is fully integrated into Lion.</li>
+<li><strong>Document locking</strong> - This grants you the ability to lock documents to prevent unwanted modifications. Not groundbreaking (see 'read-only'), but the stuff Lion does behind the scenes, like automatically locking old documents, is pretty nice.</li>
+<li><strong>Full disk encryption</strong> - No more is only your Home path safe. As of Lion, FileVault has been totally revamped and your entire disk will now be encrypted. </li>
+<li><strong>Full screen apps</strong></li>
+<li><strong>Resize windows from any edge</strong></li>
+</ul>
+
+
+
+
+<p>In addition to these nicer features, Lion did some really annoying stuff to user interaction and the user interface. I'm all for change for the better, but most of these fall under the category of "If it ain't broke, don't fix it." Fortunately, there's ways to get back the settings you expect. Here's 5 I specifically ran into.</p>
+
+
+
+
+<h2>Unhide ~/Library</h2>
+
+
+
+
+<p>For whatever reason, Apple decided to hide your <i>~/Library</i> path. This is a real pain the ass if you find yourself in there a lot. For example, Appcelerator installs its SDK and other files in <i>~/Library/Application Support/Titanium</i>. I'm constantly tinkering in that directory and it would be nice to see it in Finder. </p>
+
+
+
+
+<p>Execute this line in Terminal and you'll have your <i>Library</i> visible once again. <strong>USERNAME</strong> is your username:</p>
+
+
+<p><code>bash
+chflags nohidden /users/USERNAME/Library
+</code></p>
+
+<h2>Disable "Natural" scrolling</h2>
+
+
+
+
+<p>Lion has included "natural" scrolling. I use quotations around "natural" because it feels anything other than natural for the average user. The content you are scrolling will now move in the direction you scroll, which is essentially the opposite of how it has always worked.</p>
+
+
+
+
+<p>I have no problem with this functionality. What I do take issue with is that this was made the default behavior. To set scrolling back to the way most of us expect it, open <strong>System Settings</strong>, go to <strong>Trackpad/Mouse</strong>, and in the <strong>Scroll/Zoom</strong> tab uncheck <strong>"Scroll direction: natural"</strong>.</p>
+
+
+
+
+<p><img src="https://img.skitch.com/20110831-83ricxbahiq22edfpmfncnwp6c.jpg" alt="screen" title="" /></p>
+
+
+
+
+<h2>Fix 3 finger horizontal swipe navigation</h2>
+
+
+
+
+<p>The trackpad gesture I use more than any other is navigation using 3 finger swipes. I don't even remember the last time I manually pressed the back button in a browser. No wait, yes I do. It was when I got my MacBook Air and it had Lion on it.</p>
+
+
+
+
+<p>Turns out Apple mapped 2 finger horizontal swipes to its <strong>"Swipe between pages"</strong> functionality by default. Unfortunately, unless you switch this value to use 3 finger horizontal swipes, it won't work for browser navigation. Check out the image below to see how:</p>
+
+
+
+
+<p><img src="https://img.skitch.com/20110831-8unxrw8wbw5mum9ex61pmn4yha.jpg" alt="" title="" /></p>
+
+
+
+
+<h2>Get Rid of LaunchPad</h2>
+
+
+
+
+<p>If I wanted what is effectively a "Show Desktop" button combined with an applications list, I'd use Windows. Just remove that thing from your Dock and be done with it.</p>
+
+
+
+
+<p>Do yourself a favor. If you really want an effective way to find and run apps, check out <a href="http://www.alfredapp.com/">Alfred</a> or <a href="http://qsapp.com/">Quicksilver</a>. You can thank me later.</p>
+
+
+<div style="height:15px;"></div>
+
+
+
+
+<h2>Get a Fresh Restart</h2>
+
+
+
+
+<p>I don't know about you, but I reboot my Mac really infrequently. When I do, though, it's generally because I want a clean slate. I want all my apps closed and everything to go back to a fresh state. Lion disagrees with me.</p>
+
+
+
+
+<p>By default Lion will remember every app you had open and make sure everything is just as you left it when you restarted your computer. For those of you who would also like a fresh restart, open <strong>System Settings</strong> and go to <strong>General</strong>. In there you just need to uncheck the <strong>"Restore windows when quitting and re-opening apps"</strong> checkbox.</p>
+
+
+
+
+<p><img src="https://img.skitch.com/20110831-nugs2uasgdk7u3u51im5jw181m.jpg" alt="" title="" /></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Developer's Icon &amp; Image Checklist]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist/"/>
+    <updated>2011-03-24T09:51:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist</id>
+    <content type="html"><![CDATA[<h2>Overview</h2>
+
+
+<p>If there's one thing I've learned from delving into iOS, Android, and Blackberry app development, it's that there's a lot more to creating a mobile app than just coding it.  One of the things that can catch you off guard, especially if you are devoid of design ability like me, is the amount of icons and images necessary to deploy your apps.  This becomes even more daunting when you intend to deploy to multiple platforms.</p>
+
+<p>The other concern is that it isn't always evident from the development tools how many different graphics you need to account for all scenarios.  A new iOS developer will likely be unaware that you need a 58x58 pixel icon for iPhone 4 Spotlight and Settings.  To attempt to alleviate some of this confusion, I put together these charts to detail what I know so far about the graphics required for submitting mobile apps to the various Android, iOS, and Blackberry markets.</p>
+
+<h2>Icons</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android</td>
+<td width="15%">iOS</td>
+<td width="15%">Blackberry Playbook</td>
+<td width="45%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">29x29</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone Settings and Spotlight, iPad Settings</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">36x36</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">low pixel density icon</td>
+</tr>
+<tr>
+<td class="leftHeader">48x48</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">medium pixel density icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">50x50</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPad Spotlight. iOS will trim 1 pixel off each side and add a drop shadow, making it 48x48</td>
+</tr>
+<tr>
+<td class="leftHeader">57x57</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">58x58</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone 4 Settings and Spotlight</td>
+</tr>
+<tr>
+<td class="leftHeader">64x64</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional small custom document icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">72x72</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Android high pixel density icon, iPad icon</td>
+</tr>
+<td class="leftHeader">86x86</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">standard Playbook icon. It will trim 5 pixels off each side, making it 76x76</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">96x96</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">114x114</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone 4 icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">144x144</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">320x320</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional large custom document icon</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<br><br>
+
+
+
+
+<h2>Distribution Images</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android Market</td>
+<td width="15%">Apple App Store</td>
+<td width="15%">Blackberry App World</td>
+<td width="15%">Amazon App Store</td>
+<td width="30%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">screenshot sizes</td>
+<td>320x480, 480x800, 480x854, 1280x800</td>
+<td><strong>iPhone</strong>: 320x480, 480x320, 320x460, 480x300 <strong>iPhone 4</strong>: 640x960, 960x640 <strong>iPad</strong>: 768x1024, 1024x768, 748x1024, 1004x768</td>
+<td>640x640 or smaller</td>
+<td>480x854, 854x480</td>
+<td class="notes">required # of screenshots:
+<strong>Android</strong>: at least 2
+<strong>Apple</strong>: at least 1
+<strong>Blackberry</strong>: 1-50
+<strong>Amazon</strong>: 3-10</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">114x114</td>
+<td></td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">device icon</td>
+</tr>
+<tr>
+<td class="leftHeader">180x120</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Promotional graphic (no alpha)</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">480x480</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Product icon that should match your 86x86 icon</td>
+</tr>
+<tr>
+<td class="leftHeader">512x512</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">Large/High resolution product icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">1024x500</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Feature graphic for market</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h2>Additional Notes</h2>
+
+
+<p><strong>For Android</strong>, your 36x36, 48x48, and 72x72 pixel icons should be placed in the <strong>drawable-ldpi</strong>, <strong>drawable-mdpi</strong>, and <strong>drawable-hdpi</strong> folders of your Android project respectively.  Be sure to specify the name of the file you will be using in the <strong>android:icon</strong> attribute of the <strong><application></strong> element in your AndroidManifest.xml file.  Android also allows you to include a promotional video.</p>
+
+<p><strong>For iOS</strong> you simply need to add your appropriately sized and named icons to your <strong>Resources</strong> directory in your XCode project.  Here's a mapping of the icon sizes to the required name of the icon file. <strong>NOTE</strong>: There is purposely no extension on the 512x512 iTunesArtwork file.</p>
+
+<ul>
+<li>29x29 - Icon-Small.png</li>
+<li>50x50 - Icon-Small-50.png</li>
+<li>57x57 - Icon.png</li>
+<li>58x58 - Icon-Small@2x.png</li>
+<li>72x72 - Icon-72.png</li>
+<li>114x114 - Icon@2x.png</li>
+<li>512x512 - iTunesArtwork</li>
+</ul>
+
+
+<p><strong>For Blackberry Playbook</strong>, you need to specify the name of your 86x86 application icon in your application's <strong>blackberry-tablet.xml</strong> file.  Below is a sample of how you would set that up.</p>
+
+<p>``` xml
+<qnx></p>
+
+<pre><code>&lt;icon&gt;
+    &lt;image&gt;86x86.png&lt;/image&gt;
+&lt;/icon&gt;
+&lt;publisher&gt;My Company&lt;/publisher&gt;
+&lt;category&gt;core.games&lt;/category&gt;
+&lt;splashscreen&gt;my_splashscreen.jpg&lt;/splashscreen&gt;
+</code></pre>
+
+<p></qnx>
+```</p>
+
+<p><strong>For the Amazon App Store</strong> you can also submit promotional images of various sizes and up to 5 promotional videos.</p>
+
+<h2>Summary</h2>
+
+
+<p>So as you can see, you've got a lot to consider when it comes to presenting your mobile application to the masses.  As a developer, I'm looking for the simple solution here.  For me, the easiest thing to do was use this <a href="http://www.command-tab.com/2008/09/20/iphone-and-ipod-touch-icon-template/" target="_blank">512x512 iOS icon template</a>, create my icon, and scale it down to all the required sizes.  If you happen to be reading this post and know a better/easier workflow, please let me know.</p>
+
+<p>Here's a few references to check out to get some additional information on mobile app icons and market images:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/library/safari/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html" target="_blank">iOS Human Interface Guidelines - Custom Icon and Image Creation Guidelines</a></li>
+<li><a href="http://developer.apple.com/library/ios/#qa/qa1686/_index.html" target="_blank">App Icons on iPad and iPhone</a></li>
+<li><a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design.html" target="_blank">Android Icon Design Guidelines</a></li>
+<li><a href="http://docs.blackberry.com/en/developers/deliverables/22301/Designing_application_icons_tablet_1401556_11.jsp" target="_blank">Blackberry Playbook - Designing Application Icons</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tethering + Android Development = FAIL]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/09/tethering---android-development---fail/"/>
+    <updated>2011-03-09T21:34:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/09/tethering---android-development---fail</id>
+    <content type="html"><![CDATA[<p>So I wanted to update my <a href="http://www.boastr.de/" target="_blank">BetterTouchTool</a> version while I was on my work network.  You would think this was a simple thing, but the damn proxy seems to almost arbitrarily drop connections.  So to get around this I was planning to use my Droid X with the free <a href="http://www.junefabrics.com/android/" target="_blank">PdaNet</a> app and client to tether my MacBook Pro.  For details on how you can do this yourself, check out <a href="http://www.junefabrics.com/android/mac.php" target="_blank">this link</a>.</p>
+
+<p>But I hit a snag when initiating the tethered connection:</p>
+
+<pre lang="plain">
+PdaNet: Unable to open interface (e00002c5)
+</pre>
+
+
+<p>Really helpful and descriptive error, right?  There's another factor here, though.  I neglected to mention that I was actively developing in the Android SDK with Eclipse.  As it turns out, the Android Debug Bridge (adb) doesn't play nice with the PdaNet tether Android app.  In fact, it likely that it doesn't work with any other tether app since it takes full control of the USB debugging connection.</p>
+
+<p>So how do you fix it? Well, you can't really.  The best you can do is make sure you aren't doing both at the same time.  If you are developing in Eclipse for Android against a physical device via USB, you will have to do the following to be able to tether:</p>
+
+<ol>
+<li>Close Eclipse</li>
+<li>Kill the adb process</li>
+<li>Restart your tether app</li>
+</ol>
+
+
+<p>With those applications closed, you should be able to successfully tether your computer once again.  Hopefully this will save the someone the frustration of tracking down this error themselves.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[New Mac User Survival Kit]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/03/new-mac-user-survival-kit/"/>
+    <updated>2011-03-03T16:41:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/03/new-mac-user-survival-kit</id>
+    <content type="html"><![CDATA[<p>OK, so I've downloaded and installed all my normal tools and apps that I have available to me on Windows: Tweetdeck, Skype, Chrome, all my IDEs (except Visual Studio), and a handful of others.  Now that I have those in place, how do I finish bridging the gap between what I still need from Windows?  How do I take it from an equivalent of my Windows laptop to something much more?</p>
+
+<p>I don't have all the answers yet, but I'll get by with a little help from my friends.  In this case I'd like to mention those friends as they have helped ramp me up in Mac knowledge a hell of a lot faster than I would have thought possible.  Big thanks out to <a href="http://twitter.com/#!/john__olson" target="_blank">@john__olson</a>, <a href="http://twitter.com/#!/s9tpepper" target="_blank">@s9tpepper</a>, <a href="http://twitter.com/#!/JayMoretti" target="_blank">@JayMoretti</a>, <a href="http://twitter.com/#!/newtriks" target="_blank">@newtriks</a>, and <a href="http://twitter.com/#!/pedramp" target="_blank">@pedramp</a>.  They pointed to most of the applications below that are making my time with Mac OS X extremely productive.</p>
+
+<h2>Survival Kit</h2>
+
+
+<ul>
+    <li><a href="http://alfredapp.com" target="_blank"><span style="font-size: 125%;">Alfred</span></a> - Alfred is a productivity booster that uses keyboard shortcuts to quickly access applications, web searches, bookmarks, and a lot more.  It searches as you type and the results are instantaneous, which is something by which this long time Windows user is stunned.  I almost passed this one by because it didn't sound like anything special.  5 minutes of using it changed that perception big time.  Don't take my word for it though, go download it yourself or at the very least check out its introductory video.
+<iframe src="http://player.vimeo.com/video/16204051?title=0&amp;byline=0&amp;portrait=0" width="620" height="250" frameborder="0"></iframe></li>
+    <li><span style="font-size: 125%;"><a href="http://toolbar.google.com/gmail-helper/notifier_mac.html" target="_blank">Gmail Notifier</a></span> - How else am I going to know whether or not I have email in my Gmail account now? Can't use Google Talk anymore (and don't need to with iChat).  There's other clients out there but this one is simple, free, and gets the job done.  However I did have occaisons where the email checking intervals took way too long, like 20+ minutes.  But there's an easy fix.  Just type the following from the Terminal, restart the Gmail Notifier, and you're good to go:
+<strong>defaults write com.google.GmailNotifier AutocheckInterval 1</strong></li>
+    <li><a href="http://homepage.mac.com/thomasw/OpenTerminal/" target="_blank"><span style="font-size: 125%;">OpenTerminal</span></a> - The website may not look like much, but I think that's because all the effort was put into the tool.  OpenTerminal adds the simple, yet powerful functionality of being able to open Terminal based on a folder in Finder, or any folder you drag onto it.
+</li>
+    <li><span style="font-size: 125%;"><a href="http://skitch.com/" target="_blank">Skitch</a></span> - Skitch is the smarter, stronger, better looking brother of Windows print screen.  It lets you quickly take snapshots of any sized portion of your screen.  In that same interface you can also add arrows, annotations, shapes, and highlights to augment you snapshots.  I've probably used this 20 times already in the 4 days I've been using this MacBook Pro.  In fact, the picture below shows how I used Skitch to make the snapshot for the OpenTerminal example above:
+</li>
+    <li><span style="font-size: 125%;"><a href="http://totalfinder.binaryage.com/" target="_blank">TotalFinder</a></span> - TotalFinder is everything that the built-in Mac OS X Finder should be.  It adds missing features and tweaks like tabbed browsing, sorting files with folders on top, dual Finder views, and many other features.  Well worth the $15 asking price for this high quality bundle that integrates into directly into the existing Finder.
+</li>
+    <li><span style="font-size: 125%;"><a href="http://wb.mysql.com/" target="_blank">MySQL Workbench</a></span> - OK, this isn't exactly critical for everyone, but it was for me.  I needed a full featured MySQL GUI client and I didn't want to pay for it.  The choices are abundant for Windows, not so much for Mac.  Lots of people suggested <a href="http://www.sequelpro.com/" target="_blank">Sequel Pro</a>, but it was way to light on features, specifically the inability to alter stored procedures inline.
+
+I had tried MySQL Workbench before for Windows and was pretty displeased with it.  it offered a great deal in terms of functionality and is the sanctioned client of MySQL, but it was very glitchy.  I had a lot of inconsistent behavior and found myself losing time instead of gaining it while using it.  Just for fun I revisited it for Mac and am very pleasantly surprised.  Everything I need to be there is there and I've run into none of the aggravating behavior problems I did before.  Plus they added "snippets" to their SQL query area, which are awesome.  I highly suggest this free tool to anyone doing database development or management from Mac.</li>
+    <li><span style="font-size: 125%;"><a href="http://www.vmware.com/products/fusion/" target="_blank">VMWare Fusion</a></span> - VMWare Fusion is a specialized virtualization software that allows you to integrate your applications from a Windows VM seamlessly into your Mac desktop.  Aside from your Windows applications appearing in standard Mac windows, you get the added compatibility of copy/paste, drag-and-drop, printing, and more.  This was huge for me since the biggest hurdle in moving completely to Mac was the fact that most of my development for my employer is C# in Visual Studio.
+</li>
+    <li><span style="font-size: 125%;"><a href="http://www.microsoft.com/mac/outlook" target="_blank">Outlook:Mac 2011</a></span> - This was critical for me.  I needed to connect to our Exchange Server to be able to fully switch over to Mac for development.  Sure I could run it in a Windows VM, but I wanted the notifications in my Dock as I often have to respond quickly.  Outlook:Mac 2011 does exactly what I need, which is exactly what Outlook does on Windows.  On additional note is that the contact email address auto hinting seems to work significantly faster on Mac.  A happily welcomed perk.
+</li>
+</ul>
+
+
+<br>
+
+
+<h2>What's Next?</h2>
+
+
+<p>Anybody else got some can't miss applications I should be using for Mac?  I'm all ears.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[From Windows to Mac: 9 Things I Love &amp; Hate]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/02/from-windows-to-mac--9-things-i-love--amp--hate/"/>
+    <updated>2011-03-02T11:06:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/02/from-windows-to-mac--9-things-i-love--amp--hate</id>
+    <content type="html"><![CDATA[<p>So this week this long time Windows/Linux developer was presented with his very first Mac.  In this case, it's the brand new <a href="http://www.apple.com/macbookpro/" target="_blank">MacBook Pro</a>.  Its a pretty sweet and sexy machine, sporting a quad-core 2.0 GHz processor, 4GB of RAM, 500 GB of disk space, an HD webcam, and one of those fancy new <a href="http://www.apple.com/thunderbolt/" target="_blank">Thunderbolt ports</a>.  All this packaged in a sleek frame and accompanied by a <a href="http://www.apple.com/displays/" target="_blank">27" cinema display</a>, a <a href="http://www.apple.com/keyboard/" target="_blank">Bluetooth keyboard</a>, and a <a href="http://www.apple.com/magicmouse/" target="_blank">Magic Mouse</a>.  At first glance it's easy to see why some people get so crazy about Apple products.</p>
+
+<p>Then I turned it on.</p>
+
+<p>OK, it wasn't that bad, but there's definitely some stuff I liked and some stuff I really hated.  Some of it, of course, is the total tech shock of using a completely foreign OS.  But that doesn't explain away some of the "interesting" workflow decisions that one must become accustomed to with Mac OS X Snow Leopard. Here's 9 things so far that I love and hate about my MacBook Pro and the Mac OS X operating system.</p>
+
+<h2>9 Things I Love</h2>
+
+
+<ol>
+    <li><strong>Trackpad gestures</strong> - while it took a little getting used to, the multitouch trackpad gestures of the MacBook Pro are fantastic.  Using 2, 3, or 4 touch gestures you can scroll, navigate in your browser, and access Expose and running applications respectively.  This type of user input is truly what's coming.</li>
+    <li><strong>Expose</strong> - Expose is a great feature that let's you reorganize, hide, and access all your running applications by using either trackpad gestures or hot zones on your desktop.  It's Windows "show desktop" and "task switcher/flip" on crack, and much cooler looking.
+</li>
+    <li><strong>Easy uninstalls</strong> - No more long waits, 3rd party uninstallers, or registry unpleasantness.  All you have to do in Mac OS X is delete the application from the Applications folder.  Its simple and quick.  A very welcome change of pace.</li>
+    <li><strong>Easy setup</strong> - Apple sure got it right when it comes to getting you up and running fast.  I had my Bluetooth mouse &amp; keyboard, wireless connectivity, VPN access, Google Talk through iChat, and Gmail through Mail all working in probably less than 30 minutes.  No driver downloads, 3rd party software, or updates.  It just works well and fast.</li>
+    <li><strong>Documentation and how tos</strong> - almost every built in application or system tool has its own easy to read documentation, often times with a short video for clarity.  It got this fish back in the water pretty quickly.</li>
+    <li><strong>iOS and Mac development tools</strong> - XCode: massive, robust, free.  Why does Visual Studio cost so much again?</li>
+    <li><strong>Terminal</strong> - I probably should hav ranked this higher.  As a guy who spent 6 years developing Perl and C/C++ from no-GUI Linux, this is the perfect addition of power to Mac's flair.  I can't tell you how many times I saw this at a Windows DOS prompt:
+</li>
+    <li><strong>Dock</strong> - it is great for accessing and viewing common applications, as well as your downloads and notifications.  Quick, always-there access to your most used resources... why didn't everyone think of that?</li>
+    <li><strong>Boot, restart, and sleep</strong> - All function fast and exactly how you think they should.  Reboots, though far less common on my Mac so far, are extremely quick.  I'm talking less than a minute for full shutdown and reboot, often even faster.  Sleep is my favorite, though.  Less than 5 seconds to sleep, near instant wake up.  I love it.</li>
+</ol>
+
+
+<p>&nbsp;</p>
+
+<h2>9 Things I Hate</h2>
+
+
+<ol>
+    <li><strong>Price</strong> - Damn these things are pricey! Let's get one thing straight.  For most intents and purposes, you are paying more for "different", not "better".  Yes, Mac is superior in some aspects, but not "twice as expensive as a comparable device with a different OS" superior.</li>
+    <li><strong>Green pebble confusion</strong> - I know, I know, its designed to fit to the size of the contents.  But guess what? That's not always what it does.  Sometimes it maximizes, sometimes it fits to content, sometimes it does something entirely different and specific to one application.  It is confusing and unintuitive. SHIFT + green pebble for pure maximizing has been useful though.</li>
+    <li><strong>Most of the good dev tools cost money</strong> - While Mac is quite generous with XCode, the community of Mac developers doesn't seem to share the same sentiment.  It seems a lot of the quality free apps I came to love on Windows have no free Mac equivalents.  For example, does anyone know a good, free Mac GUI client for MySQL that comes anywhere near the functionality of <a href="http://www.quest.com/common/registration.aspx?requestdefid=11781" target="_blank">Toad</a>, or <a href="http://www.devart.com/dbforge/mysql/studio/" target="_blank">DbForge</a>? People suggested <a href="http://www.sequelpro.com/" target="_blank">Sequel Pro</a>, but it is sorely lacking in the features department. <a href="http://wb.mysql.com/" target="_blank">MySQL Workbench</a> is next on the list, but I didn't even like it for Windows.</li>
+    <li><strong>Magic Mouse</strong> - I'm sorry, but beyond the gesture support for <a href="http://www.apple.com/magicmouse/" target="_blank">this mouse</a>, its terrible.  The tracking is very hard to get used to on any surface, regardless of mouse settings.  The gestures accessible from the mouse surface are too sensitive and can occur accidentally.  Its also a weird size and shape, which isn't very appealing when your hand has become accustomed to a certain interface for 15+ years.  One of the first things I did when starting with my Mac was replace this with my normal scroll wheel USB mouse.
+</li>
+    <li><strong>Copy, Cut, &amp; Paste</strong> - Use CTRL + C,X,V like every other OS on the planet!  Using CMD + C,X,V is freaking annoying.  I know I'll get used to it, but it seems like one of those things that is different for the sake of being different.</li>
+    <li><strong>Dock</strong> - I know I mentioned it as a thing I love, but its also something I hate.  Why? Because it is no substitute for the Windows taskbar.  Its far less intuitive and obvious at a glance to determine what is running, how I maximize/minimize it, what's going to stay there, etc.. I'm getting used to it, but I really think in the end I will still like the Windows taskbar over the Dock.
+</li>
+    <li><strong>Safari sucks</strong> - This site does a far better job documenting its shortcomings than I can: <a href="http://www.safarisucks.com/" target="_blank">http://www.safarisucks.com/</a></li>
+    <li><strong>Installs can be confusing</strong> - Do I drag the icon to the applications folder?  Then what?  What if there is not instruction to drag it?  What if I instead get a package, what does that do? How bout if I'm told to put the file in the Applications folder manually? Why is there an image open on my desktop? These are all things that make sense eventually but were crazy confusing right off the bat.</li>
+    <li><strong>Apple clearly hates Adobe</strong> - I have had almost no installation or usage errors or problems, except with Adobe related software.  I couldn't install Adobe Air via the auto installer when I pulled down Tweetdeck.  I had to manually install and restart my system before it would work.  Despite having the latest Flash installed, I can't get the Flash uploaders for this blog to work.  It just seems pretty coincidental that I've never had these problems on Windows, yet the Mac is littered with them.</li>
+</ol>
+
+
+<p>&nbsp;</p>
+
+<h2>Summary</h2>
+
+
+<p>So that's my account so far of the world of the MacBook Pro.  And in my whopping 3 days experience I've learned that there's a lot to love and hate.  This sentiment, though, is far from unique to this OS and device.  If I was to write a "Things I Love/Hate" post about Windows or Linux, it would take a hell of a lot more than 9 points to fully cover the scope of their strengths and weaknesses.</p>
+
+<p>In short, I'm embracing this entirely new workflow.  I'm gritting my teeth at the unintuitive and smiling pleasantly at the simple and powerful.  in the end, I hope only to come out an effective  Mac OS X user with a stronger and deeper understanding of why it differs as it does from the others OSes with which I have experience.  <span style="color: #000000;">Its been a while since I've felt this out of place in front of a computer, and I'm enjoying every minute of it.</span></p>
+]]></content>
+  </entry>
+  
+</feed>

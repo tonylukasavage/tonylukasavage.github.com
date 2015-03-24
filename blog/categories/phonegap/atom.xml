@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: phonegap | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/phonegap/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Adobe &amp; PhoneGap: Makes Sense, Mostly]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/10/10/adobe--amp--phonegap--makes-sense--mostly/"/>
+    <updated>2011-10-10T07:57:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/10/10/adobe--amp--phonegap--makes-sense--mostly</id>
+    <content type="html"><![CDATA[
+
+<h2>Adobe Acquires Nitobi</h2>
+
+
+
+
+<p>So if you haven't heard yet, <a href="http://www.phonegap.com/2011/10/03/nitobi-enters-into-acquisition-agreement-with-adobe-2/">Adobe acquired Nitobi</a>, the company that is responsible for PhoneGap. This was announced at Adobe's big <a href="http://max.adobe.com/">MAX conference</a>. If you are unfamiliar with PhoneGap, then this post is going to be wildly uninteresting to you. At a high level, they provide a cross platform mobile development solution that leverages native webviews with HTML5, CSS, and Javascript to create native mobile apps.</p>
+
+
+
+
+<h2>Not Hard To See Coming</h2>
+
+
+
+
+<p>Well, for one thing, Adobe was obviously hedging its bets on Flash/Air's viability in the long term with mobile when they started introducing HTML5 capabilities through <a href="http://labs.adobe.com/technologies/edge/">Edge</a>. I mean, if Adobe's planning to offer interactive, Flash-like development with HTML5, who is going to believe that Flash itself has a real future with mobile? Or as Gizmodo put it, <a href="http://gizmodo.com/5826448/adobe-ditches-flash-for-adobe-edge">Adobe Edge may become the beginning of the end for Flash</a>. Yeah, it will likely always exist, but it is <em>not</em> the de facto standard for delivering interactive web (or mobile) content anymore.</p>
+
+
+
+
+<iframe width="630" height="473" src="http://www.youtube.com/embed/8FnNtX73v8k" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+<p>And of course there's the whole Adobe Air for mobile thing. Android was obliging enough to make Air a first class citizen. Install Air, run Air apps... simple. And while the Adobe Air install is a bit hefty, it's hardly something worth worrying about with today's storage capabilities on mobile devices.</p>
+
+
+
+
+<blockquote class="pquote">
+    <p>"Flash has been labeled an outlaw and Air is smuggled in like an illegal immigrant"</p>
+</blockquote>
+
+
+
+
+<p>The more harrowing journey for Adobe has been iOS. Basically, Flash has been labeled an outlaw and Air is smuggled in like an illegal immigrant. There's been a staring contest between Adobe and Apple for a while now, but I think it's safe to say Adobe blinked. Apple has continually proven that is has the most marketable mobile devices available, and has done so without any back pedaling on what they will and will not allow (minus <a href="http://www.apple.com/pr/library/2010/09/09Statement-by-Apple-on-App-Store-Review-Guidelines.html">letting 3rd parties build apps</a>).</p>
+
+
+
+
+<p>Something had to give if Adobe was going to get a real foothold in the mobile world, and it obviously wasn't coming in the form of their current solutions. Enter PhoneGap...</p>
+
+
+
+
+<h2>But PhoneGap is not Without Its Challenges</h2>
+
+
+
+
+<p>PhoneGap fills a lot of holes for Adobe, but its going to need a lot of help itself. I think PhoneGap has gone about as far as it can on its own. It has achieved its goal of abstracting most native functionality for many different mobile platforms, but starting developers are wanting more. </p>
+
+
+
+
+<p>PhoneGap has no user interface components. This is <strong><em>not</em></strong> fun for new developers... or veteran ones for that matter. You need to build everything from scratch or go out and find a UI framework that works for you. The 2 front-runners, <a href="http://www.sencha.com/products/touch/">Sencha Touch</a> and <a href="http://jquerymobile.com/">jQuery Mobile</a>, bring their own glitches and idiosyncrasies. Also, now you find yourself learning 2 frameworks that have a noticeable lack of cross-over documentation. </p>
+
+
+
+
+<p>There's also a seemingly purposeful lack of direction in terms of tooling and best practices. New developers, often web developers, are left to their own devices to find the workflow that works best for them. There's no sanctioned IDE or set of tools suggested from PhoneGap to build your mobile apps. Infinite flexibility can be a real drag when you just want to know the most effective way to get things done.</p>
+
+
+
+
+<h2>But let's put this even more plainly...</h2>
+
+
+
+
+<p>What are the pros and cons of <b>PhoneGap</b>?</p>
+
+
+
+
+<table>
+<tr><td><span style="font-weight:bold; font-size:14px; color:#880000">Pros</span></td><td><span style="font-weight:bold; font-size:14px; color:#880000">Cons</span></td></tr>
+<tr>
+<td style="width:300px; vertical-align:top;">
+<ul><li>Terrific mobile platform compatibility</li>
+<li>It's an open, standards-based solution</li>
+<li>Ease of entry for existing web developers</li>
+<li>Large existing userbase for the above reason</li></ul>
+</td>
+<td style="width:300px; vertical-align:top;">
+<ul style="margin-bottom:0; padding-bottom:0;">
+<li>No clear direction on UI, tooling, or best practices</li>
+<li>performance is limited by webview</li>
+<li>Platform disparities</li>
+<li>Documentation is brief and sometimes lacking</li></ul>
+</td>
+</tr>
+</table>
+
+
+
+
+<p>And what are the pros and cons of <b>Adobe</b>?</p>
+
+
+
+
+<table>
+<tr><td><span style="font-weight:bold; font-size:14px; color:#880000">Pros</span></td><td><span style="font-weight:bold; font-size:14px; color:#880000">Cons</span></td></tr>
+<tr>
+<td style="width:300px; vertical-align:top;">
+<ul><li>High quality tools for integrating development and design workflows</li>
+<li>With Flash and Flex, they've been delivering visual and UI sugar for a long time now</li>
+<li>They've been rocking interaction before &lt;canvas&gt; was in diapers</li>
+<li>They run nearly identical user experiences on each platform via Flash/Air</li>
+<li>Their documentation is nothing if not expansive</li>
+<li>A vehemently loyal community</li></ul>
+</td>
+<td style="width:300px; vertical-align:top;">
+<ul><li>Weak mobile platform compatibility. Android made Air a first class citizen, but we all know the story with iOS. </li>
+<li>The majority of Adobe's tools and SDKs are closed and proprietary</li>
+<li>Has not seen a lot of fresh blood lured in by their current mobile development offerings</li>
+<li>You gotta pick up AS3 if you want to be effective</li></ul>
+</td>
+</tr>
+</table>
+
+
+
+
+<p>Anyone else seeing a pretty clear yin-yang thing going on here?</p>
+
+
+
+
+<h2>So What Does It All Mean?</h2>
+
+
+
+
+<p>Well, for one thing, it means <a href="http://arstechnica.com/open-source/news/2011/10/phonegap-to-become-an-apache-project-as-adobe-acquires-nitobi.ars">PhoneGap is becoming an Apache project</a>. Yep, they are donating PhoneGap to Apache, which puts them one step closer to their altruistic goal of PhoneGap itself becoming obsolete. PhoneGap's own Brian Leroux stated in his <a href="http://www.slideshare.net/brianleroux/phonegap-10">PhoneGap 1.0 presentation</a> that:</p>
+
+
+
+
+<blockquote>
+  <p style="font-weight:bold;">"The purpose of PhoneGap is for PhoneGap to cease to exist"</p>
+</blockquote>
+
+
+
+
+<p>Why, oh why, did Adobe buy it then? I think it's because they want to be your one stop shop for purchasing IDEs, frameworks, professional services, etc... Adobe is likely banking on the ongoing popularity of PhoneGap and web-based native mobile development. "Web-based native"... sounds a little like an oxymoron, but whatever.</p>
+
+
+
+
+<h2>A Match Made in Heaven, Right?</h2>
+
+
+
+
+<p>Sounds like a perfect match. The 2 companies seem to complement each other very well. But...</p>
+
+
+
+
+<p>There's just a few questions I still have regarding the acquisition. Rather than drone on any longer inserting my own conjecture, I'll just list my questions here and leave them as talking points for you, my readers. </p>
+
+
+
+
+<blockquote class="pquote" style="float:right;">
+    <p>"I can already hear the `It's back to AS1` complaints starting..."</p>
+</blockquote>
+
+
+
+
+<ul>
+<li>What happens to Flash/Air for mobile? It obviously won't be forsaken, but this can't sit real well with developers who have so far devoted themselves to this workflow.</li>
+<li>How does Adobe deal with the inevitability that current developers will revolt against using Javascript? I can already hear the "It's back to AS1" complaints starting...</li>
+<li>Does Adobe even have any interest in getting existing AS3 developers using PhoneGap? I know they are saying that they weill support both solutions, but come on, someone is gonna get more love than the other.</li>
+<li>How long until we finally see a defined workflow and IDE for PhoneGap. Is Dreamweaver integration the best we get?</li>
+<li>What will the PhoneGap guys do next? They are actively working to put themselves out of a job, so I'm curious what the next move is.  </li>
+</ul>
+
+
+
+
+<h2>What's Next?</h2>
+
+
+
+
+<p>I have no clue, but it's sure to be interesting. I'm hoping for good things on both sides as it's only going to make mobile development in general more exciting. </p>
+
+
+
+
+<p>Will Adobe's ability to create great tools translate to mobile success? Will PhoneGap's strict adherence to the open web model jive well with Adobe's history of closed, proprietary tools? Will the inevitable merge of the open web  and existing Adobe community be a bumpy one? </p>
+
+
+
+
+<p>Stay tuned...</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Code Once, Adapt Everywhere]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/08/20/code-once--adapt-everywhere/"/>
+    <updated>2011-08-20T17:14:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/08/20/code-once--adapt-everywhere</id>
+    <content type="html"><![CDATA[<h2>CORE</h2>
+
+
+
+
+<p>For the sake of not repeating myself I'm going to refer to the phrase "code once, run everywhere" as <strong>CORE</strong> from here on in. Who knows, maybe it'll catch on.  And on to the blog post...</p>
+
+
+
+
+<p>So as you may have heard by now, I'll be starting my new job as an <a href="">Appcelerator</a> platform evangelist on Monday. If you've read some of my past blog posts, you've probably noted that I've been pretty critical of cross platform mobile solutions. From a developer's perspective, we are expecting the coveted CORE, but are often left wanting. </p>
+
+
+
+
+<p>What you'll quickly find in the world of mobile development is that cross platform does not always equal CORE. </p>
+
+
+
+
+<p>Rather than bemoan the shortcomings of each mobile framework, I'd rather talk about something I heard <a href="http://twitter.com/#!/kevinwhinnery">Kevin Whinnery</a> say during the Appcelerator <a href="http://vimeopro.com/appcelerator/building-native-mobile-applications">online training videos</a>. He stated that Appcelerator does not aim to be a CORE technology, but instead a <strong>"code once, <em>adapt</em> everywhere"</strong> one. Not quite as sexy, but perhaps an even more intriguing philosophy. Let's discuss why.</p>
+
+
+
+
+<h2>Web Based vs. Appcelerator</h2>
+
+
+
+
+<p><em>For a quick summary of how Appcelerator is fundamentally different than web-based cross platform mobile frameworks, <a href="/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript/">read here</a>.</em></p>
+
+
+
+
+<p>Aside from near-native performance, what's the biggest advantage of using Appcelerator over web based mobile frameworks like <a href="http://www.phonegap.com/">Phonegap</a> or <a href="http://rhomobile.com/">Rhomobile</a>? Its ability to use the device's native UI components. And no, I don't mean it has UI components skinned to look like native components, like many of the web-based solutions. I mean it actually uses the platform's native, performant UI in the app.</p>
+
+
+
+
+<p>With native UI we can build apps that are indistinguishable from apps built with Objective-C or Java. The look, feel, performance, and behavior will be exactly what is expected of the given platform. Plus, we don't have to build them ourselves. </p>
+
+
+
+
+<p>To achieve this level of quality, though, <strong>you need to be willing to adapt your app, not just design for the lowest common denominator</strong>, as is often the mentality with CORE apps. Sure, you can use the iPhone's slick Navigation Controller bar on all versions of your app, but is that what Android users are expecting? Nor would an Android Spinner be befitting of an iPhone app.</p>
+
+
+
+
+<p>You see, in some cases, CORE apps come at the expense of the most important factor: the user experience. </p>
+
+
+
+
+<h2>Why Bother?</h2>
+
+
+
+
+<p>Many people, particularly proponents of web based mobile development, are of the opinion that native UI components are not necessary to deliver a high quality user experience. I agree, in certain circumstances. Games, novelty utilities (think <a href="https://market.android.com/details?id=com.devuni.flashlight&amp;feature=search_result">Flashlight</a>), and otherwise simple apps are good examples that probably don't benefit much from a native experience.</p>
+
+
+
+
+<p>In my opinion, though, it's a necessity for more complex apps, particularly ones leveraging native APIs, to use the UI that is  familiar to the device. They need to work in a simple, intuitive manner as mobile users can be quick on the trigger in deeming an app unfriendly. Those who have spent time developing for multiple platforms understand that <strong>the users of each platform have different expectations</strong>. </p>
+
+
+
+
+<p>I don't want a navigation bar in my Android app. I want my tabs at the bottom on iPhone, the top on Android. I want to press my menu button on Android to get my app's options. I want my system buttons to look familiar. I want to pull to refresh on my iPhone. </p>
+
+
+
+
+<p>Let me be clear that both Appcelerator and web-based frameworks have the ability to adapt their apps to supported platforms. And I don't just mean churning out a basic app, I mean creating a high quality, native app. Depending on your point of view, however, one may be much more appealing than the other.</p>
+
+
+
+
+<h2>Attending to the UI (Web-based)</h2>
+
+
+
+
+<p>With web-based solutions, the app exists in a web view container. This means that you are effectively building a native app that consists of only a web view which hosts a web application. <strong>You have no native components with which to work</strong>. This leaves us with 2 options for building the UI of the app (super quick assessment coming): </p>
+
+
+
+
+<ol>
+<li>Use a 3rd party framework like <a href="http://jquerymobile.com/">jQuery Mobile</a> or <a href="http://www.sencha.com/products/touch/">Sencha Touch</a>
+<ul><li>Pros
+<ul><li>Lots of functionality and UI components</li>
+<li>Speeds up development process</li>
+<li>Some, like Sencha Touch, have a very native look to their components.</li></ul></li>
+<li>Cons
+<ul><li>Web based framework UI is generally less responsive than ones created natively or with Appcelerator on mobile devices.</li>
+<li>Additional learning curve for the added framework</li>
+<li>You are even further removed from the native app. You now have a UI framework which sits on a native web view wrapper which then becomes a native app. Lots to know and lots of places for things to go wrong.</li>
+<li>Frameworks like Sencha Touch are limited to webkit based web views (iOS, Android, BB 6.0+). This essentially removes the biggest advantage of web based frameworks, which is their compatibility.</li></ul></li></ul></li>
+<li>Create the UI yourself with HTML/CSS/JS
+<ul><li>Pros
+<ul><li>Totally customizable for any platform </li>
+<li>Its easier to manage performance and UI inconsistencies when using code for only what you need to achieve</li>
+<li>No additional learning curve beyond basic web dev and understanding your web based framework of choice. </li></ul></li>
+<li>Cons
+<ul><li>Much slower to develop, as you have to build your UI from scratch. The styling of the UI to look native all falls on you or external resources you can find.</li>
+<li>Even for seasoned web devs, managing cross platform mobile CSS can be a daunting task. </li>
+<li>All cross browser inconsistencies become your job to address, unless you use a light JS framework like <a href="http://xuijs.com/">xuijs</a> or <a href="http://zeptojs.com/">zeptojs</a>.</li></ul></li></ul></li>
+</ol>
+
+
+
+
+<p>So as you can see, web based mobile development encounters many of the same issues that traditional web development does. And the problem is compounded when you are trying to make these web based solutions look, feel, perform, and behave natively.</p>
+
+
+
+
+<h2>Attending to the UI (Appcelerator)</h2>
+
+
+
+
+<p>Appcelerator apps are built differently. The extremely short version is that Appcelerator Javascript code is mapped to native symbols of the target platform. Any code that can't be mapped to a native symbol is run through a Javascript interpreter. <a href="http://twitter.com/#!/jhaynie">Jeff Haynie</a>, CEO of Appcelerator, does a much better job of explaining it in <a href="http://stackoverflow.com/questions/2444001/how-does-appcelerator-titanium-mobile-work">this StackOverflow post</a>.</p>
+
+
+
+
+<p>What this means that there are <strong>no 3rd party tools or special code necessary to create totally native components</strong>. You want a button that has native appearance and behavior on both iPhone and Android?</p>
+
+
+<p><code>javascript
+var button = Ti.UI.createButton({title:'test button'});
+</code></p>
+
+<p>There you go, an Android and iPhone button respectively. How 'bout a table view populated with sample data?</p>
+
+
+<p><code>javascript
+var data = [{title:"Row 1"},{title:"Row 2"},{title:"Row 3"},{title:"Row 4"},{title:"Row 5"},{title:"Row 6"}];
+var table = Titanium.UI.createTableView({data:data});
+</code></p>
+
+<p>Yep, it's that simple. The iPhone table will even have the bounce scrolling users expect. You have the same simplicity that web based UI frameworks solutions provide, except you are additionally getting native look, feel, performance, and behavior. The components are even designable as you would expect them to be.</p>
+
+
+
+
+<p>The one drawback to this simplicity is that without careful attention to your code, you can end up with a mess of interlacing UI and logic. Android has XML for layout, iOS has .nib/.xib files, web based solutions have HTML/CSS. Appcelerator, <em>for the time being</em>, relies solely on your Javascript code. Javascript MVC frameworks, like <a href="http://puremvc.org/">PureMVC</a>, and attention to best practices (as mentioned in the <a href="http://vimeopro.com/appcelerator/building-native-mobile-applications">online training videos</a>) can mitigate this risk. There are even some vague rumblings of a more declarative syntax for UI design in the future... </p>
+
+
+
+
+<h2>Adaptation</h2>
+
+
+
+
+<p>So now that we know how UIs are built in both Appcelerator and web-based frameworks, how do we adapt them in such a way to deliver a native user experience? Despite the differences between the frameworks mentioned so far, the solution is fairly common among all frameworks. </p>
+
+
+
+
+<p>While I will confidently say that Appcelerator has the abstraction that delivers the most familiar and device-specific experience, it too needs to account for usability that is not necessarily CORE. And even saying it is not CORE can be a bit of a misnomer as the same code base can be used by multiple platforms. It just requires the clever and judicious insertion of platform specific code facilitated by your mobile framework's device identification APIs.</p>
+
+
+
+
+<p>Let's take a quick look at how Appcelerator identifies your device and can act on the information:</p>
+
+
+<p>``` javascript
+var osname = Titanium.Platform.osname;
+if (osname == 'android') {</p>
+
+<pre><code>// android specific code
+</code></pre>
+
+<p>} else if (osname == 'iphone') {</p>
+
+<pre><code>// iphone specific code
+</code></pre>
+
+<p>} else if (osname == 'ipad') {</p>
+
+<pre><code>// ipad specific code
+</code></pre>
+
+<p>}
+```</p>
+
+<p>For a more in depth example of how you can use this logic to create truly cross platform components and functionality, check out the 6 minute screencast <a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-2-a-cross-platform-navigation-controller.html">"Forging Titanium: A Cross-Platform Navigation Controller."</a> Or just watch this:</p>
+
+
+
+
+<iframe src="http://player.vimeo.com/video/27834295?title=0&amp;byline=0&amp;portrait=0" width="600" height="375" frameborder="0"></iframe>
+
+
+
+
+<p>And for reference, let's look at PhoneGap's adaptation method as well, just to show the similarities:</p>
+
+
+<p>``` javascript
+var platform = device.platform;
+if platform == 'Android') {</p>
+
+<pre><code>// android specific code
+</code></pre>
+
+<p>} else if platform == 'iPhone') {</p>
+
+<pre><code>// iphone specific code
+</code></pre>
+
+<p>} else if platform == 'BlackBerry') {</p>
+
+<pre><code>// blackberry specific code
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Very similar indeed, but you need to consider the 2 prior "Attending to the UI" sections before calling them equal. Its the frequency with which you are required to apply this and other types of adaptation that affects the maintainability of your app as it grows.</p>
+
+
+
+
+<h2>Minimizing Adaptation</h2>
+
+
+
+
+<p>It doesn't take an expert software engineer to see that conditional checks on the device's platform throughout your code isn't ideal. It gets harder to maintain the more conditionals you include. It becomes apparent that we need our development framework to do most of this work for us.</p>
+
+
+
+
+<p>In the case of Appcelerator, the need for conditional adaptation is minimized by the fact that you can utilize native UI components. Look back at our examples of the buttons and table views. There was no conditional code, no special handling. You get system specific components with no extra effort. </p>
+
+
+
+
+<p>You really only need conditional code when you want to leverage native components that don't have an equivalent on your other target platforms. For example, if you haven't already, check out the <a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-2-a-cross-platform-navigation-controller.html">Cross-Platform Navigation Controller video</a> above. It shows how you can use these conditionals to create navigation code that you can use seamlessly between iOS or Android.</p>
+
+
+
+
+<p>Web based platforms also do a great job of creating an abstraction so that you don't need to use conditionals for each supported platform. The problem, as discussed earlier, is that these abstractions don't represent actual native components. They most often represent HTML/CSS/JS that are attempting to mimic native components. Worse yet, sometimes they are components that have no relation to existing native components, yet find themselves in native apps. As I said, this is a point of contention among mobile developers, and I'll leave further discussion for the comments if necessary.</p>
+
+
+
+
+<p>What web based frameworks can't give you in native components, they provide in CSS, often applied dynamically via Javascript. The use of CSS is a double-edged sword. On one hand, you have a method of styling that not only allows you to skin your whole app, but also affords you the opportunity to gracefully degrade the styling based on the user's device. This is why web based solutions typically support more platforms than ones like Appcelerator. Add all the bells and whistles like rounded corners, drop shadows, webkit transitions, etc... and if the device doesn't support them, they will disappear without interrupting the user experience.</p>
+
+
+
+
+<p>On the other hand, unless you are a CSS wizard with existing knowledge of CSS3 and how it applies to mobile, using it can be difficult. You can find yourself with mountains of CSS attempting to mimic components that are created with a single line of code in Appcelerator. For example, here's a shiny iPhone button in pure CSS:</p>
+
+
+<p>``` css
+input[type=button] {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+  width: 97%;
+  height: 50px;
+  border: 3px solid #282726;
+  background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e) );
+  margin: 0 0 3px 0;
+  text-shadow: 0px 1px 0 #cecece;
+  -webkit-background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  -webkit-border-radius: 8px;
+}</p>
+
+<p>input[type=button]:hover, input[type=button].cancel,
+input[type=button]:active, input[type=button].cancel:active {
+  color: #fff;
+  text-shadow: none;
+}</p>
+
+<p>input[type=button]:hover, input[type=button].cancel:hover {
+  background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) );
+}</p>
+
+<p>input[type=button].cancel {
+  background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) );
+  margin-top: 6px;
+}
+```</p>
+
+<p>It does the job, but man, it is really cumbersome. Again, this is all a factor of wanting to create a native experience. Some will contest that it does not need to be this complex, that as long as the UI is uniform it does not need to conform to the native expectations. This mentality, though, is typically only held by those who back mobile frameworks that are incapable of delivering that native experience.  As the local radio sports caster in Pittsburgh likes to  say, "Not hatin', just sayin'."</p>
+
+
+
+
+<h2>Summary</h2>
+
+
+
+
+<p>You can't beat web based mobile development for platform compatibility. Every mobile device has a browser that supports HTML/CSS/JS, right? You can create UIs that work on many platforms and degrade gracefully to handle lower end devices. Quality, usable apps are totally possible with these frameworks.</p>
+
+
+
+
+<p>But the user doesn't care how compatible your app is. They just want it to work, as they expect it to, on the device of their choice. In this respect, Appcelerator is unparalleled in the realm of cross platform solutions.</p>
+
+
+
+
+<p>I have a strong suspicion that web based mobile technologies are only going to get better. I mean, let's face it, the web isn't going to be disappearing anytime soon. It will get faster, more functional, and closer to the expectations of the mobile user, just like desktop web browsers. And I, as a soon-to-be Appcelerator employee, welcome this. </p>
+
+
+
+
+<p>As web based mobile development ups it game, so shall Appcelerator. Whether you're an Appcelerator, web based, or native developer, it's an exciting time... no matter what side of the fence you're on.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Appcelerator Charging for Integrated Debugging. PhoneGap Doing It For Free.]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/15/appcelerator-charging-for-integrated-debugging--phonegap-doing-it-for-free-/"/>
+    <updated>2011-06-15T08:16:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/15/appcelerator-charging-for-integrated-debugging--phonegap-doing-it-for-free-</id>
+    <content type="html"><![CDATA[<h2>Update 7/29/2011</h2>
+
+<p>As of Titanium Studio 1.2.0, integrated mobile <strong>debugging is now free</strong>! Get it here: <a href="http://www.appcelerator.com/products/download/">http://www.appcelerator.com/products/download/</a></p>
+
+<h2>Searching for the Silver Bullet</h2>
+
+<p>So if you haven't already figured it out, I'm gunning to decide once and for all on a cross platform mobile development framework.  While all the Flash gurus I know are singing the praises of the latest versions of Adobe's mobile platform, I don't have the patience for an official release and docs to surface.  That leaves me with two options among the frameworks I've evaluated: <a href="http://www.phonegap.com/home/" target="_blank">PhoneGap</a> and <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a>.</p>
+
+<p>If you are interested in my past evaluations, check out these prior posts I wrote:</p>
+
+<ul>
+    <li><a href="/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap/">A Deeper Look at Appcelerator and PhoneGap</a></li>
+    <li><a href="/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript/">PhoneGap is Web-based. Appcelerator is Pure Javascript</a></li>
+    <li><a href="/blog/2011/01/18/review--appcelerator-vs--phonegap-vs--adobe-air/">Appcelerator vs. PhoneGap vs. Adobe Air</a></li>
+</ul>
+
+
+<p>Now judging by those past comparisons, it's pretty clear that each framework has its place.  It doesn't have to be one or the other.  Or does it?</p>
+
+<h2>I'm Only One Man</h2>
+
+<p>There comes a time after evaluating platforms, tools, and anything else when you have to make a decision.  Especially is you are an indie developer like myself.  <strong>You can end up diluting your potential impact on your target field by trying to be a jack of all trades</strong>, master of none.  It turns out its a lot more effective to be a jack of all trades, master of at least one.</p>
+
+<p>So I keep circling back to "Appcelerator or PhoneGap?"  I've done the technical comparison and neither is the wrong choice in any respect.  Both have incredibly intelligent people spearheading their development, great productivity tools, and continuous updates and improvements to their framework.  So what does it come down to?</p>
+
+<ul>
+    <li>Which one do I spend the most time in?</li>
+    <li>Which one do I start pouring my effort into?</li>
+    <li>Which one do I start contributing back to?</li>
+    <li>Which one do I think is looking out for me, the indie developer?</li>
+    <li>Which one, if it went belly up today, could I continue to use and bend to my needs?</li>
+</ul>
+
+
+<p>As I asked these questions of myself, I found that I was leaning towards PhoneGap.  I will say, though, that this is in no small part to how strong the PhoneGap crew's Twitter presence is.  Here's a <a href="/blog/2011/05/11/9-things-to-know-about-phonegap/">list of PhoneGap people to know</a>.  I am a Twitter junkie (<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>) and being able to ask questions and get near-immediate responses definitely swayed my thinking.  They do, in general, with their MIT/BSD license and github'ed everything seem like they side with the developers more than their competitor in this case.</p>
+
+<p>But damn are the native UI components and pure Javascript interface of Appcelerator sexy.  I'm not a web developer by trade, so the pure JS appeals to me more than needing to know the finer points of the HTML/CSS/JS stack.  And the tools they have are top notch.  But that's where my decision started to be made...</p>
+
+<h2>Making My Decision Easy</h2>
+
+<p>I just needed a definitive nudge in either direction really. Something the resonated with me and said, "This is the framework you should be using."  Appcelerator gave me that nudge, but not in their direction.</p>
+
+<p>I just received an email from Appcelerator touting their new official release of their Titanium Studio.  Its a great piece of software that allows you to create an Appcelerator project and deploy it to multiple mobile platforms.  Sounds great, right?  I thought so too, until I read on.</p>
+
+<blockquote>Upgrade to Titanium Indie or Titanium Professional to get a full mobile debugger.</blockquote>
+
+
+<p>Just for reference, that means $49/month for the Indie subscription and $199/developer/month for the Professional subscription.  So at its cheapest rate, I'll be expected to pay <strong>almost $600 a year just to debug my mobile applications</strong>.  That is not something I'm willing to pay.</p>
+
+<p>On the other hand, PhoneGap is currently working with the author of <a href="http://pmuellr.github.com/weinre/" target="_blank">Weinre</a>, <a href="http://twitter.com/#!/pmuellr" target="_blank">Patrick Mueller</a>, to incorporate it into the PhoneGap project.  Yes, that's right, they are working to integrate mobile debugging into their framework for free.  Pretty clear to see what an OSS supporter like myself is going to like.</p>
+
+<h2>Cheap Bastard</h2>
+
+<p>I know what you might be thinking, "Damn, he's a cheap bastard who isn't willing to shell out cash for decent software." Well, yeah, and I'll bet a lot of my readers are pretty much the same way.  But it goes beyond that. <del datetime="2011-06-15T16:51:08+00:00">It feels a bit like a bait and switch</del>.</p>
+
+<p>They offered Titanium Developer as a means to developer Appcelerator projects in the past.  Then they tell everyone that Titanium Studio is the future, so that's what you need to be developing in if you want to stay on the roadmap.  Then they effectively pull the plug on Titanium Developer, make Titanium Studio an official release, then start charging for what I consider to be basic IDE functionality.  Seems a little uncool.</p>
+
+<p><span style="color:#ff0000;"><strong>EDIT</strong></span>: Kevin and Scott (see comments) are right.  <strong>This wasn't a "bait and switch"</strong>. Titanium Developer did not have this functionality, therefore it is not deceptive that the official release of Titanium Studio does not either.  I will miss it, but it was not at all deceptive.</p>
+
+<h2>Soooo...</h2>
+
+<p>As you might imagine, <strong>my personal cross platform efforts will be using PhoneGap</strong>.  That's not to say I won't be involved in Appcelerator development.  I still think its a great way to develop iOS based apps when you or your team is lacking in Objective C and/or XCode experience.  <strong>Its fast, effective, and Appcelerator nailed the iOS platform</strong>.  They just rubbed me the wrong way at a critical time in my decision making process.  I encourage anyone reading this to not let my assessment make your decision for you as I think Appcelerator is a good fit for many.</p>
+
+<p>PhoneGap is the answer to almost all the questions I posed in my list above.  I just really like the team and the open nature of the project.  Plus, it lets me sharpen my web developer chops (<a href="/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript/">Appcelerator dev is not web dev</a>) while working in my primary focus of mobile development.  It's just a very good fit for me and the guys I work with on a regular basis.</p>
+
+<h2>In the End</h2>
+
+<p>Its all up to an educated choice that plays to your personal strengths and proclivities.  In this case, both frameworks kinda did.  But due to an intense focus on community from PhoneGap, they are going to continue to win over developers like me.  Who knows, though, I'm a cheap bastard.  Maybe there's no money in catering to developers like me.</p>
+
+<p>While everyone needs to pay the mortgage, I somehow get the impression that the PhoneGap crew will be OK with it if they all aren't millionaires.  They strike me as guys who strive to maintain a resonance with developers.  In in that effort, I say they have excelled.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Review: PhoneGap is Web-based, Appcelerator is Pure Javascript]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript/"/>
+    <updated>2011-05-25T10:57:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript</id>
+    <content type="html"><![CDATA[<h2>What's The Difference?</h2>
+
+<p>I've seen a lot of confusion out there on what the actual distinction is between <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> and <a href="http://www.appcelerator.com/" target="_blank">Appcelerator Titanium</a> in terms of programming.  Both state that they provide cross-platform mobile development frameworks driven by a Javascript core.  How different can they be?  Turns out, <strong>very</strong>.</p>
+
+<p>The fundamental difference is that PhoneGap is a web based solution where Appcelerator Titanium is a pure Javascript API that creates native code.  As I've gone over the differences between these 2 in detail before, I'm going to very strictly stick to the topic of how their code works.  Since people seem to love charts so much, here's a quick review to show the divergence between the two frameworks:</p>
+
+<table border="1" class="compare_table" cellspacing="0">
+    <tr class="compare_title">
+        <td>&nbsp;</td>
+        <td>PhoneGap</td>
+        <td>Appcelerator Titanium</td>
+                <td>Notes</td>
+    </tr>
+    <tr>
+        <td>Javascript API</td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+                <td>PhoneGap's API interacts as typical JS does in your web code. Appcelerator Titanium API is <strong>NOT</strong> web code, it is used to interact with native code.</td>
+    </tr>
+    <tr>
+        <td>Supports HTML5/CSS3</td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+        <td><img src="http://tonylukasavage.github.com/images/no.jpg"/></td>
+                <td>PhoneGap is a web app that runs in a native web browser view.</td>
+    </tr>
+    <tr>
+        <td>Supports Web Standards</td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+        <td><img src="http://tonylukasavage.github.com/images/no.jpg"/></td>
+                <td>PhoneGap looks, feels, and develops like a standard web page. It is also subject to the same browser compatibility concerns.</td>
+    </tr>
+    <tr>
+        <td>Supports DOM based<br>JS libraries</td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+        <td><img src="http://tonylukasavage.github.com/images/no.jpg"/></td>
+                <td>JS libraries that reference the DOM, like <a href="http://jquery.com/" target="_blank">jQuery</a>, <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, or any of the new <a href="http://processingjs.org/" target="_blank">&lt;canvas&gt; based libs</a> will only work with Appcelerator Titanium webviews</td>
+    </tr>
+    <tr>
+        <td>Native Code</td>
+        <td><img src="http://tonylukasavage.github.com/images/no.jpg"/></td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+                <td>Appcelerator Titanium creates a truly native app via a JS API that maps to native code. </td>
+    </tr>
+    <tr>
+        <td>Native UI/Performance</td>
+        <td><img src="http://tonylukasavage.github.com/images/no.jpg"/></td>
+        <td><img src="http://tonylukasavage.github.com/images/yes.gif"/></td>
+                <td>Appcelerator Titanium performance is limited only by the device. PhoneGap's is limited by the device's web view.</td>
+    </tr>
+</table>
+
+
+<h2>What Does This Mean?</h2>
+
+<ul>
+    <li>Web developers will have a much easier transition going to PhoneGap than they would Appcelerator Titanium.</li>
+    <li>Application developers without serious web development chops will likely gravitate towards Appcelerator Titanium.  Why learn HTML, CSS, and Javascript when you can just learn Javascript?</li>
+    <li>Designer work will be tougher to integrate into an Appcelerator project as all the layouts and assets are done programmatically. PhoneGap, on the other hand is effectively web development, which designers have been working with for a very long time.</li>
+    <li>Appcelerator is always going to win on performance.</li>
+    <li>There will be an inevitable flood of web developers calling themselves mobile developers because they are familiar with PhoneGap. Beware.</li>
+    <li>Appcelerator has a much deeper and more complex integration with each mobile platform.
+        <ul>
+            <li><strong>Pros</strong>: Native look, feel, and performance</li>
+            <li><strong>Cons</strong>: Platform compatibility will be achieved more slowly. Much harder to "code once, deploy everywhere".</li>
+        </ul>
+    </li>
+</ul>
+
+
+<h2>Summary</h2>
+
+<p>The above is a hyper-condensed review of the whole story.  As always, I encourage you to try both of these platforms.  They both excel in many areas and offer unique features.  Neither is the wrong choice, but depending on your scenario, one might be better suited than the other.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[9 things to know about PhoneGap]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/05/11/9-things-to-know-about-phonegap/"/>
+    <updated>2011-05-11T14:07:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/05/11/9-things-to-know-about-phonegap</id>
+    <content type="html"><![CDATA[<h2>The People</h2>
+
+<p>As it turns out, the co-founders and core developers of PhoneGap are pretty accessible guys.  Who better to know when it comes to using a framework than the authors?  Everything from basic "getting started" questions to more complex topics from me have been addressed directly by one or more of their team.   While there's probably a ton of people I'm not mentioning, these few guys in particular have been exceedingly helpful.</p>
+
+<ul>
+    <li>Andre Charland (<a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>)</li>
+    <li>Brian Leroux (<a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>)</li>
+    <li>Dave Johnson (<a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a>)</li>
+    <li>Michael Brooks (<a href="http://twitter.com/#!/mwbrooks" target="_blank">@mwbrooks</a>)</li>
+    <li>Fil Maj (<a href="http://twitter.com/#!/filmaj" target="_blank">@filmaj</a>)</li>
+    <li>And the PhoneGap Twitter account (<a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>)</li>
+</ul>
+
+
+<p>I'm a Twitter fiend so that's generally where I find these guys, but make sure you also check out their <a href="http://groups.google.com/group/phonegap" target="_blank">google group</a> and <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">IRC</a>.  I've said this before... if you are doing PhoneGap development and aren't following this crew on Twitter, then you're an idiot.</p>
+
+<h2>PhoneGap Build</h2>
+
+<p>So you hear about all these frameworks that do cross platform mobile development, "code once, run everywhere", and everything just magically works.  Well... it ain't that simple.  You've got SDK installations, developer &amp; signing certificates, build chains, and custom project layouts to worry about with each platform.  While this can become a nightmare to manage, PhoneGap makes a pretty epic effort to help with their currently free, beta service called <a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a>.</p>
+
+<p>PhoneGap Build will allow you to give them the web code that drives your app and in return you will get App Store deployable binaries back for all the platforms listed in interface snapshot above.  You don't have to install all the SDKs.  You don't need to worry about any platform specific setup.  It is actually that simple.</p>
+
+<p>I highly suggest setting up an account right this second, especially if you are just starting out as a mobile developer.  <strong>The time consuming, and often frustrating, nature of multi-platform testing and deployment is easy to underestimate</strong>.  When you're learning the ropes of mobile APIs and the finer points of app creation, the last thing you want to worry about is every individual SDK's varying degrees of compatibility.  Which leads me to my next section...</p>
+
+<h2>PhoneGap Generate</h2>
+
+<p>If you are like most mobile developers, you are a (proud) owner of the 4+ GB behemoth of a download <a href="https://developer.apple.com/xcode/" target="_blank">XCode 4</a>.  The good news is that you can build apps for iOS 4+ with it.  The bad news is that <strong>XCode 4's default configuration settings are not compatible with PhoneGap</strong>, and it can be a bit complicated to resolve.  Here's the bloody path I took to <a href="http://groups.google.com/group/phonegap/browse_thread/thread/544f44883f9e22b6?pli=1" target="_blank">get XCode 4 building my PhoneGap apps</a>.</p>
+
+<p>But in their constant efforts to make the build process easier on developers, PhoneGap came up with a short term solution.  Instead of hacking up your XCode 4 project files, let PhoneGap do it for you!  Enter <a href="https://build.phonegap.com/generate" target="_blank">PhoneGap Generate</a>.  Its an extension of the PhoneGap Build site that will, given a project name, generate an XCode 4 compatible project for you.  While it's not an ideal situation, it can save you some of the headaches I endured trying to do it myself.  Hopefully the PhoneGap distribution will have this resolved in the near future.</p>
+
+<h2>Cordova</h2>
+
+<p>Now we're getting to the real goodies.  <a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a> is without question the single biggest boost to my PhoneGap development workflow.  Think PhoneGap Build with no need for the cloud.</p>
+
+<p><a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a>, in Brian Leroux's (author) own description, is</p>
+
+<blockquote>A PhoneGap project toolchain that automates common tasks for building cross platform mobile projects with OS X.
+
+Automate common development workflow tasks such as: compiling, debugging, testing, releasing and other things in between. As an added benefit projects generated with Cordova create a consistent, predictable, easy to understand and therefor extend software project. A number of conventions are introduced removing the need for mobile developers to relearn their tools or, worse, rebuild them for every project.</blockquote>
+
+
+<p>Be warned, Cordova is young and best used by those with a good understanding of how PhoneGap works in terms of project layout, building, testing, and deployment.  It also helps a great deal if you understand these concepts as they relate to each platform (i.e., Android, iOS, Blackberry, etc...) you plan to target.  And you'll need to me comfortable with the Terminal on Mac OS.  If I haven't scared you off yet, read on.</p>
+
+<p>Basically, you can build and test PhoneGap apps for multiple platforms with simple Terminal commands.  No more creating projects in XCode or Eclipse just to conform to a specific platform.  You can choose your favorite web development IDE (<a href="http://www.aptana.com/" target="_blank">Aptana</a> for me) and do all your work there.  When you're done, <strong>just run one simple command from the command line and it will build for iOS, Android, and even Blackberry</strong> (with a Windows VM).  Check out this short demo from Brian Leroux to see what I mean.</p>
+
+<iframe width="560" height="349" src="http://www.youtube.com/embed/nxgM19HCytg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Yeah, its low level and it doesn't have a pretty GUI, but man this project has massively improved my efficiency in terms of cross platform testing.  I'm hoping more people see this project and hop on board, and even contribute like I did (Blackberry support).  A tool like this can really be a game changer in terms of what a single developer can do for a mobile app spanning a multitude of platforms.</p>
+
+<h2>You don't have to use Platform-specific IDEs</h2>
+
+<p><img class="size-full wp-image-2881 alignright" title="Web IDEs" src="http://savagelook.com/blog/wp-content/uploads/2011/05/textmate_vs_aptana.png" alt="Web IDEs" width="250" height="113" /></p>
+
+<p>According to the PhoneGap docs on the <a href="http://www.phonegap.com/start" target="_blank">"Get Started" page</a>, I need XCode if I want to build iPhone/iPad apps, Eclipse for Android, a Windows based IDE for Blackberry, its a serious pain in the ass.  But these are web based solutions, right?  <strong>Why in God's name would I want to endure XCode and Eclipse as web development IDEs?!</strong>  I wouldn't, and I don't have to.</p>
+
+<p style="text-align: left;">You've got 2 options when it comes to developing your apps if you don't want to use the platform specific IDEs (and you shouldn't).</p>
+
+
+
+
+<ol>
+    <li>Develop your web code in your IDE of choice.  When its at a point you want to test it on a specific platform, copy the web code into a PhoneGap project built in the platform specific IDE.  For example, if you like <a href="http://macromates.com/" target="_blank">TextMate</a>, do all the web coding in TextMate and when you are ready to test it on Android, copy the web code into the assets/www path of your Eclipse Android project.  Run and test from there.</li>
+    <li>Use <a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a>. You can do your web code in your IDE of choice and simply run 'make debug'. In the current incarnation of Cordova, this will open your web code in the iPhone, Android, and Blackberry simulators.  Reference the <a href="https://github.com/brianleroux/Cordova/blob/master/README.md" target="_blank">Cordova Github README.md </a> for more details on usage.  In the near future I'm planning a blog post on that very subject.</li>
+</ol>
+
+
+<p>The long and short of it is that the platform specific IDE workflows are not optimal for web development.  Find the tools that best suit you and your web development style, use them, and only spend your time in platform specific IDEs when necessary.  The time you save using a full featured, web-focused IDE makes up for the less-than-fun process of having to copy and paste code to platform specific IDEs.  You save even more time if you use Cordova.  Have I pimped Cordova enough yet?</p>
+
+<h2>The Supported APIs (per platform)</h2>
+
+<p>So as you probably already know, you can find all of PhoneGap's documented mobile API support at <a href="http://docs.phonegap.com/" target="_blank">docs.phonegap.com</a>. What you might not be aware of is that they have done a really good job of documenting which APIs are supported by which platforms.</p>
+
+<p>On a function by function basis, the "Supported Platforms" section lets you know down to the OS version which platforms support it.  The trailing "Quirks" section let's you know which platforms may not behave as expected.  Not only that, but the "Quirks" are typically accompanied by workarounds to make your life a little easier.</p>
+
+<p>If you are doing cross platform mobile development, get used to the fact that you are going to be spending time dealing with inconsistencies, regardless of framework choice.  Having documentation with this level of detail will surely decrease that time, as well as prevent you from hitting unforeseen dead-ends in your app development.  RTFM, its worth it.</p>
+
+<h2>PhoneGap can technically do anything</h2>
+
+<p>PhoneGap does its best to expose platform specific mobile APIs in a bare bones, clean, abstracted manner.  While this does create a reliable experience in development, it does leave some things you might want off the table.  The big thing, for example, is native UI components.  While "native" anything seems to be contradictory to  cross platform development, its still a common request (see <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> or even this <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">PhoneGap based solution</a>).  So how do you go about offering platform specific functionality in a PhoneGap app?  With plugins.</p>
+
+<p>Plugins allow you to write native code for a specific platform in order to extend the PhoneGap framework.  For example, you could write code for handling <a href="https://github.com/phonegap/phonegap-plugins/tree/master/Android/BarcodeScanner" target="_blank">bar code scanning in Java for Android</a>, then write some Javascript to hook your native code to the PhoneGap framework, then use this native functionality in one of your PhoneGap apps.  OK, I didn't give an entirely clear account of what is necessary, so just reference the <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">PhoneGap wiki for details on plugin development</a>.  The wiki currently contains step by step instructions for Android, iOS, and Blackberry.  Here's the resources you should be checking out.</p>
+
+<ul>
+    <li><a href="http://wiki.phonegap.com/w/page/36753494/How-to-Create-a-PhoneGap-Plugin-for-Android" target="_blank">How to Create a PhoneGap Plugin for Android</a></li>
+    <li><a href="http://wiki.phonegap.com/w/page/36753496/How-to-Create-a-PhoneGap-Plugin-for-IPhone" target="_blank">How to Create a PhoneGap Plugin for iPhone</a></li>
+    <li><a href="http://wiki.phonegap.com/w/page/35799737/How-To-Create-a-PhoneGap-Plugin-for-BlackBerry-WebWorks" target="_blank">How to Create a PhoneGap Plugin for Blackberry WebWorks</a></li>
+    <li>Jesse MacFadyen's (<a href="http://twitter.com/#!/purplecabbage" target="_blank">@purplecabbage</a>) collection of <a href="https://github.com/purplecabbage/phonegap-plugins" target="_blank">PhoneGap plugins on Github</a></li>
+</ul>
+
+
+<h2>They Want You!</h2>
+
+<p>PhoneGap is an open source project.  Very open source in fact.  As though the <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT</a> licenses weren't liberal enough, PhoneGap gives you the choice of applying either to your work.  As long as you keep their copyright notices in your code and don't use their name to promote your product, you can use their code however you wish, commercially or otherwise.</p>
+
+<p>How does PhoneGap benefit from this? Well, licensing like this tends to create bi-directional generosity.  By this I mean the community commonly contributes to PhoneGap and its plugins and tools.  You can go to Github right now and fork your own copy of the whole PhoneGap framework (among other things) at the <a href="https://github.com/phonegap" target="_blank">PhoneGap Github account</a>.</p>
+
+<p>So if you use PhoneGap and write some custom code you think others can benefit from, consider giving back to keep the spirit of open source alive.  Otherwise you're a jack ass.</p>
+
+<h2>weinre</h2>
+
+<p>Can't believe I forgot this one.  I'll make this brief as your best bet is to read more at its website: (<a href="http://pmuellr.github.com/weinre/" target="_blank">http://pmuellr.github.com/weinre/</a>).</p>
+
+<p>Basically, weinre lets you debug web pages remotely.  What does this mean for PhoneGap?  This means <strong>you can debug your native PhoneGap apps either on device or simulator</strong>.  It alleviates one of the biggest time sucks of web based mobile development, which is the silent dismissal of malfunctioning Javascript calls.  But now instead of your exceptions going the way of /dev/null, you can debug and log your execution as you would any other application.  Oh, and Cordova has weinre built in.</p>
+]]></content>
+  </entry>
+  
+</feed>

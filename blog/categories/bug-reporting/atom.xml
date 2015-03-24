@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bug reporting | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/bug-reporting/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[F*ck You, Show Me]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/01/24/f-ck-you/"/>
+    <updated>2014-01-24T10:48:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/01/24/f-ck-you</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://1.bp.blogspot.com/_518ml9CpccA/S1yBZEPKawI/AAAAAAAACwI/wne0NNFcUOE/s400/castaway.jpg" width="250" height="250" title="castaway" ></p>
+
+<p>Resolving bug reports is like trying to rescue developers lost on a desert island. Sometimes you get the privilege of rescuing the developer who started a signal fire you couldn't possible miss, kindled by reproducible test cases and detailed specifics of their environment. They make the rescue easy and still thank you profusely for the aid. In the end, everyone involved is happy. But this isn't always the case...<!-- more --></p>
+
+<p>Sometimes you have to resuce the developer who makes no effort on their own to get off the island. They're just sitting in the sand, arms folded, pissed off at the world for getting marooned. This developer essentially throws a message in a bottle into the sea, the entire contents reading:</p>
+
+<blockquote><p>I'm lost. Find me.</p></blockquote>
+
+<p>When the maintainer of the "offending" software project actually manages to find the message, they often tweet cynical things like this:</p>
+
+<blockquote class="twitter-tweet" lang="en"><p>“It failed” or “there was an error” is not a bug report</p>&mdash; Tony Lukasavage (@tonylukasavage) <a href="https://twitter.com/tonylukasavage/statuses/426714081102675968">January 24, 2014</a></blockquote>
+
+
+<script async src="http://tonylukasavage.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>And while there is a minute, fleeting catharsis to complaining into the void of twitter, nothing is achieved. The stranded developer is still stuck. The maintainer's project has not improved and they still need to wonder if the poorly-defined report is legitimate.</p>
+
+<p>It is at this point that I paraphrase the immortal wisdom of Henry Hill, as delivered through the genius of Martin Scorcese's "Goodfellas":</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/5ydqjqZ_3oc?rel=0&start=0&end=22&autoplay=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Trouble with the framework?</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<p>An uncaught exception crashed your app?</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<p>You're stuck on what you think is a bug and your client is expecting a deliverable ASAP?</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<p>Am I really this callous with the bug-reporting-challenged? No, not even close. I want to harbor a notion of inclusivity and even education on this task that is the lifeblood of an open source project. So maybe that's not <em>exactly</em> how you should phrase it. Perhaps in practice it sounds a little more like:</p>
+
+<blockquote><p>You haven't provided enough information for anyone to help you troubleshoot. Please provide the details of your development environment, as well as a reproducible test case that manifests the bug you are reporting, and an explanation of what the expected behavior is if it's not clear.</p></blockquote>
+
+<p>But the sentiment is the same. And without the aforementioned requirements, I <span style="color:#a00; font-weight:bold;">will not assist</span> with the bug. Why the hard line on bug reporting? Because standing firm on this point is best for everyone.</p>
+
+<ul>
+<li>The reporter, in the end, will get their problem solved faster. Providing sufficient details also assures that the issue doesn't get pushed into the maintainer's "archive"; an archive that is sometimes never revisited.</li>
+<li>The maintainer gets a bug resolved without having to employ mind-reading, which is reward enough in itself. In addition, well-written bug reports make it much easier for maintainers to write tests that will prevent regressions in the future, thereby increasing the stability of the project.</li>
+<li>The project's community of developers wins too. Well written bug reports allow the maintainer(s) to move through bugs quickly and spend more time focusing on improvements and features.</li>
+</ul>
+
+
+<p>Don't get stuck on a desert island only to get blown off by a gangster-quoting maintainer. Write minimal, detailed, reproducible bug reports.</p>
+
+<p><em>Feel free to link the shit out of this on issue lists, Q&amp;A boards, forums, etc... <span style="color:#a00; font-weight:bold;">Spread the word</a>.</em></p>
+]]></content>
+  </entry>
+  
+</feed>

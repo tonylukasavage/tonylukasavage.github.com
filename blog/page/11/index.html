@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Here&#8217;s a quick tip for those of you who are also switching to Flex 4.x/Flash Builder 4 from Flex 3.x/Flex Builder 3.  In the past when you &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/page/11/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/07/27/flash-builder-4--addelement---instead-of-addchild--/">Flash Builder 4: addElement() instead of addChild()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-27T07:56:00-04:00" pubdate data-updated="true">Jul 27<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here&#8217;s a quick tip for those of you who are also switching to Flex 4.x/Flash Builder 4 from Flex 3.x/Flex Builder 3.  In the past when you wanted to add a Flash DisplayObject to the main Application canvas you&#8217;d wrap the DisplayObject in a UIComponent, then add the UIComponent to the Application as a child, like this:</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">var sprite:Sprite = new Sprite();
+var ui:UIComponent = new UIComponent();
+ui.addChild(sprite);
+this.addChild(ui);</code></pre>
+
+
+<br>
+
+
+<p>Try that in Flash Builder 4 and you&#8217;ll encounter a fun error that looks like this:</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">Error: addChild() is not available in this class. Instead, use
+addElement() or modify the skin, if you have one.</code></pre>
+
+
+<br>
+
+
+<p>To resolve it, simply change the last line of the previous code to use addElement() instead (change in <span style="color: #ff0000;">red</span>):</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">var sprite:Sprite = new Sprite();
+var ui:UIComponent = new UIComponent();
+ui.addChild(sprite);
+<span style="color: #ff0000;">this.addElement(ui);</span></code></pre>
+
+
+<br>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/25/away3dlite--face-linking--take-2/">Away3dLite: Face linking, take 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-25T21:51:00-04:00" pubdate data-updated="true">Jun 25<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p style="text-align: center;"><a href="/demos/normals_align/sandbox.html" class="fancybox.iframe"><img title="normals_align" src="/images/normals2.jpg" alt="" width="433" height="320" /></a></p>
+
+
+<p>It was great.  I had a moment of triumph.  In my meager 3D and Away3D experience I managed to get face linking functionality into Away3DLite.  Proud of myself, I posted my success at the <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/960780192fbb77bd" target="_blank">Away3D Dev</a> list.  But my party was soon rained on by one of the Away3D developers, Peter Kapelyan, who immediately informed that my linked objects weren&#8217;t aligning as they should be.  It felt a lot like that scene in National Lampoon&#8217;s Christmas Vacation where Clark finally gets the lights lit on his house, only to have his father-in-law inform him that the little lights weren&#8217;t twinkling&#8230;</p></p>
+
+<p style="text-align: center;"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="src" value="http://www.youtube.com/v/nsaxNehMibg" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://www.youtube.com/v/nsaxNehMibg"></embed></object>
+
+<p style="text-align: left;">I know Peter, thanks for noticing.</p>
+<p style="text-align: left;">To that end, the above demo is the next revision of my prior face linking code.  This time, I got alignment working.  Because I am 3D math deficient (I&#8217;m working on it) I was unable to implement the alignment properly without using a container object for the source and the linked objects.  Someone a little more math savvy can surely make use of the upAxis parameter of the lookAt() function to make it work, but I need some studying before I can do it on my own.  Shawn McInerney from the dev list offered up <a href="http://moosemouse.com/up-object-test.html" target="_blank">a potential solution</a>, but it&#8217;s a little over my head now.  Perhaps someone else perusing this blog can make use of it.</p>
+<p style="text-align: left;">I hope Peter didn&#8217;t take this the wrong way, as I have an abrasive sense of humor that doesn&#8217;t translate well to written word.  Just in case, <a href="http://www.flashten.com/" target="_blank">here&#8217;s a link to his site</a> which is extremely clean, cool, slick, and a whole bunch of other adjectives that equal up to awesome.</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/23/away3dlite--normals-and-face-linking/">Away3dLite: Normals and Face Linking</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-23T23:19:00-04:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p style="text-align: center;"><a href="/demos/normals/sandbox.html" class="fancybox.iframe"><img title="normals" src="/images/normals2.jpg" alt="" width="432" height="323" /></a></p>
+
+
+<p>The above is a demo of face linking implemented in Away3dLite (right lick to view source).  As you&#8217;ll see in the demo, face linking allows us to &#8220;link&#8221; a 3D object to another, rendering it at the center of the source&#8217;s face and then moving along the face&#8217;s normal by a given offset.  All credit goes to the original author of the Away3D FaceLink class, as my work was just a minimal modification to port it to Away3DLite.</p>
+
+<p>One thing to note is that this demo required a modification to the Face class, found in away3dlite.core.base.Face.  I simply added a calculated normal and center for the face at creation time and made it available as a public variable.  It&#8217;s not altogether the cleanest code I&#8217;ve written, but it gives you a good idea of how you might use face linking in your own Away3DLite application.</p>
+
+<p>Just for fun, here&#8217;s a couple links to other flash apps I&#8217;ve seen that make cool use of faces, vertices, and normals:</p>
+
+<ul>
+<li><a href="http://www.everydayflash.com/blog/index.php/2009/03/16/3d-experiments-with-flash-player-10-and-as3dmod/" target="_blank">EveryDay3D - 3D experiments with Flash Player 10 and AS3Dmod</a></li>
+<li><a href="http://www.closier.nl/blog/?p=85" target="_blank">Fabrice Closier - Away3D FaceLink</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/20/away3d--augmented-reality/">Away3D: Augmented Reality</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-20T21:49:00-04:00" pubdate data-updated="true">Jun 20<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="src" value="http://www.youtube.com/v/PYBgPjxeQ-8" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://www.youtube.com/v/PYBgPjxeQ-8"> </embed></object>
+
+
+<p>Here&#8217;s a quick demo I did of using <a href="http://en.wikipedia.org/wiki/Augmented_reality" target="_blank">augmented reality</a> in Away3D.  The quick description is that your webcam is used to identify the position and orientation of the marker (which I&#8217;m holding).  With these values identified, <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en" target="_blank">FLARToolkit </a>and <a href="http://words.transmote.com/wp/flarmanager/" target="_blank">FLARManager </a>are used to translate your Away3D scene and objects relative to the marker.  You are adding interaction into your Away3D apps using natural movements rather than the typical mouse and keyboard combos.</p>
+
+<p>While the demo itself doesn&#8217;t give a great picture of the practical applications, they are showing up more quickly then you might imagine.  One particularly interesting example is the Layar browser, which uses global positioning rather than marker identification to make its alterations to reality.  Rather than try to explain it, check it out here:</p>
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="src" value="http://www.youtube.com/v/b64_16K2e08" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://www.youtube.com/v/b64_16K2e08"></embed></object>
+
+
+<p>And I&#8217;m sure plenty more applications are on the way.  Want to get on board and start churning out your own augmented reality (AR) apps in Flash?  Check out <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en" target="_blank">FLARToolkit </a>and <a href="http://words.transmote.com/wp/flarmanager/" target="_blank">FLARManager </a>for yourself.  You may also want to take a look at the original <a href="http://www.hitl.washington.edu/artoolkit/" target="_blank">ARToolkit</a>, which is based in C++, or <a href="http://nyatla.jp/nyartoolkit/wiki/index.php?NyARToolkit%20for%20Java.en" target="_blank">NyARToolkit</a>, the Java/C# port on which FLARToolkit is based.</p>
+
+<p>Too lazy for all that research?  Stay tuned and I&#8217;ll post up the source from the bare bones example I had in the first video of this post.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/14/testing-away3d-materials/">Testing Away3D Materials</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-14T17:12:00-04:00" pubdate data-updated="true">Jun 14<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p style="text-align: center;"><a href="/demos/materials/sandbox.html" class="fancybox.iframe"><img title="materials" src="/images/materials.jpg" alt="" width="451" height="335" /></a></p>
+
+
+<p>In an effort to learn more about the vast array of materials available in Away3D I put together this little demo.  It&#8217;s just an adjustable sphere that you can change the segment count of with a drop down for selecting materials to apply to it.  It&#8217;s got just one light: a DirectionalLight3D pointing straight at it.  This, of course, only affects the shaded materials as you can see in the demo.  By the way, anyone know why I&#8217;m getting no color on the ShadingColorMaterial?</p>
+
+<p>Discussion on ShadingColorMaterial not working in Away3D 3.5: <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/aaf9d9c73a12473f/b49add76061e9388">http://groups.google.com/group/away3d-dev/browse_thread/thread/aaf9d9c73a12473f/b49add76061e9388</a></p>
+
+<h3>Featured Away3D Code:</h3>
+
+<ul>
+<li>away3d.materials.AnimatedBitmapMaterial</li>
+<li>away3d.materials.VideoMaterial</li>
+<li>away3d.materials.PhongColorMaterial</li>
+<li>away3d.materials.ShadingColorMaterial</li>
+<li>away3d.materials.Dot3BitmapMaterialF10</li>
+<li>away3d.materials.Dot3BitmapMaterial</li>
+<li>away3d.materials.WireframeMaterial</li>
+<li>away3d.materials.WireColorMaterial</li>
+<li>away3d.materials.ColorMaterial</li>
+<li>away3d.lights.DirectionalLight3D</li>
+</ul>
+
+
+<p>As usual, right click to view the source of the demo.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/10/face-picking-in-away3d/">Face picking in Away3D</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-10T22:43:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p style="text-align: center;"><a href="/demos/face_picking/sandbox.html" class="fancybox.iframe"><img title="face_picking" src="/images/face_picking.jpg" alt="" width="445" height="331" /></a></p>
+
+
+<p>Here&#8217;s a quick demo of individual face picking and manipulation in Away3D.  Using your mouse you can click to select any visible face of the sphere to change its color, as well as receive information about the face itself.  The face&#8217;s number, 3D coordinates, and screen coordinates will appear in the upper left hand portion of the view.</p>
+
+<p>Hopefully you&#8217;ll find it useful.  As usual, you can right click and select &#8220;view source&#8221; to see the source code for the demo.</p>
+
+<h3>Featured Away3D code</h3>
+
+<ul>
+<li>away3d.cameras.Camera3D.screen()</li>
+<li>away3d.core.draw.ScreenVertex</li>
+<li>away3d.core.draw.DrawTriangle</li>
+<li>away3d.core.base.Mesh.faces</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/10/flash-player-10-1/">Flash Player 10.1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-10T08:55:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was checking in on a <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/dab6061d8a064d57?hl=en" target="_blank">performance thread</a> I started on the <a href="http://groups.google.com/group/away3d-dev" target="_blank">Away3D development mailing list</a> and came upon a tidbit that is quite exciting.  One of the users informed me that Flash Player 10.1 was expected to be a big &#8220;game changer&#8221; in terms of performance for Away3D.  Always skeptical, I had to check it out myself.</p>
+
+<p>I checked my demo in my last post and was getting around 27 FPS.  I then updated to the <a href="http://labs.adobe.com/downloads/flashplayer10.html" target="_blank">pre-release of Flash Player 10.1</a> and reloaded the demo.  I was shocked to see my average frame per second jump to almost 40!  <strong>Without changing a bit of code I got a 30% boost in performance.</strong> Very cool.  Can&#8217;t wait to see what&#8217;s next as 3D in Flash becomes more mature.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/10/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tonylukasavage';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

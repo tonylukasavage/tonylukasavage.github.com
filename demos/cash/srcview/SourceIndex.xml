@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of cash</title>
+	<nodes>
+		<node label="src">
+			<node icon="classpathIcon" label="GuitarModel" expanded="true">
+				<node label="images">
+					<node icon="imageIcon" label="Plane.png" url="source/GuitarModel/images/Plane.png.html"/>
+				</node>
+				<node icon="actionScriptIcon" label="GuitarModel.as" url="source/GuitarModel/GuitarModel.as.html"/>
+			</node>
+			<node label="mp3">
+				<node label="cash.mp3" url="source/mp3/cash.mp3"/>
+			</node>
+			<node icon="imageIcon" label="black2.jpg" url="source/black2.jpg.html"/>
+			<node icon="mxmlAppIcon" selected="true" label="cash.as" url="source/cash.as.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 4278K)" url="cash.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

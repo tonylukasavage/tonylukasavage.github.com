@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of Shadows</title>
+	<nodes>
+		<node label="src">
+			<node icon="mxmlIcon" label="AwayUIC.mxml" url="source/AwayUIC.mxml.html"/>
+			<node icon="imageIcon" label="shadow.png" url="source/shadow.png.html"/>
+			<node icon="mxmlAppIcon" selected="true" label="Shadows.mxml" url="source/Shadows.mxml.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 6K)" url="Shadows.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

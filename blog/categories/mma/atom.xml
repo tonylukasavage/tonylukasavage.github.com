@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mma | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/mma/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Knuckle Head: My MMA Fighter App for Android]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/08/knuckle-head--my-mma-fighter-app-for-android/"/>
+    <updated>2011-06-08T14:29:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/08/knuckle-head--my-mma-fighter-app-for-android</id>
+    <content type="html"><![CDATA[<h2>Get the App</h2>
+
+<p><span style="font-size:18px;"><a href="https://market.android.com/details?id=com.savagelook.knucklehead">* Click here to download "Knuckle Head" on the Android Market!</a></span></p>
+
+<h2>Overview</h2>
+
+<p>Knuckle Head is an app for the true Mixed Martial Arts fan. It allows you to search a database to <strong>find details on any fighter in the world</strong>, not just the UFC. In just a few touches you can search by name, nickname, or weight class to find every detail about your favorite fighters.  This is not just another MMA news app. Inside you'll find fighter images, detailed fight records, vital statistics, and other MMA analysis.</p>
+
+<p>Oh, and <span style="color:#ff0000;">I love feedback</span>, so tell me what you want next!<br></p>
+
+<h2>Screenshots</h2>
+
+<table cellspacing="0" cellpadding="0" style="padding-bottom:15px;">
+  <tr>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/search 2.png"><img src="http://tonylukasavage.github.com/images/search-e1307557245583.png" alt="" title="search" width="170" height="302" class="alignnone size-full wp-image-3064" /></a></td>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/fighters.png"><img src="http://tonylukasavage.github.com/images/fighters-e1307557324316.png" alt="" title="fighters" width="170" height="302" class="alignnone size-full wp-image-3065" /></a></td>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/profile.png"><img src="http://tonylukasavage.github.com/images/profile-e1307557366319.png" alt="" title="profile" width="170" height="302" class="alignnone size-full wp-image-3066" /></a></td>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/fights.png"><img src="http://tonylukasavage.github.com/images/fights-e1307557395185.png" alt="" title="fights" width="170" height="302" class="alignnone size-full wp-image-3067" /></a></td>
+  </tr>
+</table>
+
+
+<h2>In Case You Were Interested...</h2>
+
+<p>I'll have some technical blog posts regarding this app up very soon.  There'll be lots of native Android development goodies to be gleaned.  In addition I'm likely gonna post up some Android/Java convenience classes I've been using for various tasks like JSON handling, AdMob, ProgressDialogs, and more to my <a href="https://github.com/tonylukasavage">Github account</a>.  Stay tuned.</p>
+]]></content>
+  </entry>
+  
+</feed>

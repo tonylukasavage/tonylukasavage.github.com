@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>JigLib Flash and Away3D - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="&rarr; Click the above image or here to play the demo
+&rarr; View the source code The Overview Toying around with JigLib Flash in Away3D today was &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2010/09/07/jiglib-flash-and-away3d/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">JigLib Flash and Away3D</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-07T16:00:00-04:00" pubdate data-updated="true">Sep 7<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p style="text-align: center;"><a href="/demos/jiglib_away3d/jiglib_away3d.html" class="fancybox.iframe"><img title="jiglib_away3d" src="/images/jiglib_big.jpg" alt="" width="556" height="323" /></a></p>
+
+
+<p>&rarr; Click the above image or <a href="/demos/jiglib_away3d/jiglib_away3d.html">here</a> to play the demo
+&rarr; <a href="/demos/jiglib_away3d/srcview/index.html">View the source code</a></p>
+
+<h1>The Overview</h1>
+
+
+<p>Toying around with <a href="http://www.jiglibflash.com/blog/" target="_blank">JigLib Flash</a> in <a href="http://away3d.com" target="_blank">Away3D</a> today was both interesting and sobering.  For those who don&#8217;t know, JigLib is a 3D physics engine, and JigLib Flash is the AS3 port of it.  While my expectations weren&#8217;t too high since this is complex mathematical processing in Flash, I was hoping for a little more.  Don&#8217;t get me wrong, though, there&#8217;s some very cool potential here.  Be sure to check the tutorials and demos added by people who didn&#8217;t give up quite as quickly as me: <a href="http://www.jiglibflash.com/blog/2009/07/23/collection-of-jiglibflash-examplestutorials-3d-physic-engine/" target="_blank">JigLib Flash demos and tutorials</a>.  I particularly enjoyed some of the car physics demos using this library.</p>
+
+<p>I was setting out to do a basic Jenga-like game.  Its just a tower of zig zagging blocks, 3 blocks to a row, 18 rows total.  It quickly became evident that this just wasn&#8217;t going to happen.  After about 4 rows of blocks the frame rate dropped down into single digits and there was tons of &#8220;jitter&#8221; among the blocks in the scene.  I assume the jitter has to do with the fact that Flash can&#8217;t process the collisions fast enough and Jiglib is trying to correct rigid body penetrations.  I did A LOT of tinkering with the <a href="http://code.google.com/p/jiglibflash/source/browse/trunk/fp10/src/jiglib/cof/JConfig.as" target="_blank">JConfig</a> settings, which are a group of static settings that manipulate how the physics is calculated, but couldn&#8217;t make it work for me.  In the end, I think JigLib Flash just needs a lot of work on &#8220;stacking&#8221; and rigid bodies with many simultaneous points of contact.</p>
+
+<p>OK, now that I&#8217;ve had my purge of frustration, let me at least talk about a half decent example of Away3D and JigLib running very well together.  In the demo at the top of this post I just have a whole bunch of spheres falling into a box with JigLib taking care of the collisions.  It works very well and even maintains a good frame rate.  So good in fact that I even took the time to add some simple shadows to the falling spheres.</p>
+
+<h1>The Code</h1>
+
+
+<p>&rarr; <a href="/demos/jiglib_away3d/srcview/index.html">full source code (download link at bottom)</a>
+jiglib_away3d.mxml:</p>
+
+<div style="height:400px; overflow:auto;">
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="o">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">?&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">mx</span><span class="o">:</span><span class="n">Application</span> <span class="n">xmlns</span><span class="o">:</span><span class="n">mx</span><span class="o">=</span><span class="s2">&quot;http://www.adobe.com/2006/mxml&quot;</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;absolute&quot;</span> <span class="n">xmlns</span><span class="o">:</span><span class="n">local</span><span class="o">=</span><span class="s2">&quot;*&quot;</span>
+</span><span class='line'>              <span class="n">creationComplete</span><span class="o">=</span><span class="s2">&quot;init();&quot;</span> <span class="n">frameRate</span><span class="o">=</span><span class="s2">&quot;60&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;600&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;800&quot;</span>
+</span><span class='line'>              <span class="n">viewSourceURL</span><span class="o">=</span><span class="s2">&quot;srcview/index.html&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="n">mx</span><span class="o">:</span><span class="n">Script</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;![</span><span class="n">CDATA</span><span class="o">[</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.primitives.Plane</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.core.base.Mesh</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">__AS3__.vec.Vector</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.materials.BitmapMaterial</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">jiglib.physics.RigidBody</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">jiglib.plugin.away3d.</span><span class="o">*;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">mx.core.UIComponent</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.primitives.Sphere</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.core.math.Number3D</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.core.utils.Cast</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">private</span> <span class="kd">var</span> <span class="n">_physics</span><span class="p">:</span><span class="kt">Away3DPhysics</span><span class="o">;</span>
+</span><span class='line'>          <span class="kd">private</span> <span class="kd">var</span> <span class="n">_shadows</span><span class="p">:</span><span class="kt">Vector.&lt;Plane&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Vector.&lt;Plane&gt;</span><span class="o">();</span>
+</span><span class='line'>          <span class="kd">private</span> <span class="kd">var</span> <span class="n">_bodies</span><span class="p">:</span><span class="kt">Vector.&lt;RigidBody&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Vector.&lt;RigidBody&gt;</span><span class="o">();</span>
+</span><span class='line'>          <span class="o">[</span><span class="n">Embed</span><span class="o">(</span><span class="s2">&quot;shadow.png&quot;</span><span class="o">)]</span> <span class="kd">private</span> <span class="kd">var</span> <span class="n">pngShadow</span><span class="p">:</span><span class="kt">Class</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">[</span><span class="n">Embed</span><span class="o">(</span><span class="s2">&quot;water.jpg&quot;</span><span class="o">)]</span> <span class="kd">private</span> <span class="kd">var</span> <span class="n">jpgPaper</span><span class="p">:</span><span class="kt">Class</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">private</span> <span class="kd">function </span><span class="nf">init</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">if</span> <span class="o">(</span><span class="n">stage</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="n">initAway3D</span><span class="o">();</span>
+</span><span class='line'>              <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="k">this</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">ADDED_TO_STAGE</span><span class="o">,</span> <span class="kd">function</span><span class="o">(</span><span class="n">e</span><span class="o">:</span><span class="n">Event</span><span class="o">):</span><span class="kc">void</span> <span class="o">{</span> <span class="n">initAway3D</span><span class="o">();</span> <span class="o">});</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">private</span> <span class="kd">function </span><span class="nf">initAway3D</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">stage</span><span class="o">.</span><span class="na">quality</span> <span class="o">=</span> <span class="n">flash</span><span class="o">.</span><span class="na">display</span><span class="o">.</span><span class="na">StageQuality</span><span class="o">.</span><span class="na">LOW</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">stage</span><span class="o">.</span><span class="na">scaleMode</span> <span class="o">=</span> <span class="n">StageScaleMode</span><span class="o">.</span><span class="na">NO_SCALE</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">_drawBackground</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="c1">// prepare physics</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">walls</span><span class="p">:</span><span class="kt">Vector.&lt;RigidBody&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Vector.&lt;RigidBody&gt;</span><span class="o">();</span>
+</span><span class='line'>              <span class="n">_physics</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Away3DPhysics</span><span class="o">(</span><span class="n">away3dMain</span><span class="o">.</span><span class="na">view</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">walls</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">_physics</span><span class="o">.</span><span class="na">createCube</span><span class="o">({</span><span class="n">width</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span> <span class="n">height</span><span class="o">:</span><span class="mi">10</span><span class="o">,</span> <span class="n">depth</span><span class="o">:</span><span class="mi">1000</span><span class="o">}));</span>
+</span><span class='line'>              <span class="n">walls</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">_physics</span><span class="o">.</span><span class="na">createCube</span><span class="o">({</span><span class="n">width</span><span class="o">:</span><span class="mi">10</span><span class="o">,</span> <span class="n">height</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span> <span class="n">depth</span><span class="o">:</span><span class="mi">1000</span><span class="o">}));</span>
+</span><span class='line'>              <span class="n">walls</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">_physics</span><span class="o">.</span><span class="na">createCube</span><span class="o">({</span><span class="n">width</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span> <span class="n">height</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span> <span class="n">depth</span><span class="o">:</span><span class="mi">10</span><span class="o">}));</span>
+</span><span class='line'>              <span class="n">walls</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">_physics</span><span class="o">.</span><span class="na">createCube</span><span class="o">({</span><span class="n">width</span><span class="o">:</span><span class="mi">10</span><span class="o">,</span> <span class="n">height</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span> <span class="n">depth</span><span class="o">:</span><span class="mi">1000</span><span class="o">}));</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">sprite</span><span class="p">:</span><span class="kt">Sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">matrix</span><span class="p">:</span><span class="kt">Matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Matrix</span><span class="o">();</span>
+</span><span class='line'>              <span class="n">matrix</span><span class="o">.</span><span class="na">createGradientBox</span><span class="o">(</span><span class="mi">512</span><span class="o">,</span><span class="mi">512</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">beginGradientFill</span><span class="o">(</span><span class="s2">&quot;radial&quot;</span><span class="o">,</span> <span class="o">[</span><span class="mh">0xdddddd</span><span class="o">,</span><span class="mh">0x000000</span><span class="o">],</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">],</span> <span class="o">[</span><span class="mi">0</span><span class="o">,</span><span class="mi">255</span><span class="o">],</span> <span class="n">matrix</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">drawRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">512</span><span class="o">,</span><span class="mi">512</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">endFill</span><span class="o">();</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">bmd</span><span class="p">:</span><span class="kt">BitmapData</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">BitmapData</span><span class="o">(</span><span class="mi">512</span><span class="o">,</span><span class="mi">512</span><span class="o">,</span><span class="kc">false</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">bmd</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">sprite</span><span class="o">);</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">mat</span><span class="p">:</span><span class="kt">BitmapMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">BitmapMaterial</span><span class="o">(</span><span class="n">bmd</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="k">for</span> <span class="o">(</span><span class="kd">var</span> <span class="n">j</span><span class="p">:</span><span class="kt">uint</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">walls</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="kd">var</span> <span class="n">body</span><span class="p">:</span><span class="kt">RigidBody</span> <span class="o">=</span> <span class="n">walls</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+</span><span class='line'>                  <span class="kd">var</span> <span class="n">mesh</span><span class="p">:</span><span class="kt">Mesh</span> <span class="o">=</span> <span class="n">Away3dMesh</span><span class="o">(</span><span class="n">body</span><span class="o">.</span><span class="na">skin</span><span class="o">).</span><span class="n">mesh</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">body</span><span class="o">.</span><span class="na">movable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">mesh</span><span class="o">.</span><span class="na">material</span> <span class="o">=</span> <span class="n">mat</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">mesh</span><span class="o">.</span><span class="na">ownCanvas</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">mesh</span><span class="o">.</span><span class="na">pushback</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="k">switch</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span><span class='line'>                          <span class="n">body</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">505</span><span class="o">;</span>
+</span><span class='line'>                          <span class="n">body</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">495</span><span class="o">;</span>
+</span><span class='line'>                          <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>                      <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span><span class='line'>                          <span class="n">body</span><span class="o">.</span><span class="na">z</span> <span class="o">=</span> <span class="mi">505</span><span class="o">;</span>
+</span><span class='line'>                          <span class="n">body</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">495</span><span class="o">;</span>
+</span><span class='line'>                          <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>                      <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span><span class='line'>                          <span class="n">body</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">505</span><span class="o">;</span>
+</span><span class='line'>                          <span class="n">body</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">495</span><span class="o">;</span>
+</span><span class='line'>                          <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">paper</span><span class="p">:</span><span class="kt">BitmapMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">BitmapMaterial</span><span class="o">(</span><span class="n">Cast</span><span class="o">.</span><span class="na">bitmap</span><span class="o">(</span><span class="n">jpgPaper</span><span class="o">));</span>
+</span><span class='line'>              <span class="k">for</span> <span class="o">(</span><span class="kd">var</span> <span class="n">i</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="kd">var</span> <span class="n">sphere</span><span class="p">:</span><span class="kt">RigidBody</span> <span class="o">=</span> <span class="n">_physics</span><span class="o">.</span><span class="na">createSphere</span><span class="o">({</span><span class="n">radius</span><span class="o">:</span><span class="mi">30</span><span class="o">,</span> <span class="n">segmentsW</span><span class="o">:</span><span class="mi">6</span><span class="o">,</span> <span class="n">segmentsH</span><span class="o">:</span><span class="mi">6</span><span class="o">});</span>
+</span><span class='line'>                  <span class="n">_bodies</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">sphere</span><span class="o">);</span>
+</span><span class='line'>                  <span class="n">sphere</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">200</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">sphere</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">700</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">3000</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">sphere</span><span class="o">.</span><span class="na">z</span> <span class="o">=</span> <span class="mi">200</span> <span class="o">-</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">100</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">sphere</span><span class="o">.</span><span class="na">material</span><span class="o">.</span><span class="na">restitution</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="c1">// This is how to access the engine specific mesh/do3d</span>
+</span><span class='line'>                  <span class="n">_physics</span><span class="o">.</span><span class="na">getMesh</span><span class="o">(</span><span class="n">sphere</span><span class="o">).</span><span class="n">material</span> <span class="o">=</span> <span class="n">paper</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="kd">var</span> <span class="n">plane</span><span class="p">:</span><span class="kt">Plane</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Plane</span><span class="o">({</span><span class="n">material</span><span class="o">:</span><span class="k">new</span> <span class="kt">BitmapMaterial</span><span class="o">(</span><span class="n">Cast</span><span class="o">.</span><span class="na">bitmap</span><span class="o">(</span><span class="n">pngShadow</span><span class="o">)),</span> <span class="n">height</span><span class="o">:</span><span class="mi">80</span><span class="o">,</span> <span class="n">width</span><span class="o">:</span><span class="mi">80</span><span class="o">,</span> <span class="n">bothsides</span><span class="o">:</span><span class="kc">true</span><span class="o">});</span>
+</span><span class='line'>                  <span class="n">plane</span><span class="o">.</span><span class="na">ownCanvas</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">plane</span><span class="o">.</span><span class="na">pushback</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">plane</span><span class="o">.</span><span class="na">filters</span> <span class="o">=</span> <span class="o">[</span><span class="k">new</span> <span class="kt">BlurFilter</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span><span class="mi">8</span><span class="o">)];</span>
+</span><span class='line'>                  <span class="n">plane</span><span class="o">.</span><span class="na">blendMode</span> <span class="o">=</span> <span class="n">BlendMode</span><span class="o">.</span><span class="na">SUBTRACT</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">away3dMain</span><span class="o">.</span><span class="na">view</span><span class="o">.</span><span class="na">scene</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">plane</span><span class="o">);</span>
+</span><span class='line'>                  <span class="n">_shadows</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">plane</span><span class="o">);</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="c1">// create away3d scene</span>
+</span><span class='line'>              <span class="n">away3dMain</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="s2">&quot;SavageLook.com -- Away3D JigLib Demo&quot;</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">away3dMain</span><span class="o">.</span><span class="na">camera</span><span class="o">.</span><span class="na">position</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Number3D</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">700</span><span class="o">,</span> <span class="o">-</span><span class="mi">1500</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">away3dMain</span><span class="o">.</span><span class="na">camera</span><span class="o">.</span><span class="na">lookAt</span><span class="o">(</span><span class="k">new</span> <span class="kt">Number3D</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="c1">// assign pre and post render functions</span>
+</span><span class='line'>              <span class="n">away3dMain</span><span class="o">.</span><span class="na">preRender</span> <span class="o">=</span> <span class="kd">function</span><span class="o">():</span><span class="kc">void</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="k">for</span> <span class="o">(</span><span class="kd">var</span> <span class="n">k</span><span class="p">:</span><span class="kt">uint</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">_shadows</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="k">if</span> <span class="o">(</span><span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">505</span> <span class="o">||</span> <span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">x</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">505</span> <span class="o">||</span> <span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">z</span> <span class="o">&gt;</span> <span class="mi">505</span> <span class="o">||</span> <span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">z</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">505</span> <span class="o">||</span> <span class="n">_bodies</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">y</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                          <span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>                      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                          <span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">x</span> <span class="o">=</span> <span class="n">_bodies</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">x</span><span class="o">;</span>
+</span><span class='line'>                          <span class="n">_shadows</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">z</span> <span class="o">=</span> <span class="n">_bodies</span><span class="o">[</span><span class="n">k</span><span class="o">].</span><span class="n">z</span><span class="o">;</span>
+</span><span class='line'>                      <span class="o">}</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>                  <span class="n">_physics</span><span class="o">.</span><span class="na">step</span><span class="o">();</span>
+</span><span class='line'>              <span class="o">};</span>
+</span><span class='line'>              <span class="n">away3dMain</span><span class="o">.</span><span class="na">postRender</span> <span class="o">=</span> <span class="kd">function</span><span class="o">():</span><span class="kc">void</span> <span class="o">{</span> <span class="nf">trace</span><span class="o">(</span><span class="s2">&quot;postRender&quot;</span><span class="o">);</span> <span class="o">};</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">private</span> <span class="kd">function </span><span class="nf">_drawBackground</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">sprite</span><span class="p">:</span><span class="kt">Sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">ui</span><span class="p">:</span><span class="kt">UIComponent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">UIComponent</span><span class="o">();</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="n">matrix</span><span class="p">:</span><span class="kt">Matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Matrix</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="n">matrix</span><span class="o">.</span><span class="na">createGradientBox</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">width</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">height</span><span class="o">,</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">beginGradientFill</span><span class="o">(</span><span class="s2">&quot;linear&quot;</span><span class="o">,</span> <span class="o">[</span><span class="mh">0x888888</span><span class="o">,</span> <span class="mh">0xffffff</span><span class="o">],</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">],</span> <span class="o">[</span><span class="mi">0</span><span class="o">,</span><span class="mi">255</span><span class="o">],</span> <span class="n">matrix</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">drawRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">width</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">height</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">endFill</span><span class="o">();</span>
+</span><span class='line'>              <span class="n">ui</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">sprite</span><span class="o">);</span>
+</span><span class='line'>              <span class="k">this</span><span class="o">.</span><span class="na">addChildAt</span><span class="o">(</span><span class="n">ui</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">]]&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="n">mx</span><span class="o">:</span><span class="n">Script</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">local</span><span class="o">:</span><span class="n">AwayUIC</span> <span class="n">id</span><span class="o">=</span><span class="s2">&quot;away3dMain&quot;</span>  <span class="n">x</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;600&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;800&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">mx</span><span class="o">:</span><span class="n">Application</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+
+
+<p>AwayUIC.mxml:</p>
+
+<div style="height:400px; overflow:auto;">
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="o">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">?&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">mx</span><span class="o">:</span><span class="n">UIComponent</span> <span class="n">xmlns</span><span class="o">:</span><span class="n">mx</span><span class="o">=</span><span class="s2">&quot;http://www.adobe.com/2006/mxml&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">mx</span><span class="o">:</span><span class="n">Script</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;![</span><span class="n">CDATA</span><span class="o">[</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.debug.AwayStats</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.core.math.Number3D</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">import</span> <span class="nn">away3d.cameras.TargetCamera3D</span><span class="o">;</span>
+</span><span class='line'>            <span class="k">import</span> <span class="nn">away3d.containers.View3D</span><span class="o">;</span>
+</span><span class='line'>            <span class="k">import</span> <span class="nn">away3d.core.render.Renderer</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">var</span> <span class="n">view</span><span class="p">:</span><span class="kt">View3D</span><span class="o">;</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">var</span> <span class="n">camera</span><span class="p">:</span><span class="kt">TargetCamera3D</span><span class="o">;</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">var</span> <span class="n">doRender</span><span class="p">:</span><span class="kt">Boolean</span><span class="o">;</span>
+</span><span class='line'>            <span class="kd">private</span> <span class="kd">var</span> <span class="n">_title</span><span class="p">:</span><span class="kt">String</span><span class="o">;</span>
+</span><span class='line'>            <span class="kd">private</span> <span class="kd">var</span> <span class="n">_link</span><span class="p">:</span><span class="kt">String</span><span class="o">;</span>
+</span><span class='line'>            <span class="kd">private</span> <span class="kd">var</span> <span class="n">_titleText</span><span class="p">:</span><span class="kt">TextField</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">var</span> <span class="n">preRender</span><span class="p">:</span><span class="kt">Function</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">var</span> <span class="n">postRender</span><span class="p">:</span><span class="kt">Function</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">override</span> <span class="kd">protected</span> <span class="kd">function </span><span class="nf">createChildren</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>                <span class="kd">super</span><span class="o">.</span><span class="na">createChildren</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">doRender</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">// setup camera</span>
+</span><span class='line'>                <span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">TargetCamera3D</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">camera</span><span class="o">.</span><span class="na">position</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Number3D</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">1000</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">camera</span><span class="o">.</span><span class="na">lookAt</span><span class="o">(</span><span class="k">new</span> <span class="kt">Number3D</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">// setup view</span>
+</span><span class='line'>                <span class="n">view</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">View3D</span><span class="o">({</span><span class="n">camera</span><span class="o">:</span><span class="n">camera</span><span class="o">,</span> <span class="n">renderer</span><span class="o">:</span><span class="n">Renderer</span><span class="o">.</span><span class="na">BASIC</span><span class="o">});</span>
+</span><span class='line'>                <span class="n">view</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">unscaledWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">view</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">unscaledHeight</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>                <span class="k">this</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">view</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">// add stats and title</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="n">stats</span><span class="p">:</span><span class="kt">AwayStats</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">AwayStats</span><span class="o">(</span><span class="n">view</span><span class="o">);</span>
+</span><span class='line'>                <span class="k">this</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">stats</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">_title</span> <span class="o">=</span> <span class="s2">&quot;SavageLook.com&quot;</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">_link</span> <span class="o">=</span> <span class="s2">&quot;http://savagelook.com/blog&quot;</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">_setText</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">this</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">ENTER_FRAME</span><span class="o">,</span> <span class="kd">function</span><span class="o">(</span><span class="n">e</span><span class="o">:</span><span class="n">Event</span><span class="o">):</span><span class="kc">void</span> <span class="o">{</span> <span class="n">_render</span><span class="o">();</span> <span class="o">});</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">private</span> <span class="kd">function </span><span class="nf">_setText</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">if</span> <span class="o">(</span><span class="n">_titleText</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="n">_titleText</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">TextField</span><span class="o">();</span>
+</span><span class='line'>                  <span class="k">this</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">_titleText</span><span class="o">);</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">_titleText</span><span class="o">.</span><span class="na">text</span> <span class="o">=</span> <span class="n">_title</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">_titleText</span><span class="o">.</span><span class="na">setTextFormat</span><span class="o">(</span><span class="k">new</span> <span class="kt">TextFormat</span><span class="o">(</span><span class="s2">&quot;arial&quot;</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mh">0xffffff</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="n">_link</span><span class="o">));</span>
+</span><span class='line'>                <span class="n">_titleText</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">150</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">_titleText</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">_titleText</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">_titleText</span><span class="o">.</span><span class="na">textWidth</span> <span class="o">*</span> <span class="mf">1.1</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">_titleText</span><span class="o">.</span><span class="na">filters</span> <span class="o">=</span> <span class="o">[</span><span class="k">new</span> <span class="kt">DropShadowFilter</span><span class="o">()];</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">function</span> <span class="kd">get</span> <span class="n">link</span><span class="o">():</span><span class="n">String</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="n">_link</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">function</span> <span class="kd">set</span> <span class="n">link</span><span class="o">(</span><span class="n">value</span><span class="o">:</span><span class="n">String</span><span class="o">):</span><span class="kc">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">_link</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">_setText</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">function</span> <span class="kd">get</span> <span class="n">title</span><span class="o">():</span><span class="n">String</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="n">_title</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">public</span> <span class="kd">function</span> <span class="kd">set</span> <span class="n">title</span><span class="o">(</span><span class="n">value</span><span class="o">:</span><span class="n">String</span><span class="o">):</span><span class="kc">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">_title</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">_setText</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">override</span> <span class="kd">protected</span> <span class="kd">function </span><span class="nf">updateDisplayList</span><span class="o">(</span><span class="n">unscaledWidth</span><span class="o">:</span><span class="kt">Number</span><span class="o">,</span> <span class="n">unscaledHeight</span><span class="o">:</span><span class="kt">Number</span><span class="o">):</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>                <span class="kd">super</span><span class="o">.</span><span class="na">updateDisplayList</span><span class="o">(</span><span class="n">unscaledWidth</span><span class="o">,</span> <span class="n">unscaledHeight</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">view</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">unscaledWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>                <span class="n">view</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">unscaledHeight</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="o">(</span><span class="n">view</span><span class="o">.</span><span class="na">stage</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="n">_render</span><span class="o">();</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kd">private</span> <span class="kd">function </span><span class="nf">_render</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">if</span> <span class="o">(</span><span class="n">doRender</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">preRender</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">preRender</span><span class="o">();</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>                  <span class="n">view</span><span class="o">.</span><span class="na">render</span><span class="o">();</span>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">postRender</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">postRender</span><span class="o">();</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">]]&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">mx</span><span class="o">:</span><span class="n">Script</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">mx</span><span class="o">:</span><span class="n">UIComponent</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+
+<h1>The Summary</h1>
+
+
+<p>My hasty opinion in this case is that JigLib is fun to play with, but don&#8217;t get excited about doing anything super complex&#8230; yet.  I follow a few of the developers and contributors and they are constantly working on it.  They even just recently added support for <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> so you can use all that quick rendering goodness along with it.  I fully intend to follow this project closely as it matures.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-07T16:00:00-04:00" pubdate data-updated="true">Sep 7<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/actionscript3/'>actionscript3</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/as3/'>as3</a>, <a class='category' href='/blog/categories/away3d/'>away3d</a>, <a class='category' href='/blog/categories/away3dlite/'>away3dlite</a>, <a class='category' href='/blog/categories/jiglib/'>jiglib</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/08/31/reflection-in-away3d/" title="Previous Post: Reflection in Away3D">&laquo; Reflection in Away3D</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse/" title="Next Post: Video: Google Project, Flash Builder 4, and Subclipse">Video: Google Project, Flash Builder 4, and Subclipse &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

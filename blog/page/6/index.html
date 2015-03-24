@@ -1,0 +1,1512 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Overview First I want to start by pointing out that this Titanium Developer info will likely be moot in a short amount of time.  Titanium &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/page/6/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/02/17/titanium-developer-tips/">Titanium Developer Tips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T11:46:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+<p>First I want to start by pointing out that this <a href="http://developer.appcelerator.com/" target="_blank">Titanium Developer</a> info will likely be moot in a short amount of time.  <a href="http://www.aptana.com/" target="_blank">Titanium Appcelerator has recently acquired Aptana</a> and is likely to release an IDE with deployment integrated, thus making Titanium Developer obsolete.  It should be tremendous for the workflow, but the beta isn&#8217;t due until March and there&#8217;s no certainty as to when it will be an official release.  So for the time being, let&#8217;s make due with Titanium Developer.</p>
+
+<p>This isn&#8217;t a post on how to use Titanium Developer or develop apps with it.  For that information please reference Titanium&#8217;s own documentation:</p>
+
+<ul>
+    <li><a href="http://guides.appcelerator.com/en/getting_started.html" target="_blank">Getting Started with Appcelerator</a></li>
+    <li><a href="http://guides.appcelerator.com/en/app_structure.html" target="_blank">Appcelerator Application Project Structure</a></li>
+    <li><a href="http://developer.appcelerator.com/doc/mobile/guides" target="_blank">Appcelerator Programming Guides</a></li>
+</ul>
+
+
+<p>Also remember that <span style="color: #ff0000;">Titanium Developer is not an IDE</span>, it is just a project and deployment platform.  For creating and editing content for your apps, you&#8217;ll need your own IDE.  I&#8217;d suggest one that specializes in HTML, CSS, and Javascript.  <a href="http://macromates.com/" target="_blank">TextMate</a> seems to be the weapon of choice for Mac based Appcelerator developers (among others) and there&#8217;s a bunch out there for other OSes, like <a href="http://www.aptana.com/" target="_blank">Aptana</a>, <a href="http://www.jetbrains.com/webstorm/" target="_blank">WebStorm</a>, <a href="http://notepad-plus-plus.org/" target="_blank">Notepad++</a>, <a href="http://www.jedit.org/" target="_blank">jEdit</a>, and many more.  Obviously I&#8217;d suggest Aptana as that&#8217;s the new IDE of choice for Appcelerator.</p>
+
+<p>OK, enough back story, here&#8217;s the things to consider when using Titanium Developer and some issues you may run into.  For reference, I was using Windows XP for Android development when most of this was uncovered.  I believe Appcelerator has a more natural focus on iOS workflow, so other Windows/Android developers will benefit most from this.   <strong>HUGE</strong> thanks goes out to Tony Guntharp and Chad Auld (<a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a> respectively).  Without their help I probably would have quit Appcelerator before I got started.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Guide &amp; Troubleshooting</span></h1>
+
+
+<ul>
+    <li>First thing, be sure to follow the <a href="http://guides.appcelerator.com/en/getting_started.html" target="_blank">&#8220;Getting Started&#8221;</a> guide completely.  Most issues that arise with Titanium Developer are a direct result of not doing one of the things specifically mentioned in this guide.</li>
+    <li>Make sure you installed the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java JDK</a> (not just JRE) and that you add the JDK&#8217;s bin directory to your PATH environment variable.  If you don&#8217;t you are liable to run into some weird behavior in Titanium Developer including:
+<ul>
+    <li>[ERROR] JDK version &#8216;javac&#8217; is not recognized as an internal or external command</li>
+    <li>Your <strong>Run Emulator</strong> and <strong>Run on Device</strong> tabs may just appear as blank, grayed out panels</li>
+    <li>Other errors relating to compiling your application</li>
+</ul>
+</li>
+    <li>Here&#8217;s some things you <strong>MUST</strong> have if you want the <a href="https://github.com/appcelerator/KitchenSink" target="_blank">Kitchen Sink</a> app to run on Android
+<ul>
+    <li><strong>Latest Titanium Mobile SDK</strong> (1.5.1 at the time of this post): you can download and install it through the status updates in the upper right corner of Titanium Developer
+</li>
+    <li><strong>Kitchen Sink source code</strong>: Pull the source from Github for Kitchen Sink, don&#8217;t use the Downloads section.  The Kitchen Sink installed but would force close immediately after the splash screen finished on my Droid X when using the 1.5.0-update2 download.  You can use your favorite git client (like <a href="http://code.google.com/p/tortoisegit/" target="_blank">TortoiseGIT</a> for me) or just download the source as a <a href="https://github.com/appcelerator/KitchenSink/zipball/master" target="_blank">ZIP</a> or <a href="https://github.com/appcelerator/KitchenSink/tarball/master" target="_blank">TAR.GZ</a>.</li>
+    <li><strong>Google APIs by Google Inc., Android API</strong>: You can download and install this using the Android SDK and AVD Manager that comes with your Android SDK installation.  It is available through <strong>Available Packages -> Third Party Add-ons -> Google Inc. add-ons
+
+</strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong></li>
+</ul>
+</li>
+    <li>Android 1.5 is no longer supported and 1.6 is going to be end-of-lifed for Appcelerator soon.  They also have no yet dug into Android Honeycomb.</li>
+    <li>Titanium Developer projects can have problems deploying caused by artifacts of old builds, old Titanium SDK versions, or iOS/Android SDK changes.  Here&#8217;s a small list of brute force troubleshooting to try and get past these issues:
+<ul>
+    <li><strong>Uninstall apps before reinstalling</strong>: This isn&#8217;t often necessary, but it is a good first measure to take when getting deployment or execution issues with an Appcelerator app.  Think of it like your sys admin telling you to reboot before he digs into the real troubleshooting.</li>
+    <li><strong>Restart Titanium Developer</strong>: see above</li>
+    <li><strong>Try deleting and re-importing your project</strong>: This will ensure that all of your profile and project specific settings are being properly applied to your project.</li>
+    <li><strong>Create a new project and copy your existing project&#8217;s content into it</strong>: Yeah, it ain&#8217;t pretty, but if the above doesn&#8217;t work this might help.  A fresh project will sometimes fix any corrupted project settings.</li>
+    <li><strong>Delete the {PROJECT_PATH}/build/android and {PROJECT_PATH}/build/iphone folder</strong>: I&#8217;ve heard this advice but had no luck with it myself.  In fact I ran into even more errors when trying to emulate or run my project on a device.  Some, though, claim it will cause a full rebuild of your project in Titanium Developer and that it can often fix any build or deployment issues.  <span style="color: #ff0000;">Try at your own risk</span>.  I would make a backup of the directories you intend to delete.</li>
+</ul>
+</li>
+</ul>
+
+
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+
+
+<p>While it may a bit of a bumpy road getting started, I have a feeling the investment in time will be worth it in the end.  If I was a patient person I would just wait until the new IDE beta came out and start working with he new, sanctioned workflow.  But I&#8217;m not a patient person.  Cross platform mobile development, with access to native components and near native performance, is just too cool to wait for.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/02/09/i-m-a-titanium-titan-/">I&#8217;m a Titanium Titan!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-09T10:47:00-05:00" pubdate data-updated="true">Feb 9<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As of last night I have been accepted into the <a href="http://developer.appcelerator.com/blog/2011/01/titanium-titan-program.html" target="_blank">Titanium Titans program</a>.  To quote the description of the program itself:</p>
+
+<blockquote style="background-color: #dddddd;">Titanium Titans are experienced contributors to the Titanium Project who are responsible for representing, promoting, and expanding the Titanium Project and its ideals to the larger mobile community and the public at large.</blockquote>
+
+
+<p>I have to believe that my admission into the group was due in large part to <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> coming out on top in my popular mobile framework comparison a few weeks ago.  While that might be my only publicly visible lauding of Titanium Appcelerator, I assure you there is more behind the scenes. I am currently working on an internal app for my employer that will be securely delivering business critical data to various types of mobile devices via the Appcelerator framework.</p>
+
+<p>I feel like big things are coming with Appcelerator.  With the recent <a href="http://www.aptana.com/" target="_blank">acquisition of Aptana</a> and the launching of the Titans, its plain to see that they are making aggressive, yet calculated moves to be the #1 cross-platform mobile framework on the market.  I am just glad that I will get to be a key part of it.</p>
+
+<p>So I know a lot of my blog readers out there aren&#8217;t big HTML/CSS/JS fans, which is the core of Appcelerator development.  In fact, I know a lot of you hate it.  <a href="http://www.seantheflexguy.com/" target="_blank">Seantheflexguy</a>, I&#8217;m looking in your direction.  But I&#8217;m sure that many of you are curious.  I mean, come on, native components and near native performance without having to learn a native SDK&#8230; how can you turn a blind eye to that?  Dig in, give it a shot, and let me know what you think.  <strong>I&#8217;m sure the Titanium staffers would love to hear your perspective on their framework.  And I&#8217;ll make sure they hear it!</strong> ;)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/02/08/the-good--the-bad--and-the-ugly-of-flex--hero-/">The Good, The Bad, and The Ugly of Flex &#8220;Hero&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-08T10:50:00-05:00" pubdate data-updated="true">Feb 8<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1><span style="font-weight: bold; font-size: 16px;">Disclaimer</span></h1>
+
+
+<p>This article is from the perspective of someone whose AS3 and Flex experience is measured in months.  This is meant to show those who aren&#8217;t long time Flash developers what they can expect with <a href="http://labs.adobe.com/technologies/flexsdk_hero/" target="_blank">Flex &#8220;Hero&#8221;</a>, <a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Flash Builder &#8220;Burrito&#8221;</a>, and <a href="http://www.adobe.com/products/air/" target="_blank">Air for Android</a>.  But I didn&#8217;t go in alone, the Adobe community is full of smart and helpful people, just check my <a href="http://twitter.com/#!/tonylukasavage/following" target="_blank">Twitter follower list</a> to see some of the names that helped.  Particular thanks to <a href="http://twitter.com/#!/killerspaz" target="_blank">@killerspaz</a>, <a href="http://twitter.com/#!/jesterxl" target="_blank">@jesterxl</a>, and <a href="http://twitter.com/#!/jonbcampos" target="_blank">@jonbcampos</a>.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+<p>Recently I wrapped up my first Flex &#8220;Hero&#8221; Air for Android app, <a href="https://market.android.com/details?id=air.Repper" target="_blank">Repper</a>.  You can read my earlier blog post about it to download, get source code, or just learn more about it.  I learned a lot about mobile development and deployment, but I want to talk specifically about Flex &#8220;Hero&#8221; and Flash Builder &#8220;Burrito&#8221;.  Here&#8217;s this developer&#8217;s experience and perspective with using Adobe&#8217;s workflow for mobile development.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">The Good</span></h1>
+
+
+<ul>
+    <li> <strong>The Flash Builder &#8220;Burrito&#8221; workflow</strong> for building Android apps is fantastic.  It was a breeze to setup a basic project and be testing it live on my Droid X.  Some of the specific things I really liked were:
+<ul>
+    <li>Pre-built templates for projects, components, skins, item renderers, and more speed up the development process</li>
+    <li>Built-in emulation for various Android devices</li>
+    <li>Testing on a device is very easy to set up</li>
+    <li>Managing Flex states through the Design View can be helpful in visualing layouts</li>
+    <li>Offers the familiarity and plugins of Eclipse</li>
+</ul>
+</li>
+    <li><strong>ViewNavigator and View</strong> make navigating through applications using multiple views simple.  Using simple functions like pushView() and popView() you can move through your application and pass data with ease.  Check out these posts for a more in depth look at this powerful and intuitive interface:
+<ul>
+    <li><strong>Mihia Corlan</strong> - <a href="http://corlan.org/2011/01/12/understanding-flex-mobile-views-and-viewnavigator/" target="_blank">Understanding Flex Mobile View and ViewNavigator</a></li>
+    <li><strong>Brian Rinaldi</strong> - <a href="http://www.remotesynthesis.com/post.cfm/passing-data-across-views-in-flex-mobile" target="_blank">Passing Data Across Views in Flex Mobile</a></li>
+</ul>
+</li>
+    <li><strong>PersistenceManager</strong> alleviates the hassle of trying to manage data between view states by using Local Shared Objects. Even when your mobile OS decides to close your app for memory or power shortages, the PersistenceManager will preserve your designated data.  Check Jonathan Campos&#8217;s post on it for more details: <a href="http://www.unitedmindset.com/jonbcampos/2010/11/01/flex-4-5-persistencemanager/" target="_blank">Flex 4.5 PersistenceManager</a></li>
+    <li><strong>Flex 4 skinning</strong> is pretty damn nice, especially for someone like me who is about 95% developer, 5% designer.  Using MXML and AS3 you can create design and graphics for your components, keeping them separate from your UI&#8217;s layout and logic.  This means you can effectively create vector skins using the AS3 drawing classes.  No more importing images just to create gradients and rounded corners.  Not as big a win for designers, but the pure developers out there will love this. Check out <strong>Ryan Frishberg&#8217;s</strong> article for more details: <a href="http://www.adobe.com/devnet/flex/articles/flex4_skinning.html" target="_blank">Introducing skinning in Flex 4</a>.  The screenshot showing Repper below highlights entirely programmatic design.</li>
+
+<li><strong>Multiscreen development</strong> potential is very appealing and Adobe is working to grow it further.  Christian Cantrell&#8217;s demo video below shows what Adobe Air is capable of in terms of &#8220;code once, deploy everywhere.&#8221;  Android, iPhone, iPad, Blackberry Playbook, Desktop, and web are all valid targets for your single code base.  While this is very exciting, it is also very young.  Take this all with a grain of mobile salt as this topic shows up again in the &#8220;Ugly&#8221; section.</li>
+<iframe title="YouTube video player" width="640" height="390" src="http://www.youtube.com/embed/22vicDlzmkI" frameborder="0" allowfullscreen></iframe>
+<h1><span style="font-weight: bold; font-size: 16px;">The Bad</span></h1>
+<ul>
+<li><strong>Lack of native component support</strong> can be a deal breaker for some people building mobile apps.  Its not for me nor for lots of people who are comfortable building their own components, but many want the native experience.  But all hope is not lost with the following AS3 libraries available that emulate native components:</li>
+<table><tr><td style="vertical-align:middle; text-align:center;">
+<br><strong>Nick Jonas</strong> - <a href="http://code.google.com/p/as3iphonecomponents/" target="_blank">as3iphonecomponents</a></td>
+<td style="vertical-align:middle; text-align:center;"><br><strong>Kevin Hoyt</strong> - <a href="http://xperiments.es/blog/en/as3-android-flash-components/" target="_blank">android-components</a></td>
+</tr></table>
+<li><strong>Flex &#8220;Hero&#8221; is missing some core components</strong> that mobile developers will be expecting to be present. I for one was not expecting to have to build a modal select list from scratch.  Unfortunately, though, Flex &#8220;Hero&#8221; does not contain the mobile equivalent of a combobox.  You can create it with their scrollable List component paired with a semi-transparent background, but it would be nice to have this out of the box.  Other notable absentees are sliders and tabbed layouts.</li>
+<li><strong>Not all native APIs are supported.</strong>  While this should be expected in a cross platform framework, it can sometimes lead to unexpected roadblocks.  In my case, I have only numeric input in my app.  I wanted to default the soft keyboard to the numeric keyset.  Unfortunately this is not possible in Air for Android.  It takes some AS3 parlor tricks just to keep the soft keyboard closed when you don&#8217;t want it open on a TextInput focus.  There&#8217;s even more to worry about with Apple development, but I&#8217;ll mention that in the &#8220;Ugly&#8221; section.</li>
+<li><strong>Simple things can be complicated.</strong> Take for example closing an app when a user leaves with the back button.  Seems easy enough, but it takes 3 event handlers to do it properly and even this method is <a href="http://blog.everythingflex.com/2010/10/13/exiting-an-air-on-android-application/" target="_blank">not without its problems</a>.  Check out the code I used below, thanks to <a href="http://www.flashrealtime.com/tip-close-your-android-air-app-on-back-button/" target="_blank">Tom Krcha</a>:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="kd">protected</span> <span class="kd">function </span><span class="nf">mobileapplication1_creationCompleteHandler</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">FlexEvent</span><span class="o">):</span><span class="kt">void</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="o">(</span><span class="n">Capabilities</span><span class="o">.</span><span class="na">cpuArchitecture</span><span class="o">==</span><span class="s2">&quot;ARM&quot;</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">NativeApplication</span><span class="o">.</span><span class="na">nativeApplication</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">ACTIVATE</span><span class="o">,</span> <span class="n">handleActivate</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">NativeApplication</span><span class="o">.</span><span class="na">nativeApplication</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">DEACTIVATE</span><span class="o">,</span> <span class="n">handleDeactivate</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">NativeApplication</span><span class="o">.</span><span class="na">nativeApplication</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">KeyboardEvent</span><span class="o">.</span><span class="na">KEY_DOWN</span><span class="o">,</span> <span class="n">handleKeys</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="kd">function </span><span class="nf">handleActivate</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">Event</span><span class="o">):</span><span class="kt">void</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="n">NativeApplication</span><span class="o">.</span><span class="na">nativeApplication</span><span class="o">.</span><span class="na">systemIdleMode</span> <span class="o">=</span> <span class="n">SystemIdleMode</span><span class="o">.</span><span class="na">KEEP_AWAKE</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="kd">function </span><span class="nf">handleDeactivate</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">Event</span><span class="o">):</span><span class="kt">void</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="n">NativeApplication</span><span class="o">.</span><span class="na">nativeApplication</span><span class="o">.</span><span class="na">exit</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="kd">function </span><span class="nf">handleKeys</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">KeyboardEvent</span><span class="o">):</span><span class="kt">void</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">keyCode</span> <span class="o">==</span> <span class="n">Keyboard</span><span class="o">.</span><span class="na">BACK</span><span class="o">)</span>
+</span><span class='line'>      <span class="n">NativeApplication</span><span class="o">.</span><span class="na">nativeApplication</span><span class="o">.</span><span class="na">exit</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+<li><strong>Debugging on a device can be tricky.</strong>  So tricky in fact that I never got it working.  In all fairness, I didn&#8217;t try to diagnose it any further after the getting the initial error because the app I was building was so simple.  But the fact remains that it didn&#8217;t work out of the box for me.  Maybe your experience will be different and I welcome anyone to call me an idiot and tell me what I did wrong.</li>
+</ul>
+
+<h1><span style="font-weight: bold; font-size: 16px;">The Ugly</span></h1>
+<ul>
+<li><strong>Universal mobile device support is minimal at this point.</strong> Android is covered pretty well up through the Air 2.5 SDK, but iPhone/iPad only support Air up to version 2.0.2 via the <a href="http://labs.adobe.com/technologies/packagerforiphone/" target="_blank">Adobe Packager for iPhone</a>.  This leaves out key APIs like camera support and video/sound capture, not to mention the bevy of <a href="http://labs.adobe.com/wiki/index.php/Packager_for_iPhone:Release_Notes" target="_blank">bugs and gotchas</a> that you have to watch out for.  The workflow for deploying apps to iOS devices with the packager is also no picnic.  While the Blackberry Playbook is proudly supporting the Adobe developer community, there&#8217;s been no official announcement, though there has been mention, of Flash or Air being on Blackberry smart phones.
+
+Long and short, you aren&#8217;t going to be hitting the widest part of the market when compared to other mobile frameworks like Appcelerator or PhoneGap.  And even if you do, I&#8217;ve experienced first hand how users can be put off by having to install Adobe Air on their phone for the sake of an app.  <span style="color:#ff0000;">Until Air for mobile devices support becomes more common place, it may be viewed as an unnecessary evil by many mobile users</span>.
+</li>
+<li><strong>Performance can be a problem for even the simplest apps.</strong>  This for me is the most critical area that needs to be improved before people will take Air seriously as a mobile framework.  Simple things like view transitions, scrolling, button interactions, etc&#8230; have a noticeable sluggishness that users won&#8217;t stand for.  Even the cream of the crop among Flex Hero apps, like <a href="http://www.unitedmindset.com/jonbcampos/" target="_blank">Jonathan Campos&#8217;s</a> nearly 100K user base NetFlix <a href="https://market.android.com/details?id=air.com.unitedmindset.QueueManager" target="_blank">Queue Manager</a>, is not immune to these problems.  Though a majority of the comments are very complimentary, the few detractors have a very common message: we don&#8217;t want to install Adobe Air and we find it slower than native apps.  Are these types of comments the whole story?  Absolutely not.  Does that mean they can be ignored?  Absolutely not.  The vocal complainers, though not always very helpful, can sometimes spur the necessary advances that can take a product to the next level.
+</li>
+</ul>
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+Hey Adobe, fix the ugly, stay on top of the bad, and keep highlighting the good.
+
+While I am far from swearing off AS3 and Flex development for mobile devices, I think Adobe has a long way to go before it will be able to bring in a significant amount of non-Adobe developers.  Their mobile platform and workflow seems as though it caters entirely to existing Flash and Flex developers.  There just doesn&#8217;t seem to be an effort to bring in new blood from the outside.  And if that remains the same, Appcelerator, PhoneGap, Sensa Touch, jQuery Mobile, or whatever other platform that comes next and engages larger cores of developers will take away valuable relevance in this land grab for mobile supremacy.
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/30/rockbox--make-your-old-mp3-player-cooler-than-it-ever-was/">RockBox: Make your old MP3 player cooler than it ever was</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-30T13:16:00-05:00" pubdate data-updated="true">Jan 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.rockbox.org/" target="_blank">Rockbox</a> is an open source firmware for mp3 players, written from scratch.  What does that mean?  It means you can take your old mp3 player (like my 1st gen iPod mini for example), install Rockbox, and make it cooler than it ever was in the first place.  How cool?  <span style="color: #ff0000;">Cool like playing &#8220;Doom&#8221; on my 1st generation iPod Mini</span>, that&#8217;s how cool.</p>
+
+<p>Aside from the slightly impractical Doom gaming there&#8217;s some pretty neat stuff you can also do with Rockbox installed.  Here&#8217;s just a peek at some of the stuff you can make your old device do with Rockbox:</p>
+
+<ul>
+    <li>Re-skin your player&#8217;s interface with downloadable themes</li>
+    <li>Run applications like alarms clocks, text editors, or battery benchmarking</li>
+    <li>Play games like Doom, sudoku, and solitaire</li>
+    <li>Edit playlists directly from your player</li>
+    <li>Access and view files on your player</li>
+</ul>
+
+
+<h2 style="text-align: center;">Rockbox main menu</h2>
+
+
+
+
+<h2 style="text-align: center;">Rockbox plugins menu</h2>
+
+
+<p>So what do you have to do to achieve this level of coolness? You pretty much just have to connect your mp3 player to your computer and download the <a href="http://www.rockbox.org/download/" target="_blank">Rockbox installer</a> and follow the instructions.  Once downloaded, just extract the Rockbox Utility program and run it.  It should then guide you through the steps necessary to get up and running.</p>
+
+<p>Autodetect is your friend when configuring.  Chances are if autodetect doesn&#8217;t work for you, you either don&#8217;t have a compatible device (<a href="http://www.rockbox.org/" target="_blank">supported devices</a>) or your computer doesn&#8217;t recognize it.  If you do encounter any issues, Rockbox has a <a href="http://forums.rockbox.org/" target="_blank">user&#8217;s forum</a> where you can search for troubleshooting info or ask questions of your own.  Aside from that, I have a few tips here in case you run into any of the same problems I did.</p>
+
+<h2>Troubleshooting</h2>
+
+
+<ul>
+    <li>Make sure that your computer recognizes your device as connected before attempting to install Rockbox.  Try unplugging and replugging in your device to get it to show up.</li>
+    <li>If you get proxy or network errors it means Rockbox can&#8217;t download the necessary files to complete you installation.  Stop goofing around at work and try it when you get home. ;)</li>
+    <li>If you get a popup that says &#8220;Your configuration is invalid&#8221; chances are that your device mapped to a new drive or that you don&#8217;t have it plugged in.</li>
+    <li>During the Rockbox installation onto your player, you might get an error that says &#8220;Failed to add bootloader&#8221;.  Make sure you have selected the right device and version for the Rockbox install.</li>
+    <li>If all else fails, do a factory reset of your player and try the install again.</li>
+</ul>
+
+
+<p>Have fun Rockboxing! Be sure to <a href="https://www.paypal.com/jp/cgi-bin/webscr?cmd=_flow&amp;SESSION=39DsMJt3WhaeTg_TRRvgSGu1lxahsRuSIT0OkW0CuHNAWvxW3Scn3rznwv0&amp;dispatch=5885d80a13c0db1f8e263663d3faee8df1d2b5c147af55b8d54f2944c97d2a2a" target="_blank">donate to the project</a> if you find it valuable.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/27/hello--blackberry-playbook-/">Hello, Blackberry Playbook!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-27T09:04:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Time to say &#8220;Hello, World!&#8221; to the newest kid on the tablet device block, the <a href="http://us.blackberry.com/playbook-tablet/?CPID=KNC-kw328210_p6&amp;HBX_PK=rim|43b44ecc-8ee6-6429-a24f-000072e4f275" target="_blank">BlackBerry Playbook</a>.  Why bother developing for a tablet that isn&#8217;t even publicly available yet?  Because Research in Motion (RIM) is offering <a href="http://us.blackberry.com/developers/tablet/playbook_offer.jsp" target="_blank">free Playbooks to developers</a> who create &#8220;useful&#8221; applications for it.  Thats right, if you join the RIM vendor list (free registration for a limited time only) and submit a quality app, you will receive a free Playbook.  Great incentive to bring developers to your platform.</p>
+
+<p>So how do you get started? Go to the P<a href="http://us.blackberry.com/developers/tablet/" target="_blank">laybook developers site</a> and follow the instructions there.  Be warned, though, that its not the simplest setup.  Right now RIM has workflows for developing Playbook apps in Blackberry WebWorks and Adobe Air (via Flash Builder <a href="http://www.adobe.com/support/flex/downloads_updaters.html#flex4" target="_blank">4.0.1</a> or &#8221;<a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Burrito</a>&#8221;).  For my first go around I chose the <a href="http://us.blackberry.com/developers/tablet/adobe.jsp" target="_blank">Flash Builder 4.0.1 workflow</a>.</p>
+
+<p>Wanna take a quick peek at the code involved with the Hello World (seen above) for this workflow?</p>
+
+<h3>AIRHelloWorld.as</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="kd">package</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.display.Sprite</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.events.MouseEvent</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.text.TextField</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.text.TextFormat</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">qnx.ui.buttons.Button</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">qnx.ui.buttons.LabelButton</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// The following metadata specifies the size and properties of the canvas that</span>
+</span><span class='line'>  <span class="c1">// this application should occupy on the BlackBerry PlayBook screen.</span>
+</span><span class='line'>  <span class="o">[</span><span class="n">SWF</span><span class="o">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;1024&quot;</span><span class="o">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;600&quot;</span><span class="o">,</span> <span class="n">backgroundColor</span><span class="o">=</span><span class="s2">&quot;#cccccc&quot;</span><span class="o">,</span> <span class="n">frameRate</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="o">)]</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">class</span> <span class="n">AIRHelloWorld</span> <span class="kd">extends</span> <span class="n">Sprite</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kd">function </span><span class="nf">AIRHelloWorld</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="n">helloButton</span><span class="p">:</span><span class="kt">LabelButton</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">LabelButton</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">helloButton</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">helloButton</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span> <span class="o">-</span> <span class="n">helloButton</span><span class="o">.</span><span class="na">width</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">helloButton</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="o">(</span><span class="n">stage</span><span class="o">.</span><span class="na">stageHeight</span> <span class="o">-</span> <span class="n">helloButton</span><span class="o">.</span><span class="na">height</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">var</span> <span class="n">myFormat</span><span class="p">:</span><span class="kt">TextFormat</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">TextFormat</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">myFormat</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="mi">0</span><span class="n">xAA0000</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">myFormat</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="mi">24</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">myFormat</span><span class="o">.</span><span class="na">italic</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">myFormat</span><span class="o">.</span><span class="na">align</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">var</span> <span class="n">text</span><span class="p">:</span><span class="kt">TextField</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">TextField</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">text</span><span class="o">.</span><span class="na">text</span> <span class="o">=</span> <span class="s2">&quot;Close&quot;</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">text</span><span class="o">.</span><span class="na">setTextFormat</span><span class="o">(</span><span class="n">myFormat</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">var</span> <span class="n">closeButton</span><span class="p">:</span><span class="kt">Button</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Button</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">closeButton</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">closeButton</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">MouseEvent</span><span class="o">.</span><span class="na">CLICK</span><span class="o">,</span> <span class="n">closeWindow</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">closeButton</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span> <span class="o">-</span> <span class="n">closeButton</span><span class="o">.</span><span class="na">width</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">closeButton</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">helloButton</span><span class="o">.</span><span class="na">y</span> <span class="o">-</span> <span class="n">helloButton</span><span class="o">.</span><span class="na">height</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">addChild</span><span class="o">(</span><span class="n">helloButton</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">addChild</span><span class="o">(</span><span class="n">closeButton</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">stage</span><span class="o">.</span><span class="na">nativeWindow</span><span class="o">.</span><span class="na">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kd">private</span> <span class="kd">function </span><span class="nf">closeWindow</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">MouseEvent</span><span class="o">):</span><span class="kt">void</span><span class="o">{</span>
+</span><span class='line'>          <span class="n">stage</span><span class="o">.</span><span class="na">nativeWindow</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All of you AS3 and Flash developers should be pretty pleased.  You get the comforts of your language of choice with the ability to access native QNX components; the best of both worlds.</p>
+
+<h2>Setup Pitfalls</h2>
+
+<p>I can&#8217;t stress enough that you need to follow the instructions exactly or you won&#8217;t get it working.  I speak from experience.  Perhaps you can save yourself a few minutes (or hours) of searching for the resolution to the cryptic errors you may encounter by looking at the problems I ran into.  But really, all of these could be avoided by following the instructions exactly as written.</p>
+
+<h3>The Flash Builder 4.0.1 update must be installed</h3>
+
+<p>They only mention 4.0.1 about a dozen times but I figured &#8220;how important can a point release be?&#8221;.  Turns out, very.  You&#8217;ll see this if you ignore it too:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="n">An</span> <span class="kd">internal</span> <span class="n">error</span> <span class="n">occurred</span> <span class="n">during</span><span class="o">:</span> <span class="s2">&quot;Launching AIRHelloWorld&quot;</span><span class="o">.</span>
+</span><span class='line'><span class="n">com</span><span class="o">.</span><span class="na">adobe</span><span class="o">.</span><span class="na">flexide</span><span class="o">.</span><span class="na">launching</span><span class="o">.</span><span class="na">air</span><span class="o">.</span><span class="na">ApolloLaunchConfiguration</span><span class="o">.</span><span class="na">getAIRProfile</span><span class="o">()</span><span class="n">Ljava</span><span class="sr">/lang/</span><span class="n">String</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Just download and install the <a href="http://www.adobe.com/support/flex/downloads_updaters.html#flex4" target="_blank">Flash Builder 4.0.1 update</a> and all will be resolved.</p>
+
+<h2 style="text-decoration:underline;">Adobe Air 2.5 must be installed</h2>
+
+
+<p>Again, they are clear as day about this, but you need to install the <a href="http://www.adobe.com/products/air/sdk/" target="_blank">Adobe Air 2.5 SDK</a>.  The version that comes with Flash Builder 4 is only 2.0.2, or might be 1.5, I can&#8217;t remember off hand.  You can find the version of Air your BlackBerry Tablet SDK is installed against by looking at the app config XML file (AIRHelloWorld-app.xml) in your project.  The first node, <strong>application</strong>, indicates the Air version used:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;application</span> <span class="na">xmlns=</span><span class="s">&quot;http://ns.adobe.com/air/application/2.5&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In any case, if its not the right version you have to install Air 2.5 or you&#8217;ll see an error similar to this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>Error: Cannot find node: versionNumber
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is because the versionNumber node in your app configuration isn&#8217;t supported before Air 2.5.  In order to fix this error, you need to reinstall the BlackBerry Tablet SDK and make sure to point it at the directory of <a href="http://www.adobe.com/products/air/sdk/" target="_blank">Adobe Air 2.5</a> during the install.  If someone knows a better way to do it without having to reinstall the Blackberry Tablet SDK I&#8217;m all ears.</p>
+
+<h3>Put your Playbook Simulator in Development Mode</h3>
+
+<p>Even if you remember to put your Playbook Simulator in Development Mode as per the instructions, you&#8217;ll probably forget (like me) that you need to do that whenever you restart the simulator.  I&#8217;m not aware of a way to set Development Mode ON by default.  Here&#8217;s the error you&#8217;ll see:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>Using icon: C:\development\AIRHelloWorld\bin-debug\blackberry-tablet-icon.png
+</span><span class='line'>Package created: C:\development\AIRHelloWorld/AIRHelloWorld.bar
+</span><span class='line'>Sending Install and Launch request...
+</span><span class='line'>Error: Device is not in the development mode. Switch to Development from Security settings on the device.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All you have to do is follow the instructions <a href="http://docs.blackberry.com/en/developers/deliverables/21877/Enable_development_mode_1359171_11.jsp" target="_blank">here</a>, which will tell you to do the following:</p>
+
+<ol>
+<li>Activate the Playbook Simulator</li>
+<li>Click the gear icon at the top right</li>
+<li>Click &#8220;Security&#8221;</li>
+<li>Click &#8220;General&#8221; under &#8220;Security Settings&#8221;</li>
+<li>Toggle &#8220;Development Mode&#8221; to <strong>ON</strong> under &#8220;Development Settings&#8221;</li>
+</ol>
+
+
+<br>
+
+
+<h2>Summary</h2>
+
+<p>That&#8217;s all I got so far. It looks like a terrific platform and is really engaging a lot of the development community by integrating native access through external SDKs.  Soon as my plate clears up a bit I&#8217;m gonna hit this full steam and add myself to the list of the <del datetime="2011-01-27T13:49:44+00:00">lucky</del> talented developers (like <a href="http://www.jasonfincanon.com/" target="_blank">Jason Fincanon</a>) getting themselves a free Playbook.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/18/review--appcelerator-vs--phonegap-vs--adobe-air/">Review: Appcelerator vs. PhoneGap vs. Adobe Air</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T08:43:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Overview</h2>
+
+<p><span style="font-size:18px;"><strong>UPDATE:</strong> This was originally posted January 18th, 2011. All 3 platforms have changed immensely since. </span></p>
+
+<p>I have been charged with deciding on a mobile framework for deploying a single code base to multiple devices (iPhone, iPad, Android, Blackberry).  Naturally, I was gravitating towards Adobe Air since most of my personal work these days has been in AS3.  I wanted to see what else was out there, though, and was pretty <span style="color: #ff0000;">surprised that Adobe Air wasn&#8217;t my choice in the end</span>.</p>
+
+<p>In addition to one other commercial platform I did not fully assess (too expensive), I looked at <a href="http://www.adobe.com/devnet/devices.html" target="_blank">Adobe Air for mobile</a>, <a href="http://www.appcelerator.com/" target="_blank">Titanium Appcelerator</a> and <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a>.  All are free to use frameworks for centralized mobile development.  The gist is to be able to create apps for multiple devices off the same code base.  With iPad &amp; Blackberry support, speed to market, and the ability to use Contacts &amp; Multitouch as my critical points, I began digging.</p>
+
+<h2>General Functionality</h2>
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr class="topHeader odd">
+<td width="20%"></td>
+<td width="15%">Titanium Appcelerator</td>
+<td width="15%">PhoneGap</td>
+<td width="15%">Adobe Air for Mobile</td>
+<td width="35%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">Android Support</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Adobe Air requires Android 2.2+</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">iPhone/iPad</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Adobe Air creates iOS apps with the <a href="http://labs.adobe.com/technologies/packagerforiphone/">Packager for iPhone</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Blackberry Phone</td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes">Appcelerator support is currently beta.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Blackberry Playbook</td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Appcelerator support is currently beta.</td>
+</tr>
+<tr>
+<td class="leftHeader">Symbian</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Palm</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Windows Phone 7</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"><a href="https://github.com/mrlacey/phonegap-wp7" target="_blank">phonegap-wp7</a> is a 3rd party attempt for PhoneGap.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Native UI support</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">PhoneGap and Adobe Air both require 3rd party libraries.  PhoneGap has <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">UIControls for PhoneGap</a>.  Adobe Air has <a href="http://code.google.com/p/as3iphonecomponents/" target="_blank">as3iPhoneComponents</a> and <a href="http://xperiments.es/blog/en/as3-android-flash-components/" target="_blank">android-components</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Native code support</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes">Appcelerator allows <a href="http://developer.appcelerator.com/doc/mobile/guides" target="_blank">module development</a>. PhoneGap uses <a href="https://github.com/phonegap/phonegap-plugins" target="_blank">custom Javascript handlers</a>.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Desktop deployment</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">PhoneGap has 3rd party libraries on Github: <a href="https://github.com/phonegap/phonegap-mac" target="_blank">phonegap-mac</a> &amp; <a href="https://github.com/davejohnson/phonegap-windows" target="_blank">phonegap-windows</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Deploy without Mac?</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Adobe Air uses the <a href="http://labs.adobe.com/technologies/packagerforiphone" target="_blank">Packager for iPhone/iPad</a></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">IDE &amp; Tools</td>
+<td><a href="http://developer.appcelerator.com/tools" target="_blank">Titanium Developer</a></td>
+<td><a href="http://www.phonegap.com/tools" target="_blank">PhoneGap Tools</a></td>
+<td><a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Flash Builder</a>, <a href="http://www.fdt.powerflasher.com/developer-tools/fdt/home/" target="_blank">FDT</a>, <a href="http://www.flashdevelop.org/wikidocs/index.php?title=Main_Page" target="_blank">FlashDevelop</a></td>
+<td class="notes">Appcelerator has no current IDE, but recently acquired <a href="http://www.aptana.com/" target="_blank">Aptana</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Interpreting</td>
+<td>Javascript mapped to native code</td>
+<td>Rendered in web view control</td>
+<td>Adobe Air runtime</td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Community Resources</td>
+<td><a href="http://developer.appcelerator.com/" target="_blank">Developer Center</a></td>
+<td><a href="http://docs.phonegap.com/" target="_blank">Docs</a>, <a href="http://wiki.phonegap.com/w/page/16494772/FrontPage" target="_blank">Wiki</a>, <a href="http://groups.google.com/group/phonegap/browse_thread/thread/314586c71c847073/65338b5ded637980?pli=1" target="_blank">IRC</a>, and <a href="http://groups.google.com/group/phonegap" target="_blank">Mailing List</a></td>
+<td><a href="http://www.adobe.com/devnet/devices.html" target="_blank">Mobile and Devices Development Center</a></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Languages used</td>
+<td>JS</td>
+<td>HTML, JS, CSS</td>
+<td>Actionscript3</td>
+<td class="notes">Appcelerator also uses PHP, Ruby, and Python for desktop app development</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Support</td>
+<td><a href="http://www.appcelerator.com/products/plans-pricing/" target="_blank">$2,189 per year per developer</a></td>
+<td><a href="http://www.nitobi.com/services/phonegap/" target="_blank">ranges from $1,000 - $25,000 per year</a></td>
+<td><a href="http://www.adobe.com/support/" target="_blank">Adobe Support</a></td>
+<td class="notes">Adobe offers no professional mobile support for apps, just their products.</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Device APIs</h2>
+
+<p>Beyond the overall support structure of the frameworks I wanted to get into the specific device API functionality.  This was a little harder to track down, but the list here should be accurate as of the writing of this post.  As I said earlier, contacts and multitouch were the only criticals, but I wanted to know what else these frameworks offered.  I&#8217;m assuming anyone reading this far would find this information valuable as well.</p>
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr class="topHeader odd">
+<td class="leftHeader" width="20%"></td>
+<td width="15%">Titanium Appcelerator</td>
+<td width="15%">PhoneGap</td>
+<td width="15%">Adobe Air for Mobile</td>
+<td class="notes" width="35%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">Accelerometer</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Geolocation</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Vibration</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Camera</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">Not yet supported Adobe Air for iPhone/iPad</td>
+</tr>
+<tr>
+<td class="leftHeader">Contacts</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Multitouch</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">SQLite</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">File System IO</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">SMS</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">All support SMS via the &#8220;sms:&#8221; URL prefix.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Phone API</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Copy/Paste</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Sounds</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">PhoneGap cannot record sounds. Adobe Air cannot record sound for iPhone/iPad</td>
+</tr>
+<tr>
+<td class="leftHeader">Bluetooth</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Video Capture</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">Adobe Air cannot record video for iPhone/iPad.</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Summary</h2>
+
+<p>That&#8217;s what I&#8217;ve got so far.  Let me know if and when some of these assessments change.  I&#8217;m also eager to hear other people&#8217;s thoughts.  Feel free to chime in.</p>
+
+<p>The long and short of my recommendations:</p>
+
+<ul>
+    <li>Go Adobe Air if performance isn&#8217;t critical and you have AS3 experience.  The tools and workflow for using pure AS3 or Flex Hero make turning out mobile apps very smooth.  Watch out for performance, particularly on iOS.</li>
+    <li>Go PhoneGap if you needed the widest range of support for devices.  If you need it to run everywhere, this is your framework. Beware of the less than stellar documentation and wiki, though.</li>
+    <li>Go Appcelerator everything else. The native UI and ability to access native code is a big win.  Also, the community, IDE, and documentation are top notch.  <span style="color: #ff0000;">Appcelerator was my choice in the end, but that doesn&#8217;t mean its right for you</span>.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/11/8-steps-for-being-an-asshole-effectively/">8 Steps for being an Asshole Effectively</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-11T09:58:00-05:00" pubdate data-updated="true">Jan 11<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Exhibit A</h2>
+
+<p>I needed information on PHP debugging in IntelliJ.  After nearly tearing my hair out trying to get it to work using online references, I pleaded to the twitter community for help.  It went something like this</p>
+
+<div style="padding-left:20px; border:1px solid #000000; background-color:#dddddd;">
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: Anybody know how to get #PHP debugging working in #IntelliJ?
+<strong>* crickets *</strong>
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: I have everything else working, I just can&#8217;t get #PHP debugging in #IntelliJ. Any help?
+<strong>*crickets *</strong>
+</div>
+
+
+<p>Absolutely nothing.  It was just another drop of water in a sea of questions that never get answered on Twitter.  But I&#8217;ve found a way to get around this.  <span style="color:#ff0000;">Be an asshole</span>.  That&#8217;s right, vent your frustration, call out the project or software you are working on, swear it off for life.  This method becomes even more effective as your number of followers grows.  Again, I paraphrase:</p>
+
+<div style="padding-left:20px; border:1px solid #000000; background-color:#dddddd;">
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: Screw #IntelliJ, #PHP debugging won&#8217;t work right so I&#8217;m off to try Aptana and Eclipse.
+</div>
+
+
+<p>Within minutes I had half a dozen responses back, including one who spent 20 minutes helping me troubleshoot the process (thanks <a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>).  This is not the first time this has happened.  I asked basic questions about the <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> mobile development framework on Twitter to get only one generic response.  I &#8220;rephrased&#8221; in a less complimentary manner and within minutes had 2 of their project members messaging me.</p>
+
+<p>Why does it work like this?  <span style="color:#ff0000;">The power of negative press in social media is too powerful to ignore</span>.  These projects know that positive word of mouth and community support is their life blood.  Jeopardize that and watch people flock to your aid.</p>
+
+<h2>How To</h2>
+
+<p>Here&#8217;s the checklist for being an effective asshole in social media to get information you need.</p>
+
+<ol>
+<li>The bigger your audience (AKA, followers and friends), the more likely your negative comments will be worth extinguishing.</li>
+<li># and @ on Twitter go a long way.  Target the people you have a beef with and give them a chance to retort.</li>
+<li>Be specific with your negativity. &#8220;IntelliJ sucks&#8221; would have gotten me nowhere.  Direct complaints about functionality are the way to go.</li>
+<li>Don&#8217;t be stupid.  A sure fire way to get ignored is screaming &#8220;BUG&#8221; when you should RTFM.</li>
+<li>Be nice once someone does help. If they have the patience to deal with your sarcasm, they deserve your respect.</li>
+<li>Be grateful. If you do have some social media clout, be sure to praise the project after and thank the person that helped.</li>
+<li>Don&#8217;t be afraid to have more than one conversation about your frustration with a product, but don&#8217;t flood your stream with whining.</li>
+<li>Use sparingly. Don&#8217;t be the boy who cried wolf.</li>
+</ol>
+
+
+<p>And that&#8217;s pretty much all it takes.  Now remember, <span style="color:#ff0000;">the idea is to bring intelligent people into a problematic situation you are having, not to be a cantankerous prick</span>.  Play the game, but be sure to shake hands afterwards, regardless of who &#8220;wins&#8221;.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug/">PHP Debugging on IntelliJ IDEA 10 with XDebug</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-05T08:33:00-05:00" pubdate data-updated="true">Jan 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>The Overview</h2>
+
+<p>So after being told by my peers that print_r() was adequate, I embarked on a quest to get true PHP debugging working in a reputable IDE.  Recently I&#8217;ve heard nothing but good things about <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA 10</a>, so I decided that would be my test subject.  Don&#8217;t let the &#8220;J&#8221; fool you, while Java is its focus, this bad boy handles an array of languages and markups, including ActionScript, PHP, Groovy, Scala, Python/Jython, Ruby/JRuby, Clojure, Javascript, and HTML.</p>
+
+<p><span style="color:#ff0000;">If you are a serious PHP developer and have not given debugging a fair chance, or a chance at all, you are killing yourself</span>.  So let&#8217;s do this thing from the ground up.  WAMP, XDebug, IntelliJ, and magic.  Follow these steps (for Windows) to reach my recent state of elightenment and PHP debugging bliss.</p>
+
+<p>By the way, I almost gave up on IntelliJ entirely due to problems with debugging until <a href="http://www.kilometer0.com" target="_blank">Alex Petrescu</a> (<a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>) talked me down from the edge.  I&#8217;m very grateful as IntelliJ is proving to be an excellent IDE.</p>
+
+<h2>Step By Step</h2>
+
+<ol>
+<li>Download and install <a href="http://www.wampserver.com/en/" target="_blank">WAMP</a> (I installed to <strong>C:\wamp</strong>)</li>
+<li>After installing WAMP, create a file named <strong>C:\wamp\www\info.php</strong> that contains the following code:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span> <span class="nb">phpinfo</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+<li>Open the <a href="http://localhost/info.php" target="_blank">http://localhost/info.php</a> in a browser to get your PHP configuration.
+</li><li>
+Now view the source of the page in your browser.  Copy the entire contents of the source to your clipboard.
+</li>
+<li>Goto the <a href="http://www.xdebug.org/find-binary.php" target="_blank">XDebug Tailored Installation Instructions</a> and paste your PHP configuration source into the text box then click &#8220;analyse my phpinfo() output&#8221;.
+</li>
+<li>Follow the resulting instructions for adding XDebug to your PHP installation.  Once you make those changes, make sure the new section of your php.ini looks like this (as per a <strong>C:\wamp</strong> installation):
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>XDebug<span class="o">]</span>
+</span><span class='line'><span class="nv">zend_extension</span><span class="o">=</span><span class="s2">&quot;&lt;this is the path that the XDebug installation instructions gave you&gt;&quot;</span>
+</span><span class='line'>xdebug.remote_enable<span class="o">=</span><span class="nb">true</span>
+</span><span class='line'>xdebug.remote_port<span class="o">=</span>9000
+</span><span class='line'>xdebug.profiler_enable<span class="o">=</span>1
+</span><span class='line'>xdebug.profiler_output_dir<span class="o">=</span><span class="s2">&quot;c:\wamp\logs&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+<li>Download and install <a href="http://www.jetbrains.com/idea/download/index.html" target="_blank">IntelliJ IDEA 10 Ultimate Edition</a> (trial).  It may not be necessary, but I included all the available extensions.</li>
+<li>Setup a basic PHP project in IntelliJ IDEA 10
+<ol style="list-style-type: upper-alpha;">
+<li>Goto <strong>File -> New Project&#8230;</strong></li>
+<li>Select <strong>Create project from scratch</strong> and click Next</li>
+<li>Enter a name for your project and select <strong>Project Module</strong> under the Select Type heading and click <strong>Next</strong></li>
+<li>Select &#8220;do not create source directory&#8221; and click <strong>Next</strong></li>
+<li>Click <strong>Finish</strong> then <strong>OK</strong> when asked about starting a project without a JDK assigned.</li>
+</ol>
+<li>Create a PHP file to test debugging</li>
+<ol style="list-style-type: upper-alpha;">
+<li>In the project panel on the left side, right click the project name and goto <strong>New -> PHP File</strong> </li>
+<li>Enter a name for your PHP file and click <strong>OK</strong></li>
+<li>In the code panel on the right, enter the following and save the file:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nv">$a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+</ol>
+<li>Click the vertical bar between the project panel and the code panel next to the following line to create a red breakpoint:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$a = 0;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+<li>Copy the PHP file you created in step #9 to your WAMP www directory (<strong>C:\wamp\www</strong>)</li>
+<li>Right click on the PHP file name in the project panel, then goto <strong>Debug -> filename.php on server</strong></li>
+<li>In the resulting window, click the dotted button next to the <strong>Server</strong> dropdown</li>
+<li>Setup your deployment settings
+<ol style="list-style-type: upper-alpha;">
+<li>Select <strong>Local</strong> from the access type dropdown</li>
+<li>Click the <strong>Mappings</strong> tab and under &#8220;web path on server&#8221; enter a single slash &#8220;/&#8221; to specify the WAMP root.  Click <strong>OK</strong> and then <strong>OK</strong> again to finish the configuration.</li>
+</ol>
+<li>Right click on your PHP file in the project panel again and goto &#8221;<strong>Run on server</strong>&#8221; or &#8221;<strong>Debug on server</strong>&#8221;.  I&#8217;ve had inconsistent behavior using it, so try both if one doesn&#8217;t work.</li>
+<li>If all went according to plan, a browser should open and execution should stop at your breakpoint.  If you look at your debug panel on the bottom on IntelliJ you should now see your PHP globals laid out.  Congrats, you made it!</li>
+</ol>
+
+
+<h2>The Summary</h2>
+
+<p>I know, its not exactly a walk in the park, but <span style="color:#ff0000;">its well worth the work to not have to pollute your code with copious print_r() calls</span>.  You can now have full access over your PHP as you would with any other enterprise level language and debugger.  I didn&#8217;t go into any specific detail here, but I plan in the future to discuss all the ins and outs of PHP debugging in IntelliJ IDEA 10.  Its looks to be a great IDE thus far.</p>
+
+<p>If you have any questions, which is likely since I ran into some inconsistent behavior, feel free to comment and I&#8217;ll try to answer back as quickly as possible.  Hopefully you&#8217;ll never even need to ask.</p>
+
+<p>Happy PHP debugging!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/03/qr-to-ar--using-qr-codes-to-serve-augmented-reality-markers/">QR to AR: Using QR Codes to serve Augmented Reality Markers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-03T07:58:00-05:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>The Demo</h1>
+
+
+<p>Scan 1 of the 4 QR codes below with your mobile device.  Here&#8217;s an <a href="http://www.androidzoom.com/android_applications/shopping/barcode-scanner_clh.html" target="_blank">Android Barcode app</a> and <a href="http://www.iphoneness.com/iphone-apps/5-best-barcode-iphone-applications/" target="_blank">a couple iPhone apps</a> if you don&#8217;t already have one.</p>
+
+<table cellpadding="10">
+  <tr>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt001.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt002.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt003.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt004.png"/></td>
+  </tr>
+</table>
+
+
+<p>The resulting link will take you to an augmented reality image marker.  It doesn&#8217;t mean much by itself, but take a look at what can be done with this <span style="color:#ff0000;">&#8220;QR to AR&#8221; method</span>:</p>
+
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="600" height="488" src="http://www.youtube.com/embed/bnY5aJSL4Bg" frameborder="0"></iframe>
+
+
+<h1>The Overview</h1>
+
+
+<p><strong>NOTE:</strong> If you are totally unfamiliar with augmented reality, check out these previous posts: <a href="http://savagelook.com/blog/away3d/away3d-augmented-reality">Augmented Reality</a> and <a href="http://savagelook.com/blog/away3d/away3dlite-augmented-reality-free-camaro">Augmented Reality with Away3dlite</a>.</p>
+
+<p>What&#8217;s one of the biggest blockers to augmented reality taking off?  <span style="color:#ff0000">The difficulty in distributing the augmented reality markers</span> necessary to make the technology work.  If you&#8217;ve seen an augmented reality site, you&#8217;ve read the off-putting instructions to print an image to a sheet of paper to hold in front of your webcam.  If you are a massive publication like Esquire, then its not so big of an issue.</p>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/wp2z36kKn0s?fs=1&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/wp2z36kKn0s?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+<p>But if you have no problem distributing AR markers, you probably aren&#8217;t reading this and don&#8217;t need my help.  But if you do, you might want to try the &#8220;QR to AR&#8221; method of distribution shown at the top of this post.  You should always offer the method of printing your AR marker, but with the widespread use of mobile technology, this is another viable method.</p>
+
+<p>In short, the positive is that this method is easy to distribute and is more likely to be tried than with the &#8220;print this marker&#8221; method.  The negative is that augmented reality is already a technology that depends heavily on a quality image.  Consider the following when attempting to use the &#8220;QR to AR&#8221; method:</p>
+
+<ul>
+<li>Mobile phones can add difficulty with their reflective and glowing surface</li>
+<li>Good lighting and webcam quality is critical for the best possible augmented reality experience</li>
+<li>Disable auto-orient on your device, if possible, otherwise the image will turn when your phone does</li>
+</ul>
+
+
+<p><span style="color:#ff0000;">This isn&#8217;t necessarily meant as a practical solution</span> to augmented reality marker distribution and use, just a simple attempt to think outside the box.  Hopefully it encourages people smarter than me to think of even more clever ways to bring augmented reality to the masses.</p>
+
+<p>Special thanks to all techs involved here: <a href="http://words.transmote.com/wp/flarmanager/">FLARManager</a>, <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en">FLARToolkit</a>, <a href="http://away3d.com/">Away3D</a>, and my trusty Droid X using the <a href="http://code.google.com/p/zxing/">Barcode Scanner app from Zxing</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/01/cropping-and-compressing-video-with-virtualdub-and-xvid/">Cropping and Compressing Video with VirtualDub and Xvid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-01T12:36:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>The Video</h2>
+
+<p>Cropping a video seems like a fairly common task for anyone creating video demos or guides.  To help you out, I created a video that walks you through how to use <a href="http://www.virtualdub.com/">VirtualDub</a> and the <a href="http://www.xvid.org">Xvid codec</a> to crop and compress a video.  Its all quick, simple, and free.  If you don&#8217;t feel like sitting through a video and think you can manage it yourself, follow the steps below the video.</p>
+
+<p>Download the video here: <a href="http://savagelook.com/misc/virtualdub_xvid_crop.avi" rel="nobox">virtualdub_xvid_crop.avi</a></p>
+
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="600" height="488" src="http://www.youtube.com/embed/L5FotwP5p-U" frameborder="0"></iframe>
+
+
+<h2>The Steps</h2>
+
+<ol>
+<li>Download and extract <a href="http://virtualdub.sourceforge.net/">VirtualDub</a></li>
+<li>Download and install the <a href="http://www.xvid.org/Downloads.15.0.html">Xvid codec</a></li>
+<li>Open your video in VirtualDub</li>
+<li>Goto <strong>Video -> Filter&#8230;</strong></li>
+<li>Because you can&#8217;t crop without a filter, click <strong>Add&#8230;</strong></li>
+<li>Select <strong>brightness/contrast</strong> from the list and click <strong>OK</strong> twice</li>
+<li>Click <strong>Cropping&#8230;</strong></li>
+<li>Change to your desired offset values for the X1, X2, Y1, Y2 which are left, right, top and bottom respectively.  <span style="color:#ff0000;">Make sure your final dimensions are a multiple of 2 or you will get an error when you attempt to save</span>.</li>
+<li>Click <strong>OK</strong> to finish, then <strong>OK</strong> again to set your filter and cropping.</li>
+<li>Goto <strong>Video -> Compression&#8230;</strong></li>
+<li>Select the <strong>Xvid Codec</strong> from the list of video compression methods.  No settings need to be changed.  Click <strong>OK</strong> when done.</li>
+<li>Goto <strong>File -> Save as AVI&#8230;</strong></li>
+<li>Select the name and path for your cropped and compressed video and click <strong>Save</strong></li>
+<li>Wait for the resulting video compression and saving operations to finish</li>
+<li>Congrats! You now have your video cropped and compressed to the specifications you need.</li>
+</ol>
+
+
+<h2>The Result</h2>
+
+<p>And here&#8217;s an example of an original video and its cropped version.  As you can see, the original was a capture from my desktop and the cropped version shows only the Youtube video.</p>
+
+<table>
+<tr>
+<td><h2>Original Video</h2><iframe title="YouTube video player" class="youtube-player" type="text/html" width="480" height="390" src="http://www.youtube.com/embed/sSs1cD68aUA" frameborder="0"></iframe></td>
+</tr><tr>
+<td><h2>cropped Video</h2><iframe title="YouTube video player" class="youtube-player" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/_W-M8Er4tic" frameborder="0"></iframe></td>
+</tr>
+</table>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/7/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tonylukasavage';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

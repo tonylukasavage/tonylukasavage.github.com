@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: node.js | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/node-js/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Custom assertions in should.js]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/05/29/custom-assertions-in-should-dot-js/"/>
+    <updated>2014-05-29T14:47:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/05/29/custom-assertions-in-should-dot-js</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/visionmedia/should.js">should.js</a> is my assertion library of choice when unit testing my <a href="http://nodejs.org/">node.js</a> and <a href="http://www.appcelerator.com/titanium/">Titanium</a> projects, for a few reasons:</p>
+
+<ol>
+<li>Works flawlessly with <a href="http://visionmedia.github.io/mocha/">mocha</a>. Not a surprise since they have the same <a href="https://github.com/visionmedia">author</a>.</li>
+<li>Works in node.js, browser, and Titanium.</li>
+<li>Extremely readable and <span class="readme">expressive</span>.</li>
+<li>Extendable to be even better at #3, if you know how.</li>
+</ol>
+
+
+<!-- more -->
+
+
+<p>Here I'd like to explain exactly how you can do #4. I was originally inspired by <a href="http://beyondoverload.wordpress.com/2012/01/19/custom-assertions-with-should-js/">this post</a>, but the method therein made available only a small subset of should.js's assertion functionality. To quote Freddy Mercury, <strong><em>♫ I want it all, and I want it now. ♫</em></strong></p>
+
+<h2>Test Case</h2>
+
+<p>Let's say you have a configuration file that must abide by this format:</p>
+
+<h3>config.json</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;string value&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">1234</span><span class="p">,</span>
+</span><span class='line'><span class="s2">&quot;isSomething&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We'd like to strictly enforce that format using assertions. Lots of them. A ridiculous amount in fact. Yes, it could be done much more tersely, but it helps express the point of customization. Let's do it in a mocha <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> structure.</p>
+
+<h2>No Custom Assertions</h2>
+
+<h3>test.js</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">mocha</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mocha&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should be valid&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// assuming getConfigToTest() returns the object to be tested...</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">getConfigToTest</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">an</span><span class="p">.</span><span class="nb">Object</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Number</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Boolean</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Here we're effectively asserting the format of the configuration, but we're losing a bit of the expressiveness of should.js in the process. We've essentially got 11 lines of assertion code when what we really just want to say is</p>
+
+<blockquote><p>this object should be a valid config</p></blockquote>
+
+<p>In addition, what if we want to validate the config at the beginning of many tests and keep it <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY</a>? It's undoubtedly getting messy fast here.</p>
+
+<h2>Custom Assertions</h2>
+
+<p>Let's say "this object is a valid config" <em>exactly</em> by creating a <span class="readme">custom assertion</span> within should.js. And let's go one step further and show how this custom assertion can be placed in a separate module. This will make our tests as simple, clean, and expressive as possible.</p>
+
+<p>I'm going to explain some of the should.js assertion internals inline, but for more details I'd highly suggest perusing the <a href="https://github.com/visionmedia/should.js">source code</a>, particularly the <a href="https://github.com/visionmedia/should.js/tree/master/lib/ext">extensions</a>.</p>
+
+<h3>assertions.js</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// the name of the custom assertion</span>
+</span><span class='line'><span class="s1">&#39;ValidConfig&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// the implementation of the custom assertion</span>
+</span><span class='line'><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// `this.params` defines what text is associated with the</span>
+</span><span class='line'>    <span class="c1">// pass/fail state of your custom assertion</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to be a valid config&#39;</span> <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// `this.obj` refers to the object in the should.js chain upon</span>
+</span><span class='line'>    <span class="c1">// which the assertion will be applied. `foo` would be `this.obj`</span>
+</span><span class='line'>    <span class="c1">// in this example:</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'>    <span class="c1">//     foo.should.be.a.String;</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// the assertion itself, just as above</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">an</span><span class="p">.</span><span class="nb">Object</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Number</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Boolean</span><span class="p">;</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// is this a getter, meaning no function call?</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="c1">//     foo.should.be.a.String         // getter</span>
+</span><span class='line'><span class="c1">//     foo.should.be.equal(&#39;string&#39;); // not a getter</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="kc">true</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>and now are unit test looks like this:</p>
+
+<h3>test.js</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">mocha</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mocha&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should be valid&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">getConfigToTest</span><span class="p">().</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">ValidConfig</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Aaaaaahhh, now that is <em><span class="readme">nice</span></em>. It should be pretty clear at this point how custom assertions can improve the readability and scalability of your test suites. It becomes clearer as your test suites grow.</p>
+
+<h2>Examples</h2>
+
+<p>Just in case you aren't convinced, here's a few more examples of using custom assertions in should.js to execute critical testing while preserving maximal expressiveness.</p>
+
+<h3>Titanium Proxies</h3>
+
+<p>Remember, <a href="http://tonylukasavage.com/ti-mocha/#caveats">Titanium proxies don't play well with should.js</a>, so you need to wrap them manually before running assertions.</p>
+
+<h4>assertions.js</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;TitaniumProxy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to be a Titanium proxy&#39;</span> <span class="p">};</span>
+</span><span class='line'><span class="nx">should</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">).</span><span class="nx">be</span><span class="p">.</span><span class="nx">an</span><span class="p">.</span><span class="nb">Object</span><span class="p">;</span>
+</span><span class='line'><span class="nx">should</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">applyProperties</span><span class="p">).</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Function</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>usage</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="nx">win</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createWindow</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">(</span><span class="nx">win</span><span class="p">).</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">TitaniumProxy</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Format Validation</h3>
+
+<p>Here's a simple case of validating that a given object is an XML string using <a href="https://github.com/jindw/xmldom">xmldom</a>.</p>
+
+<h4>assertions.js</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">DOMParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;xmldom&#39;</span><span class="p">).</span><span class="nx">DOMParser</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;Xml&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to be a valid XML string&#39;</span> <span class="p">};</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">DOMParser</span><span class="p">().</span><span class="nx">parseFromString</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>usage</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">xml</span> <span class="o">=</span> <span class="s1">&#39;&lt;root&gt;&lt;node/&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">xml</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">XML</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Complex matchers</h3>
+
+<p>You can even do some really complex validating using functions instead of getters. Here's an example of asserting that a chunk of Javascript will be be minified into an expected string using <a href="https://github.com/mishoo/UglifyJS2">uglifyjs</a>.</p>
+
+<h4>assertions.js</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">UglifyJS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;uglify-js&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;minifyTo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to minify to `&#39;</span> <span class="o">+</span> <span class="nx">str</span> <span class="o">+</span> <span class="s1">&#39;`&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">expected</span><span class="o">:</span> <span class="nx">str</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">showDiff</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">UglifyJS</span><span class="p">.</span><span class="nx">minify</span><span class="p">(</span><span class="s1">&#39;test.js&#39;</span><span class="p">).</span><span class="nx">code</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">result</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>usage</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">code</span> <span class="o">=</span> <span class="s1">&#39;var  foo = &quot;bar&quot;; var quux = 123;&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">code</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">minifyTo</span><span class="p">(</span><span class="s1">&#39;var foo=&quot;bar&quot;,quux=123;&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Resources &amp; Links</h2>
+
+<ul>
+<li>should.js on <a href="https://github.com/visionmedia/should.js">github</a> and lots of assertion <a href="https://github.com/visionmedia/should.js/tree/master/lib/ext">examples</a></li>
+<li>mocha <a href="http://visionmedia.github.io/mocha/">website</a> and <a href="https://github.com/visionmedia/mocha">github</a></li>
+<li><a href="http://beyondoverload.wordpress.com/2012/01/19/custom-assertions-with-should-js/">"Custom assertions with should.js"</a> by Andrew Swerlick</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Automating Appcelerator: grunt-titanium and grunt-alloy]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/01/23/automating-appcelerator-tasks-with-grunt-titanium-and-grunt-alloy/"/>
+    <updated>2014-01-23T22:04:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/01/23/automating-appcelerator-tasks-with-grunt-titanium-and-grunt-alloy</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/grunt.png" width="150" height="150" title="gruntjs" ></p>
+
+<p>If you follow me on <a href="https://twitter.com/tonylukasavage">twitter</a>, my current love affair with task management via the node.js module <a href="http://gruntjs.com/">grunt</a> is no secret. Long story short, it is a deliciously simple way to automate development tasks, with a multitude of those tasks (like <a href="https://github.com/gruntjs/grunt-contrib-jshint">linting</a>, <a href="https://github.com/gruntjs/grunt-contrib-uglify">minification</a>, <a href="https://npmjs.org/package/grunt-contrib-watch">file watching</a>, etc...) already done for you. I could babble on about it here, but I think a tweet of mine best encapsulates my experience with it.<!-- more --></p>
+
+<blockquote class="twitter-tweet" lang="en"><p>I love <a href="https://twitter.com/gruntjs">@gruntjs</a>. I now officially spend next to no time on shit that isn’t integral to the user-facing functionality of my projects.</p>&mdash; Tony Lukasavage (@tonylukasavage) <a href="https://twitter.com/tonylukasavage/statuses/414071952039772160">December 20, 2013</a></blockquote>
+
+
+<script async src="http://tonylukasavage.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<br>
+
+
+<p>In a natural fusion of my current technological entanglements, I took to creating grunt task plugins for <a href="http://www.appcelerator.com/titanium/">Appcelerator's</a> core cross-platform mobile development tools. As a result, we now have <a href="https://npmjs.org/package/grunt-titanium">grunt-titanium</a> for the Titanium CLI and <a href="https://npmjs.org/package/grunt-alloy">grunt-alloy</a> for the Alloy MVC framework. With these plugins you can now automate all functionality involved by these 2 tools, in turn letting you shift your focus onto your mobile app development, <strong>where it should be</strong>.</p>
+
+<p>For a crash course in...</p>
+
+<ul>
+<li>task automation with grunt, check out their <a href="http://gruntjs.com/getting-started">docs</a>. Seriously, <span style="color:#a00;font-weight:bold;">learn grunt</span>.</li>
+<li>Titanium and Alloy, check out Appcelerator's <a href="http://docs.appcelerator.com/titanium/latest/">guides</a> and get to building top-of-the-line, cross-platform, <strong>native</strong> mobile apps quickly and easily.</li>
+</ul>
+
+
+<p>In the meantime, though, check out these few examples of how you can use grunt-titanium and grunt-alloy to super-charge your development workflow. Bear in mind that these are excerpts from a Gruntfile.js implementation, so again, read up on grunt and check out the grunt-titanium and grunt-alloy repos to fully understand how to use these examples.</p>
+
+<p><div class="github-widget" data-repo="tonylukasavage/grunt-titanium"></div><br></p>
+
+<p><div class="github-widget" data-repo="tonylukasavage/grunt-alloy"></div><br></p>
+
+<h2>Create and build a Titanium app</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// configure the plugins</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">titanium</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">should_create</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">workspaceDir</span><span class="o">:</span> <span class="s1">&#39;.&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">should_build</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;build&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">projectDir</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">buildOnly</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Actually load this plugin&#39;s task(s).</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadTasks</span><span class="p">(</span><span class="s1">&#39;tasks&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// These plugins provide necessary tasks.</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-titanium&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;titanium&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Create and compile a Alloy app</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// configure the plugins</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">titanium</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">all</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">workspaceDir</span><span class="o">:</span> <span class="s1">&#39;.&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">alloy</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">new_app</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;new&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;app_name&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">compile</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;compile&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">platform</span><span class="o">:</span> <span class="s1">&#39;ios&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">outputPath</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Actually load this plugin&#39;s task(s).</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadTasks</span><span class="p">(</span><span class="s1">&#39;tasks&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// These plugins provide necessary tasks.</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-titanium&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-alloy&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;titanium&#39;</span><span class="p">,</span> <span class="s1">&#39;alloy&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Stay tuned. I'll soon be posting about how you can expand this workflow with <a href="https://github.com/tonylukasavage/ti-mocha">ti-mocha</a> to start automating the runtime testing of your Titanium and Alloy apps!</p>
+
+<p><strong>PS</strong> - <a href="https://github.com/gruntjs/grunt-contrib-clean">grunt-clean</a> is a great plugin to use for cleaning up after yourself when creating temporary Titanium/Alloy apps for test automation.</p>
+
+<h2>Resources &amp; Links</h2>
+
+<ul>
+<li>grunt-titanium on <a href="https://github.com/tonylukasavage/grunt-titanium">github</a> and <a href="https://npmjs.org/package/grunt-titanium">npm</a></li>
+<li>grunt-alloy on <a href="https://github.com/tonylukasavage/grunt-alloy">github</a> and <a href="https://npmjs.org/package/grunt-alloy">npm</a></li>
+<li>gruntjs <a href="http://gruntjs.com/">website</a></li>
+<li>Titanium SDK <a href="http://www.appcelerator.com/titanium/">website</a></li>
+<li>Titanium CLI on <a href="https://npmjs.org/package/grunt-titanium">npm</a></li>
+<li>Alloy <a href="http://www.appcelerator.com/titanium/alloy/">website</a> and <a href="https://npmjs.org/package/alloy">npm page</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Taking Notes on Node.js using Gonzo]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/22/taking-notes-on-node-js-using-gonzo/"/>
+    <updated>2011-06-22T10:56:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/22/taking-notes-on-node-js-using-gonzo</id>
+    <content type="html"><![CDATA[<h2>Gonzo</h2>
+
+<p>In case you haven't heard me talking about it on <a href="http://twitter.com/#!/tonylukasavage">Twitter</a>, I'm creating my own markdown editor called <a href="https://github.com/tonylukasavage/Gonzo">Gonzo</a>. If you don't know what markdown is, read up on it at <a href="http://daringfireball.net/projects/markdown/syntax">John Gruber's (creator) blog</a>.  It was created as a way to make web based writing more readable from a writer's perspective.</p>
+
+<p>Here's some of the highlights of the VERY young <strong>Gonzo</strong>:</p>
+
+<ul style="padding-bottom:15px;">
+<li>Its open source and <a href="https://github.com/tonylukasavage/Gonzo">hosted on Github</a></lI>
+<li>Its written using Adobe Air for desktop, Flex 4, and AS3</lI>
+<li>The markdown to HTML parsing is done using <a href="https://gist.github.com/648771">Charles Strahan's Showdown.as</a></lI>
+<li>Uses <a href="http://gskinner.com/blog/archives/2007/04/free_extension.html">Grant Skinner's StringUtils.as</a></lI>
+<li>Its <strong>3 days old</strong> as of the publishing date of the article</lI>
+<li>It generates HTML as you type markdown and shows it live in a preview panel</lI>
+<li>Counts your words for those web writers trying to hit quotas</lI>
+</ul>
+
+
+<h2>Test Run</h2>
+
+<p>Last night I took <strong>Gonzo</strong> for its maiden voyage in "production." I went to a meetup of the <a href="http://www.meetup.com/Pittsburgh-JavaScript-Developers/">Pittsburgh Javascript Developers</a> and discussed <a href="http://nodejs.org/">Node.js</a>.  I've never looked at Node.js before as server side Javascript always seemed like the avenue of a one trick pony.  After shedding my preconceived notions, it became apparent that using one language throughout your entire technology stack could work miracles with your efficiency.  But its young, alpha, and it changes a lot.</p>
+
+<p>Rather than ramble on from a beginner's stand point, I'll leave you with the notes I took last night at the meetup using <strong>Gonzo</strong>.  First, I'll show you the notes as I entered into <strong>Gonzo</strong>.  Like I said at the beginning, if markdown is unfamiliar, <a href="http://daringfireball.net/projects/markdown/syntax">read up</a>.  Just one glance shows you how much more readable and editable it is than typical HTML markup.</p>
+
+<h2>My Notes in Markdown</h2>
+
+<p>```</p>
+
+<h2>Node.js</h2>
+
+<h3>Overview</h3>
+
+<ul>
+<li>Server side JS.</li>
+<li>HTTP/TCP built in</li>
+<li>non-blocking, event driven, 1 thread (launches process into event queue)</li>
+<li>not suitable for CPU intensive work</li>
+<li>Node.js is alpha and changes a lot between revisions</li>
+<li>for unix, not Windows friendly</li>
+<li>everything is a callback and gets its own process
+
+<ul>
+<li>lots of nested callbacks</li>
+</ul>
+</li>
+<li>has to run from command line, no GUI for management.</li>
+<li>you can use it as a scripting language like ruby or perl
+
+<ul>
+<li>does not have to be event driven if ran this way.</li>
+</ul>
+</li>
+<li>Having it server side allows you to use JS up and down your whole technology stack</li>
+</ul>
+
+
+<h3>NPM</h3>
+
+<ul>
+<li>Node package managaer</li>
+<li>A lot like CPAN for perl</li>
+</ul>
+
+
+<h3>Modules</h3>
+
+<ul>
+<li><a href="https://github.com/joyent/node/wiki/modules">100's of modules</a></li>
+<li>examples
+
+<ul>
+<li>Sizzle
+
+<ul>
+<li>DOM selections and traversing</li>
+</ul>
+</li>
+<li>Paperboy
+
+<ul>
+<li>serves static files</li>
+</ul>
+</li>
+<li>Jade
+
+<ul>
+<li>templating engine</li>
+</ul>
+</li>
+<li>ExpressJS
+
+<ul>
+<li>web framework</li>
+<li>use it to deliver RESTful services</li>
+</ul>
+</li>
+<li>zombie headless browser
+
+<ul>
+<li>useful for testing Node driven services</li>
+<li>assertions against returned data</li>
+<li>DOM traversing is all custom code (why?!)</li>
+</ul>
+</li>
+<li>Coffeescript</li>
+<li>multiple cores w/ web workers</li>
+<li>Node Inspector
+
+<ul>
+<li>debugger
+
+<ul>
+<li>breakpoints</li>
+<li>call stack</li>
+<li>watch expressions</li>
+</ul>
+</li>
+<li>command line</li>
+<li>runs in a webkit browser</li>
+<li>based on google's v8 engine</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Basic Server</h3>
+
+<pre><code>var http = require("http");
+
+http.createServer(function (request, response) {
+    response.writeHead("Content-Type: "text/html");
+    response.write("&lt;html&gt;&lt;/html&gt;");
+    response.end();
+}).listen(8081);
+</code></pre>
+
+<h3>Emitters</h3>
+
+<p>Emitters are used to counter nesting of code. Should probably use constants to define emitter names. Add parameters afer emitter name in <code>emit()</code> to pass to callback.</p>
+
+<pre><code>emitter.emit('eventName', param1, param2);
+emitter.on('eventName', function(param1, param2) {
+    // do stuff
+});
+</code></pre>
+
+<p>```</p>
+
+<p>And now, through the magic of <strong>Gonzo</strong> and Showdown.as, we get to see the markdown translated into HTML.  You can then take the translated HTML and publish it to the web, allowing it to leverage any CSS and formatting your target venue has in place.  Again, notice how much more readable the markdown version is than this HTML version.</p>
+
+<h2>My Notes Translated to HTML via Gonzo</h2>
+
+<p>``` html</p>
+
+<h2>Node.js</h2>
+
+
+
+
+<h3>Overview</h3>
+
+
+
+
+<ul>
+<li>Server side JS. </li>
+<li>HTTP/TCP built in</li>
+<li>non-blocking, event driven, 1 thread (launches process into event queue)</li>
+<li>not suitable for CPU intensive work</li>
+<li>Node.js is alpha and changes a lot between revisions</li>
+<li>for unix, not Windows friendly</li>
+<li>everything is a callback and gets its own process
+<ul><li>lots of nested callbacks</li></ul></li>
+<li>has to run from command line, no GUI for management.</li>
+<li>you can use it as a scripting language like ruby or perl
+<ul><li>does not have to be event driven if ran this way.</li></ul></li>
+<li>Having it server side allows you to use JS up and down your whole technology stack</li>
+</ul>
+
+
+
+
+<h3>NPM</h3>
+
+
+
+
+<ul>
+<li>Node package managaer</li>
+<li>A lot like CPAN for perl</li>
+</ul>
+
+
+
+
+<h3>Modules</h3>
+
+
+
+
+<ul>
+<li><a href="https://github.com/joyent/node/wiki/modules">100's of modules</a></li>
+<li>examples
+<ul><li>Sizzle
+<ul><li>DOM selections and traversing</li></ul></li>
+<li>Paperboy
+<ul><li>serves static files</li></ul></li>
+<li>Jade
+<ul><li>templating engine</li></ul></li>
+<li>ExpressJS
+<ul><li>web framework</li>
+<li>use it to deliver RESTful services</li></ul></li>
+<li>zombie headless browser
+<ul><li>useful for testing Node driven services</li>
+<li>assertions against returned data</li>
+<li>DOM traversing is all custom code (why?!)</li></ul></li>
+<li>Coffeescript</li>
+<li>multiple cores w/ web workers</li>
+<li>Node Inspector
+<ul><li>debugger
+<ul><li>breakpoints</li>
+<li>call stack</li>
+<li>watch expressions</li></ul></li>
+<li>command line</li>
+<li>runs in a webkit browser</li>
+<li>based on google's v8 engine</li></ul></li></ul></li>
+</ul>
+
+
+
+
+<h3>Basic Server</h3>
+
+
+
+
+<pre><code>var http = require("http");
+
+http.createServer(function (request, response) {
+    response.writeHead("Content-Type: "text/html");
+    response.write("<html></html>");
+    response.end();
+}).listen(8081);
+</code></pre>
+
+
+
+
+<h3>Emitters</h3>
+
+
+
+
+<p>Emitters are used to counter nesting of code. Should probably use constants to define emitter names. Add parameters after emitter name in <code>emit()</code> to pass to callback.</p>
+
+
+
+
+<pre><code>emitter.emit('eventName', param1, param2);
+emitter.on('eventName', function(param1, param2) {
+    // do stuff
+});
+</code></pre>
+
+
+<p>```</p>
+
+<p>And finally below is the above generated HTML copied directly into my blog.  The CSS that governs my blog does its work on the elements and makes it look relatively web ready.  Obviously if I put a little more effort in (as I will soon), I can tailor the CSS to play well with my generated HTML.  For now, though, you can see the basic formatting applied.  So without cluttering your writing with HTML you can still effortlessly generate web ready content.</p>
+
+<h2>Gonzo Generated HTML on my Blog</h2>
+
+<h2>Node.js</h2>
+
+
+
+
+<h3>Overview</h3>
+
+
+
+
+<ul>
+<li>Server side JS. </li>
+<li>HTTP/TCP built in</li>
+<li>non-blocking, event driven, 1 thread (launches process into event queue)</li>
+<li>not suitable for CPU intensive work</li>
+<li>Node.js is alpha and changes a lot between revisions</li>
+<li>for unix, not Windows friendly</li>
+<li>everything is a callback and gets its own process
+<ul><li>lots of nested callbacks</li></ul></li>
+<li>has to run from command line, no GUI for management.</li>
+<li>you can use it as a scripting language like ruby or perl
+<ul><li>does not have to be event driven if ran this way.</li></ul></li>
+<li>Having it server side allows you to use JS up and down your whole technology stack</li>
+</ul>
+
+
+
+
+<h3>NPM</h3>
+
+
+
+
+<ul>
+<li>Node package managaer</li>
+<li>A lot like CPAN for perl</li>
+</ul>
+
+
+
+
+<h3>Modules</h3>
+
+
+
+
+<ul>
+<li><a href="https://github.com/joyent/node/wiki/modules">100's of modules</a></li>
+<li>examples
+<ul><li>Sizzle
+<ul><li>DOM selections and traversing</li></ul></li>
+<li>Paperboy
+<ul><li>serves static files</li></ul></li>
+<li>Jade
+<ul><li>templating engine</li></ul></li>
+<li>ExpressJS
+<ul><li>web framework</li>
+<li>use it to deliver RESTful services</li></ul></li>
+<li>zombie headless browser
+<ul><li>useful for testing Node driven services</li>
+<li>assertions against returned data</li>
+<li>DOM traversing is all custom code (why?!)</li></ul></li>
+<li>Coffeescript</li>
+<li>multiple cores w/ web workers</li>
+<li>Node Inspector
+<ul><li>debugger
+<ul><li>breakpoints</li>
+<li>call stack</li>
+<li>watch expressions</li></ul></li>
+<li>command line</li>
+<li>runs in a webkit browser</li>
+<li>based on google's v8 engine</li></ul></li></ul></li>
+</ul>
+
+
+
+
+<h3>Basic Server</h3>
+
+
+
+
+<pre><code>var http = require("http");
+
+http.createServer(function (request, response) {
+    response.writeHead("Content-Type: "text/html");
+    response.write("<html></html>");
+    response.end();
+}).listen(8081);
+</code></pre>
+
+
+
+
+<h3>Emitters</h3>
+
+
+
+
+<p>Emitters are used to counter nesting of code. Should probably use constants to define emitter names. Add parameters after emitter name in <code>emit()</code> to pass to callback.</p>
+
+
+
+
+<pre><code>emitter.emit('eventName', param1, param2);
+emitter.on('eventName', function(param1, param2) {
+    // do stuff
+});
+</code></pre>
+
+
+
+
+<div style="height:15px;"></div>
+
+
+<h2>Screenshot of Gonzo in Action</h2>
+
+<p><a href="http://tonylukasavage.github.com/images/gonzo_example.jpg"><img src="http://tonylukasavage.github.com/images/gonzo_example-e1308748863352.jpg" alt="Gonzo in action" title="Gonzo in action" width="700" height="474" class="alignnone size-full wp-image-3169" /></a></p>
+
+<h2>Summary and TODO</h2>
+
+<p>Right now what is shown here is basically the extent of <strong>Gonzo's</strong> functionality.  It's very young, but I plan to develop it aggressively.  After this post, all of my blog content will likely first be written in markdown in <strong>Gonzo</strong>.  I welcome contributors to the <a href="https://github.com/tonylukasavage/Gonzo">Gonzo Github repository</a>, but in all honesty, I'd wait a week or two before joining in.  Its likely to change A LOT over that period of time.</p>
+
+<p>I'll end with the current TODO list for Gonzo.  Please feel free to add your own idea in the comments.</p>
+
+<ul>
+<li>Add ability to edit and apply CSS within Gonzo</li>
+<li>More robust "project" environment to allow grouping of markdown and CSS with generated HTML</li>
+<li>Spell Checker, likely via <a href="http://labs.adobe.com/technologies/squiggly/">Squiggly</a></li>
+<li>Major UI polish <em>(gonna need help here)</em></li>
+<li>Create Mac and Windows native downloads on the <a href="https://github.com/tonylukasavage/Gonzo">Github site</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

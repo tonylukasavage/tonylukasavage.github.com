@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wordpress | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/wordpress/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ShadowBox JS for Wordpress]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/17/shadowbox-js-for-wordpress/"/>
+    <updated>2010-08-17T21:23:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/17/shadowbox-js-for-wordpress</id>
+    <content type="html"><![CDATA[<p>Just a quick update to let you know that my Flash demos will be from now on be displayed in <a href="http://www.shadowbox-js.com/" target="_blank">ShadowBox.js</a> via the <a href="http://sivel.net/wordpress/shadowbox-js/" target="_blank">ShadowBox JS Wordpress plugin</a>.  Its a lightweight javascript library that allows you to show all kinds of media on your website in a slick popup window.  You've probably seen them before on video and image gallery sites.</p>
+
+<p>While the ShadowBox JS plugin will handle all your images, videos, SWFs, etc... by default, I prefer to manually determine which media will utilize it.  And to do so, its as simple as adding "rel=shadowbox" to your anchor tags, which I use in my <a href="http://savagelook.com/blog/code/box2dflashas3-fun">Box2D demo post</a>:</p>
+
+<p>``` html
+&lt;a rel="shadowbox;height=600;width=800;"</p>
+
+<pre><code>href="http://savagelook.com/demos/box2d/box2d.swf"
+target="_self"&gt;
+</code></pre>
+
+<p>  &lt;img class="  " title="Box2D demo"</p>
+
+<pre><code>     src="http://savagelook.com/images/box2d_full.jpg"
+     alt="Box2D demo" width="516" height="487" /&gt;
+</code></pre>
+
+<p></a>
+```</p>
+
+<p>I avoided pre-built blogs for the longest time because I'm a ridiculously customization driven programmer, but with what Wordpress has available for free, I wonder why I wasn't using it all along.  I highly suggest ShadowBox.js for your Wordpress blog or any website that needs a little extra eye-catching flair.  And let's face it, if you've been around my blog for any amount of time, it's all about eye candy.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Social Media Widget for WordPress]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/03/social-media-widget-for-wordpress/"/>
+    <updated>2010-08-03T11:34:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/03/social-media-widget-for-wordpress</id>
+    <content type="html"><![CDATA[<p>I just prettied up my blog's sidebar using the <a href="http://wordpress.org/extend/plugins/social-media-widget/" target="_blank">Social Media Widget for WordPress</a>.  Pretty simple little plugin for adding nice looking social networking icons to your sidebar that link to your personal pages (i.e., my "Follow Me" section).  Easy to install, easy to configure.  But if you are anything like me, you are handsome, smart, smell terrific, and are never satisfied with the out-of-the-box version of anything.  I wanted my icons aligned horizontally, not vertically.  I also wanted them in a different order.  Neither was configurable, so I got under the hood and made a few small source changes.</p>
+
+<p>To get the icons aligning horizontally in my theme I added "display:inline" to the following classes in social_widget.css:</p>
+
+<p>``` css
+.socialmedia-buttons img {</p>
+
+<pre><code>border: 0 !important;
+margin-right: 5px !important;
+display:inline;
+</code></pre>
+
+<p>}</p>
+
+<p>.socialmedia-buttons a {</p>
+
+<pre><code>background: none !important;
+display:inline;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>After that I wanted the icons in a different order.  To do this I actually had to get into the PHP for the widget.  Luckily the changes were simple.  All I had to do was cut and paste the specific sections for each icon into the order I wanted.  For example, your social-widget.php file will have a section that looks like this:</p>
+
+<p>``` php
+&lt;?php
+// Facebook
+if ( $facebook != '') {</p>
+
+<pre><code>?&gt;&lt;a href="&lt;?php echo $facebook; ?&gt;" &lt;?php echo $nofollow; ?&gt; &lt;?php echo $newtab; ?&gt;&gt;&lt;img src="&lt;?php echo $smw_path; ?&gt;images/&lt;?php echo $icon_pack.'/'.$icon_size; ?&gt;/facebook.png" alt="&lt;?php echo $title; ?&gt; on Facebook" title="&lt;?php echo $title; ?&gt; on Facebook" &lt;?php if($animation == 'fade' || $animation == 'combo') { ?&gt; style="opacity: &lt;?php echo $icon_opacity; ?&gt;; -moz-opacity: &lt;?php echo $icon_opacity;?&gt;;" &lt;?php } ?&gt;class="&lt;?php echo $animation; ?&gt;" /&gt;&lt;/a&gt;&lt;?php
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>echo ''; //If no URL inputed
+</code></pre>
+
+<p>}</p>
+
+<p>// Twitter
+if ( $twitter != '' ) {</p>
+
+<pre><code>?&gt;&lt;a href="&lt;?php echo $twitter; ?&gt;" &lt;?php echo $nofollow; ?&gt; &lt;?php echo $newtab; ?&gt;&gt;&lt;img src="&lt;?php echo $smw_path; ?&gt;images/&lt;?php echo $icon_pack.'/'.$icon_size; ?&gt;/twitter.png"  alt="&lt;?php echo $title; ?&gt; on Twitter" title="&lt;?php echo $title; ?&gt; on Twitter" &lt;?php if($animation == 'fade' || $animation == 'combo') { ?&gt; style="opacity: &lt;?php echo $icon_opacity; ?&gt;; -moz-opacity: &lt;?php echo $icon_opacity;?&gt;;" &lt;?php } ?&gt;class="&lt;?php echo $animation; ?&gt;" /&gt;&lt;/a&gt;&lt;?php
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>echo ''; //If no URL inputed
+</code></pre>
+
+<p>}
+?>
+```</p>
+
+<p>Now say you, like me, wanted the Twitter icon before the Facebook icon.  All you have to do is swap there position in the file and they will show up in the desired order:</p>
+
+<p>``` php
+&lt;?php
+// Twitter
+if ( $twitter != '' ) {</p>
+
+<pre><code>?&gt;&lt;a href="&lt;?php echo $twitter; ?&gt;" &lt;?php echo $nofollow; ?&gt; &lt;?php echo $newtab; ?&gt;&gt;&lt;img src="&lt;?php echo $smw_path; ?&gt;images/&lt;?php echo $icon_pack.'/'.$icon_size; ?&gt;/twitter.png"  alt="&lt;?php echo $title; ?&gt; on Twitter" title="&lt;?php echo $title; ?&gt; on Twitter" &lt;?php if($animation == 'fade' || $animation == 'combo') { ?&gt; style="opacity: &lt;?php echo $icon_opacity; ?&gt;; -moz-opacity: &lt;?php echo $icon_opacity;?&gt;;" &lt;?php } ?&gt;class="&lt;?php echo $animation; ?&gt;" /&gt;&lt;/a&gt;&lt;?php
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>echo ''; //If no URL inputed
+</code></pre>
+
+<p>}</p>
+
+<p>// Facebook
+if ( $facebook != '') {</p>
+
+<pre><code>?&gt;&lt;a href="&lt;?php echo $facebook; ?&gt;" &lt;?php echo $nofollow; ?&gt; &lt;?php echo $newtab; ?&gt;&gt;&lt;img src="&lt;?php echo $smw_path; ?&gt;images/&lt;?php echo $icon_pack.'/'.$icon_size; ?&gt;/facebook.png" alt="&lt;?php echo $title; ?&gt; on Facebook" title="&lt;?php echo $title; ?&gt; on Facebook" &lt;?php if($animation == 'fade' || $animation == 'combo') { ?&gt; style="opacity: &lt;?php echo $icon_opacity; ?&gt;; -moz-opacity: &lt;?php echo $icon_opacity;?&gt;;" &lt;?php } ?&gt;class="&lt;?php echo $animation; ?&gt;" /&gt;&lt;/a&gt;&lt;?php
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>echo ''; //If no URL inputed
+</code></pre>
+
+<p>}
+?>
+```</p>
+
+<p>And there you have it.  With a few simple tweaks I got the Social Media Widget looking just how I want it.  Oh, and while I was writing this post I added the <a href="http://wordpress.org/extend/plugins/wp-syntax/" target="_blank">WP-Syntax Plugin for WordPress</a>.  It is responsible for the sweet syntax highlighting in all the code segments.  I highly suggest it for anyone adding code to their WordPress blogs.</p>
+]]></content>
+  </entry>
+  
+</feed>

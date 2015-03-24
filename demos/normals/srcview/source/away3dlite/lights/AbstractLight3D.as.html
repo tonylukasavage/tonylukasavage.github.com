@@ -1,0 +1,62 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>AbstractLight3D.as</title>
+<link rel="stylesheet" type="text/css" href="../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">lights</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">arcane</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">cameras</span>.<span class="ActionScriptOperator">*</span>;
+    
+    <span class="ActionScriptReserved">use</span> <span class="ActionScriptReserved">namespace</span> <span class="ActionScriptDefault_Text">arcane</span>;
+    
+    <span class="ActionScriptASDoc">/**
+     * @author robbateman
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">AbstractLight3D</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_color</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">uint</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_red</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_green</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_blue</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_camera</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Camera3D</span>;
+        
+        <span class="ActionScriptASDoc">/**
+         * 
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">color</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">uint</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_color</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">color</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">uint</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_color</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">val</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptReserved">return</span>;
+            
+            <span class="ActionScriptDefault_Text">_color</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+            
+            <span class="ActionScriptDefault_Text">_red</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">((</span><span class="ActionScriptDefault_Text">_color</span> <span class="ActionScriptOperator">&amp;</span> 0<span class="ActionScriptDefault_Text">xFF0000</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">&gt;&gt;</span> 16<span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">/</span>255;
+            <span class="ActionScriptDefault_Text">_green</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">((</span><span class="ActionScriptDefault_Text">_color</span> <span class="ActionScriptOperator">&amp;</span> 0<span class="ActionScriptDefault_Text">xFF00</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">&gt;&gt;</span> 8<span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">/</span>255;
+            <span class="ActionScriptDefault_Text">_blue</span>  <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_color</span> <span class="ActionScriptOperator">&amp;</span> 0<span class="ActionScriptDefault_Text">xFF</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">/</span>255;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * 
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">AbstractLight3D</span><span class="ActionScriptBracket/Brace">()</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span>
+</pre></body>
+</html>

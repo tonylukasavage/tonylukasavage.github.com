@@ -1,0 +1,801 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Taking Notes on Node.js using Gonzo - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Gonzo In case you haven&#8217;t heard me talking about it on Twitter, I&#8217;m creating my own markdown editor called Gonzo. If you don&#8217;t know &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/06/22/taking-notes-on-node-js-using-gonzo/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Taking Notes on Node.js using Gonzo</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-22T10:56:00-04:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Gonzo</h2>
+
+<p>In case you haven&#8217;t heard me talking about it on <a href="http://twitter.com/#!/tonylukasavage">Twitter</a>, I&#8217;m creating my own markdown editor called <a href="https://github.com/tonylukasavage/Gonzo">Gonzo</a>. If you don&#8217;t know what markdown is, read up on it at <a href="http://daringfireball.net/projects/markdown/syntax">John Gruber&#8217;s (creator) blog</a>.  It was created as a way to make web based writing more readable from a writer&#8217;s perspective.</p>
+
+<p>Here&#8217;s some of the highlights of the VERY young <strong>Gonzo</strong>:</p>
+
+<ul style="padding-bottom:15px;">
+<li>Its open source and <a href="https://github.com/tonylukasavage/Gonzo">hosted on Github</a></lI>
+<li>Its written using Adobe Air for desktop, Flex 4, and AS3</lI>
+<li>The markdown to HTML parsing is done using <a href="https://gist.github.com/648771">Charles Strahan&#8217;s Showdown.as</a></lI>
+<li>Uses <a href="http://gskinner.com/blog/archives/2007/04/free_extension.html">Grant Skinner&#8217;s StringUtils.as</a></lI>
+<li>Its <strong>3 days old</strong> as of the publishing date of the article</lI>
+<li>It generates HTML as you type markdown and shows it live in a preview panel</lI>
+<li>Counts your words for those web writers trying to hit quotas</lI>
+</ul>
+
+
+<h2>Test Run</h2>
+
+<p>Last night I took <strong>Gonzo</strong> for its maiden voyage in &#8220;production.&#8221; I went to a meetup of the <a href="http://www.meetup.com/Pittsburgh-JavaScript-Developers/">Pittsburgh Javascript Developers</a> and discussed <a href="http://nodejs.org/">Node.js</a>.  I&#8217;ve never looked at Node.js before as server side Javascript always seemed like the avenue of a one trick pony.  After shedding my preconceived notions, it became apparent that using one language throughout your entire technology stack could work miracles with your efficiency.  But its young, alpha, and it changes a lot.</p>
+
+<p>Rather than ramble on from a beginner&#8217;s stand point, I&#8217;ll leave you with the notes I took last night at the meetup using <strong>Gonzo</strong>.  First, I&#8217;ll show you the notes as I entered into <strong>Gonzo</strong>.  Like I said at the beginning, if markdown is unfamiliar, <a href="http://daringfireball.net/projects/markdown/syntax">read up</a>.  Just one glance shows you how much more readable and editable it is than typical HTML markup.</p>
+
+<h2>My Notes in Markdown</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>## Node.js
+</span><span class='line'>
+</span><span class='line'>### Overview
+</span><span class='line'>
+</span><span class='line'>* Server side JS.
+</span><span class='line'>* HTTP/TCP built in
+</span><span class='line'>* non-blocking, event driven, 1 thread (launches process into event queue)
+</span><span class='line'>* not suitable for CPU intensive work
+</span><span class='line'>* Node.js is alpha and changes a lot between revisions
+</span><span class='line'>* for unix, not Windows friendly
+</span><span class='line'>* everything is a callback and gets its own process
+</span><span class='line'>  * lots of nested callbacks
+</span><span class='line'>* has to run from command line, no GUI for management.
+</span><span class='line'>* you can use it as a scripting language like ruby or perl
+</span><span class='line'>  * does not have to be event driven if ran this way.
+</span><span class='line'>* Having it server side allows you to use JS up and down your whole technology stack
+</span><span class='line'>
+</span><span class='line'>### NPM
+</span><span class='line'>
+</span><span class='line'>* Node package managaer
+</span><span class='line'>* A lot like CPAN for perl
+</span><span class='line'>
+</span><span class='line'>### Modules
+</span><span class='line'>
+</span><span class='line'>* [100's of modules](https://github.com/joyent/node/wiki/modules)
+</span><span class='line'>* examples
+</span><span class='line'>  * Sizzle
+</span><span class='line'>      * DOM selections and traversing
+</span><span class='line'>  * Paperboy
+</span><span class='line'>      * serves static files
+</span><span class='line'>  * Jade
+</span><span class='line'>      * templating engine
+</span><span class='line'>  * ExpressJS
+</span><span class='line'>      * web framework
+</span><span class='line'>      * use it to deliver RESTful services
+</span><span class='line'>  * zombie headless browser
+</span><span class='line'>      * useful for testing Node driven services
+</span><span class='line'>      * assertions against returned data
+</span><span class='line'>      * DOM traversing is all custom code (why?!)
+</span><span class='line'>  * Coffeescript
+</span><span class='line'>  * multiple cores w/ web workers
+</span><span class='line'>  * Node Inspector
+</span><span class='line'>      * debugger
+</span><span class='line'>          * breakpoints
+</span><span class='line'>          * call stack
+</span><span class='line'>          * watch expressions
+</span><span class='line'>      * command line
+</span><span class='line'>      * runs in a webkit browser
+</span><span class='line'>      * based on google's v8 engine
+</span><span class='line'>
+</span><span class='line'>### Basic Server
+</span><span class='line'>
+</span><span class='line'>  var http = require("http");
+</span><span class='line'>
+</span><span class='line'>  http.createServer(function (request, response) {
+</span><span class='line'>      response.writeHead("Content-Type: "text/html");
+</span><span class='line'>      response.write("&lt;html&gt;&lt;/html&gt;");
+</span><span class='line'>      response.end();
+</span><span class='line'>  }).listen(8081);
+</span><span class='line'>
+</span><span class='line'>### Emitters
+</span><span class='line'>
+</span><span class='line'>Emitters are used to counter nesting of code. Should probably use constants to define emitter names. Add parameters afer emitter name in `emit()` to pass to callback.
+</span><span class='line'>
+</span><span class='line'>  emitter.emit('eventName', param1, param2);
+</span><span class='line'>  emitter.on('eventName', function(param1, param2) {
+</span><span class='line'>      // do stuff
+</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now, through the magic of <strong>Gonzo</strong> and Showdown.as, we get to see the markdown translated into HTML.  You can then take the translated HTML and publish it to the web, allowing it to leverage any CSS and formatting your target venue has in place.  Again, notice how much more readable the markdown version is than this HTML version.</p>
+
+<h2>My Notes Translated to HTML via Gonzo</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2&gt;</span>Node.js<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h3&gt;</span>Overview<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Server side JS. <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>HTTP/TCP built in<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>non-blocking, event driven, 1 thread (launches process into event queue)<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>not suitable for CPU intensive work<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Node.js is alpha and changes a lot between revisions<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>for unix, not Windows friendly<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>everything is a callback and gets its own process
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>lots of nested callbacks<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>has to run from command line, no GUI for management.<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>you can use it as a scripting language like ruby or perl
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>does not have to be event driven if ran this way.<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Having it server side allows you to use JS up and down your whole technology stack<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h3&gt;</span>NPM<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Node package managaer<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>A lot like CPAN for perl<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h3&gt;</span>Modules<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/joyent/node/wiki/modules&quot;</span><span class="nt">&gt;</span>100&#39;s of modules<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>examples
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>Sizzle
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>DOM selections and traversing<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Paperboy
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>serves static files<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Jade
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>templating engine<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>ExpressJS
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>web framework<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>use it to deliver RESTful services<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>zombie headless browser
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>useful for testing Node driven services<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>assertions against returned data<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>DOM traversing is all custom code (why?!)<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Coffeescript<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>multiple cores w/ web workers<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>Node Inspector
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>debugger
+</span><span class='line'><span class="nt">&lt;ul&gt;&lt;li&gt;</span>breakpoints<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>call stack<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>watch expressions<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>command line<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>runs in a webkit browser<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;li&gt;</span>based on google&#39;s v8 engine<span class="nt">&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h3&gt;</span>Basic Server<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span>var http = require(&quot;http&quot;);
+</span><span class='line'>
+</span><span class='line'>http.createServer(function (request, response) {
+</span><span class='line'>    response.writeHead(&quot;Content-Type: &quot;text/html&quot;);
+</span><span class='line'>    response.write(&quot;<span class="nt">&lt;html&gt;&lt;/html&gt;</span>&quot;);
+</span><span class='line'>    response.end();
+</span><span class='line'>}).listen(8081);
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h3&gt;</span>Emitters<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>Emitters are used to counter nesting of code. Should probably use constants to define emitter names. Add parameters after emitter name in <span class="nt">&lt;code&gt;</span>emit()<span class="nt">&lt;/code&gt;</span> to pass to callback.<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span>emitter.emit(&#39;eventName&#39;, param1, param2);
+</span><span class='line'>emitter.on(&#39;eventName&#39;, function(param1, param2) {
+</span><span class='line'>    // do stuff
+</span><span class='line'>});
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And finally below is the above generated HTML copied directly into my blog.  The CSS that governs my blog does its work on the elements and makes it look relatively web ready.  Obviously if I put a little more effort in (as I will soon), I can tailor the CSS to play well with my generated HTML.  For now, though, you can see the basic formatting applied.  So without cluttering your writing with HTML you can still effortlessly generate web ready content.</p>
+
+<h2>Gonzo Generated HTML on my Blog</h2>
+
+<h2>Node.js</h2>
+
+
+
+
+<h3>Overview</h3>
+
+
+
+
+<ul>
+<li>Server side JS. </li>
+<li>HTTP/TCP built in</li>
+<li>non-blocking, event driven, 1 thread (launches process into event queue)</li>
+<li>not suitable for CPU intensive work</li>
+<li>Node.js is alpha and changes a lot between revisions</li>
+<li>for unix, not Windows friendly</li>
+<li>everything is a callback and gets its own process
+<ul><li>lots of nested callbacks</li></ul></li>
+<li>has to run from command line, no GUI for management.</li>
+<li>you can use it as a scripting language like ruby or perl
+<ul><li>does not have to be event driven if ran this way.</li></ul></li>
+<li>Having it server side allows you to use JS up and down your whole technology stack</li>
+</ul>
+
+
+
+
+<h3>NPM</h3>
+
+
+
+
+<ul>
+<li>Node package managaer</li>
+<li>A lot like CPAN for perl</li>
+</ul>
+
+
+
+
+<h3>Modules</h3>
+
+
+
+
+<ul>
+<li><a href="https://github.com/joyent/node/wiki/modules">100&#8217;s of modules</a></li>
+<li>examples
+<ul><li>Sizzle
+<ul><li>DOM selections and traversing</li></ul></li>
+<li>Paperboy
+<ul><li>serves static files</li></ul></li>
+<li>Jade
+<ul><li>templating engine</li></ul></li>
+<li>ExpressJS
+<ul><li>web framework</li>
+<li>use it to deliver RESTful services</li></ul></li>
+<li>zombie headless browser
+<ul><li>useful for testing Node driven services</li>
+<li>assertions against returned data</li>
+<li>DOM traversing is all custom code (why?!)</li></ul></li>
+<li>Coffeescript</li>
+<li>multiple cores w/ web workers</li>
+<li>Node Inspector
+<ul><li>debugger
+<ul><li>breakpoints</li>
+<li>call stack</li>
+<li>watch expressions</li></ul></li>
+<li>command line</li>
+<li>runs in a webkit browser</li>
+<li>based on google&#8217;s v8 engine</li></ul></li></ul></li>
+</ul>
+
+
+
+
+<h3>Basic Server</h3>
+
+
+
+
+<pre><code>var http = require("http");
+
+http.createServer(function (request, response) {
+    response.writeHead("Content-Type: "text/html");
+    response.write("<html></html>");
+    response.end();
+}).listen(8081);
+</code></pre>
+
+
+
+
+<h3>Emitters</h3>
+
+
+
+
+<p>Emitters are used to counter nesting of code. Should probably use constants to define emitter names. Add parameters after emitter name in <code>emit()</code> to pass to callback.</p>
+
+
+
+
+<pre><code>emitter.emit('eventName', param1, param2);
+emitter.on('eventName', function(param1, param2) {
+    // do stuff
+});
+</code></pre>
+
+
+
+
+<div style="height:15px;"></div>
+
+
+<h2>Screenshot of Gonzo in Action</h2>
+
+<p><a href="/images/gonzo_example.jpg"><img src="/images/gonzo_example-e1308748863352.jpg" alt="Gonzo in action" title="Gonzo in action" width="700" height="474" class="alignnone size-full wp-image-3169" /></a></p>
+
+<h2>Summary and TODO</h2>
+
+<p>Right now what is shown here is basically the extent of <strong>Gonzo&#8217;s</strong> functionality.  It&#8217;s very young, but I plan to develop it aggressively.  After this post, all of my blog content will likely first be written in markdown in <strong>Gonzo</strong>.  I welcome contributors to the <a href="https://github.com/tonylukasavage/Gonzo">Gonzo Github repository</a>, but in all honesty, I&#8217;d wait a week or two before joining in.  Its likely to change A LOT over that period of time.</p>
+
+<p>I&#8217;ll end with the current TODO list for Gonzo.  Please feel free to add your own idea in the comments.</p>
+
+<ul>
+<li>Add ability to edit and apply CSS within Gonzo</li>
+<li>More robust &#8220;project&#8221; environment to allow grouping of markdown and CSS with generated HTML</li>
+<li>Spell Checker, likely via <a href="http://labs.adobe.com/technologies/squiggly/">Squiggly</a></li>
+<li>Major UI polish <em>(gonna need help here)</em></li>
+<li>Create Mac and Windows native downloads on the <a href="https://github.com/tonylukasavage/Gonzo">Github site</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-22T10:56:00-04:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/actionscript3/'>actionscript3</a>, <a class='category' href='/blog/categories/adobe-air/'>adobe air</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/as3/'>as3</a>, <a class='category' href='/blog/categories/flex/'>flex</a>, <a class='category' href='/blog/categories/gonzo/'>gonzo</a>, <a class='category' href='/blog/categories/markdown/'>markdown</a>, <a class='category' href='/blog/categories/node-js/'>node.js</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/06/16/a-whole-mess-of-android-helpers/" title="Previous Post: A Whole Mess of Android Helpers">&laquo; A Whole Mess of Android Helpers</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/01/11-vague-ways-to-be-technically-relevant/" title="Next Post: 11 Vague Ways to be Technically Relevant">11 Vague Ways to be Technically Relevant &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

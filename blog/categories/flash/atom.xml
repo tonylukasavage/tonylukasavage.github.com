@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: flash | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/flash/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Flashback: My Old Away3D Experiments]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2013/02/26/flashback-my-old-away3d-experiments/"/>
+    <updated>2013-02-26T22:08:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2013/02/26/flashback-my-old-away3d-experiments</id>
+    <content type="html"><![CDATA[<p><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/image3d/sandbox.html" ><img src="http://tonylukasavage.github.com/images/image3d1.jpg" style="width:33%; float:left; margin-right:10px;"></a></p>
+
+<p>Back before before joining the <a href="http://www.appcelerator.com/">Appcelerator</a> team about a year and a half ago, I was working a typical 9 to 5 enterprise development job. While this was nothing more than a paycheck, it did afford me copious amounts of time to experiment on personal projects before I finally fell in love with cross-platform mobile development. My first true love in this experimental coding was interactive 3D using Flash and <a href="http://away3d.com/">Away3D</a>.</p>
+
+<!-- more -->
+
+
+<p>I had always been a back-end dev, mostly C/C++, working on Linux servers for about the first 7 years of my career. With these experiments, I wanted to get way out of my comfort zone. I wanted to not just learn a new programming language and tooling, but entirely new concepts for interacting with computers. To this end, I dove head-long into learning Away3D with the express purpose of developing demos that had no goal other than pure coding fun.</p>
+
+<p><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/cash/cash.html" ><img src="http://tonylukasavage.github.com/images/cash.jpg" style="width:33%; float:right; margin-right:10px;"></a></p>
+
+<p>While I never really became much more than a novice-intermediate 3D developer, I did crank out of a bunch of cool looking demos, not to mention made tons of friends and contacts in the Flash/Flex/AS3 world. If it wasn't for those guys, I wouldn't be the Twitter junkie I am today, which directly led to my current job with Appcelerator (<em>just ask <a href="https://twitter.com/fusion94">this guy</a></em>). In short, these seemingly purposeless experiments led to the most amazing experiences thus far in my professional career.</p>
+
+<p>And without further ado, dug up from the archives of my <a href="http://savagelook.com/blog/">old blog</a> I present the aforementioned experiments in Flash and Away3D. Enjoy<sup>*</sup>!</p>
+
+<p><em>These are not optimized for mobile and probably won't run properly even on mobile devices that support Flash.</em></p>
+
+<ul id="grid">
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/face_picking/sandbox.html" ><img src="/images/face_picking.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/materials/sandbox.html" ><img src="/images/materials.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/normals_align/sandbox.html" ><img src="/images/normals2.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/text_demo/text_demo.html" ><img src="/images/text.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/carousel/sandbox.html" ><img src="/images/carousel.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/projects/savagelook_1.0/index.html" ><img src="/images/savagelook_1.0.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/shadows/Shadows.html" ><img src="/images/shadows.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/3ds_load/sandbox.html" ><img src="/images/torusknot1.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/image3d/sandbox.html" ><img src="/images/image3d1.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/webcam/webcam.html" ><img src="/images/webcamp.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/box2d/box2d.swf" ><img src="/images/box2d.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/reflect_away3d/reflect_away3d.html" ><img src="/images/reflect3.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/jiglib_away3d/jiglib_away3d.html" ><img src="/images/jiglib_big.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/reflect_camera2/reflect_camera.html" ><img src="/images/bigreflect.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/cash/cash.html" ><img src="/images/cash.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_heightmap/away3d_heightmap.html" ><img src="/images/water.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_morph/away3d_morph.html" ><img src="/images/morph.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/away3d_HeightMapModifier.html" ><img src="/images/hmm.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_motion/away3d_motion.html" ><img src="/images/motionblur.jpg" width="150" height="150"></a></li>
+    <li><a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_drunk/away3d_drunk.html" ><img src="/images/drunk.jpg" width="150" height="150"></a></li>
+</ul>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Flash Player 10.1]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/06/10/flash-player-10-1/"/>
+    <updated>2010-06-10T08:55:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/06/10/flash-player-10-1</id>
+    <content type="html"><![CDATA[<p>I was checking in on a <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/dab6061d8a064d57?hl=en" target="_blank">performance thread</a> I started on the <a href="http://groups.google.com/group/away3d-dev" target="_blank">Away3D development mailing list</a> and came upon a tidbit that is quite exciting.  One of the users informed me that Flash Player 10.1 was expected to be a big "game changer" in terms of performance for Away3D.  Always skeptical, I had to check it out myself.</p>
+
+<p>I checked my demo in my last post and was getting around 27 FPS.  I then updated to the <a href="http://labs.adobe.com/downloads/flashplayer10.html" target="_blank">pre-release of Flash Player 10.1</a> and reloaded the demo.  I was shocked to see my average frame per second jump to almost 40!  <strong>Without changing a bit of code I got a 30% boost in performance.</strong> Very cool.  Can't wait to see what's next as 3D in Flash becomes more mature.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: should.js | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/should-js/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Custom assertions in should.js]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/05/29/custom-assertions-in-should-dot-js/"/>
+    <updated>2014-05-29T14:47:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/05/29/custom-assertions-in-should-dot-js</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/visionmedia/should.js">should.js</a> is my assertion library of choice when unit testing my <a href="http://nodejs.org/">node.js</a> and <a href="http://www.appcelerator.com/titanium/">Titanium</a> projects, for a few reasons:</p>
+
+<ol>
+<li>Works flawlessly with <a href="http://visionmedia.github.io/mocha/">mocha</a>. Not a surprise since they have the same <a href="https://github.com/visionmedia">author</a>.</li>
+<li>Works in node.js, browser, and Titanium.</li>
+<li>Extremely readable and <span class="readme">expressive</span>.</li>
+<li>Extendable to be even better at #3, if you know how.</li>
+</ol>
+
+
+<!-- more -->
+
+
+<p>Here I'd like to explain exactly how you can do #4. I was originally inspired by <a href="http://beyondoverload.wordpress.com/2012/01/19/custom-assertions-with-should-js/">this post</a>, but the method therein made available only a small subset of should.js's assertion functionality. To quote Freddy Mercury, <strong><em>♫ I want it all, and I want it now. ♫</em></strong></p>
+
+<h2>Test Case</h2>
+
+<p>Let's say you have a configuration file that must abide by this format:</p>
+
+<h3>config.json</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;string value&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">1234</span><span class="p">,</span>
+</span><span class='line'><span class="s2">&quot;isSomething&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We'd like to strictly enforce that format using assertions. Lots of them. A ridiculous amount in fact. Yes, it could be done much more tersely, but it helps express the point of customization. Let's do it in a mocha <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> structure.</p>
+
+<h2>No Custom Assertions</h2>
+
+<h3>test.js</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">mocha</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mocha&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should be valid&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// assuming getConfigToTest() returns the object to be tested...</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">getConfigToTest</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">an</span><span class="p">.</span><span class="nb">Object</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Number</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Boolean</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Here we're effectively asserting the format of the configuration, but we're losing a bit of the expressiveness of should.js in the process. We've essentially got 11 lines of assertion code when what we really just want to say is</p>
+
+<blockquote><p>this object should be a valid config</p></blockquote>
+
+<p>In addition, what if we want to validate the config at the beginning of many tests and keep it <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY</a>? It's undoubtedly getting messy fast here.</p>
+
+<h2>Custom Assertions</h2>
+
+<p>Let's say "this object is a valid config" <em>exactly</em> by creating a <span class="readme">custom assertion</span> within should.js. And let's go one step further and show how this custom assertion can be placed in a separate module. This will make our tests as simple, clean, and expressive as possible.</p>
+
+<p>I'm going to explain some of the should.js assertion internals inline, but for more details I'd highly suggest perusing the <a href="https://github.com/visionmedia/should.js">source code</a>, particularly the <a href="https://github.com/visionmedia/should.js/tree/master/lib/ext">extensions</a>.</p>
+
+<h3>assertions.js</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// the name of the custom assertion</span>
+</span><span class='line'><span class="s1">&#39;ValidConfig&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// the implementation of the custom assertion</span>
+</span><span class='line'><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// `this.params` defines what text is associated with the</span>
+</span><span class='line'>    <span class="c1">// pass/fail state of your custom assertion</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to be a valid config&#39;</span> <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// `this.obj` refers to the object in the should.js chain upon</span>
+</span><span class='line'>    <span class="c1">// which the assertion will be applied. `foo` would be `this.obj`</span>
+</span><span class='line'>    <span class="c1">// in this example:</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'>    <span class="c1">//     foo.should.be.a.String;</span>
+</span><span class='line'>    <span class="c1">//</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// the assertion itself, just as above</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">an</span><span class="p">.</span><span class="nb">Object</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Number</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">should</span><span class="p">.</span><span class="nx">exist</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">config</span><span class="p">.</span><span class="nx">isSomething</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Boolean</span><span class="p">;</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// is this a getter, meaning no function call?</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="c1">//     foo.should.be.a.String         // getter</span>
+</span><span class='line'><span class="c1">//     foo.should.be.equal(&#39;string&#39;); // not a getter</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="kc">true</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>and now are unit test looks like this:</p>
+
+<h3>test.js</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">mocha</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mocha&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should be valid&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">getConfigToTest</span><span class="p">().</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">ValidConfig</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Aaaaaahhh, now that is <em><span class="readme">nice</span></em>. It should be pretty clear at this point how custom assertions can improve the readability and scalability of your test suites. It becomes clearer as your test suites grow.</p>
+
+<h2>Examples</h2>
+
+<p>Just in case you aren't convinced, here's a few more examples of using custom assertions in should.js to execute critical testing while preserving maximal expressiveness.</p>
+
+<h3>Titanium Proxies</h3>
+
+<p>Remember, <a href="http://tonylukasavage.com/ti-mocha/#caveats">Titanium proxies don't play well with should.js</a>, so you need to wrap them manually before running assertions.</p>
+
+<h4>assertions.js</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;TitaniumProxy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to be a Titanium proxy&#39;</span> <span class="p">};</span>
+</span><span class='line'><span class="nx">should</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">).</span><span class="nx">be</span><span class="p">.</span><span class="nx">an</span><span class="p">.</span><span class="nb">Object</span><span class="p">;</span>
+</span><span class='line'><span class="nx">should</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">applyProperties</span><span class="p">).</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">Function</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>usage</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">),</span>
+</span><span class='line'><span class="nx">win</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createWindow</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">(</span><span class="nx">win</span><span class="p">).</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">TitaniumProxy</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Format Validation</h3>
+
+<p>Here's a simple case of validating that a given object is an XML string using <a href="https://github.com/jindw/xmldom">xmldom</a>.</p>
+
+<h4>assertions.js</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">DOMParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;xmldom&#39;</span><span class="p">).</span><span class="nx">DOMParser</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;Xml&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to be a valid XML string&#39;</span> <span class="p">};</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">DOMParser</span><span class="p">().</span><span class="nx">parseFromString</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>usage</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">xml</span> <span class="o">=</span> <span class="s1">&#39;&lt;root&gt;&lt;node/&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">xml</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">XML</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Complex matchers</h3>
+
+<p>You can even do some really complex validating using functions instead of getters. Here's an example of asserting that a chunk of Javascript will be be minified into an expected string using <a href="https://github.com/mishoo/UglifyJS2">uglifyjs</a>.</p>
+
+<h4>assertions.js</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">UglifyJS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;uglify-js&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">should</span><span class="p">.</span><span class="nx">Assertion</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;minifyTo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;to minify to `&#39;</span> <span class="o">+</span> <span class="nx">str</span> <span class="o">+</span> <span class="s1">&#39;`&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">expected</span><span class="o">:</span> <span class="nx">str</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">showDiff</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nb">String</span><span class="p">;</span>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">UglifyJS</span><span class="p">.</span><span class="nx">minify</span><span class="p">(</span><span class="s1">&#39;test.js&#39;</span><span class="p">).</span><span class="nx">code</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">result</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">should</span><span class="p">.</span><span class="nx">not</span><span class="p">.</span><span class="k">throw</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>usage</h4>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">assertions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./assertions&#39;</span><span class="p">),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">should</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">code</span> <span class="o">=</span> <span class="s1">&#39;var  foo = &quot;bar&quot;; var quux = 123;&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">code</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">minifyTo</span><span class="p">(</span><span class="s1">&#39;var foo=&quot;bar&quot;,quux=123;&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Resources &amp; Links</h2>
+
+<ul>
+<li>should.js on <a href="https://github.com/visionmedia/should.js">github</a> and lots of assertion <a href="https://github.com/visionmedia/should.js/tree/master/lib/ext">examples</a></li>
+<li>mocha <a href="http://visionmedia.github.io/mocha/">website</a> and <a href="https://github.com/visionmedia/mocha">github</a></li>
+<li><a href="http://beyondoverload.wordpress.com/2012/01/19/custom-assertions-with-should-js/">"Custom assertions with should.js"</a> by Andrew Swerlick</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

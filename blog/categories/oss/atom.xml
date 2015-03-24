@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: oss | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/oss/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Good-bye Appcelerator]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2015/03/24/good-bye-appcelerator/"/>
+    <updated>2015-03-24T08:20:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2015/03/24/good-bye-appcelerator</id>
+    <content type="html"><![CDATA[<p><img src="/images/codestrong.jpg" width="640" height="360" title="castaway" ></p>
+
+<p>It's been an amazing 3.5 years, but all incredible, life-and-career-changing experiences must eventually come to an end. This week I'll be leaving my role as Senior Engineer at <a href="http://www.appcelerator.com/">Appcelerator</a> and moving on to <a href="http://innovu.com/">Innovu</a>, a new startup in my hometown of Pittsburgh.</p>
+
+<!-- more -->
+
+
+<h2>Why?</h2>
+
+<p>Pure and simple, I have an opportunity to be the Director of Software Development at an up and coming startup run by a handful of people I've come to respect and trust over the course of over a decade. I'll be choosing the technology stack, building the team from the ground up (more on that <a href="#coming">below</a>), and having an impact on company success to a degree I never have before. It's a huge career move, it's a risk, and I'm ready for both.</p>
+
+<p>Despite how obviously fantastic this opportunity is, I still labored over the idea of leaving Appcelerator. I'm going to miss the whole crew a lot. Ironically, without having worked with a bunch of brilliant people on ground-breaking tech for an amazing developer community in the meat grinder of Silicon Valley, I wouldn't have the confidence to take this next big step. I blame Appcelerator for my ambition!</p>
+
+<h2>Thank you!</h2>
+
+<p>As I've said at least a dozen times in the last week, I've taken way more from my fellow Appcelerati than I think I've given. In particular, a few people I'd really like to thank (past and present):</p>
+
+<ul>
+<li><a href="https://twitter.com/jhaynie">Jeff Haynie</a> - For giving me an amount of trust and autonomy generally reserved for family members.</li>
+<li><a href="https://twitter.com/bingomar">Ingo Muschenetz</a> &amp; <a href="https://www.linkedin.com/in/neerajgupta1">Neeraj Gupta</a> - For doing the impossible: making a hip-shooting, code-slinging engineer see that process is <strong>incredible</strong> for productivity when executed properly.</li>
+<li><a href="https://twitter.com/cb1kenobi">Chris Barber</a> &amp; <a href="https://twitter.com/dawsontoth">Dawson Toth</a> - My insecure overachiever complex never allows me to get comfortable unless I think I'm the best developer in the room. Chris &amp; Dawson never let me get comfortable.</li>
+<li><a href="https://twitter.com/kevinwhinnery">Kevin Whinnery</a> - He's my spirit animal.</li>
+<li><a href="https://twitter.com/fusion94">Tony Guntharp</a> - For taking a loud-mouthed mobile development blogger and giving him a chance to put his money where his mouth is.</li>
+<li><a href="https://twitter.com/aaronksaunders">Aaron Saunders</a> &amp; <a href="https://twitter.com/fokkezb">Fokke Zandenberg</a> - The expanse of knowledge, contribution, and material these guys generated from the community over the years had most people assuming they were employees (and Fokke is now!). Thanks for setting the bar so high for the community.</li>
+<li><strong>The Appcelerator Community</strong> - Maybe I should have put you men and women first. The community is why I joined Appcelerator, and it's what drove me most days. When you build SDKs, frameworks, and tooling for a living, you celebrate vicariously through your community's innovations and successes. Fortunately for the engineers at Appcelerator, we got to enjoy these frequently. Keep on kicking ass.</li>
+</ul>
+
+
+<p>I'm sure there's a whole bunch of people I'm forgetting to thank, so to all of you, <strong>THANK YOU!</strong></p>
+
+<h2>What about your OSS projects?</h2>
+
+<p>As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an <a href="mailto:anthony.lukasavage@gmail.com">email</a> or just ping me on <a href="https://twitter.com/tonylukasavage">twitter</a>.</p>
+
+<ul>
+<li><a href="https://github.com/tonylukasavage/ti-mocha">ti-mocha</a> - Mocha testing ported to Titanium</li>
+<li><a href="https://github.com/tonylukasavage/triple">triple</a> - REPL for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/ti-commonjs">ti-commonjs</a> - node.js-style commonjs implementation for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/grunt-titanium">grunt-titanium</a> - Grunt plugin for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/grunt-alloy">grunt-alloy</a> - Grunt plugin for Alloy</li>
+<li><a href="https://github.com/tonylukasavage/tiapp.xml">tiapp.xml</a> - node.js module for editing tiapp.xml files</li>
+<li><a href="https://github.com/tonylukasavage/path.animator">path-animator</a> &amp; <a href="https://github.com/tonylukasavage/pathmenu.js">pathmenu.js</a> - iOS native module and Titanium code for Path-like menu</li>
+<li><a href="https://github.com/tonylukasavage/ti-fs">ti-fs</a> - node.js <code>fs</code> for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/ti-console">ti-console</a> - node.js <code>console</code> for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/vm-titanium">vm-titanium</a> - node.js <code>vm</code> for Titanium (experimental)</li>
+<li><a href="https://github.com/tonylukasavage/titanium-os">titanium-os</a> - node.js <code>os</code> for Titanium</li>
+</ul>
+
+
+<p><a name="coming"></a></p>
+
+<h2>Who's coming with me?</h2>
+
+<p>Now that I'm moving on to Innovu and building a new team, I'm curious if there's anybody out there (or anyone you know) who would want to come work with me? Here's some purposely terse job descriptions. I hate overly-detailed, impossible-to-meet criteria for tech jobs.</p>
+
+<p>Be smart. Want to learn. Play nice. Work hard. The rest is details.</p>
+
+<ul>
+<li><strong>Front-end Web Developer</strong> - Essentially I'm looking for someone hands-on with a strong background in web presentation and interaction. You should know what that encompasses for modern web development.</li>
+<li><strong>Javascript Developer</strong> - I want junior devs who at the very least have a good familiarity with Javascript and want to work with both node.js and web technologies. Committment to education exceeds the need for existing chops.</li>
+</ul>
+
+
+<p>Python, Postgres, and AWS experience a plus for either. Like I mentioned above, shoot me an <a href="mailto:alukasavage@innovu.com">email</a> if you're interested or know someone who might be.</p>
+
+<h2>It's not like I'm dying or anything</h2>
+
+<p>I'll be around. You know where to <a href="https://twitter.com/tonylukasavage">find me</a>. I'll still be very active in the open source community. I'll even be likely to host the local <a href="http://www.meetup.com/Pittsburgh-JavaScript/">Pittsburgh Javascript meetup</a> at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!</p>
+
+<p>In closing, I'll just leave you with this: <em>{{profound_life_and_career_insight}}</em></p>
+]]></content>
+  </entry>
+  
+</feed>

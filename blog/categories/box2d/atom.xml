@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: box2d | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/box2d/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Box2D JS - Physics in HTML5 &amp; Javascript Guide]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/11/21/box2d-js---physics-in-html5--amp--javascript-guide/"/>
+    <updated>2010-11-21T23:29:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/11/21/box2d-js---physics-in-html5--amp--javascript-guide</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/box2djs/helloworld.html" class="fancybox.iframe"><img title="helloworld" src="http://tonylukasavage.github.com/images/helloworld_medium.jpg" alt="" width="624" height="275" /></a></p>
+
+
+<p><strong>I hate to do it, but I highly recommend the <span style="color:#ff0000;">Google Chrome</span> browser for this demo.  In other browsers it may take a while to load and runs slower.</strong></p>
+
+<p>&rarr; Click on the demo above or <a href="http://tonylukasavage.github.com/demos/box2djs/helloworld.html">here</a>, then right click to view source
+&rarr; Download the <a href="http://sourceforge.net/projects/box2d-js/files/" target="_blank">Box2D JS library</a>
+&rarr; Download the <a href="http://tonylukasavage.github.com/demos/box2djs/box2djs.js">concatenated version</a> (~350KB)
+&rarr; Download the <a href="http://tonylukasavage.github.com/demos/box2djs/box2djs.min.js">minified version</a> (~170 KB)</p>
+
+<h2>The Overview</h2>
+
+<p>Some of you might remember the Box2DFlashAS3 demo I did a while ago.  Well here's its HTML5 counter-part, with the help of <a href="http://box2d-js.sourceforge.net/" target="_blank">Box2D JS</a>.  Box2D is the Javascript port of the <a href="http://box2dflash.sourceforge.net/" target="_blank">Box2DFlashAS3 library</a>, which in turn is a port of the <a href="http://www.box2d.org/">Box2D C++ library</a>.  Put simply, this library allows you to apply 2 dimensional physics to objects on your HTML5 canvas element.  Just click anywhere on the demo above to see what I mean.</p>
+
+<p>The code behind this is a condensed, easier-to-follow version of the demo code available by viewing the page source at the <a href="http://box2d-js.sourceforge.net/" target="_blank">Box2D JS site</a>.  I personally found it a little tough to follow initially and really wanted to avoid the large amount of individual includes necessary to get it working.  To that end I created the concatenated and minified versions downloadable above.  So basically the includes necessary go from this:</p>
+
+<p>``` javascript</p>
+
+<!--[if IE]><script type="text/javascript" src="lib/excanvas.js"></script><![endif]-->
+
+
+<script src="lib/prototype-1.6.0.2.js"></script>
+
+
+
+
+<!-- box2djs -->
+
+
+<script src='js/box2d/common/b2Settings.js'></script>
+
+
+<script src='js/box2d/common/math/b2Vec2.js'></script>
+
+
+<script src='js/box2d/common/math/b2Mat22.js'></script>
+
+
+<script src='js/box2d/common/math/b2Math.js'></script>
+
+
+<script src='js/box2d/collision/b2AABB.js'></script>
+
+
+<script src='js/box2d/collision/b2Bound.js'></script>
+
+
+<script src='js/box2d/collision/b2BoundValues.js'></script>
+
+
+<script src='js/box2d/collision/b2Pair.js'></script>
+
+
+<script src='js/box2d/collision/b2PairCallback.js'></script>
+
+
+<script src='js/box2d/collision/b2BufferedPair.js'></script>
+
+
+<script src='js/box2d/collision/b2PairManager.js'></script>
+
+
+<script src='js/box2d/collision/b2BroadPhase.js'></script>
+
+
+<script src='js/box2d/collision/b2Collision.js'></script>
+
+
+<script src='js/box2d/collision/Features.js'></script>
+
+
+<script src='js/box2d/collision/b2ContactID.js'></script>
+
+
+<script src='js/box2d/collision/b2ContactPoint.js'></script>
+
+
+<script src='js/box2d/collision/b2Distance.js'></script>
+
+
+<script src='js/box2d/collision/b2Manifold.js'></script>
+
+
+<script src='js/box2d/collision/b2OBB.js'></script>
+
+
+<script src='js/box2d/collision/b2Proxy.js'></script>
+
+
+<script src='js/box2d/collision/ClipVertex.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2Shape.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2ShapeDef.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2BoxDef.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2CircleDef.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2CircleShape.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2MassData.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2PolyDef.js'></script>
+
+
+<script src='js/box2d/collision/shapes/b2PolyShape.js'></script>
+
+
+<script src='js/box2d/dynamics/b2Body.js'></script>
+
+
+<script src='js/box2d/dynamics/b2BodyDef.js'></script>
+
+
+<script src='js/box2d/dynamics/b2CollisionFilter.js'></script>
+
+
+<script src='js/box2d/dynamics/b2Island.js'></script>
+
+
+<script src='js/box2d/dynamics/b2TimeStep.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2ContactNode.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2Contact.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2ContactConstraint.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2ContactConstraintPoint.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2ContactRegister.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2ContactSolver.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2CircleContact.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2Conservative.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2NullContact.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2PolyAndCircleContact.js'></script>
+
+
+<script src='js/box2d/dynamics/contacts/b2PolyContact.js'></script>
+
+
+<script src='js/box2d/dynamics/b2ContactManager.js'></script>
+
+
+<script src='js/box2d/dynamics/b2World.js'></script>
+
+
+<script src='js/box2d/dynamics/b2WorldListener.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2JointNode.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2Joint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2JointDef.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2DistanceJoint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2DistanceJointDef.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2Jacobian.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2GearJoint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2GearJointDef.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2MouseJoint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2MouseJointDef.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2PrismaticJoint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2PrismaticJointDef.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2PulleyJoint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2PulleyJointDef.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2RevoluteJoint.js'></script>
+
+
+<script src='js/box2d/dynamics/joints/b2RevoluteJointDef.js'></script>
+
+
+<p>```</p>
+
+<p>to this:</p>
+
+<p>``` javascript</p>
+
+<!--[if IE]><script type="text/javascript" src="lib/excanvas.js"></script><![endif]-->
+
+
+<script src="lib/prototype-1.6.0.2.js"></script>
+
+
+<script src="box2djs.min.js"></script>
+
+
+<p>```</p>
+
+<p>You still need to download Box2D JS for its dependencies on <a href="http://www.prototypejs.org/" target="_blank">Prototype</a> and <a href="http://excanvas.sourceforge.net/" target="_blank">excanvas</a>, but using my single file versions of the library will make getting started much cleaner and easier.  OK, enough of the back story, on to the code.</p>
+
+<h2>The Code</h2>
+
+<p>``` javascript
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"></p>
+
+<pre><code>&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt;SavageLook.com - Box2D JS Hello World&lt;/title&gt;
+&lt;!--[if IE]&gt;&lt;script type="text/javascript" src="lib/excanvas.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;
+&lt;script src="lib/prototype-1.6.0.2.js"&gt;&lt;/script&gt;
+&lt;script src="box2djs.min.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+var world;
+var ctx;
+var canvasWidth;
+var canvasHeight;
+var canvasTop;
+var canvasLeft;
+
+function drawWorld(world, context) {
+    for (var j = world.m_jointList; j; j = j.m_next) {
+        drawJoint(j, context);
+    }
+    for (var b = world.m_bodyList; b; b = b.m_next) {
+        for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+            drawShape(s, context);
+        }
+    }
+
+    ctx.font = 'bold 18px arial';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#000000';
+    ctx.fillText("Click the screen to add more objects", 400, 20);
+    ctx.font = 'bold 14px arial';
+    ctx.fillText("Performance will vary by browser", 400, 40);
+
+}
+
+function drawJoint(joint, context) {
+    var b1 = joint.m_body1;
+    var b2 = joint.m_body2;
+    var x1 = b1.m_position;
+    var x2 = b2.m_position;
+    var p1 = joint.GetAnchor1();
+    var p2 = joint.GetAnchor2();
+    context.strokeStyle = '#00eeee';
+    context.beginPath();
+    switch (joint.m_type) {
+    case b2Joint.e_distanceJoint:
+        context.moveTo(p1.x, p1.y);
+        context.lineTo(p2.x, p2.y);
+        break;
+
+    case b2Joint.e_pulleyJoint:
+        // TODO
+        break;
+
+    default:
+        if (b1 == world.m_groundBody) {
+            context.moveTo(p1.x, p1.y);
+            context.lineTo(x2.x, x2.y);
+        }
+        else if (b2 == world.m_groundBody) {
+            context.moveTo(p1.x, p1.y);
+            context.lineTo(x1.x, x1.y);
+        }
+        else {
+            context.moveTo(x1.x, x1.y);
+            context.lineTo(p1.x, p1.y);
+            context.lineTo(x2.x, x2.y);
+            context.lineTo(p2.x, p2.y);
+        }
+        break;
+    }
+    context.stroke();
+}
+
+function drawShape(shape, context) {
+    context.strokeStyle = '#ffffff';
+    if (shape.density == 1.0) {
+        context.fillStyle = "red";
+    } else {
+        context.fillStyle = "black";
+    }
+    context.beginPath();
+    switch (shape.m_type) {
+    case b2Shape.e_circleShape:
+        {
+            var circle = shape;
+            var pos = circle.m_position;
+            var r = circle.m_radius;
+            var segments = 16.0;
+            var theta = 0.0;
+            var dtheta = 2.0 * Math.PI / segments;
+
+            // draw circle
+            context.moveTo(pos.x + r, pos.y);
+            for (var i = 0; i &lt; segments; i++) {
+                var d = new b2Vec2(r * Math.cos(theta), r * Math.sin(theta));
+                var v = b2Math.AddVV(pos, d);
+                context.lineTo(v.x, v.y);
+                theta += dtheta;
+            }
+            context.lineTo(pos.x + r, pos.y);
+
+            // draw radius
+            context.moveTo(pos.x, pos.y);
+            var ax = circle.m_R.col1;
+            var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
+            context.lineTo(pos2.x, pos2.y);
+        }
+        break;
+    case b2Shape.e_polyShape:
+        {
+            var poly = shape;
+            var tV = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[0]));
+            context.moveTo(tV.x, tV.y);
+            for (var i = 0; i &lt; poly.m_vertexCount; i++) {
+                var v = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[i]));
+                context.lineTo(v.x, v.y);
+            }
+            context.lineTo(tV.x, tV.y);
+        }
+        break;
+    }
+    context.fill();
+    context.stroke();
+}
+
+function createWorld() {
+    var worldAABB = new b2AABB();
+    worldAABB.minVertex.Set(-1000, -1000);
+    worldAABB.maxVertex.Set(1000, 1000);
+    var gravity = new b2Vec2(0, 300);
+    var doSleep = true;
+    world = new b2World(worldAABB, gravity, doSleep);
+    createGround(world);
+    return world;
+}
+
+function createGround(world) {
+    var groundSd = new b2BoxDef();
+    groundSd.extents.Set(400, 30);
+    groundSd.restitution = 0.0;
+    var groundBd = new b2BodyDef();
+    groundBd.AddShape(groundSd);
+    groundBd.position.Set(400, 470);
+    return world.CreateBody(groundBd);
+}
+
+function createBall(world, x, y) {
+    var ballSd = new b2CircleDef();
+    ballSd.density = 1.0;
+    ballSd.radius = 20;
+    ballSd.restitution = 0.5;
+    ballSd.friction = 0.5;
+    var ballBd = new b2BodyDef();
+    ballBd.AddShape(ballSd);
+    ballBd.position.Set(x,y);
+    return world.CreateBody(ballBd);
+}
+
+function createHelloWorld() {
+    // H
+    createBox(world, 50, 420, 10, 20, false);
+    createBox(world, 90, 420, 10, 20, false);
+    createBox(world, 70, 395, 30, 5, false);
+    createBox(world, 50, 370, 10, 20, false);
+    createBox(world, 90, 370, 10, 20, false);
+
+    // E
+    createBox(world, 140, 435, 30, 5, false);
+    createBox(world, 120, 420, 10, 10, false);
+    createBox(world, 130, 405, 20, 5, false);
+    createBox(world, 120, 390, 10, 10, false);
+    createBox(world, 140, 375, 30, 5, true);
+
+    // L
+    createBox(world, 200, 435, 20, 5, false);
+    createBox(world, 185, 400, 5, 30, false);
+
+    // L
+    createBox(world, 250, 435, 20, 5, false);
+    createBox(world, 235, 400, 5, 30, false);
+
+    // O
+    createBox(world, 300, 435, 20, 5, false);
+    createBox(world, 285, 405, 5, 25, false);
+    createBox(world, 315, 405, 5, 25, false);
+    createBox(world, 300, 375, 20, 5, false);
+
+    // W
+    createBox(world, 390, 435, 40, 5, false);
+    createBox(world, 360, 390, 10, 40, false);
+    createBox(world, 420, 390, 10, 40, false);
+    createBox(world, 390, 415, 5, 15, false);
+
+    // O
+    createBox(world, 460, 435, 20, 5, false);
+    createBox(world, 445, 405, 5, 25, false);
+    createBox(world, 475, 405, 5, 25, false);
+    createBox(world, 460, 375, 20, 5, false);
+
+    // R
+    createBox(world, 495, 410, 5, 30, false);
+    createBox(world, 518, 425, 5, 15, false);
+    createBox(world, 515, 405, 15, 5, false);
+    createBox(world, 525, 390, 5, 10, false);
+    createBox(world, 510, 375, 20, 5, false);
+
+    // L
+    createBox(world, 560, 435, 20, 5, false);
+    createBox(world, 545, 400, 5, 30, false);
+
+    // D
+    createBox(world, 610, 435, 20, 5, false);
+    createBox(world, 595, 405, 5, 25, false);
+    createBox(world, 625, 405, 5, 25, false);
+    createBox(world, 610, 375, 20, 5, false);
+
+    // !
+    createBox(world, 650, 430, 10, 10, false);
+    createBox(world, 650, 380, 10, 40, false);
+}
+
+function createBox(world, x, y, width, height, fixed) {
+    if (typeof(fixed) == 'undefined') fixed = true;
+    var boxSd = new b2BoxDef();
+    if (!fixed) boxSd.density = 1.0;
+    boxSd.restitution = 0.0;
+    boxSd.friction = 1.0;
+    boxSd.extents.Set(width, height);
+    var boxBd = new b2BodyDef();
+    boxBd.AddShape(boxSd);
+    boxBd.position.Set(x,y);
+    return world.CreateBody(boxBd);
+}
+
+function step(cnt) {
+    var stepping = false;
+    var timeStep = 1.0/60;
+    var iteration = 1;
+    world.Step(timeStep, iteration);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    drawWorld(world, ctx);
+    setTimeout('step(' + (cnt || 0) + ')', 10);
+}
+
+// main entry point
+Event.observe(window, 'load', function() {
+    world = createWorld();
+    ctx = $('canvas').getContext('2d');
+    var canvasElm = $('canvas');
+    canvasWidth = parseInt(canvasElm.width);
+    canvasHeight = parseInt(canvasElm.height);
+    canvasTop = parseInt(canvasElm.style.top);
+    canvasLeft = parseInt(canvasElm.style.left);
+
+    createHelloWorld();
+
+    Event.observe('canvas', 'click', function(e) {
+            if (Math.random() &gt; 0.5) {
+                //createBox(world, Event.pointerX(e), Event.pointerY(e), 10, 10, false);
+                createBox(world, e.clientX, e.clientY, 10, 10, false);
+            } else {
+                createBall(world, Event.pointerX(e), Event.pointerY(e));
+            }
+    });
+    step();
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body style="margin:0px;"&gt;
+    &lt;canvas id="canvas" width='800' height='500' style="background-color:#eeeeee;"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p> </html>
+```</p>
+
+<hr>
+
+
+<h2>The Breakdown</h2>
+
+<p>``` javascript
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"></p>
+
+<pre><code>&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt;SavageLook.com - Box2D JS Hello World&lt;/title&gt;
+&lt;!--[if IE]&gt;&lt;script type="text/javascript" src="lib/excanvas.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;
+&lt;script src="lib/prototype-1.6.0.2.js"&gt;&lt;/script&gt;
+&lt;script src="box2djs.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>We start by including the scripts necessary to make Box2D JS work.  In order, we need excanvas (included in the Box2D JS distribution) in order to account for the fact that all current released version of Internet Explorer do not support the HTML canvas element.  Next we include the Prototype Javascript framework, also included with Box2D JS.  Finally we include my minified version of the library.  Now we can get started building physics into our canvas element.</p>
+
+<hr>
+
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+    var world;
+    var ctx;
+    var canvasWidth;
+    var canvasHeight;
+    var canvasTop;
+    var canvasLeft;
+
+    function drawWorld(world, context) {
+        for (var j = world.m_jointList; j; j = j.m_next) {
+            drawJoint(j, context);
+        }
+        for (var b = world.m_bodyList; b; b = b.m_next) {
+            for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+                drawShape(s, context);
+            }
+        }
+
+        ctx.font = 'bold 18px arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#000000';
+        ctx.fillText("Click the screen to add more objects", 400, 20);
+        ctx.font = 'bold 14px arial';
+        ctx.fillText("Performance will vary by browser", 400, 40);
+
+    }
+```
+
+Here we declare our global variables that define the "world" the physics exist in and the context, dimensions, and position of the canvas element.
+
+Also we have our drawWorld() function that will, as the name implies, draw the shapes and joints that compose the Box2D JS world.  Each of these objects is iterated through and drawn individually.  They are added to the world with the createBody() function.  An important thing to note is that in the case of this demo, drawWorld() will be called with each "step".  Think of your canvas as an animation and each call to drawWorld() as a frame.  Should be a simple concept for you Flash devs out there ;)
+<hr>
+
+``` javascript
+    function drawJoint(joint, context) {
+        var b1 = joint.m_body1;
+        var b2 = joint.m_body2;
+        var x1 = b1.m_position;
+        var x2 = b2.m_position;
+        var p1 = joint.GetAnchor1();
+        var p2 = joint.GetAnchor2();
+        context.strokeStyle = '#00eeee';
+        context.beginPath();
+        switch (joint.m_type) {
+        case b2Joint.e_distanceJoint:
+            context.moveTo(p1.x, p1.y);
+            context.lineTo(p2.x, p2.y);
+            break;
+
+        case b2Joint.e_pulleyJoint:
+            // TODO
+            break;
+
+        default:
+            if (b1 == world.m_groundBody) {
+                context.moveTo(p1.x, p1.y);
+                context.lineTo(x2.x, x2.y);
+            }
+            else if (b2 == world.m_groundBody) {
+                context.moveTo(p1.x, p1.y);
+                context.lineTo(x1.x, x1.y);
+            }
+            else {
+                context.moveTo(x1.x, x1.y);
+                context.lineTo(p1.x, p1.y);
+                context.lineTo(x2.x, x2.y);
+                context.lineTo(p2.x, p2.y);
+            }
+            break;
+        }
+        context.stroke();
+    }
+
+    function drawShape(shape, context) {
+        context.strokeStyle = '#ffffff';
+        if (shape.density == 1.0) {
+            context.fillStyle = "red";
+        } else {
+            context.fillStyle = "black";
+        }
+        context.beginPath();
+        switch (shape.m_type) {
+        case b2Shape.e_circleShape:
+            {
+                var circle = shape;
+                var pos = circle.m_position;
+                var r = circle.m_radius;
+                var segments = 16.0;
+                var theta = 0.0;
+                var dtheta = 2.0 * Math.PI / segments;
+
+                // draw circle
+                context.moveTo(pos.x + r, pos.y);
+                for (var i = 0; i < segments; i++) {
+                    var d = new b2Vec2(r * Math.cos(theta), r * Math.sin(theta));
+                    var v = b2Math.AddVV(pos, d);
+                    context.lineTo(v.x, v.y);
+                    theta += dtheta;
+                }
+                context.lineTo(pos.x + r, pos.y);
+
+                // draw radius
+                context.moveTo(pos.x, pos.y);
+                var ax = circle.m_R.col1;
+                var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
+                context.lineTo(pos2.x, pos2.y);
+            }
+            break;
+        case b2Shape.e_polyShape:
+            {
+                var poly = shape;
+                var tV = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[0]));
+                context.moveTo(tV.x, tV.y);
+                for (var i = 0; i < poly.m_vertexCount; i++) {
+                    var v = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[i]));
+                    context.lineTo(v.x, v.y);
+                }
+                context.lineTo(tV.x, tV.y);
+            }
+            break;
+        }
+        context.fill();
+        context.stroke();
+    }
+```
+
+Above are the body drawing functions: drawJoint() and drawShape().  I'm not going to get into much detail here, but just know that these functions are responsible for taking the physics bodies and giving them a visual representation.  They make calls to the canvas context 2D drawing API to create the shapes that give us our falling rectangles and circles.  This is the simplest case and requires no external dependencies.  In practical cases though, you will more likely find images or other more clever uses like this one:
+
+<object width="640" height="390"><param name="movie" value="http://www.youtube.com/v/ZTwrQSOHdX0&hl=en_US&feature=player_embedded&version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowScriptAccess" value="always"></param><embed src="http://www.youtube.com/v/ZTwrQSOHdX0&hl=en_US&feature=player_embedded&version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="390"></embed></object>
+<hr>
+
+``` javascript
+    function createWorld() {
+        var worldAABB = new b2AABB();
+        worldAABB.minVertex.Set(-1000, -1000);
+        worldAABB.maxVertex.Set(1000, 1000);
+        var gravity = new b2Vec2(0, 300);
+        var doSleep = true;
+        world = new b2World(worldAABB, gravity, doSleep);
+        createGround(world);
+        return world;
+    }
+```
+
+This is where the Box2D JS physics world is created.  We define the bounds for the AABB physics with the minVertex and maxVertex properties and set the vector of gravity.  After we create those we apply them to a newly created world and create the ground that will be the base of our scene.
+<hr>
+
+``` javascript
+    function createGround(world) {
+        var groundSd = new b2BoxDef();
+        groundSd.extents.Set(400, 30);
+        groundSd.restitution = 0.0;
+        var groundBd = new b2BodyDef();
+        groundBd.AddShape(groundSd);
+        groundBd.position.Set(400, 470);
+        return world.CreateBody(groundBd);
+    }
+
+    function createBall(world, x, y) {
+        var ballSd = new b2CircleDef();
+        ballSd.density = 1.0;
+        ballSd.radius = 20;
+        ballSd.restitution = 0.5;
+        ballSd.friction = 0.5;
+        var ballBd = new b2BodyDef();
+        ballBd.AddShape(ballSd);
+        ballBd.position.Set(x,y);
+        return world.CreateBody(ballBd);
+    }
+
+        function createBox(world, x, y, width, height, fixed) {
+        if (typeof(fixed) == 'undefined') fixed = true;
+        var boxSd = new b2BoxDef();
+        if (!fixed) boxSd.density = 1.0;
+        boxSd.restitution = 0.0;
+        boxSd.friction = 1.0;
+        boxSd.extents.Set(width, height);
+        var boxBd = new b2BodyDef();
+        boxBd.AddShape(boxSd);
+        boxBd.position.Set(x,y);
+        return world.CreateBody(boxBd);
+    }
+```
+
+Above we have the body create functions: createGround(), createBall(), and createBox().  Other than the obvious, let's talk about a few things going on here.  Each body is defined by a shape definition, and each shape definition has a number of properties that dictate how it will behave in the Box2D JS world  (see the <a href="http://www.kyucon.com/doc/box2d/" target="_blank">Box2D docs</a> for details).  Restitution, friction, and density affect how the shapes fall, move, and react.
+
+The extents define the dimensions of the shapes, but probably not how you are accustomed.  Extents represent the distance from one corner of the shape to its center.  So a 100x100 box is actually defined by the extents shapeDef.extents.Set(50,50).
+
+The shape definition is then used to define a body definition.  The body is then positioned in the world.  The positioning, like extents, is also based on the center of the body, not its corner.  Finally, the newly defined body, based on the shape definition, is added the world with the CreateBody() function.
+<hr>
+
+``` javascript
+    function createHelloWorld() {
+        // H
+        createBox(world, 50, 420, 10, 20, false);
+        createBox(world, 90, 420, 10, 20, false);
+        createBox(world, 70, 395, 30, 5, false);
+        createBox(world, 50, 370, 10, 20, false);
+        createBox(world, 90, 370, 10, 20, false);
+
+        // E
+        createBox(world, 140, 435, 30, 5, false);
+        createBox(world, 120, 420, 10, 10, false);
+        createBox(world, 130, 405, 20, 5, false);
+        createBox(world, 120, 390, 10, 10, false);
+        createBox(world, 140, 375, 30, 5, true);
+
+        // L
+        createBox(world, 200, 435, 20, 5, false);
+        createBox(world, 185, 400, 5, 30, false);
+
+        // L
+        createBox(world, 250, 435, 20, 5, false);
+        createBox(world, 235, 400, 5, 30, false);
+
+        // O
+        createBox(world, 300, 435, 20, 5, false);
+        createBox(world, 285, 405, 5, 25, false);
+        createBox(world, 315, 405, 5, 25, false);
+        createBox(world, 300, 375, 20, 5, false);
+
+        // W
+        createBox(world, 390, 435, 40, 5, false);
+        createBox(world, 360, 390, 10, 40, false);
+        createBox(world, 420, 390, 10, 40, false);
+        createBox(world, 390, 415, 5, 15, false);
+
+        // O
+        createBox(world, 460, 435, 20, 5, false);
+        createBox(world, 445, 405, 5, 25, false);
+        createBox(world, 475, 405, 5, 25, false);
+        createBox(world, 460, 375, 20, 5, false);
+
+        // R
+        createBox(world, 495, 410, 5, 30, false);
+        createBox(world, 518, 425, 5, 15, false);
+        createBox(world, 515, 405, 15, 5, false);
+        createBox(world, 525, 390, 5, 10, false);
+        createBox(world, 510, 375, 20, 5, false);
+
+        // L
+        createBox(world, 560, 435, 20, 5, false);
+        createBox(world, 545, 400, 5, 30, false);
+
+        // D
+        createBox(world, 610, 435, 20, 5, false);
+        createBox(world, 595, 405, 5, 25, false);
+        createBox(world, 625, 405, 5, 25, false);
+        createBox(world, 610, 375, 20, 5, false);
+
+        // !
+        createBox(world, 650, 430, 10, 10, false);
+        createBox(world, 650, 380, 10, 40, false);
+    }
+```
+
+Here's my addition to the Box2D JS code.  By using a series of stacked boxes I create the infamous programmer's first message, "Hello World!" (minus the comma, sorry).  No science or mystery here, just a lot of extents and positions for the boxes that compose my message.  And yes, I did cheat on the "E" and make it fixed, but not even I can defy the laws of physics for the sake of a code demo.
+<hr>
+
+``` javascript
+    function step(cnt) {
+        var stepping = false;
+        var timeStep = 1.0/60;
+        var iteration = 1;
+        world.Step(timeStep, iteration);
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        drawWorld(world, ctx);
+        setTimeout('step(' + (cnt || 0) + ')', 10);
+    }
+```
+
+The step() function is the what makes the whole thing work.  step() is called over and over, at specified intervals, to create the animation of our scene on the canvas.  The world's Step() function is first called to apply one iteration of physics to our world's bodies.  Next we clear the visual representation of the scene so that it can be redrawn by our drawWorld() function.  Finally we set the interval timer so that step() will be called again.  Again, Flash devs will recognize this as a similar methodology as using the ENTER_FRAME event.
+<hr>
+
+``` javascript
+    // main entry point
+    Event.observe(window, 'load', function() {
+        world = createWorld();
+        ctx = $('canvas').getContext('2d');
+        var canvasElm = $('canvas');
+        canvasWidth = parseInt(canvasElm.width);
+        canvasHeight = parseInt(canvasElm.height);
+        canvasTop = parseInt(canvasElm.style.top);
+        canvasLeft = parseInt(canvasElm.style.left);
+
+        createHelloWorld();
+
+        Event.observe('canvas', 'click', function(e) {
+                if (Math.random() > 0.5) {
+                    //createBox(world, Event.pointerX(e), Event.pointerY(e), 10, 10, false);
+                    createBox(world, e.clientX, e.clientY, 10, 10, false);
+                } else {
+                    createBall(world, Event.pointerX(e), Event.pointerY(e));
+                }
+        });
+        step();
+    });
+    </script>
+
+
+<p>```</p>
+
+<p>And this is where we kick everything off.  We use the Prototype event handling mechanism to wait until the window is loaded to start our code.  We first create the Box2D JS world and get the 2D context, dimensions, and position of our canvas.  After that I create the boxes that make up the Hello World message.  To finish up we listen for mouse clicks so that we can add more falling objects to the scene, since what good is a meticulously stacked Hello World if you can't turn it into a pile of rubble?  The first step() is kicked off and our scene is ready to go!</p>
+
+<hr>
+
+
+<p>``` html</p>
+
+<pre><code>&lt;/head&gt;
+&lt;body style="margin:0px;"&gt;
+    &lt;canvas id="canvas" width='800' height='500' style="background-color:#eeeeee;"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p> </html>
+```</p>
+
+<p>And to round out the breakdown, here's the actual instance of the canvas element.  Its a very simple container and allows for all the heavy lifting to be done in the Javascript.  Just a reminder, the canvas element will NOT work in Internet Explorer unless you have the conditional check that includes excanvas if necessary, or if you happen to be test driving the IE9 beta.</p>
+
+<h2>The Summary</h2>
+
+<p>OK, well that turned out a lot longer and wordier than I was expecting, but 2D physics being utilized in HTML5 and Javascript is a simple topic.  Hopefully, though, if you made it all the way through you have a much better understanding of how they all play together and how you will create Newtonian worlds of your own.</p>
+
+<p><strong><small_rant></strong>The difference in performance between different browsers is enough to drive you crazy.  In my personal experience, Chrome > Firefox > IE.  I know its early in the game and that <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie-9/home" target="_blank">IE 9</a> and <a href="http://www.mozilla.com/en-US/firefox/beta/" target="_blank">Firefox 4</a> will likely be right up to par with Chrome, but its this lag and inconsistency across the board that has me spending most of my web development time in Flash and AS3.</p>
+
+<p>Also, I had trouble making this work in all versions of IE, so if you run into any problems with a particular browser, please let me know.<strong></small_rant></strong></p>
+
+<p><strong>NOTE:</strong> The concatenated version of Box2D JS is a convenience I offer so that you don't have to do all the individual includes shown on the Box2D JS site's demos.  The minified version is that same concatenated version run through <a href="http://www.crockford.com/javascript/jsmin.html" target="_blank">JSMin</a>.  Both versions are based on version 0.1.0 of Box2D JS.  I am not a contributor to the Box2D JS project, just someone making it simpler to get into.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Box2DFlashAS3 v2.1a HelloWorld]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/18/box2dflashas3-v2-1a-helloworld/"/>
+    <updated>2010-08-18T14:34:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/18/box2dflashas3-v2-1a-helloworld</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/box2d/box2d.swf" class="fancybox.iframe"><img title="box2d" src="http://tonylukasavage.github.com/images/box2d.jpg" alt="" width="516" height="487" /></a></p>
+
+
+<p>Click the image above for the demo.
+<a href="http://tonylukasavage.github.com/demos/box2d/srcview/index.html" target="_self">Click here</a> or right click on the demo to view the source code.</p>
+
+<p>Inspired by <a href="http://www.youtube.com/watch?v=mnyynpq-TXo" target="_blank">this clip</a> of Box2D running on Android, I decided to dive into this 2D physics engine I have heard so much about.  While the version of Box2D I used is the AS3 version called <a href="http://www.box2dflash.org/" target="_blank">Box2DFlashAS3</a>, the <a href="http://www.box2d.org/" target="_blank">original version</a> is written in C++.  Basically it very simply lets you apply 2D physics to your objects, or "bodies," in AS3.</p>
+
+<p>Most of the examples and tutorials I saw were lacking 2 things:</p>
+
+<ol>
+    <li> A way to apply sprites to my "bodies" without the use of a flash project (FLA) file.</li>
+    <li>Code that was compatible with the latest version of Box2DFlashAS3, v2.1a at the time of this post.</li>
+</ol>
+
+
+<p>So to resolve that situation, or to account for my search engine deficiency, I present the HelloWorld example from the Box2DFlashAS3 2.1a distribution modified to be pure AS3:</p>
+
+<p>``` as3
+package {
+  /<em>
+   * Tony Lukasavage - SavageLook.com - 8/18/2010
+   * Box2DFlashAS3 2.1a HelloWorld example, minus the need for an accompanying FLA
+   *
+   * This the basic Box2DFlashAS3 HelloWorld.as file from the source distribution
+   * with some adjustments made so that you do not need an FLA file to compile and
+   * run the code.  A simple bonus for us pure AS3 guys.  Also a few minor modifications
+   * are made to account for changes between version 2.0 and 2.1, like adding a type
+   * for body definitions.  Finally, I threw in an click handler to toggle between
+   * normal and debug drawing.
+   *
+   </em>/</p>
+
+<p>  import Box2D.Collision.<em>;
+  import Box2D.Collision.Shapes.</em>;
+  import Box2D.Common.Math.<em>;
+  import Box2D.Dynamics.</em>;</p>
+
+<p>  import <strong>AS3</strong>.vec.Vector;</p>
+
+<p>  import com.adobe.viewsource.ViewSource;</p>
+
+<p>  import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.events.MouseEvent;
+  import flash.geom.Matrix;
+  import flash.text.TextField;
+  import flash.text.TextFormat;</p>
+
+<p>  [SWF(width="800", height="600", frameRate="30")]
+  public class box2d extends Sprite
+  {</p>
+
+<pre><code>private var _world:b2World;
+private var _velocityIterations:int = 10;
+private var _positionIterations:int = 10;
+private var _timeStep:Number = 1.0 / 30.0;
+private var _showDebug:Boolean = true;
+private var _debugSprite:Sprite;
+private var _bodySprites:Vector. = new Vector.();
+
+// Box2D uses meters for measurement, AS3 uses pixels.  1 meter = 30 pixels
+public var _worldRatio:int = 30;
+
+public function box2d()
+{
+  // Add event for main loop
+  addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
+  stage.addEventListener(MouseEvent.CLICK, onClick );
+
+  // add background gradient
+  var bg:Sprite = new Sprite();
+  var matrix:Matrix = new Matrix();
+  matrix.createGradientBox(stage.stageWidth, stage.stageHeight, Math.PI/2, 0, 0);
+  bg.graphics.beginGradientFill("linear", [0x9999ff, 0xffffff], [1, 1], [0, 255], matrix);
+  bg.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
+  bg.graphics.endFill();
+  addChild(bg);
+
+  // Define the gravity vector
+  var gravity:b2Vec2 = new b2Vec2(0.0, 10.0);
+
+  // Allow bodies to sleep
+  var doSleep:Boolean = true;
+
+  // Construct a world object
+  _world = new b2World(gravity, doSleep);
+
+  // set debug draw
+  var debugDraw:b2DebugDraw = new b2DebugDraw();
+  _debugSprite = new Sprite();
+  addChild(_debugSprite);
+  debugDraw.SetSprite(_debugSprite);
+  debugDraw.SetDrawScale(_worldRatio);
+  debugDraw.SetFillAlpha(0.5);
+  debugDraw.SetLineThickness(2);
+  debugDraw.SetAlpha(1);
+  debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+  _world.SetDebugDraw(debugDraw);
+
+  // Vars used to create bodies
+  var body:b2Body;
+  var bodyDef:b2BodyDef;
+  var boxShape:b2PolygonShape;
+  var circleShape:b2CircleShape;
+
+  // Adding sprite variable for dynamically creating body userData
+  var sprite:Sprite;
+  var groundHeight:int = 60;
+
+  sprite = new Sprite();
+  sprite.graphics.lineStyle(1);
+  sprite.graphics.beginFill(0x444444);
+  sprite.graphics.drawRect(-stage.stageWidth/2, -groundHeight/2, stage.stageWidth, groundHeight);
+  sprite.graphics.endFill();
+
+  bodyDef = new b2BodyDef();
+  bodyDef.type = b2Body.b2_staticBody;
+  bodyDef.position.Set(stage.stageWidth / _worldRatio / 2, (stage.stageHeight - sprite.height/2) / _worldRatio);
+  bodyDef.userData = sprite;
+  addChild(bodyDef.userData);
+
+  boxShape = new b2PolygonShape();
+  boxShape.SetAsBox(sprite.width/_worldRatio/2, sprite.height/_worldRatio/2);
+
+  var fixtureDef:b2FixtureDef = new b2FixtureDef();
+  fixtureDef.shape = boxShape;
+  fixtureDef.friction = 0.3;
+  fixtureDef.density = 0; // static bodies require zero density
+
+  body = _world.CreateBody(bodyDef);
+  body.CreateFixture(fixtureDef);
+
+  // Add some objects
+  for (var i:int = 1; i &lt; 20; i++) {
+    // create generic body definition
+    bodyDef = new b2BodyDef();
+    bodyDef.type = b2Body.b2_dynamicBody;
+    bodyDef.position.x = Math.random() * 15 + 5;
+    bodyDef.position.y = Math.random() * 10;
+    var rX:Number = Math.random() + 0.5;
+    var rY:Number = Math.random() + 1;
+    var spriteX:Number = rX * 30 * 2;
+    var spriteY:Number = rY * 30 * 2;
+
+    // Box
+    if (Math.random() &lt; 0.5) {
+      sprite = new Sprite();
+      sprite.graphics.lineStyle(1);
+      sprite.graphics.beginFill(0xff6666);
+      sprite.graphics.drawRect(-spriteX/2, -spriteY/2, spriteX, spriteY);
+      sprite.graphics.endFill();
+      bodyDef.userData = sprite;
+
+      boxShape = new b2PolygonShape();
+      boxShape.SetAsBox(rX, rY);
+
+      fixtureDef.shape = boxShape;
+      fixtureDef.density = 1.0;
+      fixtureDef.friction = 0.5;
+      fixtureDef.restitution = 0.2;
+
+      body = _world.CreateBody(bodyDef);
+      body.CreateFixture(fixtureDef);
+    }
+    // Circle
+    else {
+      sprite = new Sprite();
+      sprite.graphics.lineStyle(1);
+      sprite.graphics.beginFill(0x44ff44);
+      sprite.graphics.drawCircle(0, 0, spriteX/2);
+      sprite.graphics.endFill();
+      bodyDef.userData = sprite;
+
+      circleShape = new b2CircleShape(rX);
+
+      fixtureDef.shape = circleShape;
+      fixtureDef.density = 1.0;
+      fixtureDef.friction = 0.5;
+      fixtureDef.restitution = 0.2;
+
+      body = _world.CreateBody(bodyDef);
+      body.CreateFixture(fixtureDef);
+    }
+
+    _bodySprites.push(bodyDef.userData as Sprite);
+    addChild(bodyDef.userData);
+  }
+
+  // enable view source
+  ViewSource.addMenuItem(this, "srcview/index.html");
+  var text:TextField = new TextField();
+  text.text = "Right click to view source";
+  text.setTextFormat(new TextFormat("arial", 14, 0, true));
+  text.x = 20;
+  text.y = 20;
+  text.width = 200;
+  addChild(text);
+}
+
+public function onClick(e:MouseEvent):void {
+  _showDebug = !_showDebug;
+  if (!_showDebug) {
+    _debugSprite.graphics.clear();
+  }
+  for each (var sprite:Sprite in _bodySprites) {
+    sprite.visible = !_showDebug;
+  }
+}
+
+public function Update(e:Event):void{
+  _world.Step(_timeStep, _velocityIterations, _positionIterations);
+  if (_showDebug) {
+    _world.DrawDebugData();
+  }
+
+  // Go through body list and update sprite positions/rotations
+  for (var bb:b2Body = _world.GetBodyList(); bb; bb = bb.GetNext()){
+    if (bb.GetUserData() is Sprite){
+      var sprite:Sprite = bb.GetUserData() as Sprite;
+      sprite.x = bb.GetPosition().x * 30;
+      sprite.y = bb.GetPosition().y * 30;
+      sprite.rotation = bb.GetAngle() * (180/Math.PI);
+    }
+  }
+}
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Very cool stuff that adds lots of possibilities to your Flash projects.  I can't wait to start playing with the more complex aspects like joints, buoyancy and breakable bodies.  More intensely awesome demos sure to follow.</p>
+]]></content>
+  </entry>
+  
+</feed>

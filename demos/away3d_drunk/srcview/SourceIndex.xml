@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of away3d_drunk</title>
+	<nodes>
+		<node label="src">
+			<node label="images">
+				<node icon="imageIcon" label="cylinder01.jpg" url="source/images/cylinder01.jpg.html"/>
+			</node>
+			<node icon="mxmlAppIcon" selected="true" label="away3d_drunk.mxml" url="source/away3d_drunk.mxml.html"/>
+			<node icon="mxmlIcon" label="Away3dUIComponent.mxml" url="source/Away3dUIComponent.mxml.html"/>
+			<node icon="imageIcon" label="homebar.jpg" url="source/homebar.jpg.html"/>
+			<node icon="imageIcon" label="table.jpg" url="source/table.jpg.html"/>
+			<node icon="actionScriptIcon" label="WineBottle.as" url="source/WineBottle.as.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 514K)" url="away3d_drunk.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

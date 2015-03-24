@@ -1,0 +1,1110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ios | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Automata: Conway's "Game of Life" using Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2013/07/29/automata-conways-game-of-life-using-appcelerator-titanium/"/>
+    <updated>2013-07-29T11:23:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2013/07/29/automata-conways-game-of-life-using-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<p><a class="fancybox.iframe" href="http://tonylukasavage.github.com/images/automata.png" ><img src="http://tonylukasavage.github.com/images/automata.png" style="width:33%; float:right; margin-left:10px;"></a></p>
+
+<p><strong>Get the source:</strong> <a href="https://github.com/tonylukasavage/Automata">Automata on Github</a></p>
+
+<p>Every once in a while I like to engage in some wildly impractical coding experiments. You know the sort, the "Hey, I got Gentoo running on my toaster!" stuff. Today's experiement was implementing <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway's Game of Life</a> using nothing more than <a href="http://www.appcelerator.com/platform/titanium-platform/">Appcelerator Titanium</a> views and deploying it to iOS. Let me explain a bit more why this is a <span style="font-weight:bold; color:#a00;">ridiculous</span> idea...</p>
+
+<!-- more -->
+
+
+<h2>Why It's A Bad Idea</h2>
+
+<h4><em>So</em> Not What Titanium Is Built For</h4>
+
+<p>Titanium makes high-quality, cross-platform mobile applications leveraging native UI and functionality. It does exceptionally well with data-driven apps that make heavy use of the underlying mobile platform's own UI. It will win the app bake-off against any other cross-platform mobile framework there is, and often times native counterparts as well.</shamelessemployerpromotion></p>
+
+<p>It is, however, <em>not</em> well-suited for any type of gaming. It is not a rendering canvas. It is not a game/particle engine. It has no standard render loop like you would expect in those aforementioned tools. Implementing any kind of graphical game-like experience is <span style="font-weight:bold; color:#a00;">ill-advised</span>. But sometimes ill can be a good thing. Just ask the Beastie Boys (RIP MCA).</p>
+
+<p>Despite that fact, you should see what the Appcelerator-funded Lanica is doing with the <a href="http://lanica.co/products/">Platino</a>. Now <em>there's</em> a game engine. Be sure to hit up <a href="https://twitter.com/carlosicaza">Carlos Icaza</a>, former co-founder/CEO of Ansca (makers of the <a href="http://www.coronalabs.com/products/corona-sdk/">Corona SDK</a>), if you want more info about it.</p>
+
+<p>But I digress...</p>
+
+<h4>Titanium Has Webviews!</h4>
+
+<p>Any normal person implementing this in Titanium would use a webview. Why? Because webviews, depending on the platform, actually have rendering facilities for these exact type of experiences. You could use an HTML5 canvas or even a WebGL surface to render this zero-person game, like I did with my experiment rendering <a href="https://github.com/tonylukasavage/jsstl">3D STL files on the web</a>, just like Github.</p>
+
+<h2>Why It's A Good Idea</h2>
+
+<p>Because writing code to see "what if" is what makes a <span style="font-weight:bold; color:#a00;">hacker</span> a <span style="font-weight:bold; color:#a00;">hacker</span>.</p>
+
+<h2>Automata</h2>
+
+<p>Here's a test run of Automata on my iPhone Simulator (6.1) using Titanium SDK 3.1.1. As you can see, as the number of live cells dwindles, the speed increases drastically, as is to be expected. Despite it's limitations, Titanium makes for a pretty cool demo of this game.</p>
+
+<iframe src="http://player.vimeo.com/video/71266653" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<h2>The Blood And Guts</h2>
+
+<p>In order to implement the Game of Life with nothing more than Appcelerator Titanium <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View">Views</a> I needed to do the following:</p>
+
+<h4>Implement a crude render loop.</h4>
+
+<p>And by crude, I mean really crude, along the lines of:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// render current generation of cells</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// calculate next generation based on current state</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This so far only plays well with iOS. The perpetual while loop seems to prevent the UI from updating on Titanium's other supported platforms. Perhaps some toying around with <code>setInterval</code> or other timing methods could alleviate this limitation.</p>
+
+<h4>Implement The Game Of Life Algorithm</h4>
+
+<p>I needed to execute the game in performance-conscious JavaScript. I'm sure someone can squeeze a little more performance out of this, but this section accounts for less than 1% of the actual execution time. It doesn't really seem worth the time investment to push it further.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">getNextState</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">alive</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">xm1</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">xp1</span> <span class="o">=</span> <span class="nx">x</span><span class="o">+</span><span class="mi">1</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">xSize</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">ym1</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">yp1</span> <span class="o">=</span> <span class="nx">y</span><span class="o">+</span><span class="mi">1</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">ySize</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">xm1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">ym1</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">yp1</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">xp1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">ym1</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">yp1</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">ym1</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">yp1</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// A cell&#39;s next generation is alive if:</span>
+</span><span class='line'><span class="c1">// - It is currently alive and has 2-3 adjacent cells</span>
+</span><span class='line'><span class="c1">// - it is current dead, but has exactly 3 neighboring cells</span>
+</span><span class='line'><span class="k">return</span> <span class="p">(</span><span class="nx">alive</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="p">(</span><span class="nx">count</span> <span class="o">===</span> <span class="mi">2</span> <span class="o">||</span> <span class="nx">count</span> <span class="o">===</span> <span class="mi">3</span><span class="p">))</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">alive</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">count</span> <span class="o">===</span> <span class="mi">3</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h4>Handle Titanium's UI state</h4>
+
+<p>Titanium's UI handling of each cell needed to be handled in an even more performance-conscious manner, as this is where over 99% of the execution time would eventually end up. The views are wrapped in a plain JS object in order to keep track of state and toggle the UI's dead/alive rendering as infrequently as possible. The single <code>cell.proxy.visible</code> assignment below accounts for over 99% of the total execution time on each loop. Future versions of Titanium are actually planning to make these "native bridge crossings" much faster. Automata can serve as a bar by which some of these improvements can be measured.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// render current generation</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">xSize</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">for</span> <span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">ySize</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">cell</span> <span class="o">=</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// minimze number of times we need to modify the proxy object</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">cell</span><span class="p">.</span><span class="nx">alive</span> <span class="o">!==</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">cell</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">alive</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// save the state</span>
+</span><span class='line'>    <span class="nx">cell</span><span class="p">.</span><span class="nx">lastAlive</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">alive</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Final Notes</h2>
+
+<ul>
+<li>Despite abusing Titanium to no end, it was still able to render the game.</li>
+<li>Titanium UI proxies are where the majority of execution time is consumed. This is true of all Titanium apps. It would be interesting to see if it was possible to make tweaks to the native bridge crossing to speed this particular app up significantly. (batching updates, custom APIs via modules)</li>
+<li>Changing <code>opacity</code> instead of <code>visible</code> had no discernable affect on performance.</li>
+<li>Creating the live cells on-demand, rather than all cells up front, resulted in slower performance. In this particular case, the initial overhead of creating all possible cells suits the app much better.</li>
+<li>I'm curious if anyone out there has any clever ideas for speeding this up. I'm all ears.</li>
+</ul>
+
+
+<h2>Resources &amp; Links</h2>
+
+<ul>
+<li>Source Code: <a href="https://github.com/tonylukasavage/Automata">https://github.com/tonylukasavage/Automata</a></li>
+<li>Carlos Icaza presenting Lanica's Platino: <a href="http://player.vimeo.com/video/52802376">http://player.vimeo.com/video/52802376</a></li>
+<li>Conway's Game of Life: <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">http://en.wikipedia.org/wiki/Conway's_Game_of_Life</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Inspecting SQLite databases on Android and iOS]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2013/04/08/inspecting-sqlite-databases-on-android-and-ios/"/>
+    <updated>2013-04-08T10:30:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2013/04/08/inspecting-sqlite-databases-on-android-and-ios</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/sqlite_logo.png"></p>
+
+<p>One aspect of my current project, the <a href="https://github.com/appcelerator/alloy">Alloy MVC framework</a> for building cross-platform mobile apps, is simple integration with local storage via SQLite databases. SQLite is a powerful and relatively simple way to store data for offline use, or just to cache remote data to speed up interactions. Unfortunately, the current data and structure of SQLite databases can sometimes be tricky to ascertain when housed on mobile devices, emulators, and simulators. This is especially true when developing for multiple platforms and having gone through multiple iterations of your data structure.</p>
+
+<!-- more -->
+
+
+<p>Jump to: <a href="#sqlite3">sqlite3 command</a> | <a href="#android">Android</a> | <a href="#ios">iOS</a> | <a href="#inspecting">SQLite database inspection</a></p>
+
+<p>There's some common things it would be great to know quickly about your deployed databases, like:</p>
+
+<ul>
+<li>What SQLite database files are installed?</li>
+<li>What tables are created on those databases?</li>
+<li>What is the structure of the tables? Primary keys?</li>
+<li>What records are present on the tables? This is critical in determining if you model layer is working as expected.</li>
+</ul>
+
+
+<p>In order to make this a little less painful of an experience, let's take a look at a very simple way to inspect SQLite databases, and where we can find those databases on various mobile platforms. First we'll need a tool to actually interact with a SQLite database...</p>
+
+<p><a name="sqlite3"></a></p>
+
+<h2>sqlite3</h2>
+
+<p>My weapon of choice is generally the command line. For that reason I tend to stick to the <a href="http://www.sqlite.org/download.html">sqlite3</a> command line tool. It comes preloaded on Mac OSX and is available for all other major OSes. Interacting with a SQLite database becomes as easy as:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sqlite3 /path/to/database
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt; .tables
+</span><span class='line'>table1
+</span><span class='line'>table2
+</span><span class='line'>table3
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>You can quickly get to know the rest of the commands by executing <code>.help</code> in the sqlite3 prompt. Remember to include the <code>.</code> before the name of the command.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sqlite3
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt; .help
+</span><span class='line'>.backup ?DB? FILE      Backup DB (default &quot;main&quot;) to FILE
+</span><span class='line'>.bail ON|OFF           Stop after hitting an error.  Default OFF
+</span><span class='line'>.databases             List names and files of attached databases
+</span><span class='line'>.dump ?TABLE? ...      Dump the database in an SQL text format&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;                     If TABLE specified, only dump tables matching
+</span><span class='line'>                     LIKE pattern TABLE.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;.echo ON|OFF           Turn command echo on or off
+</span><span class='line'>.exit                  Exit this program
+</span><span class='line'>.explain ?ON|OFF?      Turn output mode suitable for EXPLAIN on or off.&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;                     With no args, it turns EXPLAIN on.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;.header(s) ON|OFF      Turn display of headers on or off
+</span><span class='line'>.help                  Show this message
+</span><span class='line'>.import FILE TABLE     Import data from FILE into TABLE
+</span><span class='line'>.indices ?TABLE?       Show names of all indices&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;                     If TABLE specified, only show indices for tables
+</span><span class='line'>                     matching LIKE pattern TABLE.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+</span><span class='line'>.mode MODE ?TABLE?     Set output mode where MODE is one of:&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;                     csv      Comma-separated values
+</span><span class='line'>                     column   Left-aligned columns.  (See .width)
+</span><span class='line'>                     html     HTML &amp;lt;table&amp;gt; code
+</span><span class='line'>                     insert   SQL insert statements for TABLE
+</span><span class='line'>                     line     One value per line
+</span><span class='line'>                     list     Values delimited by .separator string
+</span><span class='line'>                     tabs     Tab-separated values
+</span><span class='line'>                     tcl      TCL list elements
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;.nullvalue STRING      Print STRING in place of NULL values
+</span><span class='line'>.output FILENAME       Send output to FILENAME
+</span><span class='line'>.output stdout         Send output to the screen
+</span><span class='line'>.prompt MAIN CONTINUE  Replace the standard prompts
+</span><span class='line'>.quit                  Exit this program
+</span><span class='line'>.read FILENAME         Execute SQL in FILENAME
+</span><span class='line'>.restore ?DB? FILE     Restore content of DB (default &quot;main&quot;) from FILE
+</span><span class='line'>.schema ?TABLE?        Show the CREATE statements&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;                     If TABLE specified, only show tables matching
+</span><span class='line'>                     LIKE pattern TABLE.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;.separator STRING      Change separator used by output mode and .import
+</span><span class='line'>.show                  Show the current values for various settings
+</span><span class='line'>.stats ON|OFF          Turn stats on or off
+</span><span class='line'>.tables ?TABLE?        List names of tables&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;                     If TABLE specified, only list tables matching
+</span><span class='line'>                     LIKE pattern TABLE.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;.timeout MS            Try opening locked tables for MS milliseconds
+</span><span class='line'>.vfsname ?AUX?         Print the name of the VFS stack
+</span><span class='line'>.width NUM1 NUM2 ...   Set column widths for &quot;column&quot; mode
+</span><span class='line'>.timer ON|OFF          Turn the CPU timer measurement on or off
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><a name="android"></a></p>
+
+<h2>Android</h2>
+
+<div class="info">INFO: This section assumes you have an android SDK toolkit on your path.</div>
+
+
+<p>The nice thing about the Android interface is that we can use a single command to find the SQLite databases on both emulators and devices. Assuming you have an open emulator and/or connected Android devices, execute <code>adb devices</code> to get a listing of their serial numbers.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ adb devices
+</span><span class='line'>List of devices attached
+</span><span class='line'>emulator-5560   device
+</span><span class='line'>MYSERIAL        device
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So now connecting to an emulator or device is easy. Just pick the target serial number and execute <code>adb -s MYSERIAL shell</code>. We'll use this shell for the duration of the :</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ adb -s MYSERIAL shell&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>All commands from here on in will assume you are already connected via <code>adb shell</code>.</p>
+
+<p>Now that we're connected to the target Android device/emulator, let's get a list of the SQLite databases installed on our target app. To find that, we'll first need our target app's ID. It's typically a domain name format, like <code>com.somedomain.someapp</code>. If you don't know how to find your app ID, you can always list the installed apps on your device/emulator with the adb shell and search there:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ls data/data&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;com.android.email
+</span><span class='line'>com.android.alarmclock
+</span><span class='line'>com.android.settings
+</span><span class='line'>com.google.android.apps.maps
+</span><span class='line'>com.android.wallpaper.livepicker
+</span><span class='line'>com.android.vending
+</span><span class='line'>com.android.htmlviewer
+</span><span class='line'>...
+</span><span class='line'>com.appcelerator.Harness
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In this case we'll use <code>com.appcelerator.Harness</code> as the target app, which happens to be the test harness app I used for testing <a href="https://github.com/appcelerator/alloy">Alloy</a>. Now we just need to list the databases installed on this app:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ls data/data/com.appcelerator.Harness/databases&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;users
+</span><span class='line'>Titanium
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In this case we find 2 installed databases, <code>users</code> and <code>Titanium</code>. Congrats, you found your Android SQLite databases. To start inspecting, you just need to open up the database file with the <code>sqlite3</code> command while in the adb shell. That is, Android already has <code>sqlite3</code> available at its shell, so you can use it directly from the shell:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;sqlite3 data/data/com.appcelerator.Harness/databases&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;SQLite version 3.6.22
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now you've got yourself full access to the live SQLite database on your Android emulator/device. To take a look at a handful of useful ways to inspect your database from the sqite3 prompt, check out the <a href="#inspecting">inspecting your SQLite database</a> section.</p>
+
+<p><a name="ios"></a></p>
+
+<h2>iOS</h2>
+
+<div class="info">INFO: These instructions are relevant to OS X 10.8.2, other versions may vary.</div>
+
+
+<p>Unlike Android, you'll have to take a different approach in locating your SQLite database(s) depending on whether you are inspecting a simulator or device. It's actually pretty easy on the simulator. Devices, on the other hand, are a bit more of a pain in the ass to work with with respect to SQLite databases. So it goes with iOS.</p>
+
+<h3>Simulator</h3>
+
+<p>To find a SQLite database on an iPhone/iPad simulator, let's first track down a listing of all the installed applications. To find this you'll need your current Mac username as well as the iOS version of the simulator you are running. For this example let's assume the following:</p>
+
+<ul>
+<li>My username is <strong>tlukasavage</strong></li>
+<li>iOS SDK version is <strong>6.1</strong></li>
+</ul>
+
+
+<p>To list the applications we now execute the following. You can use Finder, but I prefer the CLI:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ cd /Users/tlukasavage/Library/Application\ Support/iPhone\ Simulator/6.1/Applications
+</span><span class='line'>$ ls
+</span><span class='line'>25D2F0D4-B225-4E19-A830-4EE6DB0093A0
+</span><span class='line'>70F04874-8486-46FE-AD01-DFD04CB3B361
+</span><span class='line'>A8D5AC32-4C09-452D-8DC0-BCA15178721F
+</span><span class='line'>4A84AB30-3306-4108-93BE-A9AC3217A89B
+</span><span class='line'>88045DAE-C8F1-4B58-8E0D-B382C8E5D0FC
+</span><span class='line'>D1F75E68-C8A7-442E-A5E5-8485ACD4420B
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now you need to select which app ID is the one that corresponds to your installed app. For this example, we'll assume it's <code>25D2F0D4-B225-4E19-A830-4EE6DB0093A0</code>. Once you've determined that, we'll dig a little bit deeper to find the actual location of that app's SQLite databases. Bear in mind, if the following directories don't exist in your app, you likely don't actually have a SQLite database installed. We'll continue from the previous code block:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ cd 25D2F0D4-B225-4E19-A830-4EE6DB0093A0/Library/Private\ Documents
+</span><span class='line'>$ ls
+</span><span class='line'>&lt;em&gt;alloy&lt;/em&gt;.sqlite
+</span><span class='line'>some_other_db.sqlite
+</span><span class='line'>test.sqlite
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Hey look, there's our databases! Now that we have the location, opening up the databases is as easy as issuing the <code>sqlite3</code> command:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sqlite3 &lt;em&gt;alloy&lt;/em&gt;.sqlite
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>You can now hop to the <a href="#inspecting">inspecting your SQLite database</a> section to see what you can do with it.</p>
+
+<h3>Device</h3>
+
+<div class="info">INFO: This section assumes you have XCode 4+.</div>
+
+
+<p>It's unfortunate, but on iOS we don't really have a good CLI method for accessing the on-device SQLite database like we do with Android. For this, we'll need to crack open Xcode, and more specifically Organizer.</p>
+
+<p>Open up Xcode and then hit <code>SHIFT+CMD+2</code> or go to <code>Window -&gt; Organizer</code> to open up Organizer. In there we'll find a listing of your currently configured iOS devices. Follow these steps to retrieve the SQLite database (and additional application data) on your target device:</p>
+
+<ol>
+<li>Select the device in the left panel, in my case <strong>Tony Lukasavage's iPad</strong>.</li>
+<li>Expand the device and select <strong>Applications</strong>.</li>
+<li>In the top right panel select your target application, in this case <strong>Harness</strong>.</li>
+<li>In the "Data Files in Sandbox" panel, make sure your SQLite database file is present under the "Library/Private Documents" folder. In this case it's <strong>_alloy_.sqlite</strong>.</li>
+<li>Download the application data in a "xcappdata" file by clicking on the <strong>Download</strong> button at the bottom of Organizer. It should save the file with a long file name that includes your app's ID and a timestamp. In this case, mine is <strong>com.appcelerator.Harness 2013-04-07 13.24.32.633.xcappdata</strong>.</li>
+</ol>
+
+
+<p><img src="/images/organizer1.png"></p>
+
+<p>Now that you have the app data downloaded, we just need to navigate to the embedded SQLite database and you'll be free to use <code>sqlite3</code> on it. Assuming you downloaded the xcappdata file to your current path, this is how you would find it:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ cd com.appcelerator.Harness\ 2013-04-07\ 13.24.32.633.xcappdata/AppData/Library/Private\ Documents
+</span><span class='line'>$ sqlite3 &lt;em&gt;alloy&lt;/em&gt;.sqlite
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Though a bit more effort than the simulator, you now have full access to the SQLite database from your iOS device. Move on to the next section for some tips of what you can do with it to learn more about your app.</p>
+
+<p><a name="inspecting"></a></p>
+
+<h2>Inspecting the SQLite database</h2>
+
+<p>Now that you've found your app's SQLite database, here's a hadful of useful commands to inspect its state and contents. While it takes various methods to access these database files, interacting is exactly the same on all when using the <code>sqlite3</code> tool.</p>
+
+<h3>Commands</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>List tables installed on current database  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; .tables&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;android_metadata  migrations        users
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Show CREATE statement for table "users"  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; .schema users&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,color TEXT);
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Show table info for table "users"  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; pragma table_info(&#39;users&#39;);&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;cid | name | type | notnull | dflt_value | pk
+</span><span class='line'>0|id|INTEGER|0||1
+</span><span class='line'>1|name|TEXT|0||0
+</span><span class='line'>2|color|TEXT|0||0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>SELECT rows from table "users"  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; SELECT * FROM users;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;1|Tony|blue
+</span><span class='line'>2|Chris|red
+</span><span class='line'>3|Bryan|red
+</span><span class='line'>4|Christian|blue
+</span><span class='line'>5|Ingo|orange
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This is only a very small sampling of quick things you can check to find the current state of your SQLite databases. For more details on the full functionality of the sqlite3 command, be sure to check out the <a href="http://www.sqlite.org/docs.html">full documentation</a>.</p>
+
+<h2>Additional Tools</h2>
+
+<h3>SQLite Manager</h3>
+
+<p>I'd highly suggest taking the time to learn the CLI and the syntax of SQLite itself. If, however, you prefer a GUI...</p>
+
+<p><img src="/images/sqlite_manager.png" alt="SQLite Manager screenshots" /></p>
+
+<p>Honestly, I'm not a huge fan of Firefox, but it has one nice thing going for it: <a href="https://addons.mozilla.org/en-us/firefox/addon/sqlite-manager/">SQLite Manager</a>. SQLite Manager is a Firefox add-on that provides a simple, clean interface for interacting with SQLite databases. Not much in the way of bells and whistles, but hey, this is SQLite, there's not a lot of bells and whistles in the first place. The nice part about it is it's free and it will work anywhere Firefox will.</p>
+
+<p>You can choose and SQLite app you like, but I recommend this one for the sake of its price, availability, and simplicity. If you aren't a command line warrior, this is a solid tool to lean on.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sneak Peek at "Knuckle Head" for iPhone]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/08/10/sneak-peek-at--knuckle-head--for-iphone/"/>
+    <updated>2011-08-10T14:25:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/08/10/sneak-peek-at--knuckle-head--for-iphone</id>
+    <content type="html"><![CDATA[<h2>Knuckle Head, Take 2</h2>
+
+
+<p>Here's a sneak peek at the soon-to-be-released iPhone version of my MMA fighter app Knuckle Head, built with <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a>. I chose to do the native <a href="https://market.android.com/details?id=com.savagelook.knucklehead&feature=search_result" target="_blank">Android version</a> first, as it allowed me to iterate through versions very quickly, making changes as users gave me feedback. Now I can apply that feedback without having to go through Apple's much slower approval process with each iteration.</p>
+
+<p>There were 3 main drivers behind this port:</p>
+
+<ul>
+<li>The Android version has been rated really well so far, and I've had requests for an iPhone version.</li>
+<li>I will be joining the Appcelerator team in a week and a half, so this seemed like a great way to sharpen my skills with it.</li>
+<li>I was just curious how the download and ad fill rate numbers would stack up against each other with a niche app like this one on Android and iPhone.</li>
+</ul>
+
+
+<p>Also, there's a chance I will open source this and put it all up on Github once it's approved for the Apple App Store.  If there's any interest let me know. If not, I'll probably turn out some blog articles based on things I learned doing this port. The short version is that Appcelerator definitely has its quirks, but is in all likelihood going to be your fastest route to a quality iPhone app. I went from zero to complete port in about 20 hours of work.</p>
+
+<p>And that doesn't even get into the cross platform potential. Expect a lot of content going forward on how you can turn the "potential" of cross platform code into "actual" cross platform code using Appcelerator.</p>
+
+<h2>Knuckle Head for iPhone video</h2>
+
+
+<p>So here it is, in all its water-marked, sub par quality glory. You'll have to forgive those issues, I'm currently evaluating <a href="http://www.telestream.net/screen-flow/" target="_blank">ScreenFlow</a>. Seems like a good tool so far, but I don't like shelling out $99 for software without playing around with it a little bit.</p>
+
+<table style="width:100%"><tr><td style="text-align:center;">
+<iframe width="360" height="720" src="http://www.youtube.com/embed/4y4dFTADUY4?hd=1" frameborder="0" allowfullscreen></iframe>
+</td></tr></table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Deeper Look at Appcelerator and PhoneGap]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap/"/>
+    <updated>2011-04-20T12:58:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap</id>
+    <content type="html"><![CDATA[<h2><span style="font-size: 20px; font-weight: bold;">Overview</span></h2>
+
+
+<p>I'd like to start by saying that I think it's important that both of these frameworks exist.  The more I worked with each, the more I found that it wasn't a simple question of which mobile framework was better.  Both have some of the features a cross platform framework should have, and each shines in areas that the other frankly does not.  And that will be the focus of this analysis.  What are the key aspects to a great cross platform mobile framework, and how do <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> and <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> stack up.</p>
+
+<h1>Cross Platform Support</h1>
+
+
+<p>So this is why we're all here right? Code once, run every where.  That's what we want.  Well in this case, one of these solutions gets you a lot closer than the other.</p>
+
+<p>This is PhoneGap's bread and butter.  By leveraging web views native to the mobile devices, PhoneGap allows you to build as an app as complex and modern as you want while providing the ability to have it gracefully degrade for lower end devices, all in the same code base.  This degradation can be controlled via CSS or even dynamically with javascript and media queries.  You can use the same design and development principles that have guided cross browser development for years.  And the list of mobile platforms they support (which includes iOS, Android, Blackberry, webOS, and Symbian)  is definitely worth bragging about.</p>
+
+<p>Appcelerator, on the other hand, does iOS really, really well.  Android brings some additional headaches and quirks.  Blackberry is still in the beta stage.  They are actually creating native code based on their Javascript API, so the quirks will likely always exist. Appcelerator will constantly be one step behind/removed in their efforts to integrate native functionality.  No fault of their own, it's just the nature of their product.</p>
+
+<p>This is why I think emphasis on Appcelerator being a cross platform framework is misleading.  <strong>While it CAN be a cross platform framework, it is not by nature</strong>.  I mean, how can it be? One of its main selling points is access to native UI components, something that is obviously not part of a cross platform solution.  One code base for multiple mobile platforms is totally a possibility with Appcelerator, but you will likely sacrifice a lot of what makes it great (coming in the following sections) to get to that lowest common denominator.</p>
+
+<h1>Defined Workflow</h1>
+
+
+<p>The product will only be as good as the tools that support, particularly when you are trying to appeal to an audience as large as mobile developers.  In this respect, Appcelerator is the clear winner.</p>
+
+<p>Earlier this year Appcelerator announced that they had acquired the web development IDE <a href="http://www.aptana.com/" target="_blank">Aptana</a>. Before this point you were stuck with <a href="http://www.appcelerator.com/products/" target="_blank">Titanium Developer</a> which did the job, but was only a project deployment tool, not a true IDE.  Just this month they introduced the first version of the new <a href="http://preview.appcelerator.com/studio/" target="_blank">Titanium Studio</a>, an integration of Titanium Developer and Aptana.  There were a few bugs to wrestle with the earliest versions of this software, but I must say that I am loving it.  It has truly integrated the development and deployment workflow, making it more organized and efficient.  It has built in update checking for not only the studio but also the Titanium SDKs.  Oh, and <strong>did I mention that all of this is free</strong>?</p>
+
+<p>PhoneGap leaves you to your own tools and workflow.  A plus for some, but I would imagine its a minus for those of us who don't come from primarily a web development background.  They give you some direction in the <a href="http://www.phonegap.com/tools" target="_blank">Tools</a> section of their website, but its not what you would call a workflow.  It a different approach, basically leaving the developer to determine what libraries, IDE, touch frameworks, etc... are most appropriate for their project.  This can be problematic for two reasons. 1, new mobile developers are not going to know which tools are the most appropriate and 2, there are A LOT of available touch and JS libraries out there for mobile development.  Choosing can be a project in its own rite. All that said, <a href="http://twitter.com/#!/brianleroux" target="_blank">Brian Leroux</a> of <a href="http://www.nitobi.com/" target="_blank">Nitobi</a>, the makers of PhoneGap, created the <a href="http://xuijs.com/" target="_blank">XUIJS library</a>. Its what I'm using and I'm really digging it so far.</p>
+
+<h1>Programming Language</h1>
+
+
+<p>Admit it Appcelerator developers, you aren't interested in the Javascript API so much as you are interested in <strong>NOT</strong> writing Objective-C!  Yeah, me too.</p>
+
+<p>You would think this topic would be a deadlock, right?  Its just Appcelerator's Javascript API versus PhoneGap's use of the standard web stack of HTML/CSS/JS.  It basically the same thing... or is it?  Remember how I said in the last section that PhoneGap gives you free reign to choose whatever framework you want for development?  Well, Appcelerator doesn't, and it is definitely to the chagrin of many Javascript savvy developers.</p>
+
+<p>PhoneGap is HTML/CSS/JS.  Anything you can do with it on a normal web page you can do in a mobile browser's web view.  This means any chunk of Javascript you find anywhere that you like can potentially be integrated into you app.  This ranges from your favorite frameworks like <a href="http://jquery.com/" target="_blank">jQuery</a> and <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, mobile  libraries like <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, or even graphical ones like Grant Skinner's <a href="http://easeljs.com/" target="_blank">EaselJS</a> or one of these many <a href="http://javascript.open-libraries.com/multimedia/3d/fantastic-javascript-3d-libraries/" target="_blank">3D libraries</a>.  Performance and device support permitting, you can use any Javascript you want.</p>
+
+<p>Appcelerator's API unfortunately is purely Javascript, is has no ties to the DOM.  But wait, doesn't the most popular Javascript library in the world assume the presence of the DOM window and document?! Yep, that's right, <strong>you can't use any part of jQuery that requires the DOM</strong> (which is almost all of it) in your Appcelerator code.  The one exception is that you can still use jQuery and other DOM reliant libraries in a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium.UI.WebView</a>, but you can't use it with the actual Appcelerator API.  Annoying to me, but I can see this being REALLY aggravating  to long time web developers accustomed to using jQuery with everything.</p>
+
+<h1>Deployment Support</h1>
+
+
+<p>If you've spent any time in mobile development, you know that deploying your finished app to markets and app stores can be a truly daunting task.  There's certificates, app signing, icons, logos, promotional images, supporting text, and the task of keeping it all organized.  It can quickly become a mess.  While both Appcelerator and PhoneGap both give you detailed instructions on how to build app store ready apps from your development environment and offer professional services, <strong>PhoneGap takes it one huge step further</strong>.</p>
+
+<p><a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a> is currently a free beta service that you need to get your ass signed up for now.  While I highly encourage you to check it out for yourself, here's the insanely easy workflow:</p>
+
+<ol>
+    <li>Upload you PhoneGap project to PhoneGap Build (or use its Github integration)</li>
+    <li>Configure your platform specific accounts with certificates and signing keys (all PhoneGap supported platforms available)</li>
+    <li>Watch as PhoneGap Build creates deployable binaries for each of these platforms and delivers you download links for each</li>
+</ol>
+
+
+<p>Now that is the type of workflow I'm looking for! A quick note on step #2 is that iOS is the only platform that requires a certificate to get a testable binary.  You'll want to set up certificates and keys before you deploy the the market/app store, but you can test the binary without them.</p>
+
+<h1>Speed of Development</h1>
+
+
+<p>All this flexibility and platform support has to bite PhoneGap in the ass somewhere, right?  Speed of development, if you can't tell by it name, is another place that Appcelerator excels.</p>
+
+<p>Appcelerator allows developers to start building an app that looks, feels, and performs like a native one very quickly.  Some of the big reasons are the following:</p>
+
+<ul>
+    <li>Their Javascript API is infinitely easier than Objective-C, and some might also say Java (but not me)</li>
+    <li>Tons of ready-to-use native UI components</li>
+    <li>You are not required to adhere to the MVC architectural pattern</li>
+    <li>The double-edged sword of loosely typed Javascript allows you to create custom components like table views and rows very easily</li>
+    <li>The new Titanium Studio gives you one place to develop and build for multiple platforms</li>
+</ul>
+
+
+<p>&nbsp;</p>
+
+<iframe src="http://player.vimeo.com/video/8730218?title=0&amp;byline=0&amp;portrait=0&amp;color=9a0707" width="400" height="225" frameborder="0"></iframe>
+
+
+<p>PhoneGap, though, is a bare bones framework.  It looks to provide mobile API support (things like location, accelerometer, etc...) across all major vendors.  The UI is left up to you and your chops as a web developer.  To that end <strong>most people are left to go find another touch framework to layer on top of PhoneGap</strong>.  <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>, <a href="http://jqtouch.com/" target="_blank">JQTouch</a> are all popular options.  There's even efforts to create <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">web based "native" components</a>.  You can also take my route and build most of it from scratch using <a href="http://xuijs.com/" target="_blank">XUIJS</a>.</p>
+
+<p>The long and short is that if you are only building for iOS, or maybe also Android, Appcelerator will likely get you from concept to completion faster than PhoneGap.</p>
+
+<h1>Documentation</h1>
+
+
+<p>Documentation is key when undertaking any new technology.  Both frameworks have their ups and downs here.</p>
+
+<p>Appcelerator maintains a newly improved collection of there documentation on their <a href="http://wiki.appcelerator.org/display/guides/Home#" target="_blank">new Confluence site</a>.  While it is fairly comprehensive, it is also a bit jumbled, particularly the <a href="http://wiki.appcelerator.org/display/guides/Getting+Started+with+Titanium" target="_blank">"Getting Started" section</a>.  Its all there if you have the patience to find what you are looking for.  You'll find installation, setup, examples, tutorials, the works.  You can also find a comprehensive listing of their <a href="http://developer.appcelerator.com/apidoc/mobile/latest" target="_blank">mobile API here</a>.  The problems I see with their documentation are the following:</p>
+
+<ul>
+    <li>Its sometimes hard to tell what version of their SDK examples apply to</li>
+    <li>Often Titanium objects have properties that don't apply, or don't behave as the documentation indicates</li>
+    <li>You are sometimes left digging through the Q &amp; A section to find the quirks for specific Titanium objects</li>
+    <li>Examples given for Titanium objects are WAY too simplistic</li>
+    <li>How 'bout a few more "Hello, World!" scale tutorials before you throw us at the <a href="https://github.com/appcelerator/KitchenSink/" target="_blank">Kitchen Sink</a>?!</li>
+    <li>Im sure this will change after the Titanium Studio release gets some traction, but the "Getting Started" section is still using Titanium Developer as its chosen workflow</li>
+</ul>
+
+
+<p><strong>PhoneGap's <a href="http://www.phonegap.com/start" target="_blank">"Get Started" section</a> is a thing of beauty</strong>.  In a very clean, concise layout, the PhoneGap site walks you through how to set up your computer for each individual platform you wish to develop for.  It list requirements, toolsets, and easy to follow instructions.  It helps ease the intimidation that can come with trying to develop for so many platforms. Once you get it up and running, PhoneGap's <a href="http://docs.phonegap.com/" target="_blank">API documentation</a> is incredibly easy to follow.  A simple layout lists everything PhoneGap is capable of doing.  Clicking on these capabilities then takes you to the API specific documentation that lists usage, examples, device support, and any quirks that are currently known.  It takes a lot of the guess work and frustration out of the inevitable troubleshooting that ensues with cross platform mobile development.</p>
+
+<p>&nbsp;</p>
+
+<p>PhoneGap definitely shines in the documentation department.  In all fairness, though, Appcelerator has a hell of a lot more to document.  PhoneGap's lack of UI components accounts for a large part of its documentation being so easy to follow.</p>
+
+<h1>Community</h1>
+
+
+<p>An active and knowledgable community is one of my biggest factors in choosing any technology.  Appcelerator and PhoneGap both have a wiki and blog, and also offer these a few more resources.</p>
+
+<p>Appcelerator has their <a href="http://developer.appcelerator.com/questions/created" target="_blank">Q &amp; A section</a> of their site.  It allows users to submit questions about Appcelerator to the community.  Users can submit answers, vote on others' answers, and receive points and badges for participation.  If StackOverflow has taught us anything, its that people like being rewarded for participation, no matter how meaningless.  On top of this free resource, they also offer training, certification, and professional services for those looking to take their Appcelerator'ing to the next level.  I hand out on Twitter a lot, so its worth mentioning that you can get some great help and info regarding Appcelerator by following <a href="http://twitter.com/#!/appcelerator" target="_blank">@appcelerator</a>, <a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a>, <a href="http://twitter.com/#!/aaronksaunders" target="_blank">@aaronksaunders</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a>.</p>
+
+<p>PhoneGap maintains a connection with the community with their <a href="http://groups.google.com/group/phonegap" target="_blank">Google Group</a> and on IRC at <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">irc.freenode.net #phonegap</a>.  They also offer <a href="http://www.phonegap.com/services" target="_blank">professional services and training</a>.  The core of the PhoneGap team is very involved with the community and I've often been found chatting with <a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>, <a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>, <a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>, and <a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a> on Twitter.</p>
+
+<p>Other than wishing PhoneGap had some kind of a forum system better than a Google group, I think both frameworks do a very good job of listening to and staying engaged in the community.</p>
+
+<h1>Extensibility</h1>
+
+
+<p>No developer I have ever known is just happy with the tools he's given.  We want to be able to add to and modify anything we get our hands on.  Both frameworks are very extendable via modules and offer open source licenses, though PhoneGap's option of <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">"New" BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT license</a> is a little nicer than Appcelerator's <a href="http://www.opensource.org/licenses/apache2.0.php" target="_blank">Apache 2.0 license</a>.</p>
+
+<p>Appcelerator offers <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+Android" target="_blank">Android</a> and <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+iOS" target="_blank">iOS</a> module development guides.  These allow you to build native components in their native SDKs and then be able to access them in your Appcelerator app via the Javascript API.  Anywhere Appcelerator falls short in terms of supporting any API or UI component, you are free to pick it up and make it happen.  Its not the simplest process and effectively removes the possibility of  cross platform code, but can be a strong tool for a single platform scenario.</p>
+
+<p><strong>UPDATE</strong>: In addition, Tony Guntharp also gave me this blog post detailing how modules can be developed in other languages as well: <a href="http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html">http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html</a></p>
+
+<p>PhoneGap also supports additional modules, or plugins, to its framework in the same fashion that Appcelerator does.  You can develop native code and then write hooks back to PhoneGap to access it in your project.  Again, this undoes any cross platform compatibility unless you make the native component for all supported platforms.  There's a <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">guide to creating plugins found here</a>.</p>
+
+<p><strong>Appcelerator on Github:</strong> <a href="https://github.com/appcelerator" target="_blank">https://github.com/appcelerator</a>
+<strong>PhoneGap on Github:</strong> <a href="https://github.com/phonegap/phonegap" target="_blank">https://github.com/phonegap/phonegap</a></p>
+
+<h1>Summary</h1>
+
+
+<p>So as I stated at the beginning, I think both of these frameworks are important and have their place in the mobile landscape.  From my personal perspective, as they both stand now, PhoneGap is the true cross platform solution.  <a href="http://twitter.com/#!/fling" target="_blank">Brian Fling</a>, author of <a href="http://oreilly.com/catalog/9780596155452" target="_blank">"Mobile Design and Development"</a>, rang the point home throughout his book that the future of mobile development lies in web based applications that adhere to a structure of graceful degradation.  I initially thought he was a web developer who didn't want to learn Objective-C or Java.  After spending some time with native development and multiple cross platform frameworks, I find myself coming to the same conclusion.</p>
+
+<p>But that's not to say that PhoneGap is the end all, be all of mobile development.  I happen to think that for iOS &amp; Android projects, Appcelerator could likely be your best choice.  Unless you have prior experience with Objective-C, I would advise anyone with even a basic knowledge of Javascript to give it a shot before resorting to native development.  Trust me, you won't miss Interface Builder, and outlets, and actions, and all kinds of other iOS MVC fun.  Oh, and you're sure to enjoy the native UI and performance that Titanium uniquely provides.</p>
+
+<p><strong>NOTE:</strong> I would have liked to include Adobe Air as I did in my past comparison, but I honestly have not used it in 2+ months and there have been serious changes since.  I've been focusing on cross platform solutions that can hit the big three mobile devices out there: Android, iOS, and Blackberry.  Soon as Blackberry supports Adobe Air you better believe I'm coming back to re-evaluate it.  I'll take AS3 and/or Flex over HTML/CSS/JS any day.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Developer's Icon &amp; Image Checklist]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist/"/>
+    <updated>2011-03-24T09:51:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist</id>
+    <content type="html"><![CDATA[<h2>Overview</h2>
+
+
+<p>If there's one thing I've learned from delving into iOS, Android, and Blackberry app development, it's that there's a lot more to creating a mobile app than just coding it.  One of the things that can catch you off guard, especially if you are devoid of design ability like me, is the amount of icons and images necessary to deploy your apps.  This becomes even more daunting when you intend to deploy to multiple platforms.</p>
+
+<p>The other concern is that it isn't always evident from the development tools how many different graphics you need to account for all scenarios.  A new iOS developer will likely be unaware that you need a 58x58 pixel icon for iPhone 4 Spotlight and Settings.  To attempt to alleviate some of this confusion, I put together these charts to detail what I know so far about the graphics required for submitting mobile apps to the various Android, iOS, and Blackberry markets.</p>
+
+<h2>Icons</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android</td>
+<td width="15%">iOS</td>
+<td width="15%">Blackberry Playbook</td>
+<td width="45%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">29x29</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone Settings and Spotlight, iPad Settings</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">36x36</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">low pixel density icon</td>
+</tr>
+<tr>
+<td class="leftHeader">48x48</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">medium pixel density icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">50x50</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPad Spotlight. iOS will trim 1 pixel off each side and add a drop shadow, making it 48x48</td>
+</tr>
+<tr>
+<td class="leftHeader">57x57</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">58x58</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone 4 Settings and Spotlight</td>
+</tr>
+<tr>
+<td class="leftHeader">64x64</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional small custom document icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">72x72</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Android high pixel density icon, iPad icon</td>
+</tr>
+<td class="leftHeader">86x86</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">standard Playbook icon. It will trim 5 pixels off each side, making it 76x76</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">96x96</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">114x114</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone 4 icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">144x144</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">320x320</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional large custom document icon</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<br><br>
+
+
+
+
+<h2>Distribution Images</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android Market</td>
+<td width="15%">Apple App Store</td>
+<td width="15%">Blackberry App World</td>
+<td width="15%">Amazon App Store</td>
+<td width="30%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">screenshot sizes</td>
+<td>320x480, 480x800, 480x854, 1280x800</td>
+<td><strong>iPhone</strong>: 320x480, 480x320, 320x460, 480x300 <strong>iPhone 4</strong>: 640x960, 960x640 <strong>iPad</strong>: 768x1024, 1024x768, 748x1024, 1004x768</td>
+<td>640x640 or smaller</td>
+<td>480x854, 854x480</td>
+<td class="notes">required # of screenshots:
+<strong>Android</strong>: at least 2
+<strong>Apple</strong>: at least 1
+<strong>Blackberry</strong>: 1-50
+<strong>Amazon</strong>: 3-10</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">114x114</td>
+<td></td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">device icon</td>
+</tr>
+<tr>
+<td class="leftHeader">180x120</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Promotional graphic (no alpha)</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">480x480</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Product icon that should match your 86x86 icon</td>
+</tr>
+<tr>
+<td class="leftHeader">512x512</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">Large/High resolution product icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">1024x500</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Feature graphic for market</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h2>Additional Notes</h2>
+
+
+<p><strong>For Android</strong>, your 36x36, 48x48, and 72x72 pixel icons should be placed in the <strong>drawable-ldpi</strong>, <strong>drawable-mdpi</strong>, and <strong>drawable-hdpi</strong> folders of your Android project respectively.  Be sure to specify the name of the file you will be using in the <strong>android:icon</strong> attribute of the <strong><application></strong> element in your AndroidManifest.xml file.  Android also allows you to include a promotional video.</p>
+
+<p><strong>For iOS</strong> you simply need to add your appropriately sized and named icons to your <strong>Resources</strong> directory in your XCode project.  Here's a mapping of the icon sizes to the required name of the icon file. <strong>NOTE</strong>: There is purposely no extension on the 512x512 iTunesArtwork file.</p>
+
+<ul>
+<li>29x29 - Icon-Small.png</li>
+<li>50x50 - Icon-Small-50.png</li>
+<li>57x57 - Icon.png</li>
+<li>58x58 - Icon-Small@2x.png</li>
+<li>72x72 - Icon-72.png</li>
+<li>114x114 - Icon@2x.png</li>
+<li>512x512 - iTunesArtwork</li>
+</ul>
+
+
+<p><strong>For Blackberry Playbook</strong>, you need to specify the name of your 86x86 application icon in your application's <strong>blackberry-tablet.xml</strong> file.  Below is a sample of how you would set that up.</p>
+
+<p>``` xml
+<qnx></p>
+
+<pre><code>&lt;icon&gt;
+    &lt;image&gt;86x86.png&lt;/image&gt;
+&lt;/icon&gt;
+&lt;publisher&gt;My Company&lt;/publisher&gt;
+&lt;category&gt;core.games&lt;/category&gt;
+&lt;splashscreen&gt;my_splashscreen.jpg&lt;/splashscreen&gt;
+</code></pre>
+
+<p></qnx>
+```</p>
+
+<p><strong>For the Amazon App Store</strong> you can also submit promotional images of various sizes and up to 5 promotional videos.</p>
+
+<h2>Summary</h2>
+
+
+<p>So as you can see, you've got a lot to consider when it comes to presenting your mobile application to the masses.  As a developer, I'm looking for the simple solution here.  For me, the easiest thing to do was use this <a href="http://www.command-tab.com/2008/09/20/iphone-and-ipod-touch-icon-template/" target="_blank">512x512 iOS icon template</a>, create my icon, and scale it down to all the required sizes.  If you happen to be reading this post and know a better/easier workflow, please let me know.</p>
+
+<p>Here's a few references to check out to get some additional information on mobile app icons and market images:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/library/safari/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html" target="_blank">iOS Human Interface Guidelines - Custom Icon and Image Creation Guidelines</a></li>
+<li><a href="http://developer.apple.com/library/ios/#qa/qa1686/_index.html" target="_blank">App Icons on iPad and iPhone</a></li>
+<li><a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design.html" target="_blank">Android Icon Design Guidelines</a></li>
+<li><a href="http://docs.blackberry.com/en/developers/deliverables/22301/Designing_application_icons_tablet_1401556_11.jsp" target="_blank">Blackberry Playbook - Designing Application Icons</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

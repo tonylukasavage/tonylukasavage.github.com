@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: heightmap | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/heightmap/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D Morphing with HeightMapModifier]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/10/04/away3d-morphing-with-heightmapmodifier/"/>
+    <updated>2010-10-04T07:38:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/10/04/away3d-morphing-with-heightmapmodifier</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/away3d_HeightMapModifier.html" class="fancybox.iframe"><img title="away3d_HeightMapModifier" src="http://tonylukasavage.github.com/images/hmm.jpg" alt="" width="560" height="417" /></a></p>
+
+
+<p>&rarr; <a href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/away3d_HeightMapModifier.html">Click here</a> or the image above for the demo.
+&rarr; View the <a href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/srcview/index.html">source code</a>.</p>
+
+<p>As usual, shortly after finishing an Away3D demo an Away3d dev (this time <a href="http://www.closier.nl/blog/" target="_blank">Fabrice Closier</a>) suggests a better way to do it.  In my previous 2 demos I created fluid and morphing effects on planar meshes using a modified version of the SkinExtrude class.</p>
+
+<p>As per Fabrice's suggestion, this time I did the same using the HeightMapModifier class.  No modifications to Away3D source code necessary and it works on any mesh, planar or otherwise.  In this example I apply dynamic height maps to a sphere to create some pretty wild meshes.  Be sure to toggle to wireframe mode so that you can get a good look at how the vertices move with each height map transition.  Here's a snippet of how it works:</p>
+
+<p>``` as3
+[Embed("heightmap.jpg")] private var hmImage:Class;</p>
+
+<p>var heightData:BitmapData = Cast.bitmap(hmImage);
+var sphere:Sphere = new Sphere();
+var heightMapModifier:HeightMapModifier = new HeightMapModifier(sphere, heightData);</p>
+
+<p>// offset determines the minimum height value of each vertice
+heightMapModifier.offset = 300;</p>
+
+<p>// scale is the multiplier for the calculated height values
+heightMapModifier.scale = ELEVATION_HEIGHT;</p>
+
+<p>// execute the modifier
+heightMapModifier.execute();
+```</p>
+
+<p>One other cool note to remember is that you can also use negative values for scale.  By doing so you can create indents rather than bumps on your mesh.  See what happens when you turn the "Elevation height" all the way down on this demo.</p>
+
+<p>Also in the example I utilize the EnviroBitmapMaterial to give our target mesh a shiny, reflective appearance.  True reflection is very processor intensive and is outside the realm of feasibility right now for 3D Flash.  But by using environment materials, we can "fake" a reflective surface by using an environment map that closely matches the Away3D scene.  In this case the environment map I used for the EnviroBitmapMaterial is one of the images I used to create the skybox for the scene.  You'll notice the reflective effect even more as the mesh morphs or when you orbit around it.</p>
+
+<p>There you have it, mesh morphing and reflective materials in Away3D.  With a little luck, this'll be the last time you have to hear me talk about it for a while!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D Mesh Morphing]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/30/away3d-mesh-morphing/"/>
+    <updated>2010-09-30T08:50:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/30/away3d-mesh-morphing</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_morph/away3d_morph.html" class="fancybox.iframe"><img title="away3d_morph" src="http://tonylukasavage.github.com/images/morph.jpg" alt="" width="561" height="355" /></a></p>
+
+
+<p>→ <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_morph/away3d_morph.html">Click here</a> or the image above for the demo.
+→ View the <a href="http://tonylukasavage.github.com/demos/away3d_morph/srcview/index.html">source code</a>.</p>
+
+<p>As I have a way of doing, I immediately started working on a better demo upon finishing the last one on height maps in Away3D.  In this demo I use simple bitmap transitioning and my modified Away3D SkinExtrude class (SavageLookSkinExtrude) to create a morphing effect.  Basically one mesh's vertices will smoothly transition to the position of the next mesh's vertices based on the given height maps.</p>
+
+<p>I mentioned <a href="http://exey.ru/blog/home/fluid-simulation-pv3d-and-away3d" target="_blank">Exey Panteleev's fluid simulation in PaperVision3D and Away3D</a> in my last post as a method superior to dynamic height maps for creating a flowing, fluid mesh in Away3D.  I still stand by the point.  But as shown in this demo, dynamic height maps offer many more possibilities as provided by the control you have over the 2D height maps.  In fact, you can have a designer, with no knowledge of Away3D of 3D math, create your height maps and you can handle the morphing.</p>
+
+<p>The shapes you can morph are only limited by your imagination... OK, that's not entirely true.  The shapes will be limited by your ability to create, or find, height maps that suit your needs.  Also, with this method you are limited to morphing the plane that is the base of the SkinExtrude, or in this case the SavageLookSkinExtrude.  Morphing other 3D meshes or primitives is beyond the scope of this technique, and to be honest, beyond my expertise at this point in time.</p>
+
+<p>Even with those limitations, though, this method offers some really eye catching dimension to the toolkit of a hopelessly code driven 3D artist like myself.  Play around with it and let me know if you come up with something cool.  I'd love to see this method work with some more interesting height maps, like facial maps.</p>
+
+<p><strong>NOTE:</strong> I'm currently inquiring on the <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/f5dd17752c1d051f" target="_blank">Away3D Dev list</a> how to get the subdivision size of the SkinExtrude smaller so that I can get more accuracy and precision.  Unfortunately as it stands triangles start to disappear when the subdivision size goes lower than 20.  I'll update this post if we come up with a solution.  Please let me know if you come up with one yourself.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dynamic Heightmaps in Away3D]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/29/dynamic-heightmaps-in-away3d/"/>
+    <updated>2010-09-29T07:42:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/29/dynamic-heightmaps-in-away3d</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_heightmap/away3d_heightmap.html" class="fancybox.iframe"><img title="away3d_heightmap" src="http://tonylukasavage.github.com/images/water.jpg" alt="" width="561" height="420" /></a></p>
+
+
+<p>→ Click the image above for the demo (or <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_heightmap/away3d_heightmap.html">click here</a>).
+→ View the <a href="http://tonylukasavage.github.com/demos/away3d_heightmap/srcview/index.html">source code</a>.</p>
+
+<p>While there might be other simpler ways to do it (<a href="http://code.google.com/p/as3dmod/" target="_blank">AS3Mod</a> comes to mind), I found myself working with the Elevation and SkinExtrude classes in Away3D and created some cool flowing effects.  The basic idea is that you dynamically create a gradient bitmap in AS3, tween its appearance on each frame, and use that bitmap as a heightmap for a SkinExtrude.  This will give you the effects shown in the demo above.</p>
+
+<p>I had to make a few slight changes to the existing SkinExtrude class in order to make it more efficient to reuse in each frame.  This is the <a href="http://tonylukasavage.github.com/demos/away3d_heightmap/srcview/" target="_self">SavageLookSkinExtrude class</a> found in the source code.  It is identical to the SkinExtrude class found in away3d.extrusions, except for the annotated sections that allow me to generate the heightmap extrusion more than once per instantiation.</p>
+
+<p>The inspiration for this demo came from 2 places.  The first is <a href="http://exey.ru/blog/home/fluid-simulation-pv3d-and-away3d" target="_blank">Exey Panteleev's (much better) fluid simulation</a>. The code displayed on his page is for PaperVision3D, but there's a link for the Away3D code as well.  All things being equal, you should be following the footsteps of Exey since his solution performs much better than mine.   I just did this demo cause frankly I'm not that good at 3D math and I could barely understand the math involved in his solution. The only real advantage of my method is that you have more control over the pattern as it is driven by the bitmap.</p>
+
+<p>My other source of inspiration, as well as pure tutelage with Away3D height maps and SkinExtrude, is <a href="http://jasonbejot.com/?p=307" target="_blank">Jason Bejot's "Create Terrain in Away3D" tutorial</a>.  Jason gives a very easy to follow and concise look at how you can use Away3D's Elevation and SkinExtrude classes in conjunction with grayscale height maps to create realistic terrain.  I basically just took his method and put it in motion.</p>
+
+<p>As you can see, there's more than one way to skin this cat.  Play around with it and see what kind of creations you can make with heightmaps and SkinExtrude.  I don't have the time to play with it now, but I feel like bitmaps given the PixelBender treatment might create some pretty wild 3D objects.</p>
+]]></content>
+  </entry>
+  
+</feed>

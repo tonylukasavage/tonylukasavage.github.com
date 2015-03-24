@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Packet capture with C++ &amp; Linux - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="As part of a larger project I&#8217;m working on I need to refamiliarize myself with some old friends: C and libcap. While I do have a healthy &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2010/11/17/packet-capture-with-c----amp--linux/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Packet capture with C++ &amp; Linux</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-17T11:28:00-05:00" pubdate data-updated="true">Nov 17<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As part of a larger project I&#8217;m working on I need to refamiliarize myself with some old friends: C and <a href="http://www.tcpdump.org/" target="_blank">libcap</a>.  While I do have a healthy dislike for coding in C, I have a much healthier respect for those who have used it to create some pretty fantastic stuff.  It still takes conscious effort to not spend all my time wrapping C code in C++ objects, but I digress.</p>
+
+<p>libpcap is a C library used to capture and analyze network packets off the wire, otherwise known as packet sniffing.  Some of the more prominent applications out there using it right now are <a href="http://www.snort.org/" target="_blank">Snort intrusion detection system</a>, <a href="http://www.wireshark.org/" target="_blank">Wireshark network analyzer</a> (formerly known as Ethereal), and the proprietor of libpcap, <a href="http://www.tcpdump.org/" target="_blank">tcpdump</a>.</p>
+
+<p>Why would you want to be able to analyze packets in code and not use one of these applications?  Because packet sniffing, in the hands of someone knowledgeable in network protocols, can be a great, non-intrusive way to gather discrete or statistical information and tie it to other coded business logic.  There&#8217;s also that little, evil, <a href="http://www.blackhat.com/" target="_blank">don-your-black-hat</a>, I-wanna-be-a-hacker kind of feel to seeing packets you have no explicit reason to see.  Motives aside, let&#8217;s see a simple example of how it works in Linux with a little C++ tacked on.</p>
+
+<h2>The Code</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;pcap.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="n">packetCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">packetHandler</span><span class="p">(</span><span class="n">u_char</span> <span class="o">*</span><span class="n">userData</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">pcap_pkthdr</span><span class="o">*</span> <span class="n">pkthdr</span><span class="p">,</span> <span class="k">const</span> <span class="n">u_char</span><span class="o">*</span> <span class="n">packet</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">++</span><span class="n">packetCount</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; packet(s) captured&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">dev</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">pcap_t</span> <span class="o">*</span><span class="n">descr</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">errbuf</span><span class="p">[</span><span class="n">PCAP_ERRBUF_SIZE</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">dev</span> <span class="o">=</span> <span class="n">pcap_lookupdev</span><span class="p">(</span><span class="n">errbuf</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">dev</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;pcap_lookupdev() failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">errbuf</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">descr</span> <span class="o">=</span> <span class="n">pcap_open_live</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">errbuf</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">descr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;pcap_open_live() failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">errbuf</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">pcap_loop</span><span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">packetHandler</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;pcap_loop() failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pcap_geterr</span><span class="p">(</span><span class="n">descr</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;capture finished&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>The Output</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>1 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>2 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>3 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>4 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>5 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>6 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>7 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>8 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>9 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>10 packet<span class="o">(</span>s<span class="o">)</span> captured
+</span><span class='line'>capture finished
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this very basic example we are simply setting up a network interface to use libpcap, capturing a few packets, and exiting with a message.  Pretty vanilla, but there&#8217;s a good bit going on here.  let&#8217;s break it down in more detail.</p>
+
+<h2>The Breakdown</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;pcap.h&gt;</span>
+</span><span class='line'><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here along with standard includes we also include pcap.h.  This is the header file that is necessary for all libpcap operations and constants.</p>
+
+<hr><br><br>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="n">packetCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">packetHandler</span><span class="p">(</span><span class="n">u_char</span> <span class="o">*</span><span class="n">userData</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">pcap_pkthdr</span><span class="o">*</span> <span class="n">pkthdr</span><span class="p">,</span> <span class="k">const</span> <span class="n">u_char</span><span class="o">*</span> <span class="n">packet</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">++</span><span class="n">packetCount</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; packet(s) captured&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is the callback packet handler function that will do all the heavy lifting when it comes to network analysis.  This callback is referenced later by the <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a> function.  Every packet that pcap receives will be passed to this function.  Here&#8217;s the explanation of the parameters:</p>
+
+<ul>
+    <li><strong>userData </strong>- a pointer to user defined data that can be passed into each callback, as defined in the <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a> call&#8217;s 4th parameter.</li>
+    <li><strong>pkthdr </strong>- the pcap packet header that includes relevant information about the packet as it relates to pcap&#8217;s capture.</li>
+    <li><strong>packet </strong>- a pointer to the actual packet that will be analyzed.</li>
+</ul>
+
+
+<p>For the sake of this example, we won&#8217;t be doing any protocol analysis and will simply be counting the number of packets that pass over our listening interface.</p>
+
+<hr><br><br>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">dev</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">pcap_t</span> <span class="o">*</span><span class="n">descr</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">errbuf</span><span class="p">[</span><span class="n">PCAP_ERRBUF_SIZE</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The start of our packet capture program.</p>
+
+<ul>
+<li><strong>dev</strong> - this will hold the name of the interface on which we will sniff</li>
+<li><strong>descr</strong> - The descriptor, or handle, for the libpcap packet capture</li>
+<li><strong>errbuf</strong> - a character buffer to contain any potential errors from libpcap.  The max error size is defined by <strong>PCAP_ERRBUF_SIZE</strong> in pcap.h.</li>
+</ul>
+
+
+<hr><br>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">dev</span> <span class="o">=</span> <span class="n">pcap_lookupdev</span><span class="p">(</span><span class="n">errbuf</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">dev</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;pcap_lookupdev() failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">errbuf</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we use <a href="http://www.manpagez.com/man/3/pcap_lookupdev/" target="_blank">pcap_lookupdev()</a> to find an available network interface on which to sniff.  The name of the interface is returned in the <strong>dev</strong> character array.  If there is an error or if no interface is available, <a href="http://www.manpagez.com/man/3/pcap_lookupdev/" target="_blank">pcap_lookupdev()</a> returns a NULL value and fills the <strong>errbuf</strong> with the relevant error information.  Returning a failure value then populating an error buffer is common practice for libpcap functions that end in error.</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">descr</span> <span class="o">=</span> <span class="n">pcap_open_live</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">BUFSIZ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">errbuf</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">descr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;pcap_open_live() failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">errbuf</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next we create our packet capture descriptor using <a href="http://www.manpagez.com/man/3/pcap_open_live/" target="_blank">pcap_open_live()</a>.  This is how we will enable our target network interface for sniffing.  It will return a valid descriptor on success, a NULL on failure.  The parameters are as follows:</p>
+
+<ul>
+<li><strong>device</strong> - the name of the network interface to be used by libpcap for sniffing.  We found it using <a href="http://www.manpagez.com/man/3/pcap_lookupdev/" target="_blank">pcap_lookupdev()</a>.</li>
+<li><strong>snaplen</strong> - the maximum snap length, or packet size, to be handled by this descriptor.  We using the system defined <strong>BUFSIZ</strong> constant.</li>
+<li><strong>promisc</strong> - Determines whether or not the interface will listen in <a href="http://en.wikipedia.org/wiki/Promiscuous_mode" target="_blank">promiscuous mode</a>.  Promiscuous mode will analyze packets not specifically addressed for your machine, like if you were attached to a hub or a <a href="http://en.wikipedia.org/wiki/Port_mirroring" target="_blank">mirrored switch port</a>.  1 turns it on, 0 turns it off.</li>
+<li><strong>to_ms</strong> - this is the packet read timeout in milliseconds.  Specify -1 for no timeout.</li>
+<li><strong>errbuf</strong> - In case of an error, this is where a descriptive message will be left.</li>
+</ul>
+
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">pcap_loop</span><span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">packetHandler</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;pcap_loop() failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pcap_geterr</span><span class="p">(</span><span class="n">descr</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;capture finished&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here&#8217;s the call we&#8217;ve been waiting for: <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a>.  This will take our pcap descriptor and start sniffing packets, sending them all to our packet handler callback function, aptly named packetHandler().  Here&#8217;s <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()&#8217;s</a> parameters:</p>
+
+<ul>
+<li><strong>descr</strong> - the packet capture descriptor that we have initialized in the previous steps.</li>
+<li><strong>count</strong> - the number of packets to capture before <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a> exits.  Use -1 or 0 to use no limit.</li>
+<li><strong>callback</strong> - this is the callback function that is called every time pcap sniffs a packet.  As specified above in the packetHandler() function, it receives relevant user data, pcap headers, and full packet data.  It is the work horse of the packet analysis process.  If creating a callback of your own, be sure to follow the function signature given in packetHandler().</li>
+<li><strong>userData</strong> - this is an array of unsigned bytes to be sent in with each packet.  You can use it to hold any relevant user data you would like to send to the callback as its first paramater.   You can also specify NULL if you wish to pass no user data to the callback.</li>
+</ul>
+
+
+<hr>
+
+
+<h2>The Summary</h2>
+
+<p>With this basic example you can now use C/C++ to capture network packets.  But keeping a count of packets isn&#8217;t terribly interesting, is it?  No, I don&#8217;t think so either.  So what should I do next?  If you managed to make it all the way to this summary, you can help me decide what aspects of packet capture or C/C++ to show case next.  Comment on one of the following or ad your own idea and I&#8217;ll probably do it next!</p>
+
+<ul><li>Learn how to use <a href="http://en.wikipedia.org/wiki/Berkeley_Packet_Filter" target="_blank">Berkeley packet filters</a> to focus and make more efficient your packet sniffing.</li>
+<li>Process offline packet capture dumps from some of the other programs I mentioned earlier.  It&#8217;s a critical skill for testing.</li>
+<li>Use libpcap to learn more about the interfaces on your system?</li>
+<li>Wrap this ugly C code in some much more developer friendly C++ objects.</li>
+<li>Get right into the nitty gritty and start learning how to analyze packet data.</li>
+</ul>
+
+
+<p>The choice is your&#8217;s guys.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-17T11:28:00-05:00" pubdate data-updated="true">Nov 17<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/c-c-/'>c/c++</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/packet-capture/'>packet capture</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/11/11/setting-up-wireless-on-centos-5/" title="Previous Post: Setting Up Wireless on Centos 5">&laquo; Setting Up Wireless on Centos 5</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/11/21/box2d-js---physics-in-html5--amp--javascript-guide/" title="Next Post: Box2D JS - Physics in HTML5 &amp; Javascript Guide">Box2D JS - Physics in HTML5 &amp; Javascript Guide &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

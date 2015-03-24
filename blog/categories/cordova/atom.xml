@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cordova | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/cordova/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[9 things to know about PhoneGap]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/05/11/9-things-to-know-about-phonegap/"/>
+    <updated>2011-05-11T14:07:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/05/11/9-things-to-know-about-phonegap</id>
+    <content type="html"><![CDATA[<h2>The People</h2>
+
+<p>As it turns out, the co-founders and core developers of PhoneGap are pretty accessible guys.  Who better to know when it comes to using a framework than the authors?  Everything from basic "getting started" questions to more complex topics from me have been addressed directly by one or more of their team.   While there's probably a ton of people I'm not mentioning, these few guys in particular have been exceedingly helpful.</p>
+
+<ul>
+    <li>Andre Charland (<a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>)</li>
+    <li>Brian Leroux (<a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>)</li>
+    <li>Dave Johnson (<a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a>)</li>
+    <li>Michael Brooks (<a href="http://twitter.com/#!/mwbrooks" target="_blank">@mwbrooks</a>)</li>
+    <li>Fil Maj (<a href="http://twitter.com/#!/filmaj" target="_blank">@filmaj</a>)</li>
+    <li>And the PhoneGap Twitter account (<a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>)</li>
+</ul>
+
+
+<p>I'm a Twitter fiend so that's generally where I find these guys, but make sure you also check out their <a href="http://groups.google.com/group/phonegap" target="_blank">google group</a> and <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">IRC</a>.  I've said this before... if you are doing PhoneGap development and aren't following this crew on Twitter, then you're an idiot.</p>
+
+<h2>PhoneGap Build</h2>
+
+<p>So you hear about all these frameworks that do cross platform mobile development, "code once, run everywhere", and everything just magically works.  Well... it ain't that simple.  You've got SDK installations, developer &amp; signing certificates, build chains, and custom project layouts to worry about with each platform.  While this can become a nightmare to manage, PhoneGap makes a pretty epic effort to help with their currently free, beta service called <a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a>.</p>
+
+<p>PhoneGap Build will allow you to give them the web code that drives your app and in return you will get App Store deployable binaries back for all the platforms listed in interface snapshot above.  You don't have to install all the SDKs.  You don't need to worry about any platform specific setup.  It is actually that simple.</p>
+
+<p>I highly suggest setting up an account right this second, especially if you are just starting out as a mobile developer.  <strong>The time consuming, and often frustrating, nature of multi-platform testing and deployment is easy to underestimate</strong>.  When you're learning the ropes of mobile APIs and the finer points of app creation, the last thing you want to worry about is every individual SDK's varying degrees of compatibility.  Which leads me to my next section...</p>
+
+<h2>PhoneGap Generate</h2>
+
+<p>If you are like most mobile developers, you are a (proud) owner of the 4+ GB behemoth of a download <a href="https://developer.apple.com/xcode/" target="_blank">XCode 4</a>.  The good news is that you can build apps for iOS 4+ with it.  The bad news is that <strong>XCode 4's default configuration settings are not compatible with PhoneGap</strong>, and it can be a bit complicated to resolve.  Here's the bloody path I took to <a href="http://groups.google.com/group/phonegap/browse_thread/thread/544f44883f9e22b6?pli=1" target="_blank">get XCode 4 building my PhoneGap apps</a>.</p>
+
+<p>But in their constant efforts to make the build process easier on developers, PhoneGap came up with a short term solution.  Instead of hacking up your XCode 4 project files, let PhoneGap do it for you!  Enter <a href="https://build.phonegap.com/generate" target="_blank">PhoneGap Generate</a>.  Its an extension of the PhoneGap Build site that will, given a project name, generate an XCode 4 compatible project for you.  While it's not an ideal situation, it can save you some of the headaches I endured trying to do it myself.  Hopefully the PhoneGap distribution will have this resolved in the near future.</p>
+
+<h2>Cordova</h2>
+
+<p>Now we're getting to the real goodies.  <a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a> is without question the single biggest boost to my PhoneGap development workflow.  Think PhoneGap Build with no need for the cloud.</p>
+
+<p><a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a>, in Brian Leroux's (author) own description, is</p>
+
+<blockquote>A PhoneGap project toolchain that automates common tasks for building cross platform mobile projects with OS X.
+
+Automate common development workflow tasks such as: compiling, debugging, testing, releasing and other things in between. As an added benefit projects generated with Cordova create a consistent, predictable, easy to understand and therefor extend software project. A number of conventions are introduced removing the need for mobile developers to relearn their tools or, worse, rebuild them for every project.</blockquote>
+
+
+<p>Be warned, Cordova is young and best used by those with a good understanding of how PhoneGap works in terms of project layout, building, testing, and deployment.  It also helps a great deal if you understand these concepts as they relate to each platform (i.e., Android, iOS, Blackberry, etc...) you plan to target.  And you'll need to me comfortable with the Terminal on Mac OS.  If I haven't scared you off yet, read on.</p>
+
+<p>Basically, you can build and test PhoneGap apps for multiple platforms with simple Terminal commands.  No more creating projects in XCode or Eclipse just to conform to a specific platform.  You can choose your favorite web development IDE (<a href="http://www.aptana.com/" target="_blank">Aptana</a> for me) and do all your work there.  When you're done, <strong>just run one simple command from the command line and it will build for iOS, Android, and even Blackberry</strong> (with a Windows VM).  Check out this short demo from Brian Leroux to see what I mean.</p>
+
+<iframe width="560" height="349" src="http://www.youtube.com/embed/nxgM19HCytg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Yeah, its low level and it doesn't have a pretty GUI, but man this project has massively improved my efficiency in terms of cross platform testing.  I'm hoping more people see this project and hop on board, and even contribute like I did (Blackberry support).  A tool like this can really be a game changer in terms of what a single developer can do for a mobile app spanning a multitude of platforms.</p>
+
+<h2>You don't have to use Platform-specific IDEs</h2>
+
+<p><img class="size-full wp-image-2881 alignright" title="Web IDEs" src="http://savagelook.com/blog/wp-content/uploads/2011/05/textmate_vs_aptana.png" alt="Web IDEs" width="250" height="113" /></p>
+
+<p>According to the PhoneGap docs on the <a href="http://www.phonegap.com/start" target="_blank">"Get Started" page</a>, I need XCode if I want to build iPhone/iPad apps, Eclipse for Android, a Windows based IDE for Blackberry, its a serious pain in the ass.  But these are web based solutions, right?  <strong>Why in God's name would I want to endure XCode and Eclipse as web development IDEs?!</strong>  I wouldn't, and I don't have to.</p>
+
+<p style="text-align: left;">You've got 2 options when it comes to developing your apps if you don't want to use the platform specific IDEs (and you shouldn't).</p>
+
+
+
+
+<ol>
+    <li>Develop your web code in your IDE of choice.  When its at a point you want to test it on a specific platform, copy the web code into a PhoneGap project built in the platform specific IDE.  For example, if you like <a href="http://macromates.com/" target="_blank">TextMate</a>, do all the web coding in TextMate and when you are ready to test it on Android, copy the web code into the assets/www path of your Eclipse Android project.  Run and test from there.</li>
+    <li>Use <a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a>. You can do your web code in your IDE of choice and simply run 'make debug'. In the current incarnation of Cordova, this will open your web code in the iPhone, Android, and Blackberry simulators.  Reference the <a href="https://github.com/brianleroux/Cordova/blob/master/README.md" target="_blank">Cordova Github README.md </a> for more details on usage.  In the near future I'm planning a blog post on that very subject.</li>
+</ol>
+
+
+<p>The long and short of it is that the platform specific IDE workflows are not optimal for web development.  Find the tools that best suit you and your web development style, use them, and only spend your time in platform specific IDEs when necessary.  The time you save using a full featured, web-focused IDE makes up for the less-than-fun process of having to copy and paste code to platform specific IDEs.  You save even more time if you use Cordova.  Have I pimped Cordova enough yet?</p>
+
+<h2>The Supported APIs (per platform)</h2>
+
+<p>So as you probably already know, you can find all of PhoneGap's documented mobile API support at <a href="http://docs.phonegap.com/" target="_blank">docs.phonegap.com</a>. What you might not be aware of is that they have done a really good job of documenting which APIs are supported by which platforms.</p>
+
+<p>On a function by function basis, the "Supported Platforms" section lets you know down to the OS version which platforms support it.  The trailing "Quirks" section let's you know which platforms may not behave as expected.  Not only that, but the "Quirks" are typically accompanied by workarounds to make your life a little easier.</p>
+
+<p>If you are doing cross platform mobile development, get used to the fact that you are going to be spending time dealing with inconsistencies, regardless of framework choice.  Having documentation with this level of detail will surely decrease that time, as well as prevent you from hitting unforeseen dead-ends in your app development.  RTFM, its worth it.</p>
+
+<h2>PhoneGap can technically do anything</h2>
+
+<p>PhoneGap does its best to expose platform specific mobile APIs in a bare bones, clean, abstracted manner.  While this does create a reliable experience in development, it does leave some things you might want off the table.  The big thing, for example, is native UI components.  While "native" anything seems to be contradictory to  cross platform development, its still a common request (see <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> or even this <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">PhoneGap based solution</a>).  So how do you go about offering platform specific functionality in a PhoneGap app?  With plugins.</p>
+
+<p>Plugins allow you to write native code for a specific platform in order to extend the PhoneGap framework.  For example, you could write code for handling <a href="https://github.com/phonegap/phonegap-plugins/tree/master/Android/BarcodeScanner" target="_blank">bar code scanning in Java for Android</a>, then write some Javascript to hook your native code to the PhoneGap framework, then use this native functionality in one of your PhoneGap apps.  OK, I didn't give an entirely clear account of what is necessary, so just reference the <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">PhoneGap wiki for details on plugin development</a>.  The wiki currently contains step by step instructions for Android, iOS, and Blackberry.  Here's the resources you should be checking out.</p>
+
+<ul>
+    <li><a href="http://wiki.phonegap.com/w/page/36753494/How-to-Create-a-PhoneGap-Plugin-for-Android" target="_blank">How to Create a PhoneGap Plugin for Android</a></li>
+    <li><a href="http://wiki.phonegap.com/w/page/36753496/How-to-Create-a-PhoneGap-Plugin-for-IPhone" target="_blank">How to Create a PhoneGap Plugin for iPhone</a></li>
+    <li><a href="http://wiki.phonegap.com/w/page/35799737/How-To-Create-a-PhoneGap-Plugin-for-BlackBerry-WebWorks" target="_blank">How to Create a PhoneGap Plugin for Blackberry WebWorks</a></li>
+    <li>Jesse MacFadyen's (<a href="http://twitter.com/#!/purplecabbage" target="_blank">@purplecabbage</a>) collection of <a href="https://github.com/purplecabbage/phonegap-plugins" target="_blank">PhoneGap plugins on Github</a></li>
+</ul>
+
+
+<h2>They Want You!</h2>
+
+<p>PhoneGap is an open source project.  Very open source in fact.  As though the <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT</a> licenses weren't liberal enough, PhoneGap gives you the choice of applying either to your work.  As long as you keep their copyright notices in your code and don't use their name to promote your product, you can use their code however you wish, commercially or otherwise.</p>
+
+<p>How does PhoneGap benefit from this? Well, licensing like this tends to create bi-directional generosity.  By this I mean the community commonly contributes to PhoneGap and its plugins and tools.  You can go to Github right now and fork your own copy of the whole PhoneGap framework (among other things) at the <a href="https://github.com/phonegap" target="_blank">PhoneGap Github account</a>.</p>
+
+<p>So if you use PhoneGap and write some custom code you think others can benefit from, consider giving back to keep the spirit of open source alive.  Otherwise you're a jack ass.</p>
+
+<h2>weinre</h2>
+
+<p>Can't believe I forgot this one.  I'll make this brief as your best bet is to read more at its website: (<a href="http://pmuellr.github.com/weinre/" target="_blank">http://pmuellr.github.com/weinre/</a>).</p>
+
+<p>Basically, weinre lets you debug web pages remotely.  What does this mean for PhoneGap?  This means <strong>you can debug your native PhoneGap apps either on device or simulator</strong>.  It alleviates one of the biggest time sucks of web based mobile development, which is the silent dismissal of malfunctioning Javascript calls.  But now instead of your exceptions going the way of /dev/null, you can debug and log your execution as you would any other application.  Oh, and Cordova has weinre built in.</p>
+]]></content>
+  </entry>
+  
+</feed>

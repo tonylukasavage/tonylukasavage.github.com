@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: augmented reality | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/augmented-reality/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[QR to AR: Using QR Codes to serve Augmented Reality Markers]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/03/qr-to-ar--using-qr-codes-to-serve-augmented-reality-markers/"/>
+    <updated>2011-01-03T07:58:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/03/qr-to-ar--using-qr-codes-to-serve-augmented-reality-markers</id>
+    <content type="html"><![CDATA[<h1>The Demo</h1>
+
+
+<p>Scan 1 of the 4 QR codes below with your mobile device.  Here's an <a href="http://www.androidzoom.com/android_applications/shopping/barcode-scanner_clh.html" target="_blank">Android Barcode app</a> and <a href="http://www.iphoneness.com/iphone-apps/5-best-barcode-iphone-applications/" target="_blank">a couple iPhone apps</a> if you don't already have one.</p>
+
+<table cellpadding="10">
+  <tr>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt001.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt002.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt003.png"/></td>
+    <td><img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com/ar/markers/patt004.png"/></td>
+  </tr>
+</table>
+
+
+<p>The resulting link will take you to an augmented reality image marker.  It doesn't mean much by itself, but take a look at what can be done with this <span style="color:#ff0000;">"QR to AR" method</span>:</p>
+
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="600" height="488" src="http://www.youtube.com/embed/bnY5aJSL4Bg" frameborder="0"></iframe>
+
+
+<h1>The Overview</h1>
+
+
+<p><strong>NOTE:</strong> If you are totally unfamiliar with augmented reality, check out these previous posts: <a href="http://savagelook.com/blog/away3d/away3d-augmented-reality">Augmented Reality</a> and <a href="http://savagelook.com/blog/away3d/away3dlite-augmented-reality-free-camaro">Augmented Reality with Away3dlite</a>.</p>
+
+<p>What's one of the biggest blockers to augmented reality taking off?  <span style="color:#ff0000">The difficulty in distributing the augmented reality markers</span> necessary to make the technology work.  If you've seen an augmented reality site, you've read the off-putting instructions to print an image to a sheet of paper to hold in front of your webcam.  If you are a massive publication like Esquire, then its not so big of an issue.</p>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/wp2z36kKn0s?fs=1&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/wp2z36kKn0s?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+<p>But if you have no problem distributing AR markers, you probably aren't reading this and don't need my help.  But if you do, you might want to try the "QR to AR" method of distribution shown at the top of this post.  You should always offer the method of printing your AR marker, but with the widespread use of mobile technology, this is another viable method.</p>
+
+<p>In short, the positive is that this method is easy to distribute and is more likely to be tried than with the "print this marker" method.  The negative is that augmented reality is already a technology that depends heavily on a quality image.  Consider the following when attempting to use the "QR to AR" method:</p>
+
+<ul>
+<li>Mobile phones can add difficulty with their reflective and glowing surface</li>
+<li>Good lighting and webcam quality is critical for the best possible augmented reality experience</li>
+<li>Disable auto-orient on your device, if possible, otherwise the image will turn when your phone does</li>
+</ul>
+
+
+<p><span style="color:#ff0000;">This isn't necessarily meant as a practical solution</span> to augmented reality marker distribution and use, just a simple attempt to think outside the box.  Hopefully it encourages people smarter than me to think of even more clever ways to bring augmented reality to the masses.</p>
+
+<p>Special thanks to all techs involved here: <a href="http://words.transmote.com/wp/flarmanager/">FLARManager</a>, <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en">FLARToolkit</a>, <a href="http://away3d.com/">Away3D</a>, and my trusty Droid X using the <a href="http://code.google.com/p/zxing/">Barcode Scanner app from Zxing</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Away3DLite + Augmented Reality = Free Camaro!]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/05/away3dlite---augmented-reality---free-camaro-/"/>
+    <updated>2010-08-05T21:25:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/05/away3dlite---augmented-reality---free-camaro-</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/augmented_reality/sandbox.html" class="fancybox.iframe"><img title="augmented_reality" src="http://tonylukasavage.github.com/images/camaro.jpg" alt="" width="384" height="286" /></a></p>
+
+
+<p>As promised the demo above includes bare bones source code (right click to view source)  for getting FLARManager up and running with Away3dLite.  And for a limited time, it comes with your very own Camaro!  99% of the credit goes to Eric Socolofsky as the code is just a trimmed down version of his example code included in FLARManager.  The model has been provided free by the modeler "Race Tracks" at <a href="http://www.turbosquid.com/FullPreview/Index.cfm/ID/310098" target="_blank">turbosquid</a>.  In order to use this demo, you need to do the following:</p>
+
+<ul>
+<li>Download and print <a href="http://www.savagelook.com/demos/augmented_reality/resources/flar/patterns/patt001.png" target="_blank">this marker</a></li>
+<li>Turn on your webcam and point it at yourself.</li>
+<li>Start the demo, point the printed marker at the webcam, and enjoy!</li>
+</ul>
+
+
+<p>If the above steps aren't clear, check out the <a href="http://www.youtube.com/watch?v=PYBgPjxeQ-8" target="_blank">video demo from my prior blog post</a>.  For those out there constantly evaluating how far we can push the performance of away3dlite, you might like to know that the model consists of right around 1000 faces.  1000+ faces along with the video processing of patterns and I'm still maintaining right around 30 FPS.  Not bad at all.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D: Augmented Reality]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/06/20/away3d--augmented-reality/"/>
+    <updated>2010-06-20T21:49:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/06/20/away3d--augmented-reality</id>
+    <content type="html"><![CDATA[<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="src" value="http://www.youtube.com/v/PYBgPjxeQ-8" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://www.youtube.com/v/PYBgPjxeQ-8"> </embed></object>
+
+
+<p>Here's a quick demo I did of using <a href="http://en.wikipedia.org/wiki/Augmented_reality" target="_blank">augmented reality</a> in Away3D.  The quick description is that your webcam is used to identify the position and orientation of the marker (which I'm holding).  With these values identified, <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en" target="_blank">FLARToolkit </a>and <a href="http://words.transmote.com/wp/flarmanager/" target="_blank">FLARManager </a>are used to translate your Away3D scene and objects relative to the marker.  You are adding interaction into your Away3D apps using natural movements rather than the typical mouse and keyboard combos.</p>
+
+<p>While the demo itself doesn't give a great picture of the practical applications, they are showing up more quickly then you might imagine.  One particularly interesting example is the Layar browser, which uses global positioning rather than marker identification to make its alterations to reality.  Rather than try to explain it, check it out here:</p>
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="350" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="src" value="http://www.youtube.com/v/b64_16K2e08" /><embed type="application/x-shockwave-flash" width="425" height="350" src="http://www.youtube.com/v/b64_16K2e08"></embed></object>
+
+
+<p>And I'm sure plenty more applications are on the way.  Want to get on board and start churning out your own augmented reality (AR) apps in Flash?  Check out <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en" target="_blank">FLARToolkit </a>and <a href="http://words.transmote.com/wp/flarmanager/" target="_blank">FLARManager </a>for yourself.  You may also want to take a look at the original <a href="http://www.hitl.washington.edu/artoolkit/" target="_blank">ARToolkit</a>, which is based in C++, or <a href="http://nyatla.jp/nyartoolkit/wiki/index.php?NyARToolkit%20for%20Java.en" target="_blank">NyARToolkit</a>, the Java/C# port on which FLARToolkit is based.</p>
+
+<p>Too lazy for all that research?  Stay tuned and I'll post up the source from the bare bones example I had in the first video of this post.</p>
+]]></content>
+  </entry>
+  
+</feed>

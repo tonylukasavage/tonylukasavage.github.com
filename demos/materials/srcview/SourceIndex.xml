@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of dot3</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="resources">
+				<node label="normal.jpg" icon="imageIcon" url="source/resources/normal.jpg.html"/>
+				<node label="tvnoise.flv" url="source/resources/tvnoise.flv"/>
+				<node label="tvnoise.swf" icon="swfIcon" url="source/resources/tvnoise.swf"/>
+			</node>
+			<node label="AwayUIC.mxml" icon="mxmlIcon" url="source/AwayUIC.mxml.html"/>
+			<node selected="true" label="sandbox.mxml" icon="mxmlAppIcon" url="source/sandbox.mxml.html"/>
+		</node>
+	</nodes>
+</index>

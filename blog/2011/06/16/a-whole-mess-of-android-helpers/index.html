@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Whole Mess of Android Helpers - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Overview In my work on my MMA fighter Android app Knuckle Head I used a lot of Android functionality that I&#8217;m sure I&#8217;ll use again. Things &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/06/16/a-whole-mess-of-android-helpers/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Whole Mess of Android Helpers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T10:01:00-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Overview</h2>
+
+<p>In my work on my MMA fighter Android app <a href="/blog/2011/06/08/knuckle-head--my-mma-fighter-app-for-android/">Knuckle Head</a> I used a lot of Android functionality that I&#8217;m sure I&#8217;ll use again.  Things like JSON processing, asynchronous tasks with ProgressDialogs, and single instance Toasts are all things that will inevitably show up in future work.  Because I&#8217;m just so generous, I decided to refactor them out of the Knuckle Head specific code and turn them into a Java package anyone could use.</p>
+
+<p><span style="font-size:18px;">* Clone or download <a href="https://github.com/tonylukasavage/com.savagelook.android" target="_blank">com.savagelook.android on Github</a></span></p>
+
+<div style="height:15px;">&nbsp;</div>
+
+
+<h2>The Classes</h2>
+
+<p>Its a small collection so far, but sure to grow very quickly.  Here&#8217;s a list of the classes included so far:</p>
+
+<ul>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/JsonHelper.java">JsonHelper.java</a> - A collection of JSON handling functions. Includes Retrieving JSON from a remote URL.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/KeyValuePair.java">KeyValuePair.java</a> - A generic key/value pait class. Useful for populating Android Spinners.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/Lazy.java">Lazy.java</a> - A collection of static classes for operations I don&#8217;t have a better home for.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/ToastSingleton.java">ToastSingleton.java</a> - I hate how Toasts in Android are shown sequentially. To prevent this I operate on a single instance of a Toast throughout my apps.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/Toaster.java">Toaster.java</a> - A class that utilizes ToastSingleton.java and delivers Toasts with convenient static functions.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java">UrlJsonAsyncTask.java</a> - This is a custom AsyncTask for a very common Android problem. I very often need to retrieve JSON from a remote URL, display a ProgressDialog while this occurs, operate on the data when it is returned, and then close the ProgressDialog. With this class that work is reduced down to just a few lines of code.</li>
+</ul>
+
+
+<p><span style="font-weight:bold; font-size:16px; padding:0px; margin:0px;">UrlJsonAsyncTask Example</span>
+If you had only have time for a quick look, be sure to check <a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java">UrlJsonAsyncTask.java</a>.  Using this class in side my Activity code reduced the line count drastically.  Since I was lazy about documentation for any of this, here&#8217;s an example to reward my blog reader&#8217;s.  This is straight from <a href="http://savagelook.com/blog/android/knuckle-head-my-mma-fighter-app-for-android">Knuckle Head</a> code.  You&#8217;ll notice a few other classes mentioned above are also included.</p>
+
+<p>UrlJsonAsyncTask is not abstract like <a href="http://developer.android.com/reference/android/os/AsyncTask.html" target="_blank">AsyncTask</a>, most of the functionality has been implemented. You only need to implement onPostExecute(JSONObject) if you want to do something with the returned JSON.  In order for this to work, your JSON needs to return an object formatted like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="kc">true</span><span class="err">|</span><span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;info&quot;</span><span class="p">:</span><span class="s2">&quot;error or warning message from server&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<ul>
+<li><strong>success</strong> is a boolean indication from your JSON source whether or not the request was successful</li>
+<li><strong>info</strong> on error or warning, will contain an app user friendly message that can be delivered via Toast</li>
+<li><strong>data</strong> This is the actual JSON object or array that you will operate on given a successful request</li>
+</ul>
+
+
+<div style="height:15px;">&nbsp;</div>
+
+
+<p>And this is how you would define your own UrlJsonAsyncTask.  In this case I am querying my server to get a list of fighter, or the profile of one particular fighter.  In either scenario, as stated in the JSON description above, the &#8220;data&#8221; attribute of my JSON is what I will pass to the target intent.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="kd">class</span> <span class="nc">FighterSearchTask</span> <span class="kd">extends</span> <span class="n">UrlJsonAsyncTask</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">FighterSearchTask</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onPostExecute</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">json</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="o">.</span><span class="na">validateJson</span><span class="o">(</span><span class="n">json</span><span class="o">);</span> <span class="c1">// throws IOException, JSONException</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// These 4 lines represent the actual post execute logic</span>
+</span><span class='line'>            <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">intentClass</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;info&quot;</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;list&quot;</span><span class="o">)</span> <span class="o">?</span> <span class="n">FighterListActivity</span><span class="o">.</span><span class="na">class</span> <span class="o">:</span> <span class="n">FighterTabActivity</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">intentClass</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">intent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="s">&quot;json&quot;</span><span class="o">,</span> <span class="n">json</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;data&quot;</span><span class="o">).</span><span class="na">toString</span><span class="o">());</span>
+</span><span class='line'>            <span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="c1">// IOExceptions are custom and return JSON &quot;info&quot; in getMessage()</span>
+</span><span class='line'>            <span class="n">Toaster</span><span class="o">.</span><span class="na">toast</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">context</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="c1">// Lazy.Ex.getStackTrace(Exception) is just a simple one liner for turning</span>
+</span><span class='line'>            <span class="c1">// a stack trace into a String.</span>
+</span><span class='line'>            <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">&quot;YourTagName&quot;</span><span class="o">,</span> <span class="n">Lazy</span><span class="o">.</span><span class="na">Ex</span><span class="o">.</span><span class="na">getStackTrace</span><span class="o">(</span><span class="n">e</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// JSONExceptions here are generally because your JSON is not formatted as</span>
+</span><span class='line'>            <span class="c1">// per the description in the comments above. We don&#39;t want to show these</span>
+</span><span class='line'>            <span class="c1">// errors to the user, so we give them a pre-defined error message to let</span>
+</span><span class='line'>            <span class="c1">// them know something went wrong.</span>
+</span><span class='line'>            <span class="n">Toaster</span><span class="o">.</span><span class="na">toast</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">getMessageError</span><span class="o">());</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span><span class='line'>            <span class="kd">super</span><span class="o">.</span><span class="na">onPostExecute</span><span class="o">(</span><span class="n">json</span><span class="o">);</span> <span class="c1">// Must be called to close the ProgressDialog</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After you have created your subclass of UrlJsonAsyncTask, you can execute these following few lines of code anywhere to fire your task and have a ProgressDialog pop up until it either finishes successfully or or returns an error/warning message. There&#8217;s tons of setters to customize your task. Check them out in the <a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java" target="_blank">source code</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">FighterSearchTask</span> <span class="n">task</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FighterSearchTask</span><span class="o">(</span><span class="n">SearchActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+</span><span class='line'><span class="n">task</span><span class="o">.</span><span class="na">setMessageLoading</span><span class="o">(</span><span class="s">&quot;Searching for fighters...&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">task</span><span class="o">.</span><span class="na">setConnectionParams</span><span class="o">(</span><span class="mi">2000</span><span class="o">,</span> <span class="mi">5000</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span> <span class="c1">// connection timeout(ms), read timeout(ms), number of retries</span>
+</span><span class='line'><span class="n">task</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And voila, you got JSON from a remote URL with a ProgressDialog assuring your users that the data is in fact loading.  All of this is non-blocking so you are able to continue other operations or update the UI if necessary.</p>
+
+<h2>Summary</h2>
+
+<p>So yeah, it&#8217;s just another collection of a developer&#8217;s reusable tools for getting stuff done, this time for Android.  If you do happen to peruse, or use, the code, let me know what you think.  Suggestions,criticisms, and of course contributions are more than welcome.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T10:01:00-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/06/15/appcelerator-charging-for-integrated-debugging--phonegap-doing-it-for-free-/" title="Previous Post: Appcelerator Charging for Integrated Debugging. PhoneGap Doing It For Free.">&laquo; Appcelerator Charging for Integrated Debugging. PhoneGap Doing It For Free.</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/06/22/taking-notes-on-node-js-using-gonzo/" title="Next Post: Taking Notes on Node.js using Gonzo">Taking Notes on Node.js using Gonzo &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

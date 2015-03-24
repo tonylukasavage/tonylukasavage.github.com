@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: heightmapmodifier | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/heightmapmodifier/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D Morphing with HeightMapModifier]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/10/04/away3d-morphing-with-heightmapmodifier/"/>
+    <updated>2010-10-04T07:38:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/10/04/away3d-morphing-with-heightmapmodifier</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/away3d_HeightMapModifier.html" class="fancybox.iframe"><img title="away3d_HeightMapModifier" src="http://tonylukasavage.github.com/images/hmm.jpg" alt="" width="560" height="417" /></a></p>
+
+
+<p>&rarr; <a href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/away3d_HeightMapModifier.html">Click here</a> or the image above for the demo.
+&rarr; View the <a href="http://tonylukasavage.github.com/demos/away3d_HeightMapModifier/srcview/index.html">source code</a>.</p>
+
+<p>As usual, shortly after finishing an Away3D demo an Away3d dev (this time <a href="http://www.closier.nl/blog/" target="_blank">Fabrice Closier</a>) suggests a better way to do it.  In my previous 2 demos I created fluid and morphing effects on planar meshes using a modified version of the SkinExtrude class.</p>
+
+<p>As per Fabrice's suggestion, this time I did the same using the HeightMapModifier class.  No modifications to Away3D source code necessary and it works on any mesh, planar or otherwise.  In this example I apply dynamic height maps to a sphere to create some pretty wild meshes.  Be sure to toggle to wireframe mode so that you can get a good look at how the vertices move with each height map transition.  Here's a snippet of how it works:</p>
+
+<p>``` as3
+[Embed("heightmap.jpg")] private var hmImage:Class;</p>
+
+<p>var heightData:BitmapData = Cast.bitmap(hmImage);
+var sphere:Sphere = new Sphere();
+var heightMapModifier:HeightMapModifier = new HeightMapModifier(sphere, heightData);</p>
+
+<p>// offset determines the minimum height value of each vertice
+heightMapModifier.offset = 300;</p>
+
+<p>// scale is the multiplier for the calculated height values
+heightMapModifier.scale = ELEVATION_HEIGHT;</p>
+
+<p>// execute the modifier
+heightMapModifier.execute();
+```</p>
+
+<p>One other cool note to remember is that you can also use negative values for scale.  By doing so you can create indents rather than bumps on your mesh.  See what happens when you turn the "Elevation height" all the way down on this demo.</p>
+
+<p>Also in the example I utilize the EnviroBitmapMaterial to give our target mesh a shiny, reflective appearance.  True reflection is very processor intensive and is outside the realm of feasibility right now for 3D Flash.  But by using environment materials, we can "fake" a reflective surface by using an environment map that closely matches the Away3D scene.  In this case the environment map I used for the EnviroBitmapMaterial is one of the images I used to create the skybox for the scene.  You'll notice the reflective effect even more as the mesh morphs or when you orbit around it.</p>
+
+<p>There you have it, mesh morphing and reflective materials in Away3D.  With a little luck, this'll be the last time you have to hear me talk about it for a while!</p>
+]]></content>
+  </entry>
+  
+</feed>

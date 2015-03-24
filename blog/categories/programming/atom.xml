@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[8 Steps for being an Asshole Effectively]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/11/8-steps-for-being-an-asshole-effectively/"/>
+    <updated>2011-01-11T09:58:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/11/8-steps-for-being-an-asshole-effectively</id>
+    <content type="html"><![CDATA[<h2>Exhibit A</h2>
+
+<p>I needed information on PHP debugging in IntelliJ.  After nearly tearing my hair out trying to get it to work using online references, I pleaded to the twitter community for help.  It went something like this</p>
+
+<div style="padding-left:20px; border:1px solid #000000; background-color:#dddddd;">
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: Anybody know how to get #PHP debugging working in #IntelliJ?
+<strong>* crickets *</strong>
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: I have everything else working, I just can't get #PHP debugging in #IntelliJ. Any help?
+<strong>*crickets *</strong>
+</div>
+
+
+<p>Absolutely nothing.  It was just another drop of water in a sea of questions that never get answered on Twitter.  But I've found a way to get around this.  <span style="color:#ff0000;">Be an asshole</span>.  That's right, vent your frustration, call out the project or software you are working on, swear it off for life.  This method becomes even more effective as your number of followers grows.  Again, I paraphrase:</p>
+
+<div style="padding-left:20px; border:1px solid #000000; background-color:#dddddd;">
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: Screw #IntelliJ, #PHP debugging won't work right so I'm off to try Aptana and Eclipse.
+</div>
+
+
+<p>Within minutes I had half a dozen responses back, including one who spent 20 minutes helping me troubleshoot the process (thanks <a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>).  This is not the first time this has happened.  I asked basic questions about the <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> mobile development framework on Twitter to get only one generic response.  I "rephrased" in a less complimentary manner and within minutes had 2 of their project members messaging me.</p>
+
+<p>Why does it work like this?  <span style="color:#ff0000;">The power of negative press in social media is too powerful to ignore</span>.  These projects know that positive word of mouth and community support is their life blood.  Jeopardize that and watch people flock to your aid.</p>
+
+<h2>How To</h2>
+
+<p>Here's the checklist for being an effective asshole in social media to get information you need.</p>
+
+<ol>
+<li>The bigger your audience (AKA, followers and friends), the more likely your negative comments will be worth extinguishing.</li>
+<li># and @ on Twitter go a long way.  Target the people you have a beef with and give them a chance to retort.</li>
+<li>Be specific with your negativity. "IntelliJ sucks" would have gotten me nowhere.  Direct complaints about functionality are the way to go.</li>
+<li>Don't be stupid.  A sure fire way to get ignored is screaming "BUG" when you should RTFM.</li>
+<li>Be nice once someone does help. If they have the patience to deal with your sarcasm, they deserve your respect.</li>
+<li>Be grateful. If you do have some social media clout, be sure to praise the project after and thank the person that helped.</li>
+<li>Don't be afraid to have more than one conversation about your frustration with a product, but don't flood your stream with whining.</li>
+<li>Use sparingly. Don't be the boy who cried wolf.</li>
+</ol>
+
+
+<p>And that's pretty much all it takes.  Now remember, <span style="color:#ff0000;">the idea is to bring intelligent people into a problematic situation you are having, not to be a cantankerous prick</span>.  Play the game, but be sure to shake hands afterwards, regardless of who "wins".</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Debugging on IntelliJ IDEA 10 with XDebug]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug/"/>
+    <updated>2011-01-05T08:33:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug</id>
+    <content type="html"><![CDATA[<h2>The Overview</h2>
+
+<p>So after being told by my peers that print_r() was adequate, I embarked on a quest to get true PHP debugging working in a reputable IDE.  Recently I've heard nothing but good things about <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA 10</a>, so I decided that would be my test subject.  Don't let the "J" fool you, while Java is its focus, this bad boy handles an array of languages and markups, including ActionScript, PHP, Groovy, Scala, Python/Jython, Ruby/JRuby, Clojure, Javascript, and HTML.</p>
+
+<p><span style="color:#ff0000;">If you are a serious PHP developer and have not given debugging a fair chance, or a chance at all, you are killing yourself</span>.  So let's do this thing from the ground up.  WAMP, XDebug, IntelliJ, and magic.  Follow these steps (for Windows) to reach my recent state of elightenment and PHP debugging bliss.</p>
+
+<p>By the way, I almost gave up on IntelliJ entirely due to problems with debugging until <a href="http://www.kilometer0.com" target="_blank">Alex Petrescu</a> (<a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>) talked me down from the edge.  I'm very grateful as IntelliJ is proving to be an excellent IDE.</p>
+
+<h2>Step By Step</h2>
+
+<ol>
+<li>Download and install <a href="http://www.wampserver.com/en/" target="_blank">WAMP</a> (I installed to <strong>C:\wamp</strong>)</li>
+<li>After installing WAMP, create a file named <strong>C:\wamp\www\info.php</strong> that contains the following code:
+
+``` php
+<?php phpinfo(); ?>
+```
+
+<li>Open the <a href="http://localhost/info.php" target="_blank">http://localhost/info.php</a> in a browser to get your PHP configuration.
+</li><li>
+Now view the source of the page in your browser.  Copy the entire contents of the source to your clipboard.
+</li>
+<li>Goto the <a href="http://www.xdebug.org/find-binary.php" target="_blank">XDebug Tailored Installation Instructions</a> and paste your PHP configuration source into the text box then click "analyse my phpinfo() output".
+</li>
+<li>Follow the resulting instructions for adding XDebug to your PHP installation.  Once you make those changes, make sure the new section of your php.ini looks like this (as per a <strong>C:\wamp</strong> installation):
+
+``` bash
+[XDebug]
+zend_extension="<this is the path that the XDebug installation instructions gave you>"
+xdebug.remote_enable=true
+xdebug.remote_port=9000
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir="c:\wamp\logs"
+```
+
+</li>
+<li>Download and install <a href="http://www.jetbrains.com/idea/download/index.html" target="_blank">IntelliJ IDEA 10 Ultimate Edition</a> (trial).  It may not be necessary, but I included all the available extensions.</li>
+<li>Setup a basic PHP project in IntelliJ IDEA 10
+<ol style="list-style-type: upper-alpha;">
+<li>Goto <strong>File -> New Project...</strong></li>
+<li>Select <strong>Create project from scratch</strong> and click Next</li>
+<li>Enter a name for your project and select <strong>Project Module</strong> under the Select Type heading and click <strong>Next</strong></li>
+<li>Select "do not create source directory" and click <strong>Next</strong></li>
+<li>Click <strong>Finish</strong> then <strong>OK</strong> when asked about starting a project without a JDK assigned.</li>
+</ol>
+<li>Create a PHP file to test debugging</li>
+<ol style="list-style-type: upper-alpha;">
+<li>In the project panel on the left side, right click the project name and goto <strong>New -> PHP File</strong> </li>
+<li>Enter a name for your PHP file and click <strong>OK</strong></li>
+<li>In the code panel on the right, enter the following and save the file:
+
+``` php
+<?php
+$a = 0;
+?>
+```
+
+</li>
+</ol>
+<li>Click the vertical bar between the project panel and the code panel next to the following line to create a red breakpoint:
+
+``` php
+$a = 0;
+```
+
+</li>
+<li>Copy the PHP file you created in step #9 to your WAMP www directory (<strong>C:\wamp\www</strong>)</li>
+<li>Right click on the PHP file name in the project panel, then goto <strong>Debug -> filename.php on server</strong></li>
+<li>In the resulting window, click the dotted button next to the <strong>Server</strong> dropdown</li>
+<li>Setup your deployment settings
+<ol style="list-style-type: upper-alpha;">
+<li>Select <strong>Local</strong> from the access type dropdown</li>
+<li>Click the <strong>Mappings</strong> tab and under "web path on server" enter a single slash "/" to specify the WAMP root.  Click <strong>OK</strong> and then <strong>OK</strong> again to finish the configuration.</li>
+</ol>
+<li>Right click on your PHP file in the project panel again and goto "<strong>Run on server</strong>" or "<strong>Debug on server</strong>".  I've had inconsistent behavior using it, so try both if one doesn't work.</li>
+<li>If all went according to plan, a browser should open and execution should stop at your breakpoint.  If you look at your debug panel on the bottom on IntelliJ you should now see your PHP globals laid out.  Congrats, you made it!</li>
+</ol>
+
+
+<h2>The Summary</h2>
+
+<p>I know, its not exactly a walk in the park, but <span style="color:#ff0000;">its well worth the work to not have to pollute your code with copious print_r() calls</span>.  You can now have full access over your PHP as you would with any other enterprise level language and debugger.  I didn't go into any specific detail here, but I plan in the future to discuss all the ins and outs of PHP debugging in IntelliJ IDEA 10.  Its looks to be a great IDE thus far.</p>
+
+<p>If you have any questions, which is likely since I ran into some inconsistent behavior, feel free to comment and I'll try to answer back as quickly as possible.  Hopefully you'll never even need to ask.</p>
+
+<p>Happy PHP debugging!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NerdKits under my Christmas Tree!]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/28/nerdkits-under-my-christmas-tree-/"/>
+    <updated>2010-12-28T09:51:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/28/nerdkits-under-my-christmas-tree-</id>
+    <content type="html"><![CDATA[<p>Time to dive into the world of embedded programming head long with one of my favorite Christmas gifts: my <a href="http://www.nerdkits.com/">NerdKit</a>.  What's a NerdKit?  Well its basically a starter kit for bridging programming with the real world through electronics, an API, and a thorough guide for getting started.  You might have also heard of <a href="http://www.arduino.cc/">Arduino</a>, which is a similar and uses open source technology for embedded programming.</p>
+
+<p>What can you do with it?  Well, thats what I aim to find out.  In the meantime, though, you can check out the <a href="http://www.nerdkits.com/projects/">"Projects" page</a> of the NerdKits site for some pretty damn cool projects that include:</p>
+
+<ul>
+<li>iPhone controlled RC Car</li>
+<li>Morse Code decoder</li>
+<li>Digital thermometers</li>
+<li>Spark generator</li>
+<li>Computer controlled robotics and devices</li>
+</ul>
+
+
+<p>So for all you SavageLook.com faithful there's sure to be some NerdKit guides and demos to come.  Here's hoping I haven't forgotten every bit of electrical engineering I learned in college.  Forget it, I drank that knowledge clean outta my head.  I guess 3 hours/week of EE can't compete with 12 hours/week of beer pong.  Oh well, should be fun anyway!</p>
+
+<p>Oh and be sure to follow <a href="http://twitter.com/#!/nerdkits">@nerdkits</a> on twitter for all kinds of cool updates, demos, and tutorials!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Programmers: Why do we do it?]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/22/programmers--why-do-we-do-it-/"/>
+    <updated>2010-12-22T09:30:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/22/programmers--why-do-we-do-it-</id>
+    <content type="html"><![CDATA[<p>Every now and again when suffering through a movie my wife has chosen, I manage to find one thing I really like about it.  This time the form of torture was "The Kids Are All Right".  Fantastic acting, spectacularly unentertaining story.  Anyway, while I was daydreaming about code, I heard this exchange that probably went right over the heads of most viewers.  Not the viewers fault, they were probably still reeling from the rough Mark Ruffalo on Julianne Moore action in the prior scene.</p>
+
+<p><strong>Gardener</strong>: "I have allergies."
+<strong>Jules</strong>: "Then why are you a gardener?!"
+<strong>Gardener</strong>: "Because I love the flowers."</p>
+
+<p>And then they fly right past that line, but that's the one good thing I took from this movie.  <span style="color:#ff0000;">Sometimes the things we love don't make sense and can downright make us miserable</span>, but it doesn't make us love them any less.</p>
+
+<p>In my head this philosophy plays so easily into the mind of programmer.  There's so much to dislike about programming:</p>
+
+<ul>
+<li>Entire days spent chasing bugs</li>
+<li>Short deadlines</li>
+<li>Constantly having skillsets superseded by new technology</li>
+<li>No appreciation for the work it takes outside other developers</li>
+<li>The elitist nature of many in the developer community</li>
+<li>Moronic clients</li>
+<li>Late nights, long hours in front of a glowing screen</li>
+<li>The constant inkling that some 14 year Japanese kid already did this better than you</li>
+<li>The lottery-esque likelihood of independent success</li>
+</ul>
+
+
+<p>And that's just a few.  I'm sure I'll hear a few more in the comments.</p>
+
+<p>Then why do we do it?  What is there to love about programming?  What is it about crafting together mountains of syntax that makes us come back to it every day?  I know for most of us there's a paycheck attached to it, but for plenty of us that's not the root.</p>
+
+<p>I may be getting too romantic even for my own tastes, but I think its the fact that <span style="color:#ff0000;">those who truly love programming see it as an art form</span>.  Its not just a technical pursuit, but one that allows the leveraging of one's unique talent and views.  You bring a form of personal expression into your work.  You invest yourself physically and mentally in what you do.  You suffer and toil, using code as your medium, just as other artists craft with paint or stone.  You have a personal association and pride with its creation.  <span style="color:#ff0000;">The code and its results represent you</span>.</p>
+
+<p>What do you think?  Is there really a right-brain satisfaction achieved through a love of programming.  Is it more than ones and zeros doing an assigned task?  I think so.  Otherwise, why bother?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip - C# property with abstract getter, concrete setter]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/20/quick-tip---c--property-with-abstract-getter--concrete-setter/"/>
+    <updated>2010-12-20T21:09:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/20/quick-tip---c--property-with-abstract-getter--concrete-setter</id>
+    <content type="html"><![CDATA[<h2>The Problem</h2>
+
+<p>On a recent .NET project I was defining an abstract class in C# when I came upon a unusual case: I needed a property that had an abstract getter, but a concrete setter.  In other words, the getter needed to be implemented by all derived classes and the setter does not, in fact its defined in the abstract class.  Nothing I like more than a good object oriented programming quandry.</p>
+
+<p>Here's some code to help make sense of it:</p>
+
+<p>``` csharp
+public abstract class BaseClass
+{</p>
+
+<pre><code>private string _baseValue;
+public abstract string Value
+{
+    get;
+    // the "set" will cause a compile error.  You can't define the get or set inside
+    // of an abstract property.
+    set
+    {
+        _baseValue = value;
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>The Solution</h2>
+
+<p>While the above syntax will generate a compile time error, there is a fairly simple way to work around the issue.  Check out this code:</p>
+
+<p>``` csharp
+public abstract class BaseClass
+{</p>
+
+<pre><code>private string _baseValue;
+protected abstract string ValueGet();
+protected void ValueSet(string baseValue)
+{
+    _baseValue = baseValue;
+}
+
+public abstract string Value
+{
+    get
+    {
+        // as implemented by the derived class
+        return this.ValueGet();
+    }
+    set
+    {
+        // as implemented by BaseClass, or derived class override
+        this.ValueSet(value);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here we delegated the setting and getting of the property to separate protected methods within BaseClass.  Now that 2 methods are used we can assign whether or not they are abstract separately.  The getter must be implemented by the derived classes, the setter may or may not be.</p>
+
+<p>And that's it.  Obviously this code also works vice versa, with the setter being abstract and the getter being concrete.  It's nice because from the perspective of someone using your code, <span style="color:#ff0000;">nothing changes with regards to the public Value property</span>.  The use of protected methods to defer overriding and abstraction help you avoid writing any unnecessarily redundant code in your derived classes. It's a nice little trick to have in your pocket.</p>
+
+<p>Happy C# OOP'ing!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,1706 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Box2D JS - Physics in HTML5 &amp; Javascript Guide - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="I hate to do it, but I highly recommend the Google Chrome browser for this demo. In other browsers it may take a while to load and runs slower. & &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2010/11/21/box2d-js---physics-in-html5--amp--javascript-guide/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Box2D JS - Physics in HTML5 &amp; Javascript Guide</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-21T23:29:00-05:00" pubdate data-updated="true">Nov 21<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p style="text-align: center;"><a href="/demos/box2djs/helloworld.html" class="fancybox.iframe"><img title="helloworld" src="/images/helloworld_medium.jpg" alt="" width="624" height="275" /></a></p>
+
+
+<p><strong>I hate to do it, but I highly recommend the <span style="color:#ff0000;">Google Chrome</span> browser for this demo.  In other browsers it may take a while to load and runs slower.</strong></p>
+
+<p>&rarr; Click on the demo above or <a href="/demos/box2djs/helloworld.html">here</a>, then right click to view source
+&rarr; Download the <a href="http://sourceforge.net/projects/box2d-js/files/" target="_blank">Box2D JS library</a>
+&rarr; Download the <a href="/demos/box2djs/box2djs.js">concatenated version</a> (~350KB)
+&rarr; Download the <a href="/demos/box2djs/box2djs.min.js">minified version</a> (~170 KB)</p>
+
+<h2>The Overview</h2>
+
+<p>Some of you might remember the Box2DFlashAS3 demo I did a while ago.  Well here&#8217;s its HTML5 counter-part, with the help of <a href="http://box2d-js.sourceforge.net/" target="_blank">Box2D JS</a>.  Box2D is the Javascript port of the <a href="http://box2dflash.sourceforge.net/" target="_blank">Box2DFlashAS3 library</a>, which in turn is a port of the <a href="http://www.box2d.org/">Box2D C++ library</a>.  Put simply, this library allows you to apply 2 dimensional physics to objects on your HTML5 canvas element.  Just click anywhere on the demo above to see what I mean.</p>
+
+<p>The code behind this is a condensed, easier-to-follow version of the demo code available by viewing the page source at the <a href="http://box2d-js.sourceforge.net/" target="_blank">Box2D JS site</a>.  I personally found it a little tough to follow initially and really wanted to avoid the large amount of individual includes necessary to get it working.  To that end I created the concatenated and minified versions downloadable above.  So basically the includes necessary go from this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span><span class="p">[</span><span class="k">if</span> <span class="nx">IE</span><span class="p">]</span><span class="o">&gt;&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/excanvas.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;&lt;![endif]--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/prototype-1.6.0.2.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!--</span> <span class="nx">box2djs</span> <span class="o">--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/common/b2Settings.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/common/math/b2Vec2.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/common/math/b2Mat22.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/common/math/b2Math.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2AABB.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2Bound.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2BoundValues.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2Pair.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2PairCallback.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2BufferedPair.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2PairManager.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2BroadPhase.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2Collision.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/Features.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2ContactID.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2ContactPoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2Distance.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2Manifold.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2OBB.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/b2Proxy.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/ClipVertex.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2Shape.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2ShapeDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2BoxDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2CircleDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2CircleShape.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2MassData.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2PolyDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/collision/shapes/b2PolyShape.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2Body.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2BodyDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2CollisionFilter.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2Island.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2TimeStep.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2ContactNode.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2Contact.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2ContactConstraint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2ContactConstraintPoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2ContactRegister.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2ContactSolver.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2CircleContact.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2Conservative.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2NullContact.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2PolyAndCircleContact.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/contacts/b2PolyContact.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2ContactManager.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2World.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/b2WorldListener.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2JointNode.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2Joint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2JointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2DistanceJoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2DistanceJointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2Jacobian.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2GearJoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2GearJointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2MouseJoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2MouseJointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2PrismaticJoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2PrismaticJointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2PulleyJoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2PulleyJointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2RevoluteJoint.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;js/box2d/dynamics/joints/b2RevoluteJointDef.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c">&lt;!--</span><span class="p">[</span><span class="k">if</span> <span class="nx">IE</span><span class="p">]</span><span class="o">&gt;&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/excanvas.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;&lt;![endif]--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/prototype-1.6.0.2.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;box2djs.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You still need to download Box2D JS for its dependencies on <a href="http://www.prototypejs.org/" target="_blank">Prototype</a> and <a href="http://excanvas.sourceforge.net/" target="_blank">excanvas</a>, but using my single file versions of the library will make getting started much cleaner and easier.  OK, enough of the back story, on to the code.</p>
+
+<h2>The Code</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+<span class='line-number'>213</span>
+<span class='line-number'>214</span>
+<span class='line-number'>215</span>
+<span class='line-number'>216</span>
+<span class='line-number'>217</span>
+<span class='line-number'>218</span>
+<span class='line-number'>219</span>
+<span class='line-number'>220</span>
+<span class='line-number'>221</span>
+<span class='line-number'>222</span>
+<span class='line-number'>223</span>
+<span class='line-number'>224</span>
+<span class='line-number'>225</span>
+<span class='line-number'>226</span>
+<span class='line-number'>227</span>
+<span class='line-number'>228</span>
+<span class='line-number'>229</span>
+<span class='line-number'>230</span>
+<span class='line-number'>231</span>
+<span class='line-number'>232</span>
+<span class='line-number'>233</span>
+<span class='line-number'>234</span>
+<span class='line-number'>235</span>
+<span class='line-number'>236</span>
+<span class='line-number'>237</span>
+<span class='line-number'>238</span>
+<span class='line-number'>239</span>
+<span class='line-number'>240</span>
+<span class='line-number'>241</span>
+<span class='line-number'>242</span>
+<span class='line-number'>243</span>
+<span class='line-number'>244</span>
+<span class='line-number'>245</span>
+<span class='line-number'>246</span>
+<span class='line-number'>247</span>
+<span class='line-number'>248</span>
+<span class='line-number'>249</span>
+<span class='line-number'>250</span>
+<span class='line-number'>251</span>
+<span class='line-number'>252</span>
+<span class='line-number'>253</span>
+<span class='line-number'>254</span>
+<span class='line-number'>255</span>
+<span class='line-number'>256</span>
+<span class='line-number'>257</span>
+<span class='line-number'>258</span>
+<span class='line-number'>259</span>
+<span class='line-number'>260</span>
+<span class='line-number'>261</span>
+<span class='line-number'>262</span>
+<span class='line-number'>263</span>
+<span class='line-number'>264</span>
+<span class='line-number'>265</span>
+<span class='line-number'>266</span>
+<span class='line-number'>267</span>
+<span class='line-number'>268</span>
+<span class='line-number'>269</span>
+<span class='line-number'>270</span>
+<span class='line-number'>271</span>
+<span class='line-number'>272</span>
+<span class='line-number'>273</span>
+<span class='line-number'>274</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span> <span class="nx">PUBLIC</span> <span class="s2">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="s2">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">html</span> <span class="nx">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">&quot;Content-Type&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;text/html; charset=utf-8&quot;</span> <span class="o">/&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">SavageLook</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span> <span class="nx">Box2D</span> <span class="nx">JS</span> <span class="nx">Hello</span> <span class="nx">World</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>  <span class="c">&lt;!--</span><span class="p">[</span><span class="k">if</span> <span class="nx">IE</span><span class="p">]</span><span class="o">&gt;&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/excanvas.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;&lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/prototype-1.6.0.2.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;box2djs.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">world</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ctx</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasWidth</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasHeight</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasTop</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasLeft</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">drawWorld</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_jointList</span><span class="p">;</span> <span class="nx">j</span><span class="p">;</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">j</span><span class="p">.</span><span class="nx">m_next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">drawJoint</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_bodyList</span><span class="p">;</span> <span class="nx">b</span><span class="p">;</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">m_next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">GetShapeList</span><span class="p">();</span> <span class="nx">s</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">GetNext</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">drawShape</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s1">&#39;bold 18px arial&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">textAlign</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s1">&#39;#000000&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="s2">&quot;Click the screen to add more objects&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s1">&#39;bold 14px arial&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="s2">&quot;Performance will vary by browser&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">drawJoint</span><span class="p">(</span><span class="nx">joint</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">b1</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">m_body1</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">b2</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">m_body2</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">b1</span><span class="p">.</span><span class="nx">m_position</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">x2</span> <span class="o">=</span> <span class="nx">b2</span><span class="p">.</span><span class="nx">m_position</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">GetAnchor1</span><span class="p">();</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">p2</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">GetAnchor2</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">strokeStyle</span> <span class="o">=</span> <span class="s1">&#39;#00eeee&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">switch</span> <span class="p">(</span><span class="nx">joint</span><span class="p">.</span><span class="nx">m_type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">case</span> <span class="nx">b2Joint</span><span class="p">.</span><span class="nx">e_distanceJoint</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">case</span> <span class="nx">b2Joint</span><span class="p">.</span><span class="nx">e_pulleyJoint</span><span class="o">:</span>
+</span><span class='line'>          <span class="c1">// TODO</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nx">b1</span> <span class="o">==</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_groundBody</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">b2</span> <span class="o">==</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_groundBody</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">drawShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">strokeStyle</span> <span class="o">=</span> <span class="s1">&#39;#ffffff&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">density</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">switch</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">m_type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">case</span> <span class="nx">b2Shape</span><span class="p">.</span><span class="nx">e_circleShape</span><span class="o">:</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">m_position</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">m_radius</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">segments</span> <span class="o">=</span> <span class="mf">16.0</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">theta</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">dtheta</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="nx">segments</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="c1">// draw circle</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">segments</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2Vec2</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">theta</span><span class="p">),</span> <span class="nx">r</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">theta</span><span class="p">));</span>
+</span><span class='line'>                  <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">AddVV</span><span class="p">(</span><span class="nx">pos</span><span class="p">,</span> <span class="nx">d</span><span class="p">);</span>
+</span><span class='line'>                  <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>                  <span class="nx">theta</span> <span class="o">+=</span> <span class="nx">dtheta</span><span class="p">;</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="c1">// draw radius</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">ax</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">m_R</span><span class="p">.</span><span class="nx">col1</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">pos2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2Vec2</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">*</span> <span class="nx">ax</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">*</span> <span class="nx">ax</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">pos2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pos2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">case</span> <span class="nx">b2Shape</span><span class="p">.</span><span class="nx">e_polyShape</span><span class="o">:</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">poly</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">tV</span> <span class="o">=</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">AddVV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_position</span><span class="p">,</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">b2MulMV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_R</span><span class="p">,</span> <span class="nx">poly</span><span class="p">.</span><span class="nx">m_vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tV</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">tV</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">poly</span><span class="p">.</span><span class="nx">m_vertexCount</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">AddVV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_position</span><span class="p">,</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">b2MulMV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_R</span><span class="p">,</span> <span class="nx">poly</span><span class="p">.</span><span class="nx">m_vertices</span><span class="p">[</span><span class="nx">i</span><span class="p">]));</span>
+</span><span class='line'>                  <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">tV</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">tV</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">createWorld</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">worldAABB</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2AABB</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">worldAABB</span><span class="p">.</span><span class="nx">minVertex</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">worldAABB</span><span class="p">.</span><span class="nx">maxVertex</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">gravity</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2Vec2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">doSleep</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">world</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2World</span><span class="p">(</span><span class="nx">worldAABB</span><span class="p">,</span> <span class="nx">gravity</span><span class="p">,</span> <span class="nx">doSleep</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createGround</span><span class="p">(</span><span class="nx">world</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">world</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">createGround</span><span class="p">(</span><span class="nx">world</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">groundSd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BoxDef</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">groundSd</span><span class="p">.</span><span class="nx">extents</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">groundSd</span><span class="p">.</span><span class="nx">restitution</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">groundBd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BodyDef</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">groundBd</span><span class="p">.</span><span class="nx">AddShape</span><span class="p">(</span><span class="nx">groundSd</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">groundBd</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">470</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">world</span><span class="p">.</span><span class="nx">CreateBody</span><span class="p">(</span><span class="nx">groundBd</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">createBall</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">ballSd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2CircleDef</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">ballSd</span><span class="p">.</span><span class="nx">density</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ballSd</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ballSd</span><span class="p">.</span><span class="nx">restitution</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ballSd</span><span class="p">.</span><span class="nx">friction</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">ballBd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BodyDef</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">ballBd</span><span class="p">.</span><span class="nx">AddShape</span><span class="p">(</span><span class="nx">ballSd</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">ballBd</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">world</span><span class="p">.</span><span class="nx">CreateBody</span><span class="p">(</span><span class="nx">ballBd</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">createHelloWorld</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// H</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">395</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// E</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// L</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// L</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// O</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">285</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// W</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">415</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// O</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">445</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// R</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">410</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">518</span><span class="p">,</span> <span class="mi">425</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// L</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">545</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// D</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">610</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">595</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">625</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">610</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// !</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">650</span><span class="p">,</span> <span class="mi">430</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">650</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">fixed</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">fixed</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="nx">fixed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">boxSd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BoxDef</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fixed</span><span class="p">)</span> <span class="nx">boxSd</span><span class="p">.</span><span class="nx">density</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">boxSd</span><span class="p">.</span><span class="nx">restitution</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">boxSd</span><span class="p">.</span><span class="nx">friction</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">boxSd</span><span class="p">.</span><span class="nx">extents</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">boxBd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BodyDef</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">boxBd</span><span class="p">.</span><span class="nx">AddShape</span><span class="p">(</span><span class="nx">boxSd</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">boxBd</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">world</span><span class="p">.</span><span class="nx">CreateBody</span><span class="p">(</span><span class="nx">boxBd</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">step</span><span class="p">(</span><span class="nx">cnt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">stepping</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">timeStep</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">60</span><span class="p">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">iteration</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">world</span><span class="p">.</span><span class="nx">Step</span><span class="p">(</span><span class="nx">timeStep</span><span class="p">,</span> <span class="nx">iteration</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">canvasWidth</span><span class="p">,</span> <span class="nx">canvasHeight</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">drawWorld</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">setTimeout</span><span class="p">(</span><span class="s1">&#39;step(&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">cnt</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// main entry point</span>
+</span><span class='line'>  <span class="nx">Event</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">world</span> <span class="o">=</span> <span class="nx">createWorld</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">).</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">canvasElm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">canvasWidth</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">canvasHeight</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">canvasTop</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">canvasLeft</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">createHelloWorld</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">Event</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="c1">//createBox(world, Event.pointerX(e), Event.pointerY(e), 10, 10, false);</span>
+</span><span class='line'>                  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="nx">createBall</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">Event</span><span class="p">.</span><span class="nx">pointerX</span><span class="p">(</span><span class="nx">e</span><span class="p">),</span> <span class="nx">Event</span><span class="p">.</span><span class="nx">pointerY</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>      <span class="nx">step</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">body</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;margin:0px;&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas&quot;</span> <span class="nx">width</span><span class="o">=</span><span class="s1">&#39;800&#39;</span> <span class="nx">height</span><span class="o">=</span><span class="s1">&#39;500&#39;</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;background-color:#eeeeee;&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/body&gt;</span>
+</span><span class='line'> <span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<hr>
+
+
+<h2>The Breakdown</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span> <span class="nx">PUBLIC</span> <span class="s2">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="s2">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">html</span> <span class="nx">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">&quot;Content-Type&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;text/html; charset=utf-8&quot;</span> <span class="o">/&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">SavageLook</span><span class="p">.</span><span class="nx">com</span> <span class="o">-</span> <span class="nx">Box2D</span> <span class="nx">JS</span> <span class="nx">Hello</span> <span class="nx">World</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>  <span class="c">&lt;!--</span><span class="p">[</span><span class="k">if</span> <span class="nx">IE</span><span class="p">]</span><span class="o">&gt;&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/excanvas.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;&lt;![endif]--&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;lib/prototype-1.6.0.2.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;box2djs.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We start by including the scripts necessary to make Box2D JS work.  In order, we need excanvas (included in the Box2D JS distribution) in order to account for the fact that all current released version of Internet Explorer do not support the HTML canvas element.  Next we include the Prototype Javascript framework, also included with Box2D JS.  Finally we include my minified version of the library.  Now we can get started building physics into our canvas element.</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">world</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ctx</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasWidth</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasHeight</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasTop</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasLeft</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">drawWorld</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_jointList</span><span class="p">;</span> <span class="nx">j</span><span class="p">;</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">j</span><span class="p">.</span><span class="nx">m_next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">drawJoint</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_bodyList</span><span class="p">;</span> <span class="nx">b</span><span class="p">;</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">m_next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">GetShapeList</span><span class="p">();</span> <span class="nx">s</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">GetNext</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">drawShape</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s1">&#39;bold 18px arial&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">textAlign</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s1">&#39;#000000&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="s2">&quot;Click the screen to add more objects&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s1">&#39;bold 14px arial&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">ctx</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="s2">&quot;Performance will vary by browser&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we declare our global variables that define the &#8220;world&#8221; the physics exist in and the context, dimensions, and position of the canvas element.</p>
+
+<p>Also we have our drawWorld() function that will, as the name implies, draw the shapes and joints that compose the Box2D JS world.  Each of these objects is iterated through and drawn individually.  They are added to the world with the createBody() function.  An important thing to note is that in the case of this demo, drawWorld() will be called with each &#8220;step&#8221;.  Think of your canvas as an animation and each call to drawWorld() as a frame.  Should be a simple concept for you Flash devs out there ;)</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">drawJoint</span><span class="p">(</span><span class="nx">joint</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">b1</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">m_body1</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">b2</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">m_body2</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">b1</span><span class="p">.</span><span class="nx">m_position</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">x2</span> <span class="o">=</span> <span class="nx">b2</span><span class="p">.</span><span class="nx">m_position</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">GetAnchor1</span><span class="p">();</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">p2</span> <span class="o">=</span> <span class="nx">joint</span><span class="p">.</span><span class="nx">GetAnchor2</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">strokeStyle</span> <span class="o">=</span> <span class="s1">&#39;#00eeee&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">switch</span> <span class="p">(</span><span class="nx">joint</span><span class="p">.</span><span class="nx">m_type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">case</span> <span class="nx">b2Joint</span><span class="p">.</span><span class="nx">e_distanceJoint</span><span class="o">:</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">case</span> <span class="nx">b2Joint</span><span class="p">.</span><span class="nx">e_pulleyJoint</span><span class="o">:</span>
+</span><span class='line'>      <span class="c1">// TODO</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">b1</span> <span class="o">==</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_groundBody</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">b2</span> <span class="o">==</span> <span class="nx">world</span><span class="p">.</span><span class="nx">m_groundBody</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">x2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">drawShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">strokeStyle</span> <span class="o">=</span> <span class="s1">&#39;#ffffff&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">density</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">switch</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">m_type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">case</span> <span class="nx">b2Shape</span><span class="p">.</span><span class="nx">e_circleShape</span><span class="o">:</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">m_position</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">m_radius</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">segments</span> <span class="o">=</span> <span class="mf">16.0</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">theta</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">dtheta</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="nx">segments</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">// draw circle</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">segments</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2Vec2</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">theta</span><span class="p">),</span> <span class="nx">r</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">theta</span><span class="p">));</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">AddVV</span><span class="p">(</span><span class="nx">pos</span><span class="p">,</span> <span class="nx">d</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>              <span class="nx">theta</span> <span class="o">+=</span> <span class="nx">dtheta</span><span class="p">;</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">// draw radius</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">ax</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">m_R</span><span class="p">.</span><span class="nx">col1</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">pos2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2Vec2</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">*</span> <span class="nx">ax</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">*</span> <span class="nx">ax</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">pos2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pos2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="nx">b2Shape</span><span class="p">.</span><span class="nx">e_polyShape</span><span class="o">:</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">poly</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">tV</span> <span class="o">=</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">AddVV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_position</span><span class="p">,</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">b2MulMV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_R</span><span class="p">,</span> <span class="nx">poly</span><span class="p">.</span><span class="nx">m_vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tV</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">tV</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">poly</span><span class="p">.</span><span class="nx">m_vertexCount</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">AddVV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_position</span><span class="p">,</span> <span class="nx">b2Math</span><span class="p">.</span><span class="nx">b2MulMV</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">m_R</span><span class="p">,</span> <span class="nx">poly</span><span class="p">.</span><span class="nx">m_vertices</span><span class="p">[</span><span class="nx">i</span><span class="p">]));</span>
+</span><span class='line'>              <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">tV</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">tV</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above are the body drawing functions: drawJoint() and drawShape().  I&#8217;m not going to get into much detail here, but just know that these functions are responsible for taking the physics bodies and giving them a visual representation.  They make calls to the canvas context 2D drawing API to create the shapes that give us our falling rectangles and circles.  This is the simplest case and requires no external dependencies.  In practical cases though, you will more likely find images or other more clever uses like this one:</p>
+
+<object width="640" height="390"><param name="movie" value="http://www.youtube.com/v/ZTwrQSOHdX0&hl=en_US&feature=player_embedded&version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowScriptAccess" value="always"></param><embed src="http://www.youtube.com/v/ZTwrQSOHdX0&hl=en_US&feature=player_embedded&version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="390"></embed></object>
+
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">createWorld</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">worldAABB</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2AABB</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">worldAABB</span><span class="p">.</span><span class="nx">minVertex</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">worldAABB</span><span class="p">.</span><span class="nx">maxVertex</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">gravity</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2Vec2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">doSleep</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">world</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2World</span><span class="p">(</span><span class="nx">worldAABB</span><span class="p">,</span> <span class="nx">gravity</span><span class="p">,</span> <span class="nx">doSleep</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createGround</span><span class="p">(</span><span class="nx">world</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">world</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is where the Box2D JS physics world is created.  We define the bounds for the AABB physics with the minVertex and maxVertex properties and set the vector of gravity.  After we create those we apply them to a newly created world and create the ground that will be the base of our scene.</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">createGround</span><span class="p">(</span><span class="nx">world</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">groundSd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BoxDef</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">groundSd</span><span class="p">.</span><span class="nx">extents</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">groundSd</span><span class="p">.</span><span class="nx">restitution</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">groundBd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BodyDef</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">groundBd</span><span class="p">.</span><span class="nx">AddShape</span><span class="p">(</span><span class="nx">groundSd</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">groundBd</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">470</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">world</span><span class="p">.</span><span class="nx">CreateBody</span><span class="p">(</span><span class="nx">groundBd</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">createBall</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ballSd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2CircleDef</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">ballSd</span><span class="p">.</span><span class="nx">density</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">ballSd</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">ballSd</span><span class="p">.</span><span class="nx">restitution</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">ballSd</span><span class="p">.</span><span class="nx">friction</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ballBd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BodyDef</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">ballBd</span><span class="p">.</span><span class="nx">AddShape</span><span class="p">(</span><span class="nx">ballSd</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">ballBd</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">world</span><span class="p">.</span><span class="nx">CreateBody</span><span class="p">(</span><span class="nx">ballBd</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">fixed</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">fixed</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="nx">fixed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">boxSd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BoxDef</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fixed</span><span class="p">)</span> <span class="nx">boxSd</span><span class="p">.</span><span class="nx">density</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">boxSd</span><span class="p">.</span><span class="nx">restitution</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">boxSd</span><span class="p">.</span><span class="nx">friction</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">boxSd</span><span class="p">.</span><span class="nx">extents</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">boxBd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">b2BodyDef</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">boxBd</span><span class="p">.</span><span class="nx">AddShape</span><span class="p">(</span><span class="nx">boxSd</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">boxBd</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">world</span><span class="p">.</span><span class="nx">CreateBody</span><span class="p">(</span><span class="nx">boxBd</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above we have the body create functions: createGround(), createBall(), and createBox().  Other than the obvious, let&#8217;s talk about a few things going on here.  Each body is defined by a shape definition, and each shape definition has a number of properties that dictate how it will behave in the Box2D JS world  (see the <a href="http://www.kyucon.com/doc/box2d/" target="_blank">Box2D docs</a> for details).  Restitution, friction, and density affect how the shapes fall, move, and react.</p>
+
+<p>The extents define the dimensions of the shapes, but probably not how you are accustomed.  Extents represent the distance from one corner of the shape to its center.  So a 100x100 box is actually defined by the extents shapeDef.extents.Set(50,50).</p>
+
+<p>The shape definition is then used to define a body definition.  The body is then positioned in the world.  The positioning, like extents, is also based on the center of the body, not its corner.  Finally, the newly defined body, based on the shape definition, is added the world with the CreateBody() function.</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">createHelloWorld</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// H</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">395</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// E</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// L</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// L</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// O</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">285</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// W</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">415</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// O</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">445</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// R</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">410</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">518</span><span class="p">,</span> <span class="mi">425</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// L</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">545</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// D</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">610</span><span class="p">,</span> <span class="mi">435</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">595</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">625</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">610</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// !</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">650</span><span class="p">,</span> <span class="mi">430</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="mi">650</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s my addition to the Box2D JS code.  By using a series of stacked boxes I create the infamous programmer&#8217;s first message, &#8220;Hello World!&#8221; (minus the comma, sorry).  No science or mystery here, just a lot of extents and positions for the boxes that compose my message.  And yes, I did cheat on the &#8220;E&#8221; and make it fixed, but not even I can defy the laws of physics for the sake of a code demo.</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">step</span><span class="p">(</span><span class="nx">cnt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">stepping</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">timeStep</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">60</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">iteration</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">world</span><span class="p">.</span><span class="nx">Step</span><span class="p">(</span><span class="nx">timeStep</span><span class="p">,</span> <span class="nx">iteration</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">canvasWidth</span><span class="p">,</span> <span class="nx">canvasHeight</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">drawWorld</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">setTimeout</span><span class="p">(</span><span class="s1">&#39;step(&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">cnt</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The step() function is the what makes the whole thing work.  step() is called over and over, at specified intervals, to create the animation of our scene on the canvas.  The world&#8217;s Step() function is first called to apply one iteration of physics to our world&#8217;s bodies.  Next we clear the visual representation of the scene so that it can be redrawn by our drawWorld() function.  Finally we set the interval timer so that step() will be called again.  Again, Flash devs will recognize this as a similar methodology as using the ENTER_FRAME event.</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// main entry point</span>
+</span><span class='line'><span class="nx">Event</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">world</span> <span class="o">=</span> <span class="nx">createWorld</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">).</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">canvasElm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">canvasWidth</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">canvasHeight</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">canvasTop</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">canvasLeft</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">canvasElm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">createHelloWorld</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Event</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="c1">//createBox(world, Event.pointerX(e), Event.pointerY(e), 10, 10, false);</span>
+</span><span class='line'>              <span class="nx">createBox</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">createBall</span><span class="p">(</span><span class="nx">world</span><span class="p">,</span> <span class="nx">Event</span><span class="p">.</span><span class="nx">pointerX</span><span class="p">(</span><span class="nx">e</span><span class="p">),</span> <span class="nx">Event</span><span class="p">.</span><span class="nx">pointerY</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="nx">step</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this is where we kick everything off.  We use the Prototype event handling mechanism to wait until the window is loaded to start our code.  We first create the Box2D JS world and get the 2D context, dimensions, and position of our canvas.  After that I create the boxes that make up the Hello World message.  To finish up we listen for mouse clicks so that we can add more falling objects to the scene, since what good is a meticulously stacked Hello World if you can&#8217;t turn it into a pile of rubble?  The first step() is kicked off and our scene is ready to go!</p>
+
+<hr>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">&quot;margin:0px;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">&quot;canvas&quot;</span> <span class="na">width=</span><span class="s">&#39;800&#39;</span> <span class="na">height=</span><span class="s">&#39;500&#39;</span> <span class="na">style=</span><span class="s">&quot;background-color:#eeeeee;&quot;</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'> <span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And to round out the breakdown, here&#8217;s the actual instance of the canvas element.  Its a very simple container and allows for all the heavy lifting to be done in the Javascript.  Just a reminder, the canvas element will NOT work in Internet Explorer unless you have the conditional check that includes excanvas if necessary, or if you happen to be test driving the IE9 beta.</p>
+
+<h2>The Summary</h2>
+
+<p>OK, well that turned out a lot longer and wordier than I was expecting, but 2D physics being utilized in HTML5 and Javascript is a simple topic.  Hopefully, though, if you made it all the way through you have a much better understanding of how they all play together and how you will create Newtonian worlds of your own.</p>
+
+<p><strong><small_rant></strong>The difference in performance between different browsers is enough to drive you crazy.  In my personal experience, Chrome > Firefox > IE.  I know its early in the game and that <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie-9/home" target="_blank">IE 9</a> and <a href="http://www.mozilla.com/en-US/firefox/beta/" target="_blank">Firefox 4</a> will likely be right up to par with Chrome, but its this lag and inconsistency across the board that has me spending most of my web development time in Flash and AS3.</p>
+
+<p>Also, I had trouble making this work in all versions of IE, so if you run into any problems with a particular browser, please let me know.<strong></small_rant></strong></p>
+
+<p><strong>NOTE:</strong> The concatenated version of Box2D JS is a convenience I offer so that you don&#8217;t have to do all the individual includes shown on the Box2D JS site&#8217;s demos.  The minified version is that same concatenated version run through <a href="http://www.crockford.com/javascript/jsmin.html" target="_blank">JSMin</a>.  Both versions are based on version 0.1.0 of Box2D JS.  I am not a contributor to the Box2D JS project, just someone making it simpler to get into.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-21T23:29:00-05:00" pubdate data-updated="true">Nov 21<span>st</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/box2d/'>box2d</a>, <a class='category' href='/blog/categories/html5/'>html5</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/physics/'>physics</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/11/17/packet-capture-with-c----amp--linux/" title="Previous Post: Packet capture with C++ &amp; Linux">&laquo; Packet capture with C++ &amp; Linux</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/11/24/adobe--molehill--3d-api-videos/" title="Next Post: Adobe "Molehill" 3D API Videos">Adobe "Molehill" 3D API Videos &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: air | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/air/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Are You Actually Saving Time With Mobile Frameworks?]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/10/are-you-actually-saving-time-with-mobile-frameworks-/"/>
+    <updated>2011-03-10T10:37:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/10/are-you-actually-saving-time-with-mobile-frameworks-</id>
+    <content type="html"><![CDATA[<h2>The Short, Blunt Version</h2>
+
+
+<p><strong>DISCLAIMER</strong>: Don't leave me nasty comments if this is all you read.</p>
+
+<p>Most of the available "cross platform" mobile frameworks are not as universally and uniformly compatible as they would be announced.  There are inconsistencies that make "code once, run everywhere" very unlikely without at least some tweaking.  The time spent fitting an app to one, universal mold can often force a sacrifice of even more time, quality, and usability.</p>
+
+<p>Using HTML/CSS/JS for mobile development is seen as an advantage only to those who already have a great deal of experience with it.  I say this from a pure language perspective as it carries the obvious advantage of providing portable, standards based code.  If you don't have this experience with Javascript, but do have the talent and/or diversity of background necessary to learn the languages to develop natively, do so.</p>
+
+<p>I'm not saying you can't build a multi-platform, high quality app with a mobile framework.  I am saying that it is not quite as easy as it may appear on paper.  This may seem counter-intuitive, but <span style="color: #ff0000;">as the complexity of your project grows, the less effective a "code once, run everywhere" approach will be</span>.  That said, most mobile frameworks do a terrific job of making small to medium sized projects available to a large audience in a short amount of time.</p>
+
+<p>For the quick feature comparison of the mobile frameworks I'll talk about below, check out my prior post, "Appcelerator vs. PhoneGap vs. Adobe Air".</p>
+
+<hr />
+
+
+
+
+<h2>Naivity</h2>
+
+
+<p>I approached the world of mobile development with the thought that a cross platform development framework was the one true path.  I mean, how else could a single developer keep up with the plethora of mobile OSes, SDKs, and devices?  And with that notion, I went forward in search of the silver bullet framework that would give me the coveted "code once, run everywhere" solution.</p>
+
+<p>But as you may have expected, I haven't found it.  With my tunnel-vision focus on cross platform development I neglected to pay attention to the multitude of other key factors that can cost developers time.  I also neglected the fact that deploying to every mobile device imaginable is almost never the goal of a particular app.</p>
+
+<p>So what are the problems I've run into?  How have they cost me time?  Does this outweigh the potential time saved with the "code once, run everywhere"?  Is "code once, run everywhere" really achievable for most apps?  Let's dig into these topics and see how they could impact your potential mobile development workflow.</p>
+
+<hr/>
+
+
+
+
+<h2>Most frameworks are babies</h2>
+
+
+<p>Let's take a look at the 3 frameworks I've looked at so far:</p>
+
+<ul>
+    <li><strong>Appcelerator</strong> - mobile SDK started in 2009</li>
+    <li><strong>PhoneGap</strong> - started in 2008</li>
+    <li><strong>Adobe Air &amp; Flex Hero</strong> - Air for Android and the iOS packager came out in 2010.  Flex "Hero" is still beta.</li>
+</ul>
+
+
+<p>As you can see, all of these frameworks are very young.  And with that youth comes ambition, which in turn can lead to cut corners.  The  competion is fierce in a new and growing market. They know what they need to stand out: <span style="color: #ff0000;">features</span>.  Stability and adherence to standards aren't quite as eye-catching as an app that can leverage cool mobile APIs like geolocation and accelerometers.</p>
+
+<p>It seems that in many cases the frameworks are spreading themselves thin at the expense of solid compatibility and stability.</p>
+
+<h2>How "Cross Platform" Are These Frameworks?</h2>
+
+
+<p>Here's the mobile OSes aforementioned claim to support:</p>
+
+<ul>
+    <li><strong>Appcelerator</strong> - iOS, Android, Blackberry (beta)</li>
+    <li><strong>PhoneGap</strong> - iOS, Android, Blackberry, WebOS, Symbian</li>
+    <li><strong>Adobe Air &amp; Flex Hero</strong> - iOS, Android, Blackberry Playbook</li>
+</ul>
+
+
+<p>Now here's been my experience with each so far, your mileage may vary.  I will try to keep it as high level as possible.</p>
+
+<ul>
+    <li><strong>Appcelerator</strong> - iOS is their flagship.  You can tell by the very Mac-ish look to their Titanium Developer project application that this is their focus.  Appcelerator does iOs very well.  Android on the other hand has been a bit frustrating.  Many features and even core functionality are lagging behind in Android in terms of stability.  Simple things like orientation lock and layouts work well in iOS but not so much in Android.  This leads to inconsistent behavior between the two platforms, which is kinda the whole point of the framework.
+
+I have not yet tried Blackberry development, but if Android is a production release and has these issues, I worry what I may run into.</li>
+    <li><strong>PhoneGap</strong> - <span style="color: #ff0000;">This is the one framework I've experimented with so far that has a relatively uniform experience across all its supported platforms</span>.  The core functionality is there, operates the same, and with a consistent level of performance.  Granted PhoneGap is an entirely contained web app and has no native UI component access, though <a href="http://docs.phonegap.com/" target="_blank">most APIs are supported</a>.  This, though, should be the expected experience with a cross platform mobile app.  Give me the same thing on every device to which I deploy!</li>
+    <li><strong>Adobe Air &amp; Flex Hero</strong> - Because these mobile apps run against the Adobe Air runtime you get a nearly identical experience across the supported platforms.  Flex Hero comes with a wide array of mobile components for your use, though some are notable missing.  The big hitch with consistency is performance.
+
+Blackberry Playbook development churns out great, performant content.  Blackberry made available an AS3 SDK along with the ability to use Flex Hero.  Because of this forethought and respect for the existing technology, Flash/Flex developers are really enjoying this platform and I think users will too.
+
+On Android, Air performs OK.  There's just enough lag on transitions and load time to drive you nuts as a developer, but likely won't be a deal breaker for users.
+
+iOS seems to be a sore point for some developers.  The performance is reported to be less than desirable when compared with the other supported platforms.  Also, the <a href="http://labs.adobe.com/technologies/packagerforiphone/" target="_blank">Adobe iOS packager</a> that allows you to deploy Adobe Air mobile applications to iOS currently only supports Air 2.0, leaving out some popular APIs like camera and video.  We are all familiar with the battles between Apple and Adobe and why these performance issues exist.  The users don't care though and are likely to turn away from apps that seem sluggish as these might.</li>
+</ul>
+
+
+<p>So as you can see, "cross platform" and "code once, run everywhere" aren't quite as cut and dry as we would be led to believe.  I'm not saying that frameworks should be dismissed for these reasons, but they simplicity of universal deployment and satisfactory user experience in many cases is overstated.</p>
+
+<h2>Do You Really Need To Support All Those Mobile OSes</h2>
+
+
+<p>I could ramble on about market share, market viability, and targeted deployment, but I'll just let these few charts do the talking and let you render your own decision:</p>
+
+<h2>Javascript</h2>
+
+
+<p>I'm not here to start a holy war about whether or not Javascript is quality language.  We all know the effectiveness of a programming language is largely determined by the person wielding it.  But let's be honest, Javascript is no Java, C#, or even Objective-C.  And with the exception of Adobe Air and Flex Hero, almost all mobile frameworks use HTML/CSS/JS as their technology stack.</p>
+
+<p>There's no classes, no types, and the available IDEs and debugging facilities are weak in comparison to its native language SDK counterparts.  As I hear many of my Flash/Flex friends saying from time to time, its a reminder of all that was wrong with the original version of Actionscript.  jQuery and other frameworks make it more tolerable, but its still tough sledding when you are accustomed to a more full featured language.</p>
+
+<h2>Debugging</h2>
+
+
+<p>This is where you are ging to spend the majority of your life as a developer.  If you don't, you're a better dev than I.  And let me tell you something: debugging sucks in Javascript.  Compound this with the fact that it is pretty much impossible to debug Javascript on a mobile device and you have a recipe for may, many lost hours chasing bugs.</p>
+
+<p>Let's look at Appcelerator and PhoneGap: <span style="color: #ff0000;"><del datetime="2011-03-10T18:24:52+00:00">They have no ability to debug on a device</del></span> (I've had suggestions to try <a href="http://pmuellr.github.com/weinre/" target="_blank">WEINRE</a> and <a href="http://jsconsole.com/remote-debugging.html" target="_blank">JSConsole</a>).  Appcelerator often refers to a "debug" function you can use, but it is simply a logging capability called debugging.  With PhoneGap the suggested method of debugging is running your code against the desktop version of Webkit and using its debugging capabilities.  Neither of these situation is very ideal.</p>
+
+<p>Adobe Air and Flex Hero debug the way you would expect an application to be debugged.  Air can do full integrated, on-device debugging in a number of IDEs (<a href="http://www.jdoqocy.com/click-4249024-10772054" target="_top">Flash Builder</a> and <a href="https://www.cleverbridge.com/429/?affiliate=15006&amp;scope=cart&amp;cart=71011" target="_blank">FDT</a> spring to mind).  This is what should be expected.  While Javascript based mobile frameworks are using web technology, they can no longer expect developer to abide by the web's workflow.  When developing native apps we want application debugging, not web debugging.</p>
+
+<p>Do not underestimate the impact that poor debugging capabilities will have on not only the timeline of your project, but also the quality.  In both cases, you just might be better served going the native route.</p>
+
+<h2>2 Layers Of Potential Bugs</h2>
+
+
+<p>We all know that Android, iOS, Blackberry, and any other mobile OS you may encounter is going to have bugs and quirks in its SDK.  The same could be said of all software.  If you are using a mobile framework to develop against these SDKs, you now have 2 layers of potential bugs and quirks.  It can often be difficult and time consuming to determine which one is the culprit... after you've ruled out your own code of course!</p>
+
+<p>While PhoneGap and Adobe Air suffer from this to a degree, the impact is less on these two frameworks.  This is because they make no attempt to handle native components.  They rely on your own HTML/CSS/JS or Flex/AS3 components respectively to serve your UI.  Some see this as a drawback and taking away from the native user experience.  I, on the other hand, see it as a step towards true uniformity in your app.  <span style="color: #ff0000;">You need to make a decision: Do I want a native or uniform experience?</span></p>
+
+<p>Appcelerator suffers more from this situation.  By taking their unique approach of offering a Javascript SDK by which you can create native components, you are given the opportunity to create a native experience without having to engage in native development.  This is very appealing to many developers.  I know it was to me.  The unfortunate side-effect of this is that you many times will not get exactly what you would expect out of a component.  Due to the need to abstract functionality in order to make one code set apply to many different mobile OS components, you may find configurability difficult.  Determining whether something is misbahving in your app because of your code, your framework, or your SDK becomes quite troubling.</p>
+
+<hr/>
+
+
+
+
+<h2>Summary</h2>
+
+
+<p>I gave the summary at the beginning, since I don't know if a lot of you have the stomach for this much negativity in one blog post.  There was a lot to say and detail, but the short, blunt intro summary is my current sentiment on the state of mobile development.</p>
+
+<p>Just to be clear, its not all gloom and doom for mobile frameworks.  Check out the post I did a little while back detailing all the areas where these mobile frameworks can make your life much easier.  And these frameworks are getting better everyday.  PhoneGap is quickly <a href="http://wiki.phonegap.com/w/page/28291160/roadmap-planning" target="_blank">closing the gap</a> (pun) between itself and the other mobile frameworks in terms of features.  Appcelerator is making some major moves by creating a community of Titans to bring more notoriety to the cause.  They are also due to release the first public beta of their new IDE, a fusion between <a href="http://www.appcelerator.com/" target="_blank">Titanium Developer</a> and <a href="http://www.aptana.com/" target="_blank">Aptana</a>, sure to help the current state of Javascript development.  And Adobe is aggressively garnering support for its <a href="http://labs.adobe.com/" target="_blank">pre-release programs</a> for Air, Flash Player, and Flash Builder.  I believe new features along with improved performance across all platforms is going to be the fruit of this labor.</p>
+
+<p>So I haven't given up yet and will continue to actively pursue these platforms.  I may wait for a bit more dust to settle though before engaging in a large scale project with any of them.  I'm sure folks braver than I are more than able to have success doing so right now.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Good, The Bad, and The Ugly of Flex "Hero"]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/02/08/the-good--the-bad--and-the-ugly-of-flex--hero-/"/>
+    <updated>2011-02-08T10:50:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/02/08/the-good--the-bad--and-the-ugly-of-flex--hero-</id>
+    <content type="html"><![CDATA[<h1><span style="font-weight: bold; font-size: 16px;">Disclaimer</span></h1>
+
+
+<p>This article is from the perspective of someone whose AS3 and Flex experience is measured in months.  This is meant to show those who aren't long time Flash developers what they can expect with <a href="http://labs.adobe.com/technologies/flexsdk_hero/" target="_blank">Flex "Hero"</a>, <a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Flash Builder "Burrito"</a>, and <a href="http://www.adobe.com/products/air/" target="_blank">Air for Android</a>.  But I didn't go in alone, the Adobe community is full of smart and helpful people, just check my <a href="http://twitter.com/#!/tonylukasavage/following" target="_blank">Twitter follower list</a> to see some of the names that helped.  Particular thanks to <a href="http://twitter.com/#!/killerspaz" target="_blank">@killerspaz</a>, <a href="http://twitter.com/#!/jesterxl" target="_blank">@jesterxl</a>, and <a href="http://twitter.com/#!/jonbcampos" target="_blank">@jonbcampos</a>.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+<p>Recently I wrapped up my first Flex "Hero" Air for Android app, <a href="https://market.android.com/details?id=air.Repper" target="_blank">Repper</a>.  You can read my earlier blog post about it to download, get source code, or just learn more about it.  I learned a lot about mobile development and deployment, but I want to talk specifically about Flex "Hero" and Flash Builder "Burrito".  Here's this developer's experience and perspective with using Adobe's workflow for mobile development.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">The Good</span></h1>
+
+
+<ul>
+    <li> <strong>The Flash Builder "Burrito" workflow</strong> for building Android apps is fantastic.  It was a breeze to setup a basic project and be testing it live on my Droid X.  Some of the specific things I really liked were:
+<ul>
+    <li>Pre-built templates for projects, components, skins, item renderers, and more speed up the development process</li>
+    <li>Built-in emulation for various Android devices</li>
+    <li>Testing on a device is very easy to set up</li>
+    <li>Managing Flex states through the Design View can be helpful in visualing layouts</li>
+    <li>Offers the familiarity and plugins of Eclipse</li>
+</ul>
+</li>
+    <li><strong>ViewNavigator and View</strong> make navigating through applications using multiple views simple.  Using simple functions like pushView() and popView() you can move through your application and pass data with ease.  Check out these posts for a more in depth look at this powerful and intuitive interface:
+<ul>
+    <li><strong>Mihia Corlan</strong> - <a href="http://corlan.org/2011/01/12/understanding-flex-mobile-views-and-viewnavigator/" target="_blank">Understanding Flex Mobile View and ViewNavigator</a></li>
+    <li><strong>Brian Rinaldi</strong> - <a href="http://www.remotesynthesis.com/post.cfm/passing-data-across-views-in-flex-mobile" target="_blank">Passing Data Across Views in Flex Mobile</a></li>
+</ul>
+</li>
+    <li><strong>PersistenceManager</strong> alleviates the hassle of trying to manage data between view states by using Local Shared Objects. Even when your mobile OS decides to close your app for memory or power shortages, the PersistenceManager will preserve your designated data.  Check Jonathan Campos's post on it for more details: <a href="http://www.unitedmindset.com/jonbcampos/2010/11/01/flex-4-5-persistencemanager/" target="_blank">Flex 4.5 PersistenceManager</a></li>
+    <li><strong>Flex 4 skinning</strong> is pretty damn nice, especially for someone like me who is about 95% developer, 5% designer.  Using MXML and AS3 you can create design and graphics for your components, keeping them separate from your UI's layout and logic.  This means you can effectively create vector skins using the AS3 drawing classes.  No more importing images just to create gradients and rounded corners.  Not as big a win for designers, but the pure developers out there will love this. Check out <strong>Ryan Frishberg's</strong> article for more details: <a href="http://www.adobe.com/devnet/flex/articles/flex4_skinning.html" target="_blank">Introducing skinning in Flex 4</a>.  The screenshot showing Repper below highlights entirely programmatic design.</li>
+
+<li><strong>Multiscreen development</strong> potential is very appealing and Adobe is working to grow it further.  Christian Cantrell's demo video below shows what Adobe Air is capable of in terms of "code once, deploy everywhere."  Android, iPhone, iPad, Blackberry Playbook, Desktop, and web are all valid targets for your single code base.  While this is very exciting, it is also very young.  Take this all with a grain of mobile salt as this topic shows up again in the "Ugly" section.</li>
+<iframe title="YouTube video player" width="640" height="390" src="http://www.youtube.com/embed/22vicDlzmkI" frameborder="0" allowfullscreen></iframe>
+<h1><span style="font-weight: bold; font-size: 16px;">The Bad</span></h1>
+<ul>
+<li><strong>Lack of native component support</strong> can be a deal breaker for some people building mobile apps.  Its not for me nor for lots of people who are comfortable building their own components, but many want the native experience.  But all hope is not lost with the following AS3 libraries available that emulate native components:</li>
+<table><tr><td style="vertical-align:middle; text-align:center;">
+<br><strong>Nick Jonas</strong> - <a href="http://code.google.com/p/as3iphonecomponents/" target="_blank">as3iphonecomponents</a></td>
+<td style="vertical-align:middle; text-align:center;"><br><strong>Kevin Hoyt</strong> - <a href="http://xperiments.es/blog/en/as3-android-flash-components/" target="_blank">android-components</a></td>
+</tr></table>
+<li><strong>Flex "Hero" is missing some core components</strong> that mobile developers will be expecting to be present. I for one was not expecting to have to build a modal select list from scratch.  Unfortunately, though, Flex "Hero" does not contain the mobile equivalent of a combobox.  You can create it with their scrollable List component paired with a semi-transparent background, but it would be nice to have this out of the box.  Other notable absentees are sliders and tabbed layouts.</li>
+<li><strong>Not all native APIs are supported.</strong>  While this should be expected in a cross platform framework, it can sometimes lead to unexpected roadblocks.  In my case, I have only numeric input in my app.  I wanted to default the soft keyboard to the numeric keyset.  Unfortunately this is not possible in Air for Android.  It takes some AS3 parlor tricks just to keep the soft keyboard closed when you don't want it open on a TextInput focus.  There's even more to worry about with Apple development, but I'll mention that in the "Ugly" section.</li>
+<li><strong>Simple things can be complicated.</strong> Take for example closing an app when a user leaves with the back button.  Seems easy enough, but it takes 3 event handlers to do it properly and even this method is <a href="http://blog.everythingflex.com/2010/10/13/exiting-an-air-on-android-application/" target="_blank">not without its problems</a>.  Check out the code I used below, thanks to <a href="http://www.flashrealtime.com/tip-close-your-android-air-app-on-back-button/" target="_blank">Tom Krcha</a>:
+
+```  as3
+protected function mobileapplication1_creationCompleteHandler(event:FlexEvent):void
+{
+    if(Capabilities.cpuArchitecture=="ARM")
+    {
+        NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, handleActivate, false, 0, true);
+        NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, handleDeactivate, false, 0, true);
+        NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys, false, 0, true);
+    }
+}
+
+private function handleActivate(event:Event):void
+{
+    NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
+}
+
+private function handleDeactivate(event:Event):void
+{
+    NativeApplication.nativeApplication.exit();
+}
+
+private function handleKeys(event:KeyboardEvent):void
+{
+    if(event.keyCode == Keyboard.BACK)
+        NativeApplication.nativeApplication.exit();
+}
+```
+
+</li>
+<li><strong>Debugging on a device can be tricky.</strong>  So tricky in fact that I never got it working.  In all fairness, I didn't try to diagnose it any further after the getting the initial error because the app I was building was so simple.  But the fact remains that it didn't work out of the box for me.  Maybe your experience will be different and I welcome anyone to call me an idiot and tell me what I did wrong.</li>
+</ul>
+
+<h1><span style="font-weight: bold; font-size: 16px;">The Ugly</span></h1>
+<ul>
+<li><strong>Universal mobile device support is minimal at this point.</strong> Android is covered pretty well up through the Air 2.5 SDK, but iPhone/iPad only support Air up to version 2.0.2 via the <a href="http://labs.adobe.com/technologies/packagerforiphone/" target="_blank">Adobe Packager for iPhone</a>.  This leaves out key APIs like camera support and video/sound capture, not to mention the bevy of <a href="http://labs.adobe.com/wiki/index.php/Packager_for_iPhone:Release_Notes" target="_blank">bugs and gotchas</a> that you have to watch out for.  The workflow for deploying apps to iOS devices with the packager is also no picnic.  While the Blackberry Playbook is proudly supporting the Adobe developer community, there's been no official announcement, though there has been mention, of Flash or Air being on Blackberry smart phones.
+
+Long and short, you aren't going to be hitting the widest part of the market when compared to other mobile frameworks like Appcelerator or PhoneGap.  And even if you do, I've experienced first hand how users can be put off by having to install Adobe Air on their phone for the sake of an app.  <span style="color:#ff0000;">Until Air for mobile devices support becomes more common place, it may be viewed as an unnecessary evil by many mobile users</span>.
+</li>
+<li><strong>Performance can be a problem for even the simplest apps.</strong>  This for me is the most critical area that needs to be improved before people will take Air seriously as a mobile framework.  Simple things like view transitions, scrolling, button interactions, etc... have a noticeable sluggishness that users won't stand for.  Even the cream of the crop among Flex Hero apps, like <a href="http://www.unitedmindset.com/jonbcampos/" target="_blank">Jonathan Campos's</a> nearly 100K user base NetFlix <a href="https://market.android.com/details?id=air.com.unitedmindset.QueueManager" target="_blank">Queue Manager</a>, is not immune to these problems.  Though a majority of the comments are very complimentary, the few detractors have a very common message: we don't want to install Adobe Air and we find it slower than native apps.  Are these types of comments the whole story?  Absolutely not.  Does that mean they can be ignored?  Absolutely not.  The vocal complainers, though not always very helpful, can sometimes spur the necessary advances that can take a product to the next level.
+</li>
+</ul>
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+Hey Adobe, fix the ugly, stay on top of the bad, and keep highlighting the good.
+
+While I am far from swearing off AS3 and Flex development for mobile devices, I think Adobe has a long way to go before it will be able to bring in a significant amount of non-Adobe developers.  Their mobile platform and workflow seems as though it caters entirely to existing Flash and Flex developers.  There just doesn't seem to be an effort to bring in new blood from the outside.  And if that remains the same, Appcelerator, PhoneGap, Sensa Touch, jQuery Mobile, or whatever other platform that comes next and engages larger cores of developers will take away valuable relevance in this land grab for mobile supremacy.
+
+]]></content>
+  </entry>
+  
+</feed>

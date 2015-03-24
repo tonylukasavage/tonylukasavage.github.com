@@ -1,0 +1,92 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>BitmapMaterial.as</title>
+<link rel="stylesheet" type="text/css" href="../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">materials</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span>.<span class="ActionScriptDefault_Text">display</span>.<span class="ActionScriptOperator">*</span>;
+    
+    <span class="ActionScriptASDoc">/**
+     * Basic bitmap material
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">BitmapMaterial</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">Material</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptASDoc">/**
+         * Defines the bitmapData object to be used as the material&apos;s texture.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">bitmap</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">BitmapData</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">bitmapData</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">bitmap</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">BitmapData</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">bitmapData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Defines whether repeat is used when drawing the material.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">repeat</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">repeat</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">repeat</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">repeat</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Defines whether smoothing is used when drawing the material.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">smooth</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">smooth</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">smooth</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">smooth</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Returns the width of the material&apos;s bitmapdata object.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">width</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">bitmapData</span>.<span class="ActionScriptDefault_Text">width</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Returns the height of the material&apos;s bitmapdata object.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">height</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">bitmapData</span>.<span class="ActionScriptDefault_Text">height</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Creates a new &lt;code&gt;BitmapMaterial&lt;/code&gt; object.
+         * 
+         * @param    bitmap        The bitmapData object to be used as the material&apos;s texture.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">BitmapMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">bitmap</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">BitmapData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">()</span>;
+            
+            <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>.<span class="ActionScriptDefault_Text">bitmapData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">bitmap</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">BitmapData</span><span class="ActionScriptBracket/Brace">(</span>100, 100, <span class="ActionScriptReserved">false</span>, 0<span class="ActionScriptDefault_Text">x000000</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptDefault_Text">graphicsData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">IGraphicsData</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">([</span><span class="ActionScriptDefault_Text">_graphicsStroke</span>, <span class="ActionScriptDefault_Text">_graphicsBitmapFill</span>, <span class="ActionScriptDefault_Text">_triangles</span>, <span class="ActionScriptDefault_Text">_graphicsEndFill</span><span class="ActionScriptBracket/Brace">])</span>;
+            <span class="ActionScriptDefault_Text">graphicsData</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+            
+            <span class="ActionScriptDefault_Text">trianglesIndex</span> <span class="ActionScriptOperator">=</span> 2;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: simpleshadow | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/simpleshadow/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D: SimpleShadow and Simple Shadows]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/08/away3d--simpleshadow-and-simple-shadows/"/>
+    <updated>2010-08-08T23:37:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/08/away3d--simpleshadow-and-simple-shadows</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/shadows/Shadows.html" class="fancybox.iframe"><img title="shadows" src="http://tonylukasavage.github.com/images/shadows.jpg" alt="" width="441" height="302" /></a></p>
+
+
+
+
+<p style="text-align: left;"><strong>Click the above picture for a demo.  Right click on the demo to view source.</strong> Be sure to pay close attention to the apply() and positionPlane() methods of SimpleShadow.</p>
+
+
+
+
+<p style="text-align: left;">You want to quickly add perspective and depth to a scene?  Look no further than shadows.  Shadows can make a minimalistic scene look fantastic.  Take a look at <a href="http://flashten.com/" target="_blank">the website of Peter Kapelyan</a>, one of the Away3D's developers, and you'll see what I mean.  Luckily, in Away3D they are easily available in more than one form.  Note, though, that shadows in Away3D are not actually created by light sources as this would be extermely expensive in terms of performance.</p>
+
+
+
+
+<p style="text-align: left;">The above demo shows Away3D's built-in SimpleShadow class (left) vs. a shadow created simply by adding a plane with a shadow BitmapMaterial (right).  Both are pretty easy to do, and both have their pros and cons:</p>
+
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>                                 </th>
+<th> SimpleShadow </th>
+<th> BitmapMaterial method </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> Built into Away3D               </td>
+<td> X            </td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td> Shadow confirms to object shape </td>
+<td> X            </td>
+<td> specific to object</td>
+</tr>
+<tr>
+<td></td>
+<td> Fast performance                </td>
+<td>              </td>
+<td> X</td>
+</tr>
+<tr>
+<td></td>
+<td> Shadow handles rotation         </td>
+<td> X            </td>
+<td> only one one axis</td>
+</tr>
+<tr>
+<td></td>
+<td> Handles translation             </td>
+<td> X            </td>
+<td> X</td>
+</tr>
+<tr>
+<td></td>
+<td> Handles scaling                 </td>
+<td> X            </td>
+<td> needs to be added</td>
+</tr>
+<tr>
+<td></td>
+<td> Handles distance                </td>
+<td> X            </td>
+<td> needs to be added</td>
+</tr>
+</tbody>
+</table>
+
+
+<p style="text-align: left;">"Shadow conforms to object shape" means that no matter what type of 3D object you are applying the SimpleShadow to, the shadow will accurately represent its overall shape.  With the BitmapMaterial method the shadow image must be created specifically for a particular 3D object to maintain an accurate representation.  So for a cube you need to create a square shadow image, for a sphere you need to create a circle shadow, and so on.</p>
+
+
+
+
+<p style="text-align: left;">By "needs to be added" I mean that there's no reason this functionality could not be added to the BitmapMaterial method.  The reason its not there now is the reason that SimpleShadow won't perform as well as the BitmapMaterial method.  All those extra calculations and shadow redrawing are what will slow down a scene that has one too many SimpleShadows.</p>
+
+
+<p>The clear winner might appear to be SimpleShadow, but if functionality always won over performance we wouldn't have a need for Away3DLite.  In general, if you have a scene with only a few shadows and you would like those shadows to appear realistic relative to the object casting them, use SimpleShadow.  If performance is the main concern, like in a scene with many objects casting a shadow, the BitmapMaterial method would likely suit you best.</p>
+
+<p>These are the 2 methods I've seen for creating shadows in Away3D, but there may be others.  If you find any, let me know.  Otherwise, enjoy!</p>
+
+<p><strong>UPDATE</strong>: I conversed with SimpleShadow's creator, Fabrice Closier, and he was confused as to why I said SimpleShadow's performance was slower.  I should clarify that SimpleShadow is slower only when the shadow needs to be redrawn frequently with the apply() method.  In a still scene or when the shadows in the scene do not often need to be redrawn, the performance should be very similar to that of the BitmapMaterial method.</p>
+]]></content>
+  </entry>
+  
+</feed>

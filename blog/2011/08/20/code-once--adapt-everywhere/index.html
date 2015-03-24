@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Code Once, Adapt Everywhere - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="CORE For the sake of not repeating myself I&#8217;m going to refer to the phrase &#8220;code once, run everywhere&#8221; as CORE from here on in. Who &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/08/20/code-once--adapt-everywhere/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Code Once, Adapt Everywhere</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-20T17:14:00-04:00" pubdate data-updated="true">Aug 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>CORE</h2>
+
+
+
+
+<p>For the sake of not repeating myself I&#8217;m going to refer to the phrase &#8220;code once, run everywhere&#8221; as <strong>CORE</strong> from here on in. Who knows, maybe it&#8217;ll catch on.  And on to the blog post&#8230;</p>
+
+
+
+
+<p>So as you may have heard by now, I&#8217;ll be starting my new job as an <a href="">Appcelerator</a> platform evangelist on Monday. If you&#8217;ve read some of my past blog posts, you&#8217;ve probably noted that I&#8217;ve been pretty critical of cross platform mobile solutions. From a developer&#8217;s perspective, we are expecting the coveted CORE, but are often left wanting. </p>
+
+
+
+
+<p>What you&#8217;ll quickly find in the world of mobile development is that cross platform does not always equal CORE. </p>
+
+
+
+
+<p>Rather than bemoan the shortcomings of each mobile framework, I&#8217;d rather talk about something I heard <a href="http://twitter.com/#!/kevinwhinnery">Kevin Whinnery</a> say during the Appcelerator <a href="http://vimeopro.com/appcelerator/building-native-mobile-applications">online training videos</a>. He stated that Appcelerator does not aim to be a CORE technology, but instead a <strong>&#8220;code once, <em>adapt</em> everywhere&#8221;</strong> one. Not quite as sexy, but perhaps an even more intriguing philosophy. Let&#8217;s discuss why.</p>
+
+
+
+
+<h2>Web Based vs. Appcelerator</h2>
+
+
+
+
+<p><em>For a quick summary of how Appcelerator is fundamentally different than web-based cross platform mobile frameworks, <a href="/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript/">read here</a>.</em></p>
+
+
+
+
+<p>Aside from near-native performance, what&#8217;s the biggest advantage of using Appcelerator over web based mobile frameworks like <a href="http://www.phonegap.com/">Phonegap</a> or <a href="http://rhomobile.com/">Rhomobile</a>? Its ability to use the device&#8217;s native UI components. And no, I don&#8217;t mean it has UI components skinned to look like native components, like many of the web-based solutions. I mean it actually uses the platform&#8217;s native, performant UI in the app.</p>
+
+
+
+
+<p>With native UI we can build apps that are indistinguishable from apps built with Objective-C or Java. The look, feel, performance, and behavior will be exactly what is expected of the given platform. Plus, we don&#8217;t have to build them ourselves. </p>
+
+
+
+
+<p>To achieve this level of quality, though, <strong>you need to be willing to adapt your app, not just design for the lowest common denominator</strong>, as is often the mentality with CORE apps. Sure, you can use the iPhone&#8217;s slick Navigation Controller bar on all versions of your app, but is that what Android users are expecting? Nor would an Android Spinner be befitting of an iPhone app.</p>
+
+
+
+
+<p>You see, in some cases, CORE apps come at the expense of the most important factor: the user experience. </p>
+
+
+
+
+<h2>Why Bother?</h2>
+
+
+
+
+<p>Many people, particularly proponents of web based mobile development, are of the opinion that native UI components are not necessary to deliver a high quality user experience. I agree, in certain circumstances. Games, novelty utilities (think <a href="https://market.android.com/details?id=com.devuni.flashlight&amp;feature=search_result">Flashlight</a>), and otherwise simple apps are good examples that probably don&#8217;t benefit much from a native experience.</p>
+
+
+
+
+<p>In my opinion, though, it&#8217;s a necessity for more complex apps, particularly ones leveraging native APIs, to use the UI that is  familiar to the device. They need to work in a simple, intuitive manner as mobile users can be quick on the trigger in deeming an app unfriendly. Those who have spent time developing for multiple platforms understand that <strong>the users of each platform have different expectations</strong>. </p>
+
+
+
+
+<p>I don&#8217;t want a navigation bar in my Android app. I want my tabs at the bottom on iPhone, the top on Android. I want to press my menu button on Android to get my app&#8217;s options. I want my system buttons to look familiar. I want to pull to refresh on my iPhone. </p>
+
+
+
+
+<p>Let me be clear that both Appcelerator and web-based frameworks have the ability to adapt their apps to supported platforms. And I don&#8217;t just mean churning out a basic app, I mean creating a high quality, native app. Depending on your point of view, however, one may be much more appealing than the other.</p>
+
+
+
+
+<h2>Attending to the UI (Web-based)</h2>
+
+
+
+
+<p>With web-based solutions, the app exists in a web view container. This means that you are effectively building a native app that consists of only a web view which hosts a web application. <strong>You have no native components with which to work</strong>. This leaves us with 2 options for building the UI of the app (super quick assessment coming): </p>
+
+
+
+
+<ol>
+<li>Use a 3rd party framework like <a href="http://jquerymobile.com/">jQuery Mobile</a> or <a href="http://www.sencha.com/products/touch/">Sencha Touch</a>
+<ul><li>Pros
+<ul><li>Lots of functionality and UI components</li>
+<li>Speeds up development process</li>
+<li>Some, like Sencha Touch, have a very native look to their components.</li></ul></li>
+<li>Cons
+<ul><li>Web based framework UI is generally less responsive than ones created natively or with Appcelerator on mobile devices.</li>
+<li>Additional learning curve for the added framework</li>
+<li>You are even further removed from the native app. You now have a UI framework which sits on a native web view wrapper which then becomes a native app. Lots to know and lots of places for things to go wrong.</li>
+<li>Frameworks like Sencha Touch are limited to webkit based web views (iOS, Android, BB 6.0+). This essentially removes the biggest advantage of web based frameworks, which is their compatibility.</li></ul></li></ul></li>
+<li>Create the UI yourself with HTML/CSS/JS
+<ul><li>Pros
+<ul><li>Totally customizable for any platform </li>
+<li>Its easier to manage performance and UI inconsistencies when using code for only what you need to achieve</li>
+<li>No additional learning curve beyond basic web dev and understanding your web based framework of choice. </li></ul></li>
+<li>Cons
+<ul><li>Much slower to develop, as you have to build your UI from scratch. The styling of the UI to look native all falls on you or external resources you can find.</li>
+<li>Even for seasoned web devs, managing cross platform mobile CSS can be a daunting task. </li>
+<li>All cross browser inconsistencies become your job to address, unless you use a light JS framework like <a href="http://xuijs.com/">xuijs</a> or <a href="http://zeptojs.com/">zeptojs</a>.</li></ul></li></ul></li>
+</ol>
+
+
+
+
+<p>So as you can see, web based mobile development encounters many of the same issues that traditional web development does. And the problem is compounded when you are trying to make these web based solutions look, feel, perform, and behave natively.</p>
+
+
+
+
+<h2>Attending to the UI (Appcelerator)</h2>
+
+
+
+
+<p>Appcelerator apps are built differently. The extremely short version is that Appcelerator Javascript code is mapped to native symbols of the target platform. Any code that can&#8217;t be mapped to a native symbol is run through a Javascript interpreter. <a href="http://twitter.com/#!/jhaynie">Jeff Haynie</a>, CEO of Appcelerator, does a much better job of explaining it in <a href="http://stackoverflow.com/questions/2444001/how-does-appcelerator-titanium-mobile-work">this StackOverflow post</a>.</p>
+
+
+
+
+<p>What this means that there are <strong>no 3rd party tools or special code necessary to create totally native components</strong>. You want a button that has native appearance and behavior on both iPhone and Android?</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createButton</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span><span class="s1">&#39;test button&#39;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>There you go, an Android and iPhone button respectively. How &#8216;bout a table view populated with sample data?</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">title</span><span class="o">:</span><span class="s2">&quot;Row 1&quot;</span><span class="p">},{</span><span class="nx">title</span><span class="o">:</span><span class="s2">&quot;Row 2&quot;</span><span class="p">},{</span><span class="nx">title</span><span class="o">:</span><span class="s2">&quot;Row 3&quot;</span><span class="p">},{</span><span class="nx">title</span><span class="o">:</span><span class="s2">&quot;Row 4&quot;</span><span class="p">},{</span><span class="nx">title</span><span class="o">:</span><span class="s2">&quot;Row 5&quot;</span><span class="p">},{</span><span class="nx">title</span><span class="o">:</span><span class="s2">&quot;Row 6&quot;</span><span class="p">}];</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createTableView</span><span class="p">({</span><span class="nx">data</span><span class="o">:</span><span class="nx">data</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Yep, it&#8217;s that simple. The iPhone table will even have the bounce scrolling users expect. You have the same simplicity that web based UI frameworks solutions provide, except you are additionally getting native look, feel, performance, and behavior. The components are even designable as you would expect them to be.</p>
+
+
+
+
+<p>The one drawback to this simplicity is that without careful attention to your code, you can end up with a mess of interlacing UI and logic. Android has XML for layout, iOS has .nib/.xib files, web based solutions have HTML/CSS. Appcelerator, <em>for the time being</em>, relies solely on your Javascript code. Javascript MVC frameworks, like <a href="http://puremvc.org/">PureMVC</a>, and attention to best practices (as mentioned in the <a href="http://vimeopro.com/appcelerator/building-native-mobile-applications">online training videos</a>) can mitigate this risk. There are even some vague rumblings of a more declarative syntax for UI design in the future&#8230; </p>
+
+
+
+
+<h2>Adaptation</h2>
+
+
+
+
+<p>So now that we know how UIs are built in both Appcelerator and web-based frameworks, how do we adapt them in such a way to deliver a native user experience? Despite the differences between the frameworks mentioned so far, the solution is fairly common among all frameworks. </p>
+
+
+
+
+<p>While I will confidently say that Appcelerator has the abstraction that delivers the most familiar and device-specific experience, it too needs to account for usability that is not necessarily CORE. And even saying it is not CORE can be a bit of a misnomer as the same code base can be used by multiple platforms. It just requires the clever and judicious insertion of platform specific code facilitated by your mobile framework&#8217;s device identification APIs.</p>
+
+
+
+
+<p>Let&#8217;s take a quick look at how Appcelerator identifies your device and can act on the information:</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">osname</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">osname</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">osname</span> <span class="o">==</span> <span class="s1">&#39;android&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// android specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">osname</span> <span class="o">==</span> <span class="s1">&#39;iphone&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iphone specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">osname</span> <span class="o">==</span> <span class="s1">&#39;ipad&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ipad specific code</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>For a more in depth example of how you can use this logic to create truly cross platform components and functionality, check out the 6 minute screencast <a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-2-a-cross-platform-navigation-controller.html">&#8220;Forging Titanium: A Cross-Platform Navigation Controller.&#8221;</a> Or just watch this:</p>
+
+
+
+
+<iframe src="http://player.vimeo.com/video/27834295?title=0&amp;byline=0&amp;portrait=0" width="600" height="375" frameborder="0"></iframe>
+
+
+
+
+<p>And for reference, let&#8217;s look at PhoneGap&#8217;s adaptation method as well, just to show the similarities:</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">platform</span> <span class="o">=</span> <span class="nx">device</span><span class="p">.</span><span class="nx">platform</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="nx">platform</span> <span class="o">==</span> <span class="s1">&#39;Android&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// android specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">platform</span> <span class="o">==</span> <span class="s1">&#39;iPhone&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iphone specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">platform</span> <span class="o">==</span> <span class="s1">&#39;BlackBerry&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// blackberry specific code</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Very similar indeed, but you need to consider the 2 prior &#8220;Attending to the UI&#8221; sections before calling them equal. Its the frequency with which you are required to apply this and other types of adaptation that affects the maintainability of your app as it grows.</p>
+
+
+
+
+<h2>Minimizing Adaptation</h2>
+
+
+
+
+<p>It doesn&#8217;t take an expert software engineer to see that conditional checks on the device&#8217;s platform throughout your code isn&#8217;t ideal. It gets harder to maintain the more conditionals you include. It becomes apparent that we need our development framework to do most of this work for us.</p>
+
+
+
+
+<p>In the case of Appcelerator, the need for conditional adaptation is minimized by the fact that you can utilize native UI components. Look back at our examples of the buttons and table views. There was no conditional code, no special handling. You get system specific components with no extra effort. </p>
+
+
+
+
+<p>You really only need conditional code when you want to leverage native components that don&#8217;t have an equivalent on your other target platforms. For example, if you haven&#8217;t already, check out the <a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-2-a-cross-platform-navigation-controller.html">Cross-Platform Navigation Controller video</a> above. It shows how you can use these conditionals to create navigation code that you can use seamlessly between iOS or Android.</p>
+
+
+
+
+<p>Web based platforms also do a great job of creating an abstraction so that you don&#8217;t need to use conditionals for each supported platform. The problem, as discussed earlier, is that these abstractions don&#8217;t represent actual native components. They most often represent HTML/CSS/JS that are attempting to mimic native components. Worse yet, sometimes they are components that have no relation to existing native components, yet find themselves in native apps. As I said, this is a point of contention among mobile developers, and I&#8217;ll leave further discussion for the comments if necessary.</p>
+
+
+
+
+<p>What web based frameworks can&#8217;t give you in native components, they provide in CSS, often applied dynamically via Javascript. The use of CSS is a double-edged sword. On one hand, you have a method of styling that not only allows you to skin your whole app, but also affords you the opportunity to gracefully degrade the styling based on the user&#8217;s device. This is why web based solutions typically support more platforms than ones like Appcelerator. Add all the bells and whistles like rounded corners, drop shadows, webkit transitions, etc&#8230; and if the device doesn&#8217;t support them, they will disappear without interrupting the user experience.</p>
+
+
+
+
+<p>On the other hand, unless you are a CSS wizard with existing knowledge of CSS3 and how it applies to mobile, using it can be difficult. You can find yourself with mountains of CSS attempting to mimic components that are created with a single line of code in Appcelerator. For example, here&#8217;s a shiny iPhone button in pure CSS:</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-family</span><span class="o">:</span> <span class="s2">&quot;Helvetica Neue&quot;</span><span class="o">,</span> <span class="n">Helvetica</span><span class="o">,</span> <span class="k">sans-serif</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-size</span><span class="o">:</span> <span class="m">1.3em</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">97</span><span class="o">%</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">height</span><span class="o">:</span> <span class="m">50px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">:</span> <span class="m">3px</span> <span class="k">solid</span> <span class="m">#282726</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">background</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span> <span class="n">linear</span><span class="o">,</span> <span class="k">left</span> <span class="k">top</span><span class="o">,</span> <span class="k">left</span> <span class="k">bottom</span><span class="o">,</span> <span class="n">from</span><span class="p">(</span><span class="m">#e2e2e2</span><span class="p">)</span><span class="o">,</span> <span class="n">to</span><span class="p">(</span><span class="m">#8c8a88</span><span class="p">)</span><span class="o">,</span> <span class="k">color</span><span class="o">-</span><span class="n">stop</span><span class="p">(</span><span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="o">,</span> <span class="m">#acadae</span><span class="p">)</span><span class="o">,</span> <span class="k">color</span><span class="o">-</span><span class="n">stop</span><span class="p">(</span><span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="o">,</span> <span class="m">#82807e</span><span class="p">)</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">3px</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">text-shadow</span><span class="o">:</span> <span class="m">0px</span> <span class="m">1px</span> <span class="m">0</span> <span class="m">#cecece</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">background</span><span class="o">-</span><span class="n">origin</span><span class="o">:</span> <span class="k">padding</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">background</span><span class="o">-</span><span class="k">clip</span><span class="o">:</span> <span class="k">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">8px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nc">.cancel</span><span class="o">,</span>
+</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nd">:active</span><span class="o">,</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nc">.cancel</span><span class="nd">:active</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#fff</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">text-shadow</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nc">.cancel</span><span class="nd">:hover</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span> <span class="n">linear</span><span class="o">,</span> <span class="k">left</span> <span class="k">top</span><span class="o">,</span> <span class="k">left</span> <span class="k">bottom</span><span class="o">,</span> <span class="n">from</span><span class="p">(</span><span class="m">#aaaee5</span><span class="p">)</span><span class="o">,</span> <span class="n">to</span><span class="p">(</span><span class="m">#10006d</span><span class="p">)</span><span class="o">,</span> <span class="k">color</span><span class="o">-</span><span class="n">stop</span><span class="p">(</span><span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="o">,</span> <span class="m">#1F3B97</span><span class="p">)</span><span class="o">,</span> <span class="k">color</span><span class="o">-</span><span class="n">stop</span><span class="p">(</span><span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="o">,</span> <span class="m">#081f6f</span><span class="p">)</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="nt">button</span><span class="o">]</span><span class="nc">.cancel</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background</span><span class="o">:</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span> <span class="n">linear</span><span class="o">,</span> <span class="k">left</span> <span class="k">top</span><span class="o">,</span> <span class="k">left</span> <span class="k">bottom</span><span class="o">,</span> <span class="n">from</span><span class="p">(</span><span class="m">#5c5c5b</span><span class="p">)</span><span class="o">,</span> <span class="n">to</span><span class="p">(</span><span class="m">#1e1b16</span><span class="p">)</span><span class="o">,</span> <span class="k">color</span><span class="o">-</span><span class="n">stop</span><span class="p">(</span><span class="m">0</span><span class="o">.</span><span class="m">2</span><span class="o">,</span> <span class="m">#1e1b16</span><span class="p">)</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">margin-top</span><span class="o">:</span> <span class="m">6px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>It does the job, but man, it is really cumbersome. Again, this is all a factor of wanting to create a native experience. Some will contest that it does not need to be this complex, that as long as the UI is uniform it does not need to conform to the native expectations. This mentality, though, is typically only held by those who back mobile frameworks that are incapable of delivering that native experience.  As the local radio sports caster in Pittsburgh likes to  say, &#8220;Not hatin&#8217;, just sayin&#8217;.&#8221;</p>
+
+
+
+
+<h2>Summary</h2>
+
+
+
+
+<p>You can&#8217;t beat web based mobile development for platform compatibility. Every mobile device has a browser that supports HTML/CSS/JS, right? You can create UIs that work on many platforms and degrade gracefully to handle lower end devices. Quality, usable apps are totally possible with these frameworks.</p>
+
+
+
+
+<p>But the user doesn&#8217;t care how compatible your app is. They just want it to work, as they expect it to, on the device of their choice. In this respect, Appcelerator is unparalleled in the realm of cross platform solutions.</p>
+
+
+
+
+<p>I have a strong suspicion that web based mobile technologies are only going to get better. I mean, let&#8217;s face it, the web isn&#8217;t going to be disappearing anytime soon. It will get faster, more functional, and closer to the expectations of the mobile user, just like desktop web browsers. And I, as a soon-to-be Appcelerator employee, welcome this. </p>
+
+
+
+
+<p>As web based mobile development ups it game, so shall Appcelerator. Whether you&#8217;re an Appcelerator, web based, or native developer, it&#8217;s an exciting time&#8230; no matter what side of the fence you&#8217;re on.</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-20T17:14:00-04:00" pubdate data-updated="true">Aug 20<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/core/'>core</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/phonegap/'>phonegap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/08/10/sneak-peek-at--knuckle-head--for-iphone/" title="Previous Post: Sneak Peek at "Knuckle Head" for iPhone">&laquo; Sneak Peek at "Knuckle Head" for iPhone</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/08/25/android-intent-filters-in-appcelerator/" title="Next Post: Android Intent Filters in Appcelerator">Android Intent Filters in Appcelerator &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

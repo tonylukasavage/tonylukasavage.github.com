@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: java | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Whole Mess of Android Helpers]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/16/a-whole-mess-of-android-helpers/"/>
+    <updated>2011-06-16T10:01:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/16/a-whole-mess-of-android-helpers</id>
+    <content type="html"><![CDATA[<h2>Overview</h2>
+
+<p>In my work on my MMA fighter Android app <a href="/blog/2011/06/08/knuckle-head--my-mma-fighter-app-for-android/">Knuckle Head</a> I used a lot of Android functionality that I'm sure I'll use again.  Things like JSON processing, asynchronous tasks with ProgressDialogs, and single instance Toasts are all things that will inevitably show up in future work.  Because I'm just so generous, I decided to refactor them out of the Knuckle Head specific code and turn them into a Java package anyone could use.</p>
+
+<p><span style="font-size:18px;">* Clone or download <a href="https://github.com/tonylukasavage/com.savagelook.android" target="_blank">com.savagelook.android on Github</a></span></p>
+
+<div style="height:15px;">&nbsp;</div>
+
+
+<h2>The Classes</h2>
+
+<p>Its a small collection so far, but sure to grow very quickly.  Here's a list of the classes included so far:</p>
+
+<ul>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/JsonHelper.java">JsonHelper.java</a> - A collection of JSON handling functions. Includes Retrieving JSON from a remote URL.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/KeyValuePair.java">KeyValuePair.java</a> - A generic key/value pait class. Useful for populating Android Spinners.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/Lazy.java">Lazy.java</a> - A collection of static classes for operations I don't have a better home for.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/ToastSingleton.java">ToastSingleton.java</a> - I hate how Toasts in Android are shown sequentially. To prevent this I operate on a single instance of a Toast throughout my apps.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/Toaster.java">Toaster.java</a> - A class that utilizes ToastSingleton.java and delivers Toasts with convenient static functions.</li>
+<li><a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java">UrlJsonAsyncTask.java</a> - This is a custom AsyncTask for a very common Android problem. I very often need to retrieve JSON from a remote URL, display a ProgressDialog while this occurs, operate on the data when it is returned, and then close the ProgressDialog. With this class that work is reduced down to just a few lines of code.</li>
+</ul>
+
+
+<p><span style="font-weight:bold; font-size:16px; padding:0px; margin:0px;">UrlJsonAsyncTask Example</span>
+If you had only have time for a quick look, be sure to check <a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java">UrlJsonAsyncTask.java</a>.  Using this class in side my Activity code reduced the line count drastically.  Since I was lazy about documentation for any of this, here's an example to reward my blog reader's.  This is straight from <a href="http://savagelook.com/blog/android/knuckle-head-my-mma-fighter-app-for-android">Knuckle Head</a> code.  You'll notice a few other classes mentioned above are also included.</p>
+
+<p>UrlJsonAsyncTask is not abstract like <a href="http://developer.android.com/reference/android/os/AsyncTask.html" target="_blank">AsyncTask</a>, most of the functionality has been implemented. You only need to implement onPostExecute(JSONObject) if you want to do something with the returned JSON.  In order for this to work, your JSON needs to return an object formatted like this:</p>
+
+<p>``` json
+{</p>
+
+<pre><code>"success":true|false,
+"info":"error or warning message from server",
+"data": {}
+</code></pre>
+
+<p>}
+```</p>
+
+<ul>
+<li><strong>success</strong> is a boolean indication from your JSON source whether or not the request was successful</li>
+<li><strong>info</strong> on error or warning, will contain an app user friendly message that can be delivered via Toast</li>
+<li><strong>data</strong> This is the actual JSON object or array that you will operate on given a successful request</li>
+</ul>
+
+
+<div style="height:15px;">&nbsp;</div>
+
+
+<p>And this is how you would define your own UrlJsonAsyncTask.  In this case I am querying my server to get a list of fighter, or the profile of one particular fighter.  In either scenario, as stated in the JSON description above, the "data" attribute of my JSON is what I will pass to the target intent.</p>
+
+<p>``` java
+private class FighterSearchTask extends UrlJsonAsyncTask {</p>
+
+<pre><code>public FighterSearchTask(Context context) {
+    super(context);
+}
+
+@Override
+protected void onPostExecute(JSONObject json) {
+    try {
+        this.validateJson(json); // throws IOException, JSONException
+
+        // These 4 lines represent the actual post execute logic
+        Class&lt;?&gt; intentClass = json.getString("info").equals("list") ? FighterListActivity.class : FighterTabActivity.class;
+        Intent intent = new Intent(context, intentClass);
+        intent.putExtra("json", json.getString("data").toString());
+        startActivity(intent);
+    } catch (IOException e) {
+        // IOExceptions are custom and return JSON "info" in getMessage()
+        Toaster.toast(this.context, e.getMessage());
+    } catch (JSONException e) {
+        // Lazy.Ex.getStackTrace(Exception) is just a simple one liner for turning
+        // a stack trace into a String.
+        Log.e("YourTagName", Lazy.Ex.getStackTrace(e));
+
+        // JSONExceptions here are generally because your JSON is not formatted as
+        // per the description in the comments above. We don't want to show these
+        // errors to the user, so we give them a pre-defined error message to let
+        // them know something went wrong.
+        Toaster.toast(context, this.getMessageError());
+    } finally {
+        super.onPostExecute(json); // Must be called to close the ProgressDialog
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>After you have created your subclass of UrlJsonAsyncTask, you can execute these following few lines of code anywhere to fire your task and have a ProgressDialog pop up until it either finishes successfully or or returns an error/warning message. There's tons of setters to customize your task. Check them out in the <a href="https://github.com/tonylukasavage/com.savagelook.android/blob/master/com/savagelook/android/UrlJsonAsyncTask.java" target="_blank">source code</a>.</p>
+
+<p><code>java
+FighterSearchTask task = new FighterSearchTask(SearchActivity.this);
+task.setMessageLoading("Searching for fighters...");
+task.setConnectionParams(2000, 5000, 3); // connection timeout(ms), read timeout(ms), number of retries
+task.execute(url);
+</code></p>
+
+<p>And voila, you got JSON from a remote URL with a ProgressDialog assuring your users that the data is in fact loading.  All of this is non-blocking so you are able to continue other operations or update the UI if necessary.</p>
+
+<h2>Summary</h2>
+
+<p>So yeah, it's just another collection of a developer's reusable tools for getting stuff done, this time for Android.  If you do happen to peruse, or use, the code, let me know what you think.  Suggestions,criticisms, and of course contributions are more than welcome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Knuckle Head: My MMA Fighter App for Android]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/08/knuckle-head--my-mma-fighter-app-for-android/"/>
+    <updated>2011-06-08T14:29:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/08/knuckle-head--my-mma-fighter-app-for-android</id>
+    <content type="html"><![CDATA[<h2>Get the App</h2>
+
+<p><span style="font-size:18px;"><a href="https://market.android.com/details?id=com.savagelook.knucklehead">* Click here to download "Knuckle Head" on the Android Market!</a></span></p>
+
+<h2>Overview</h2>
+
+<p>Knuckle Head is an app for the true Mixed Martial Arts fan. It allows you to search a database to <strong>find details on any fighter in the world</strong>, not just the UFC. In just a few touches you can search by name, nickname, or weight class to find every detail about your favorite fighters.  This is not just another MMA news app. Inside you'll find fighter images, detailed fight records, vital statistics, and other MMA analysis.</p>
+
+<p>Oh, and <span style="color:#ff0000;">I love feedback</span>, so tell me what you want next!<br></p>
+
+<h2>Screenshots</h2>
+
+<table cellspacing="0" cellpadding="0" style="padding-bottom:15px;">
+  <tr>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/search 2.png"><img src="http://tonylukasavage.github.com/images/search-e1307557245583.png" alt="" title="search" width="170" height="302" class="alignnone size-full wp-image-3064" /></a></td>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/fighters.png"><img src="http://tonylukasavage.github.com/images/fighters-e1307557324316.png" alt="" title="fighters" width="170" height="302" class="alignnone size-full wp-image-3065" /></a></td>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/profile.png"><img src="http://tonylukasavage.github.com/images/profile-e1307557366319.png" alt="" title="profile" width="170" height="302" class="alignnone size-full wp-image-3066" /></a></td>
+    <td style="padding:3px;"><a href="http://tonylukasavage.github.com/images/fights.png"><img src="http://tonylukasavage.github.com/images/fights-e1307557395185.png" alt="" title="fights" width="170" height="302" class="alignnone size-full wp-image-3067" /></a></td>
+  </tr>
+</table>
+
+
+<h2>In Case You Were Interested...</h2>
+
+<p>I'll have some technical blog posts regarding this app up very soon.  There'll be lots of native Android development goodies to be gleaned.  In addition I'm likely gonna post up some Android/Java convenience classes I've been using for various tasks like JSON handling, AdMob, ProgressDialogs, and more to my <a href="https://github.com/tonylukasavage">Github account</a>.  Stay tuned.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Handling Global Configuration in Android]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/03/handling-global-configuration-in-android/"/>
+    <updated>2011-06-03T09:42:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/03/handling-global-configuration-in-android</id>
+    <content type="html"><![CDATA[<h2>The Problem</h2>
+
+<p>You have configuration variables and data that you want to share globally in your Android app.  You want all Activities to be able to access and edit the same instance of application specific data.</p>
+
+<h2>Generic Solution</h2>
+
+<p>You could create a <em>Configuration</em> class <a href="http://www.glenmccl.com/tip_002.htm" target="_blank">loaded with static members</a> or as a <a href="http://en.wikipedia.org/wiki/Singleton_pattern" target="_blank">Singleton</a>.  Now you've got a shared, single instance of your configuration that can be accessed anywhere in your application.  But there are 2 minor drawbacks to this method in the context of Android development.</p>
+
+<ol>
+<li>You now have to initialize your configuration in a separate class, in this case, your startup Activity.</li>
+<li>You'll need to carry this new <em>Configuration</em> class around in all your projects.</li>
+</ol>
+
+
+<br>
+
+
+<p>Neither of these problems are critical, but let's see if we can do better.</p>
+
+<h2>Android Solution</h2>
+
+<p>In Android it is possible to extend the <a href="http://developer.android.com/reference/android/app/Application.html" target="_blank">Application</a> class in order to store additional application specific information... like say configuration data.  These additional members are then accessible in any Activity via the <a href="http://developer.android.com/reference/android/content/Context.html#getApplicationContext()" target="_blank">getApplicationContext()</a> method.</p>
+
+<p>The first step in this process is extending your app's Application object.  Android gives your app a generic Application object by default, so you may have never even had to look at this class directly.  But as you'll see below, its pretty simple to extend.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">SampleApplication.java</span><br></p>
+
+<p>``` java
+public class SampleApplication extends Application {</p>
+
+<pre><code>private String mStringValue;
+
+@Override
+public void onCreate() {
+    // Here you could pull values from a config file in res/raw or somewhere else
+    // but for simplicity's sake, we'll just hardcode values
+    mStringValue = "SavageLook.com";
+    super.onCreate();
+}
+
+public String getStringValue() {
+    return mStringValue;
+}
+
+public void setStringValue(String value) {
+    mStringValue = value;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you can see above, extending the Application class as <strong>SampleApplication</strong> is quite simple.  You add class members for each bit of configuration data you would like to share throughout your application.  In this example, we are simply saving a String value (mStringValue) that can then be accessed and modified in any Activity in SampleApplication.</p>
+
+<p>After you've added your members and any necessary getters/setters, you need to override the <strong>onCreate()</strong> method.  In the onCreate() method you can then initialize your class members with your configuration data.  You can do this any way you want. To keep the example simple, I hardcoded the configuration value (mStringValue), but I commonly store configuration data in JSON files in res/raw and load them into my extended Application object.  I won't get into those details, though, as that will likely be a whole other blog post. <span style="color:#ff0000;">Make sure you call super.onCreate() when you are finished</span>.</p>
+
+<p><strong>NOTE</strong>: It's not necessary to initialize your members in the onCreate(). For application-wide configuration data you would likely always do it in onCreate(), but you are technically free to manipulate the extended Application object anywhere in your app code.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">AndroidManifest.xml</span><br></p>
+
+<p>``` xml
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"</p>
+
+<pre><code>  package="com.yourdomain"
+  android:versionCode="1"
+  android:versionName="1.0"&gt;
+
+&lt;!-- Android 'uses' elements... --&gt;
+
+&lt;application
+    android:icon="@drawable/icon"
+    android:label="@string/app_name"
+    android:name=".SampleApplication"&gt;
+    &lt;activity android:name=".SampleActivity"&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name="android.intent.action.MAIN" /&gt;
+            &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+        &lt;/intent-filter&gt;
+    &lt;/activity&gt;
+&lt;/application&gt;
+</code></pre>
+
+<p></manifest>
+```</p>
+
+<p>The final modification to make our Android app use the new SampleApplication class is setting it in the <strong><application></strong> element of the AndroidManifest.xml file.  The only change we make to AndroidManifest.xml is adding the <strong>android:name</strong> attribute to the <application> element.  Just add this attribute and set it equal to the name of your extended Application object, in this case <strong>SampleApplication</strong>.</p>
+
+<p>OK, so now your app is using your new SampleApplication class.  How do we access the stored data in its members?  See the basic usage below.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">Sample usage in any Activity</span><br></p>
+
+<p>``` java
+public class SampleActivity extends Activity {</p>
+
+<pre><code>@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    SampleApplication sampleApp = (SampleApplication)getApplicationContext();
+    String localStr = sampleApp.getStringValue();
+    // perform operations on localStr
+    sampleApp.setStringValue(localStr);
+
+    // The rest of your Activity code...
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>All you have to do is call <a href="http://developer.android.com/reference/android/content/Context.html#getApplicationContext()" target="_blank">getApplicationContext()</a> and cast it to the type of your new Application object (SampleApplication).  The resulting SampleApplication object can now be used the get/set any of the members you defined for it in SampleApplication.java.</p>
+
+<h2>Summary</h2>
+
+<p>Now you have a solid, Android native way to share data globally in your app code.  While I'm a big fan of portable solutions, I feel this Android specific one is worth to have a clear distinction between the onCreate() of my Application versus my Activities.  Hopefully this walkthrough was clear because this is something you will likely do very frequently when developing Android apps.</p>
+
+<p>One final note. I can already envision some lazy developers' minds churning, "I can use this instead of Intent extras!"... Don't!  Intent extras have a specific interaction context which is important not only to functionality, but also to readability of your code.  Don't undo this by just feeding them into the global Application object.  Extending your Application object is a complement to Intent extras, not a replacement.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Quick Tip: EditText with DONE Button That Closes the Keyboard]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/02/android-quick-tip--edittext-with-done-button-that-closes-the-keyboard/"/>
+    <updated>2011-06-02T09:17:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/02/android-quick-tip--edittext-with-done-button-that-closes-the-keyboard</id>
+    <content type="html"><![CDATA[<h2>Android Quick Tip</h2>
+
+<p>Close the keyboard when you click 'DONE'... seems like a simple task, right? Unfortunately, clicking 'DONE' or the 'RETURN' button in even a single line Android EditText will not drop focus and close the soft keyboard.  In most cases it will just generate a new line of text.  So what do you have to do if you want to close the soft keyboard by clicking 'DONE'?</p>
+
+<p>First you need to set the <strong>android:imeOptions</strong> attribute equal to <strong>"actionDone"</strong> for your target EditText as seen below.  That will change your 'RETURN' button in your EditText's soft keyboard to a 'DONE' button.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">* example_edittext.xml</span><br></p>
+
+<p>``` xml
+&lt;EditText</p>
+
+<pre><code>android:id="@+id/edittext_done"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:hint="Enter some text"
+android:imeOptions="actionDone"
+/&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Now we need to create a custom <a href="http://developer.android.com/reference/android/widget/TextView.OnEditorActionListener.html" target="_blank">OnEditorActionListener</a> for the target EditText that will recognize when the 'DONE' button has been clicked.  In it we override the <a href="http://developer.android.com/reference/android/widget/TextView.html#onEditorAction(int)" target="_blank">onEditorAction()</a> method, get an instance of the <a href="http://developer.android.com/reference/android/view/inputmethod/InputMethodManager.html" target="_blank">InputMethodManager</a>, and use it to close the soft keyboard.  Here's the code for the custom OnEditorActionListener class:</p>
+
+<p><span style="font-weight:bold; font-size:125%;">* DoneOnEditorActionListener.java</span><br></p>
+
+<p>``` java
+class DoneOnEditorActionListener implements OnEditorActionListener {</p>
+
+<pre><code>@Override
+public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    if (actionId == EditorInfo.IME_ACTION_DONE) {
+        InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        return true;
+    }
+    return false;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Now go to the onCreate() method of the Activity that contains the target EditText.  We'll call it <strong>SampleActivity</strong> here.  In here you will assign the new <strong>DoneOnEditorActionListener</strong> to the target EditText via the <a href="http://developer.android.com/reference/android/widget/TextView.html#setOnEditorActionListener(android.widget.TextView.OnEditorActionListener)" target="_blank">setOnEditorActionListener()</a> method.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">* SampleActivity.java</span><br></p>
+
+<p>``` java
+public class SampleActivity extends Activity {</p>
+
+<pre><code>@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.sample_activity_layout); // sample_activity_layout contains our target EditText, target_edittext
+
+    EditText targetEditText = (EditText)findViewById(R.id.target_edittext);
+    targetEditText.setOnEditorActionListener(new DoneOnEditorActionListener());
+
+    // The rest of the onCreate() code
+</code></pre>
+
+<p>   }
+}
+```</p>
+
+<p>And there you go, your target EditText field will now close the soft keyboard whenever you click the 'DONE' button.  Very handy and not too difficult.  Enjoy.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Quick Tip: Remove ListView Dividers]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/05/31/android-quick-tip--remove-listview-dividers/"/>
+    <updated>2011-05-31T12:59:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/05/31/android-quick-tip--remove-listview-dividers</id>
+    <content type="html"><![CDATA[<h2>Quick Tip</h2>
+
+<p>If you want to remove the dividers from an Android ListView, execute the following code on your ListView object.</p>
+
+<p><code>java
+ListView listView = (ListView)findViewById(R.id.your_listview_id);
+listView.setDivider(null);
+listView.setDividerHeight(0);
+</code></p>
+
+<p>or if you are trying to remove dividers from a ListActivity, do this in your onCreate() method:</p>
+
+<p><code>java
+this.getListView.setDivider(null);
+this.getListView.setDividerHeight(0);
+</code></p>
+
+<p>And there you go, no more dividers.  Enjoy.</p>
+]]></content>
+  </entry>
+  
+</feed>

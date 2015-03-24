@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: c++ | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/c-/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[NerdKits under my Christmas Tree!]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/28/nerdkits-under-my-christmas-tree-/"/>
+    <updated>2010-12-28T09:51:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/28/nerdkits-under-my-christmas-tree-</id>
+    <content type="html"><![CDATA[<p>Time to dive into the world of embedded programming head long with one of my favorite Christmas gifts: my <a href="http://www.nerdkits.com/">NerdKit</a>.  What's a NerdKit?  Well its basically a starter kit for bridging programming with the real world through electronics, an API, and a thorough guide for getting started.  You might have also heard of <a href="http://www.arduino.cc/">Arduino</a>, which is a similar and uses open source technology for embedded programming.</p>
+
+<p>What can you do with it?  Well, thats what I aim to find out.  In the meantime, though, you can check out the <a href="http://www.nerdkits.com/projects/">"Projects" page</a> of the NerdKits site for some pretty damn cool projects that include:</p>
+
+<ul>
+<li>iPhone controlled RC Car</li>
+<li>Morse Code decoder</li>
+<li>Digital thermometers</li>
+<li>Spark generator</li>
+<li>Computer controlled robotics and devices</li>
+</ul>
+
+
+<p>So for all you SavageLook.com faithful there's sure to be some NerdKit guides and demos to come.  Here's hoping I haven't forgotten every bit of electrical engineering I learned in college.  Forget it, I drank that knowledge clean outta my head.  I guess 3 hours/week of EE can't compete with 12 hours/week of beer pong.  Oh well, should be fun anyway!</p>
+
+<p>Oh and be sure to follow <a href="http://twitter.com/#!/nerdkits">@nerdkits</a> on twitter for all kinds of cool updates, demos, and tutorials!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Offline packet capture analysis with C/C++ &amp; libpcap]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/19/offline-packet-capture-analysis-with-c-c----amp--libpcap/"/>
+    <updated>2010-12-19T21:49:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/19/offline-packet-capture-analysis-with-c-c----amp--libpcap</id>
+    <content type="html"><![CDATA[<h2>The Overview</h2>
+
+<p>At the request of one of my faithful readers in my original article on packet capture with libpcap, I decided to post a guide to offline packet capture processing.  Why is this useful?  Because popular packet capture programs like <a href="http://www.wireshark.org/">Wireshark</a> or <a href="http://www.tcpdump.org/">tcpdump</a> can save captures to files that can be processed later.  You can then apply your specialized code to these previously captured packets.</p>
+
+<h2>The Code</h2>
+
+<p><strong>NOTE:</strong> This program makes use of the <a href="http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=view&target=http.cap">http.cap</a> Wireshark packet capture sample.</p>
+
+<p>``` cpp</p>
+
+<h1>include <iostream></h1>
+
+<h1>include &lt;pcap.h></h1>
+
+<h1>include &lt;net/ethernet.h></h1>
+
+<h1>include &lt;netinet/ip.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;netinet/tcp.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<p>using namespace std;</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet);</p>
+
+<p>int main() {</p>
+
+<pre><code>pcap_t *descr;
+char errbuf[PCAP_ERRBUF_SIZE];
+
+// open capture file for offline processing
+descr = pcap_open_offline("http.cap", errbuf);
+if (descr == NULL) {
+    cout &lt;&lt; "pcap_open_live() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+
+// start packet processing loop, just like live capture
+if (pcap_loop(descr, 0, packetHandler, NULL) &lt; 0) {
+    cout &lt;&lt; "pcap_loop() failed: " &lt;&lt; pcap_geterr(descr);
+    return 1;
+}
+
+cout &lt;&lt; "capture finished" &lt;&lt; endl;
+
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet) {</p>
+
+<pre><code>const struct ether_header* ethernetHeader;
+const struct ip* ipHeader;
+const struct tcphdr* tcpHeader;
+char sourceIp[INET_ADDRSTRLEN];
+char destIp[INET_ADDRSTRLEN];
+u_int sourcePort, destPort;
+u_char *data;
+int dataLength = 0;
+string dataStr = "";
+
+ethernetHeader = (struct ether_header*)packet;
+if (ntohs(ethernetHeader-&gt;ether_type) == ETHERTYPE_IP) {
+    ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_src), sourceIp, INET_ADDRSTRLEN);
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_dst), destIp, INET_ADDRSTRLEN);
+
+    if (ipHeader-&gt;ip_p == IPPROTO_TCP) {
+        tcpHeader = (tcphdr*)(packet + sizeof(struct ether_header) + sizeof(struct ip));
+        sourcePort = ntohs(tcpHeader-&gt;source);
+        destPort = ntohs(tcpHeader-&gt;dest);
+        data = (u_char*)(packet + sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+        dataLength = pkthdr-&gt;len - (sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+
+        // convert non-printable characters, other than carriage return, line feed,
+        // or tab into periods when displayed.
+        for (int i = 0; i &lt; dataLength; i++) {
+            if ((data[i] &gt;= 32 &amp;&amp; data[i] &lt;= 126) || data[i] == 10 || data[i] == 11 || data[i] == 13) {
+                dataStr += (char)data[i];
+            } else {
+                dataStr += ".";
+            }
+        }
+
+        // print the results
+        cout &lt;&lt; sourceIp &lt;&lt; ":" &lt;&lt; sourcePort &lt;&lt; " -&gt; " &lt;&lt; destIp &lt;&lt; ":" &lt;&lt; destPort &lt;&lt; endl;
+        if (dataLength &gt; 0) {
+            cout &lt;&lt; dataStr &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>The Breakdown</h2>
+
+<p>``` cpp</p>
+
+<h1>include <iostream></h1>
+
+<h1>include &lt;pcap.h></h1>
+
+<h1>include &lt;net/ethernet.h></h1>
+
+<h1>include &lt;netinet/ip.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;netinet/tcp.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<p>using namespace std;</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet);
+```</p>
+
+<p>These are the includes and declarations necessary for reading the packet captures.  The first 2 are self explanatory, the following 5 includes might be less so.  These are used for parsing and transforming data found in packets.  The functions and structures included in these headers are integral to packet processing and are available natively on Linux systems (Ubuntu in this case).</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>int main() {
+pcap_t *descr;
+char errbuf[PCAP_ERRBUF_SIZE];
+
+// open capture file for offline processing
+descr = pcap_open_offline("http.cap", errbuf);
+if (descr == NULL) {
+    cout &lt;&lt; "pcap_open_live() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>After entering the main execution, we go straight to opening our target packet capture file, <a href="http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=view&target=http.cap">http.cap</a>.  To do this we use <a href="http://www.manpagez.com/man/3/pcap_open_offline/">pcap_open_offline()</a> and give it the capture filename and an error buffer as parameters.  If all goes well, we get a pcap_t descriptor returned.  If not, check the error buffer for details.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>    // start packet processing loop, just like live capture
+if (pcap_loop(descr, 0, packetHandler, NULL) &lt; 0) {
+    cout &lt;&lt; "pcap_loop() failed: " &lt;&lt; pcap_geterr(descr);
+    return 1;
+}
+
+cout &lt;&lt; "capture finished" &lt;&lt; endl;
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Just like in a live packet capture, we use <a href="http://www.manpagez.com/man/3/pcap_loop/">pcap_loop()</a> to set up a handler callback for each packet to be processed. We give it the following:</p>
+
+<ul>
+<li>descr - the descriptor we just created with <a href="http://www.manpagez.com/man/3/pcap_open_offline/">pcap_open_offline()</a></li>
+<li>count - 0 (zero), to indicate there is no limit to the number of packets we want to process</li>
+<li>callback - The name of our packet handler function</li>
+<li>userdata - NULL, to indicate that we will be passing no user defined data to the callack</li>
+</ul>
+
+
+<p>When the entire file has been processed, we will print the "capture complete" message and then exit.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>void packetHandler(u_char *userData, const struct pcap_pkthdr* pkthdr, const u_char* packet) {
+const struct ether_header* ethernetHeader;
+const struct ip* ipHeader;
+const struct tcphdr* tcpHeader;
+char sourceIp[INET_ADDRSTRLEN];
+char destIp[INET_ADDRSTRLEN];
+u_int sourcePort, destPort;
+u_char *data;
+int dataLength = 0;
+string dataStr = "";
+</code></pre>
+
+<p>```</p>
+
+<p>Here we define the packet handler callback, as per the libpcap specifications.  For more details, check out my <a href="http://savagelook.com/blog/code/packet-capture-with-c-linux">original post on packet capture</a>.  The following declarations define variables that will help us parse meaningful data out of the packets.  These include packet header data, IP addresses, source/destination ports, and payload data.</p>
+
+<p>There's LOTS more useful information to be analyzed from the average packet.  Check out the structure defined in the network includes at the beginning of the code for more details.  Actually, it would probably be a hell of a lot easier to just download and fire up <a href="http://www.wireshark.org/">Wireshark</a>.  It will give you a greater appreciation for what can be learned from a packet.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>    ethernetHeader = (struct ether_header*)packet;
+if (ntohs(ethernetHeader-&gt;ether_type) == ETHERTYPE_IP) {
+    ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_src), sourceIp, INET_ADDRSTRLEN);
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_dst), destIp, INET_ADDRSTRLEN);
+</code></pre>
+
+<p>```</p>
+
+<p>I'm not going to delve to deeply into the specifics of network protocols, as that could be a post... check that... that could be a book of its own.  Basically here we are parsing the ethernet header from the packet and using its type to determine if it is an IP packet or not.  We use the <a href="http://linux.about.com/library/cmd/blcmdl3_ntohs.htm">ntohs()</a> to convert the type from network byte order to host byte order.</p>
+
+<p>If it is an IP packet, we parse out the IP header and use the <a href="http://pubs.opengroup.org/onlinepubs/009695399/functions/inet_ntop.html">inet_ntop()</a> function to convert the IP addresses found in the IP header into a human readable format (i.e., xxx.xxx.xxx.xxx).  <span style="color:#ff0000">In a lot of older examples you'll see the use of <a href="http://beej.us/guide/bgnet/output/html/multipage/inet_ntoaman.html">inet_ntoa()</a>, but this is not thread-safe and is deprecated.</span></p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>    if (ipHeader-&gt;ip_p == IPPROTO_TCP) {
+        tcpHeader = (tcphdr*)(packet + sizeof(struct ether_header) + sizeof(struct ip));
+        sourcePort = ntohs(tcpHeader-&gt;source);
+        destPort = ntohs(tcpHeader-&gt;dest);
+        data = (u_char*)(packet + sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+        dataLength = pkthdr-&gt;len - (sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+</code></pre>
+
+<p>```</p>
+
+<p>Similar to above, I use the IP header to determine if this is a TCP packet (they all should be since its a HTTP capture) and then parse out the TCP header.  With the TCP header we can then determine the source and destination ports, with <a href="http://linux.about.com/library/cmd/blcmdl3_ntohs.htm">ntohs()</a> again, and then determine the contents of the packet payload.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>        // convert non-printable characters, other than carriage return, line feed,
+        // or tab into periods when displayed.
+        for (int i = 0; i &lt; dataLength; i++) {
+            if ((data[i] &gt;= 32 &amp;&amp; data[i] &lt;= 126) || data[i] == 10 || data[i] == 11 || data[i] == 13) {
+                dataStr += (char)data[i];
+            } else {
+                dataStr += ".";
+            }
+        }
+
+        // print the results
+        cout &lt;&lt; sourceIp &lt;&lt; ":" &lt;&lt; sourcePort &lt;&lt; " -&gt; " &lt;&lt; destIp &lt;&lt; ":" &lt;&lt; destPort &lt;&lt; endl;
+        if (dataLength &gt; 0) {
+            cout &lt;&lt; dataStr &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>In the final step of the packet handler we display the results of our rudimentary analysis.  First we iterate through the bytes of the payload and save it in a format that is human friendly.  If you try to print it out with the non-printable characters in there you will get some very messy results in your console.  After this cleanup we simply output the packet data we have extracted and display it in the console.</p>
+
+<h2>The Summary</h2>
+
+<p>So now that you can process packets offline, what do you want to do with them?  I don't know about you, but aside from obvious applications to network analysis, <span style="color:#ff0000;">I'd like to use this data for trending, visualization, or even generative art and sound</span>.  But then again I'm weird.  What are you gonna do?</p>
+]]></content>
+  </entry>
+  
+</feed>

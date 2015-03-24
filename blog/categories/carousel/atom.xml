@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: carousel | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/carousel/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D: Carousel Gallery]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/06/away3d--carousel-gallery/"/>
+    <updated>2010-08-06T22:09:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/06/away3d--carousel-gallery</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/carousel/sandbox.html" class="fancybox.iframe"><img title="carousel" src="http://tonylukasavage.github.com/images/carousel.jpg" alt="" width="431" height="322" /></a></p>
+
+
+<p>At the request of one of my readers (a list that is probably about 12 people long), here is a demo and source code for the carousel gallery included in the 3d version of savagelook.com shown in my last blog post.  It's a customizable ring of planes that can display any type of away3d material, in this case BitmapMaterials.  You simply need to pass in an array of materials during initialization and the CarouselGallery handles the rest.</p>
+
+<p style="text-align: left;">This example uses a simple rotation in the render loop, but my 3d savagelook.com example uses mouse interaction to make it cycle.  You could even add left and right arrows if you wanted to have it move one image in those respective directions.  You could achieve this by simply rotating along the Y axis by a number of degress equal to 360 divided by the number of planes in the carousel.</p>
+
+
+
+
+<p style="text-align: left;">I hope anyone else who wanders tot his site finds it useful or inspirational for their own work.  Oh, and the time to completion for the first code request I received was about a day and half.  So if you have any ideas or requests for me, feel free to send them along in a comment or email and I'll get to them as soon as possible.  People's feedback is what keeps me active and on my toes with this stuff.</p>
+
+]]></content>
+  </entry>
+  
+</feed>

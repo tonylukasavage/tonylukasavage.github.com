@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>F*ck You, Show Me - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Resolving bug reports is like trying to rescue developers lost on a desert island. Sometimes you get the privilege of rescuing the developer who &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2014/01/24/f-ck-you/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">F*ck You, Show Me</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-24T10:48:00-05:00" pubdate data-updated="true">Jan 24<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="right" src="http://1.bp.blogspot.com/_518ml9CpccA/S1yBZEPKawI/AAAAAAAACwI/wne0NNFcUOE/s400/castaway.jpg" width="250" height="250" title="castaway" ></p>
+
+<p>Resolving bug reports is like trying to rescue developers lost on a desert island. Sometimes you get the privilege of rescuing the developer who started a signal fire you couldn&#8217;t possible miss, kindled by reproducible test cases and detailed specifics of their environment. They make the rescue easy and still thank you profusely for the aid. In the end, everyone involved is happy. But this isn&#8217;t always the case&#8230;<!-- more --></p>
+
+<p>Sometimes you have to resuce the developer who makes no effort on their own to get off the island. They&#8217;re just sitting in the sand, arms folded, pissed off at the world for getting marooned. This developer essentially throws a message in a bottle into the sea, the entire contents reading:</p>
+
+<blockquote><p>I&#8217;m lost. Find me.</p></blockquote>
+
+<p>When the maintainer of the &#8220;offending&#8221; software project actually manages to find the message, they often tweet cynical things like this:</p>
+
+<blockquote class="twitter-tweet" lang="en"><p>“It failed” or “there was an error” is not a bug report</p>&mdash; Tony Lukasavage (@tonylukasavage) <a href="https://twitter.com/tonylukasavage/statuses/426714081102675968">January 24, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>And while there is a minute, fleeting catharsis to complaining into the void of twitter, nothing is achieved. The stranded developer is still stuck. The maintainer&#8217;s project has not improved and they still need to wonder if the poorly-defined report is legitimate.</p>
+
+<p>It is at this point that I paraphrase the immortal wisdom of Henry Hill, as delivered through the genius of Martin Scorcese&#8217;s &#8220;Goodfellas&#8221;:</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/5ydqjqZ_3oc?rel=0&start=0&end=22&autoplay=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Trouble with the framework?</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<p>An uncaught exception crashed your app?</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<p>You&#8217;re stuck on what you think is a bug and your client is expecting a deliverable ASAP?</p>
+
+<blockquote><p>Fuck you, show me.</p></blockquote>
+
+<p>Am I really this callous with the bug-reporting-challenged? No, not even close. I want to harbor a notion of inclusivity and even education on this task that is the lifeblood of an open source project. So maybe that&#8217;s not <em>exactly</em> how you should phrase it. Perhaps in practice it sounds a little more like:</p>
+
+<blockquote><p>You haven&#8217;t provided enough information for anyone to help you troubleshoot. Please provide the details of your development environment, as well as a reproducible test case that manifests the bug you are reporting, and an explanation of what the expected behavior is if it&#8217;s not clear.</p></blockquote>
+
+<p>But the sentiment is the same. And without the aforementioned requirements, I <span style="color:#a00; font-weight:bold;">will not assist</span> with the bug. Why the hard line on bug reporting? Because standing firm on this point is best for everyone.</p>
+
+<ul>
+<li>The reporter, in the end, will get their problem solved faster. Providing sufficient details also assures that the issue doesn&#8217;t get pushed into the maintainer&#8217;s &#8220;archive&#8221;; an archive that is sometimes never revisited.</li>
+<li>The maintainer gets a bug resolved without having to employ mind-reading, which is reward enough in itself. In addition, well-written bug reports make it much easier for maintainers to write tests that will prevent regressions in the future, thereby increasing the stability of the project.</li>
+<li>The project&#8217;s community of developers wins too. Well written bug reports allow the maintainer(s) to move through bugs quickly and spend more time focusing on improvements and features.</li>
+</ul>
+
+
+<p>Don&#8217;t get stuck on a desert island only to get blown off by a gangster-quoting maintainer. Write minimal, detailed, reproducible bug reports.</p>
+
+<p><em>Feel free to link the shit out of this on issue lists, Q&amp;A boards, forums, etc&#8230; <span style="color:#a00; font-weight:bold;">Spread the word</a>.</em></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-24T10:48:00-05:00" pubdate data-updated="true">Jan 24<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bug-reporting/'>bug reporting</a>, <a class='category' href='/blog/categories/rant/'>rant</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/23/automating-appcelerator-tasks-with-grunt-titanium-and-grunt-alloy/" title="Previous Post: Automating Appcelerator: grunt-titanium and grunt-alloy">&laquo; Automating Appcelerator: grunt-titanium and grunt-alloy</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/29/custom-assertions-in-should-dot-js/" title="Next Post: Custom assertions in should.js">Custom assertions in should.js &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tonylukasavage';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tonylukasavage.github.com/blog/2014/01/24/f-ck-you/';
+        var disqus_url = 'http://tonylukasavage.github.com/blog/2014/01/24/f-ck-you/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

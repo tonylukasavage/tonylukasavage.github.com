@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Joys of Screen Scraping]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2012/03/01/the-joys-of-screen-scraping/"/>
+    <updated>2012-03-01T15:14:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2012/03/01/the-joys-of-screen-scraping</id>
+    <content type="html"><![CDATA[<h2>Knucklehead Up and Running Again</h2>
+
+
+<p>For about a week there my MMA fighter app for Android, <a href="https://market.android.com/details?id=com.savagelook.knucklehead" target="_blank">Knucklehead</a>, has been out of commission. The reason is that the site that I scrape for data, <a href="http://sherdog.com" target="_blank">Sherdog</a> was completely redesigned. I needed to rework a lot of my PHP-based screen scraping code to make it work. My PHP is rusty, but fortunately, my regular expression chops are always sharp. In any case, it's back to working order now.</p>
+
+<p>Maybe with a little luck I can get people to re-rate those 1-star ratings I got while it was down. If not, perhaps I can guilt people into giving me good ratings by saying that it's my newborn son's fault I didn't get to it sooner. I mean, really, are you going to give the father of this child a hard time? Don't be so heartless. :)</p>
+
+<p><a href="http://tonylukasavage.github.com/images/charlie.png"><img src="http://tonylukasavage.github.com/images/charlie.png" alt="" title="charlie" width="600" height="400" class="alignnone size-full wp-image-3507" /></a></p>
+
+<h2 style="padding-top:20px;">Screen Scraping Tips</h2>
+
+
+<p>As we all know, screen scraping is pretty much the most <span style="color:#a00">volatile</span> way to supply your apps with data. While no amount of planning can permanently future-proof your screen scraper, there's some things you can do to make it easier.</p>
+
+<ul style="padding-bottom:20px;">
+    <li><strong>Define a data model for what you are scraping</strong>. What made my project relatively easy to get working again was that I had a clearly defined data model shared by both the backend and frontend. In my case, this is a LAMP stack and distributed Android app respectively. Now my users don't need to download a new version of my app in order to get the fix. It just works now.</li>
+    <li><strong>Code the scraper on a backend proxy</strong>, not in the app itself. That way, when your scraper inevitably gets broken at some point (after a year in my case), you only need to change the code in one place. This goes hand-in-hand with defining a data model.</li>
+    <li><strong>Keep it simple stupid</strong>. Don't over-architect a screen scraper. Most data processing code will change over time, but a screen scraper may need a total rewrite at some point. Put all your software engineering skills into controlling what leaves the scraper, but play it pretty loose with what the scraper is going to be processing.</li>
+    <li><strong>Using JSON? You better be using <a href="http://jsonlint.com" target="_blank">jsonlint.com</a> too</strong>. jsonlint.com can save you a lot of time and aggravation when it comes to creating and processing your scraped data. Not only does it validate your JSON, but it will also pretty print it so it's easy to read through yourself.</li>
+</ul>
+
+
+<p>That's just a couple things that made fixing my scraper a lot less painful. You guys out there have any tips? I'd love to hear them. All things being equal, I hope I never have to screen scrape for data ever again. But since that's pretty unlikely, it's good to be prepared for the inevitable obstacles that scraping will present.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Debugging on IntelliJ IDEA 10 with XDebug]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug/"/>
+    <updated>2011-01-05T08:33:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug</id>
+    <content type="html"><![CDATA[<h2>The Overview</h2>
+
+<p>So after being told by my peers that print_r() was adequate, I embarked on a quest to get true PHP debugging working in a reputable IDE.  Recently I've heard nothing but good things about <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA 10</a>, so I decided that would be my test subject.  Don't let the "J" fool you, while Java is its focus, this bad boy handles an array of languages and markups, including ActionScript, PHP, Groovy, Scala, Python/Jython, Ruby/JRuby, Clojure, Javascript, and HTML.</p>
+
+<p><span style="color:#ff0000;">If you are a serious PHP developer and have not given debugging a fair chance, or a chance at all, you are killing yourself</span>.  So let's do this thing from the ground up.  WAMP, XDebug, IntelliJ, and magic.  Follow these steps (for Windows) to reach my recent state of elightenment and PHP debugging bliss.</p>
+
+<p>By the way, I almost gave up on IntelliJ entirely due to problems with debugging until <a href="http://www.kilometer0.com" target="_blank">Alex Petrescu</a> (<a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>) talked me down from the edge.  I'm very grateful as IntelliJ is proving to be an excellent IDE.</p>
+
+<h2>Step By Step</h2>
+
+<ol>
+<li>Download and install <a href="http://www.wampserver.com/en/" target="_blank">WAMP</a> (I installed to <strong>C:\wamp</strong>)</li>
+<li>After installing WAMP, create a file named <strong>C:\wamp\www\info.php</strong> that contains the following code:
+
+``` php
+<?php phpinfo(); ?>
+```
+
+<li>Open the <a href="http://localhost/info.php" target="_blank">http://localhost/info.php</a> in a browser to get your PHP configuration.
+</li><li>
+Now view the source of the page in your browser.  Copy the entire contents of the source to your clipboard.
+</li>
+<li>Goto the <a href="http://www.xdebug.org/find-binary.php" target="_blank">XDebug Tailored Installation Instructions</a> and paste your PHP configuration source into the text box then click "analyse my phpinfo() output".
+</li>
+<li>Follow the resulting instructions for adding XDebug to your PHP installation.  Once you make those changes, make sure the new section of your php.ini looks like this (as per a <strong>C:\wamp</strong> installation):
+
+``` bash
+[XDebug]
+zend_extension="<this is the path that the XDebug installation instructions gave you>"
+xdebug.remote_enable=true
+xdebug.remote_port=9000
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir="c:\wamp\logs"
+```
+
+</li>
+<li>Download and install <a href="http://www.jetbrains.com/idea/download/index.html" target="_blank">IntelliJ IDEA 10 Ultimate Edition</a> (trial).  It may not be necessary, but I included all the available extensions.</li>
+<li>Setup a basic PHP project in IntelliJ IDEA 10
+<ol style="list-style-type: upper-alpha;">
+<li>Goto <strong>File -> New Project...</strong></li>
+<li>Select <strong>Create project from scratch</strong> and click Next</li>
+<li>Enter a name for your project and select <strong>Project Module</strong> under the Select Type heading and click <strong>Next</strong></li>
+<li>Select "do not create source directory" and click <strong>Next</strong></li>
+<li>Click <strong>Finish</strong> then <strong>OK</strong> when asked about starting a project without a JDK assigned.</li>
+</ol>
+<li>Create a PHP file to test debugging</li>
+<ol style="list-style-type: upper-alpha;">
+<li>In the project panel on the left side, right click the project name and goto <strong>New -> PHP File</strong> </li>
+<li>Enter a name for your PHP file and click <strong>OK</strong></li>
+<li>In the code panel on the right, enter the following and save the file:
+
+``` php
+<?php
+$a = 0;
+?>
+```
+
+</li>
+</ol>
+<li>Click the vertical bar between the project panel and the code panel next to the following line to create a red breakpoint:
+
+``` php
+$a = 0;
+```
+
+</li>
+<li>Copy the PHP file you created in step #9 to your WAMP www directory (<strong>C:\wamp\www</strong>)</li>
+<li>Right click on the PHP file name in the project panel, then goto <strong>Debug -> filename.php on server</strong></li>
+<li>In the resulting window, click the dotted button next to the <strong>Server</strong> dropdown</li>
+<li>Setup your deployment settings
+<ol style="list-style-type: upper-alpha;">
+<li>Select <strong>Local</strong> from the access type dropdown</li>
+<li>Click the <strong>Mappings</strong> tab and under "web path on server" enter a single slash "/" to specify the WAMP root.  Click <strong>OK</strong> and then <strong>OK</strong> again to finish the configuration.</li>
+</ol>
+<li>Right click on your PHP file in the project panel again and goto "<strong>Run on server</strong>" or "<strong>Debug on server</strong>".  I've had inconsistent behavior using it, so try both if one doesn't work.</li>
+<li>If all went according to plan, a browser should open and execution should stop at your breakpoint.  If you look at your debug panel on the bottom on IntelliJ you should now see your PHP globals laid out.  Congrats, you made it!</li>
+</ol>
+
+
+<h2>The Summary</h2>
+
+<p>I know, its not exactly a walk in the park, but <span style="color:#ff0000;">its well worth the work to not have to pollute your code with copious print_r() calls</span>.  You can now have full access over your PHP as you would with any other enterprise level language and debugger.  I didn't go into any specific detail here, but I plan in the future to discuss all the ins and outs of PHP debugging in IntelliJ IDEA 10.  Its looks to be a great IDE thus far.</p>
+
+<p>If you have any questions, which is likely since I ran into some inconsistent behavior, feel free to comment and I'll try to answer back as quickly as possible.  Hopefully you'll never even need to ask.</p>
+
+<p>Happy PHP debugging!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Johnny Cash in Flash]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/27/johnny-cash-in-flash/"/>
+    <updated>2010-09-27T09:56:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/27/johnny-cash-in-flash</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/cash/cash.html" class="fancybox.iframe"><img title="face_picking" src="http://tonylukasavage.github.com/images/cash.jpg" alt="" width="559" height="421" /></a></p>
+
+
+<p>→ <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/cash/cash.html">Click here</a> or the image above for the demo.
+&rarr; View the <a href="http://tonylukasavage.github.com/demos/cash/srcview/index.html">source code</a>.
+<b>NOTE:</b> You'll need to download <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a>, <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a>, and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> to compile the code.</p>
+
+<p>Inspired by the legendary Johnny Cash I decided to dive into a few AS3 development topics I haven't gotten to yet to create a 3d equalizer and tribute to the Man in Black.  Those topics, along with some other more familiar ones, include:</p>
+
+<ul>
+    <li>Playing audio in Flash with Sound and SoundChannel</li>
+    <li>Using the <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/media/SoundMixer.html" target="_blank">SoundMixer</a> to generate values based on the audio</li>
+    <li>Searching for images with the Google API via <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a></li>
+    <li>Creating a PHP proxy for beating <a href="http://www.onegiantmedia.com/as3---load-a-remote-image-from-any-domain-with-no-security-sandbox-errors" target="_blank">Flash cross-domain security issues</a></li>
+    <li>Using <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> for speedy 3d visualization (I even get 15 FPS on my phone!)</li>
+    <li>Using <a href="http://www.closier.nl/prefab/" target="_blank">Prefab</a> to export 3d models as native AS3 code for Away3d or Away3dLite.</li>
+</ul>
+
+
+<p>This demo has a good bit more code than I usually post up.  It also uses a couple external libraries, namely <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a> (3d rendering), <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a> (Google API), and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> (super useful AS3 utilities).  Rather than overwhelm you with mountains of tutorial-like rambling, instead I'll leave this demo here to be enjoyed, make the source code available, and break down each of these topics into smaller tutorials/guides in the near future.</p>
+
+<p>Sometimes your muse doesn't need to be even slightly related to your field of creativity.  In fact, that can often make for the most interesting inspiration.</p>
+]]></content>
+  </entry>
+  
+</feed>

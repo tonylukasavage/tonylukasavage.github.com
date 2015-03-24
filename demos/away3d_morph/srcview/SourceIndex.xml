@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of away3d_morph</title>
+	<nodes>
+		<node label="src">
+			<node label="letters">
+				<node icon="imageIcon" label="a.jpg" url="source/letters/a.jpg.html"/>
+				<node icon="imageIcon" label="e.jpg" url="source/letters/e.jpg.html"/>
+				<node icon="imageIcon" label="g.jpg" url="source/letters/g.jpg.html"/>
+				<node icon="imageIcon" label="k.jpg" url="source/letters/k.jpg.html"/>
+				<node icon="imageIcon" label="l.jpg" url="source/letters/l.jpg.html"/>
+				<node icon="imageIcon" label="o.jpg" url="source/letters/o.jpg.html"/>
+				<node icon="imageIcon" label="s.jpg" url="source/letters/s.jpg.html"/>
+				<node icon="imageIcon" label="v.jpg" url="source/letters/v.jpg.html"/>
+			</node>
+			<node icon="mxmlAppIcon" selected="true" label="away3d_morph.mxml" url="source/away3d_morph.mxml.html"/>
+			<node icon="mxmlIcon" label="Away3dUIComponent.mxml" url="source/Away3dUIComponent.mxml.html"/>
+			<node icon="imageIcon" label="hm1.jpg" url="source/hm1.jpg.html"/>
+			<node icon="imageIcon" label="hm2.jpg" url="source/hm2.jpg.html"/>
+			<node icon="actionScriptIcon" label="SavageLookSkinExtrude.as" url="source/SavageLookSkinExtrude.as.html"/>
+			<node icon="imageIcon" label="terrain.jpg" url="source/terrain.jpg.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 189K)" url="away3d_morph.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

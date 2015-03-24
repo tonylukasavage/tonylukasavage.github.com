@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>From Air for Android to Blackberry Playbook in seconds - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Overview NOTE: all source code is available for Repper at Github. The above image shows my Air for Android app Repper ported over to the Blackberry &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/02/21/from-air-for-android-to-blackberry-playbook-in-seconds/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">From Air for Android to Blackberry Playbook in seconds</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-21T11:19:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+
+
+<p style="text-align: left;"><strong>NOTE</strong>: all source code is available for <a href="https://github.com/tonylukasavage/Repper" target="_blank">Repper at Github</a>.</p>
+
+
+<p style="text-align: left;">The above image shows my <a href="http://savagelook.com/blog/actionscript3/repper-my-first-flex-hero-mobile-app" target="_self">Air for Android app Repper</a> ported over to the Blackberry Playbook.  The most remarkable thing about this port? It literally took about 60 seconds to complete!  Here is the shockingly simple, comprehensive list of steps I took to accomplish this:</p>
+
+
+
+
+<ol>
+    <li>Create a new Flex mobile project in <a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Flash Builder &#8220;Burrito&#8221;</a> to <a href="http://docs.blackberry.com/en/developers/deliverables/25068/Install_the_BlackBerry_Tablet_SDK_1347129_11.jsp" target="_blank">target the Blackberry Playbook</a></li>
+    <li>Copied the project files from my original Repper project to the new project</li>
+    <li>Set up the <a href="http://docs.blackberry.com/en/developers/deliverables/25068/Run_app_FB45_1397696_11.jsp" target="_blank">Playbook simulator run settings</a> in my new project</li>
+    <li>Clicked &#8220;Run&#8221; and voila, Repper on the Playbook!</li>
+</ol>
+
+
+<p style="text-align: left;">All components scaled properly.  All layouts fit to the available screen space appropriately.  All orientation transitions performed as expected.  How was this achieved without having to write a single line of device specific code?  It comes down to 3 simple things: Adobe Air, fluid layouts, and vector graphics skinning via Flex MXML.</p>
+
+
+
+
+<h1><span style="font-weight: bold; font-size: 16px;">Adobe Air</span></h1>
+
+
+<p style="text-align: left;">Blackberry&#8217;s use of the <a href="http://us.blackberry.com/developers/tablet/adobe.jsp" target="_blank">Adobe Air SDK for its Playbook development</a> lets Flash/Air/Flex/AS3 developers leverage existing expertise and code to create apps.  The Air SDK for the Playbook also makes available QNX components to give Playbook apps a Blackberry look and feel.  You can choose from either.  This way Flex developers can use their existing paradigms and pure AS3 developers can make use of Blackberry&#8217;s QNX components.  You can even use both as Renaun Erickson details in <a href="http://renaun.com/blog/2010/12/using-mxml-with-qnx-ui-components-for-the-playbook/" target="_blank">this post</a>.</p>
+
+
+<p style="text-align: left;">For me the big win was taking Repper, a <a href="http://labs.adobe.com/technologies/flexsdk_hero/" target="_blank">Flex &#8220;Hero&#8221; </a> app for Android, and porting it directly, unchanged into a working Playbook app.  The Playbook Adobe Air SDK supports Flex &#8220;Hero&#8221; so everything just worked right out of the gate.  That&#8217;s the kind of portability that lets an independent developer be extremely productive.</p>
+
+
+
+
+<h1><span style="font-weight: bold; font-size: 16px;">Fluid Layout</span></h1>
+
+
+<p style="text-align: left;">Using fluid layouts with little to no defined pixel dimensions is key to writing a multi-screen app.  Take a look at this excerpt from the main <a href="https://github.com/tonylukasavage/Repper/blob/master/src/views/RepperHome.mxml" target="_blank">RepperHome.mxml view</a>.</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>    <span class="nt">&lt;s:HGroup</span> <span class="na">id=</span><span class="s">&quot;landscapeGroup&quot;</span> <span class="na">includeIn=</span><span class="s">&quot;landscape&quot;</span> <span class="na">height=</span><span class="s">&quot;100%&quot;</span> <span class="na">width=</span><span class="s">&quot;100%&quot;</span>
+</span><span class='line'>        <span class="na">paddingTop=</span><span class="s">&quot;{this.height*0.03}&quot;</span> <span class="na">paddingBottom=</span><span class="s">&quot;{this.height*0.03}&quot;</span> <span class="na">paddingLeft=</span><span class="s">&quot;{this.height*0.03}&quot;</span>
+</span><span class='line'>        <span class="na">paddingRight=</span><span class="s">&quot;{this.height*0.03}&quot;</span> <span class="na">gap=</span><span class="s">&quot;{this.height*0.03}&quot;</span> <span class="na">verticalAlign=</span><span class="s">&quot;middle&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:SkinnableContainer</span> <span class="na">id=</span><span class="s">&quot;landscapeInput&quot;</span> <span class="na">width=</span><span class="s">&quot;36%&quot;</span> <span class="na">skinClass=</span><span class="s">&quot;RepperInputSkin&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:layout&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;s:VerticalLayout</span> <span class="na">paddingTop=</span><span class="s">&quot;{this.height*0.06}&quot;</span> <span class="na">paddingLeft=</span><span class="s">&quot;{this.height*0.06}&quot;</span>
+</span><span class='line'>                            <span class="na">paddingRight=</span><span class="s">&quot;{this.height*0.06}&quot;</span> <span class="na">paddingBottom=</span><span class="s">&quot;{this.height*0.06}&quot;</span>
+</span><span class='line'>                            <span class="na">gap=</span><span class="s">&quot;{landscapeInput.height*0.04}&quot;</span> <span class="na">horizontalAlign=</span><span class="s">&quot;right&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/s:layout&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:HGroup</span> <span class="na">width=</span><span class="s">&quot;100%&quot;</span> <span class="na">verticalAlign=</span><span class="s">&quot;middle&quot;</span> <span class="na">gap=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;s:Label</span> <span class="na">text=</span><span class="s">&quot;Weight&quot;</span> <span class="na">width=</span><span class="s">&quot;65%&quot;</span> <span class="na">color=</span><span class="s">&quot;0x000000&quot;</span> <span class="na">fontWeight=</span><span class="s">&quot;bold&quot;</span> <span class="na">fontSize=</span><span class="s">&quot;32&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;s:TextInput</span> <span class="na">width=</span><span class="s">&quot;35%&quot;</span> <span class="na">text=</span><span class="s">&quot;{inputWeight}&quot;</span> <span class="na">keyUp=</span><span class="s">&quot;onWeightKeyUp(event)&quot;</span> <span class="na">restrict=</span><span class="s">&quot;0-9.&quot;</span>
+</span><span class='line'>                       <span class="na">contentBackgroundColor=</span><span class="s">&quot;0xffffff&quot;</span> <span class="na">color=</span><span class="s">&quot;0x000000&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/s:HGroup&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:HGroup</span> <span class="na">width=</span><span class="s">&quot;100%&quot;</span> <span class="na">verticalAlign=</span><span class="s">&quot;middle&quot;</span> <span class="na">gap=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;s:Label</span> <span class="na">text=</span><span class="s">&quot;# of reps&quot;</span> <span class="na">width=</span><span class="s">&quot;65%&quot;</span> <span class="na">color=</span><span class="s">&quot;0x000000&quot;</span> <span class="na">fontWeight=</span><span class="s">&quot;bold&quot;</span> <span class="na">fontSize=</span><span class="s">&quot;32&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;s:TextInput</span> <span class="na">width=</span><span class="s">&quot;35%&quot;</span> <span class="na">text=</span><span class="s">&quot;{inputReps}&quot;</span> <span class="na">keyUp=</span><span class="s">&quot;onRepsKeyUp(event)&quot;</span> <span class="na">restrict=</span><span class="s">&quot;0-9&quot;</span>
+</span><span class='line'>                       <span class="na">contentBackgroundColor=</span><span class="s">&quot;0xffffff&quot;</span> <span class="na">color=</span><span class="s">&quot;0x000000&quot;</span> <span class="na">focusIn=</span><span class="s">&quot;textinput1_focusInHandler(event)&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/s:HGroup&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:Button</span> <span class="na">label=</span><span class="s">&quot;Rep It&quot;</span> <span class="na">click=</span><span class="s">&quot;recalculate();&quot;</span> <span class="na">chromeColor=</span><span class="s">&quot;#111111&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/s:SkinnableContainer&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;local:VDataGroup</span> <span class="na">width=</span><span class="s">&quot;32%&quot;</span> <span class="na">height=</span><span class="s">&quot;100%&quot;</span> <span class="na">dataProvider=</span><span class="s">&quot;{repValues1}&quot;</span> <span class="na">itemRenderer=</span><span class="s">&quot;RepperEntry&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;local:VDataGroup</span> <span class="na">width=</span><span class="s">&quot;32%&quot;</span> <span class="na">height=</span><span class="s">&quot;100%&quot;</span> <span class="na">dataProvider=</span><span class="s">&quot;{repValues2}&quot;</span> <span class="na">itemRenderer=</span><span class="s">&quot;RepperEntry&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:HGroup&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p style="text-align: left;">If you look at every component and container in this chunk of Flex MXML you&#8217;ll notice that no defined pixel dimensions are used.  Every component&#8217;s size is determined using percentages or data bindings.  I&#8217;m not going to lie, specifying dimensions in this manner will take more time and requires a bit of trial and error to get right.  It helps if you do it with the expectation that another, dissimilar device will be using this same layout in the future.  I did, and in this case the little bit of extra forethought paid off huge in terms of portability.</p>
+
+
+<p>Because of design via fluid layouts, Repper appears properly in both portrait and landscape orientation on the Blackberry Playbook with no additional effort.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Vector Graphics via Flex MXML Skinning</span></h1>
+
+
+<p style="text-align: left;">The final factor that made Repper such a breeze to port to the Playbook was Flex Hero&#8217;s ability to create vector graphics via Flex MXML.  By utilizing this capability you can create skins for your components that scale as the app scales.  No external artwork of any kind is necessary.  While this is not ideal for designers or highly stylized apps, a developer like me loves it.
+
+Here&#8217;s another excerpt from Repper.  This time it shows how I used fluid dimensions once again to create vector graphic skins for my <a href="https://github.com/tonylukasavage/Repper/blob/master/src/RepperEntry.mxml" target="_blank">RepperEntry</a> components via the <a href="https://github.com/tonylukasavage/Repper/blob/master/src/RepperEntrySkin.mxml" target="_blank">RepperEntrySkin.mxml class</a></p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;s:Rect</span> <span class="na">id=</span><span class="s">&quot;background&quot;</span> <span class="na">x=</span><span class="s">&quot;0&quot;</span> <span class="na">y=</span><span class="s">&quot;{this.height/6}&quot;</span> <span class="na">height=</span><span class="s">&quot;66%&quot;</span> <span class="na">width=</span><span class="s">&quot;100%&quot;</span> <span class="na">radiusX=</span><span class="s">&quot;10&quot;</span> <span class="na">radiusY=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;s:filters&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:DropShadowFilter</span> <span class="na">blurX=</span><span class="s">&quot;16&quot;</span> <span class="na">blurY=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:filters&gt;</span>
+</span><span class='line'><span class="nt">&lt;s:stroke&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:SolidColorStroke</span> <span class="na">weight=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:stroke&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;s:fill&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:LinearGradient</span> <span class="na">rotation=</span><span class="s">&quot;-90&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:GradientEntry</span> <span class="na">color=</span><span class="s">&quot;#bbbbbb&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:GradientEntry</span> <span class="na">color=</span><span class="s">&quot;#ffffff&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/s:LinearGradient&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/s:fill&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:Rect&gt;</span>
+</span><span class='line'><span class="nt">&lt;s:Rect</span> <span class="na">x=</span><span class="s">&quot;0&quot;</span> <span class="na">y=</span><span class="s">&quot;{this.height/6}&quot;</span> <span class="na">height=</span><span class="s">&quot;66%&quot;</span> <span class="na">width=</span><span class="s">&quot;60%&quot;</span> <span class="na">radiusX=</span><span class="s">&quot;10&quot;</span> <span class="na">radiusY=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;s:filters&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:DropShadowFilter</span> <span class="na">blurX=</span><span class="s">&quot;8&quot;</span> <span class="na">blurY=</span><span class="s">&quot;8&quot;</span> <span class="na">angle=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:filters&gt;</span>
+</span><span class='line'><span class="nt">&lt;s:stroke&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:SolidColorStroke</span> <span class="na">weight=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:stroke&gt;</span>
+</span><span class='line'><span class="nt">&lt;s:fill&gt;</span>
+</span><span class='line'>  <span class="c">&lt;!--- @private --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;s:LinearGradient</span> <span class="na">rotation=</span><span class="s">&quot;-90&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:GradientEntry</span> <span class="na">color=</span><span class="s">&quot;#000000&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;s:GradientEntry</span> <span class="na">color=</span><span class="s">&quot;#444444&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/s:LinearGradient&gt;</span>
+</span><span class='line'>  <span class="c">&lt;!-- &lt;s:SolidColor color=&quot;#333333&quot;/&gt; --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:fill&gt;</span>
+</span><span class='line'><span class="nt">&lt;/s:Rect&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, percentages and binding are used to create skins for my components that are appropriately scaled regardless of the dimensions of the device.  Not having to create skin resources for each device and orientation is a tremendous time saver.  Especially for someone like myself who has no patience or talent for it.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+
+
+<p>Lesson for the day: with a little forethought and a penchant for Adobe Air, magic can happen.  OK, maybe not magic, but you&#8217;ll have more time to explore the possibility of creating magic now that you won&#8217;t be wasting it on porting your mobile apps.  Yes, I know, I&#8217;ve griped a bit lately about Flex Hero on <a href="http://twitter.com/#!/tonylukasavage" target="_blank">twitter</a>, but there are undoubtedly some things it does very well.</p>
+
+<p>In fact, if you think about it, anyone that openly supports Adobe and their efforts to create a viable cross-platform mobile development environment has done very well with it.  I&#8217;m trying to think of who isn&#8217;t supporting it?  Who&#8217;s at the &#8220;core&#8221; of the issue?  I feel like day to day they are trying to keep the doctor away.  Supporting Adobe should be as appealing as American pie.  Oh well, hopefully some day they will have their thinking jolted like Isaac Newton did from a falling piece of fruit.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-21T11:19:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/actionscript3/'>actionscript3</a>, <a class='category' href='/blog/categories/adobe-air/'>adobe air</a>, <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/as3/'>as3</a>, <a class='category' href='/blog/categories/blackberry/'>blackberry</a>, <a class='category' href='/blog/categories/flash-builder-4/'>flash builder 4</a>, <a class='category' href='/blog/categories/flex/'>flex</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/playbook/'>playbook</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/02/17/titanium-developer-tips/" title="Previous Post: Titanium Developer Tips">&laquo; Titanium Developer Tips</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/02/23/blackberry-playbook-simulator-tips/" title="Next Post: Blackberry Playbook Simulator Tips">Blackberry Playbook Simulator Tips &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

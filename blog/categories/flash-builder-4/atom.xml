@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: flash builder 4 | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/flash-builder-4/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[From Air for Android to Blackberry Playbook in seconds]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/02/21/from-air-for-android-to-blackberry-playbook-in-seconds/"/>
+    <updated>2011-02-21T11:19:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/02/21/from-air-for-android-to-blackberry-playbook-in-seconds</id>
+    <content type="html"><![CDATA[<h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+
+
+<p style="text-align: left;"><strong>NOTE</strong>: all source code is available for <a href="https://github.com/tonylukasavage/Repper" target="_blank">Repper at Github</a>.</p>
+
+
+<p style="text-align: left;">The above image shows my <a href="http://savagelook.com/blog/actionscript3/repper-my-first-flex-hero-mobile-app" target="_self">Air for Android app Repper</a> ported over to the Blackberry Playbook.  The most remarkable thing about this port? It literally took about 60 seconds to complete!  Here is the shockingly simple, comprehensive list of steps I took to accomplish this:</p>
+
+
+
+
+<ol>
+    <li>Create a new Flex mobile project in <a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Flash Builder "Burrito"</a> to <a href="http://docs.blackberry.com/en/developers/deliverables/25068/Install_the_BlackBerry_Tablet_SDK_1347129_11.jsp" target="_blank">target the Blackberry Playbook</a></li>
+    <li>Copied the project files from my original Repper project to the new project</li>
+    <li>Set up the <a href="http://docs.blackberry.com/en/developers/deliverables/25068/Run_app_FB45_1397696_11.jsp" target="_blank">Playbook simulator run settings</a> in my new project</li>
+    <li>Clicked "Run" and voila, Repper on the Playbook!</li>
+</ol>
+
+
+<p style="text-align: left;">All components scaled properly.  All layouts fit to the available screen space appropriately.  All orientation transitions performed as expected.  How was this achieved without having to write a single line of device specific code?  It comes down to 3 simple things: Adobe Air, fluid layouts, and vector graphics skinning via Flex MXML.</p>
+
+
+
+
+<h1><span style="font-weight: bold; font-size: 16px;">Adobe Air</span></h1>
+
+
+<p style="text-align: left;">Blackberry's use of the <a href="http://us.blackberry.com/developers/tablet/adobe.jsp" target="_blank">Adobe Air SDK for its Playbook development</a> lets Flash/Air/Flex/AS3 developers leverage existing expertise and code to create apps.  The Air SDK for the Playbook also makes available QNX components to give Playbook apps a Blackberry look and feel.  You can choose from either.  This way Flex developers can use their existing paradigms and pure AS3 developers can make use of Blackberry's QNX components.  You can even use both as Renaun Erickson details in <a href="http://renaun.com/blog/2010/12/using-mxml-with-qnx-ui-components-for-the-playbook/" target="_blank">this post</a>.</p>
+
+
+<p style="text-align: left;">For me the big win was taking Repper, a <a href="http://labs.adobe.com/technologies/flexsdk_hero/" target="_blank">Flex "Hero" </a> app for Android, and porting it directly, unchanged into a working Playbook app.  The Playbook Adobe Air SDK supports Flex "Hero" so everything just worked right out of the gate.  That's the kind of portability that lets an independent developer be extremely productive.</p>
+
+
+
+
+<h1><span style="font-weight: bold; font-size: 16px;">Fluid Layout</span></h1>
+
+
+<p style="text-align: left;">Using fluid layouts with little to no defined pixel dimensions is key to writing a multi-screen app.  Take a look at this excerpt from the main <a href="https://github.com/tonylukasavage/Repper/blob/master/src/views/RepperHome.mxml" target="_blank">RepperHome.mxml view</a>.</p>
+
+
+<p>``` xml</p>
+
+<pre><code>    &lt;s:HGroup id="landscapeGroup" includeIn="landscape" height="100%" width="100%"
+          paddingTop="{this.height*0.03}" paddingBottom="{this.height*0.03}" paddingLeft="{this.height*0.03}"
+          paddingRight="{this.height*0.03}" gap="{this.height*0.03}" verticalAlign="middle"&gt;
+    &lt;s:SkinnableContainer id="landscapeInput" width="36%" skinClass="RepperInputSkin"&gt;
+        &lt;s:layout&gt;
+            &lt;s:VerticalLayout paddingTop="{this.height*0.06}" paddingLeft="{this.height*0.06}"
+                              paddingRight="{this.height*0.06}" paddingBottom="{this.height*0.06}"
+                              gap="{landscapeInput.height*0.04}" horizontalAlign="right"/&gt;
+        &lt;/s:layout&gt;
+        &lt;s:HGroup width="100%" verticalAlign="middle" gap="0"&gt;
+            &lt;s:Label text="Weight" width="65%" color="0x000000" fontWeight="bold" fontSize="32"/&gt;
+            &lt;s:TextInput width="35%" text="{inputWeight}" keyUp="onWeightKeyUp(event)" restrict="0-9."
+                         contentBackgroundColor="0xffffff" color="0x000000"/&gt;
+        &lt;/s:HGroup&gt;
+        &lt;s:HGroup width="100%" verticalAlign="middle" gap="0"&gt;
+            &lt;s:Label text="# of reps" width="65%" color="0x000000" fontWeight="bold" fontSize="32"/&gt;
+            &lt;s:TextInput width="35%" text="{inputReps}" keyUp="onRepsKeyUp(event)" restrict="0-9"
+                         contentBackgroundColor="0xffffff" color="0x000000" focusIn="textinput1_focusInHandler(event)"/&gt;
+        &lt;/s:HGroup&gt;
+        &lt;s:Button label="Rep It" click="recalculate();" chromeColor="#111111" /&gt;
+    &lt;/s:SkinnableContainer&gt;
+    &lt;local:VDataGroup width="32%" height="100%" dataProvider="{repValues1}" itemRenderer="RepperEntry"/&gt;
+    &lt;local:VDataGroup width="32%" height="100%" dataProvider="{repValues2}" itemRenderer="RepperEntry"/&gt;
+&lt;/s:HGroup&gt;
+</code></pre>
+
+<p>```</p>
+
+<p style="text-align: left;">If you look at every component and container in this chunk of Flex MXML you'll notice that no defined pixel dimensions are used.  Every component's size is determined using percentages or data bindings.  I'm not going to lie, specifying dimensions in this manner will take more time and requires a bit of trial and error to get right.  It helps if you do it with the expectation that another, dissimilar device will be using this same layout in the future.  I did, and in this case the little bit of extra forethought paid off huge in terms of portability.</p>
+
+
+<p>Because of design via fluid layouts, Repper appears properly in both portrait and landscape orientation on the Blackberry Playbook with no additional effort.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Vector Graphics via Flex MXML Skinning</span></h1>
+
+
+<p style="text-align: left;">The final factor that made Repper such a breeze to port to the Playbook was Flex Hero's ability to create vector graphics via Flex MXML.  By utilizing this capability you can create skins for your components that scale as the app scales.  No external artwork of any kind is necessary.  While this is not ideal for designers or highly stylized apps, a developer like me loves it.
+
+Here's another excerpt from Repper.  This time it shows how I used fluid dimensions once again to create vector graphic skins for my <a href="https://github.com/tonylukasavage/Repper/blob/master/src/RepperEntry.mxml" target="_blank">RepperEntry</a> components via the <a href="https://github.com/tonylukasavage/Repper/blob/master/src/RepperEntrySkin.mxml" target="_blank">RepperEntrySkin.mxml class</a></p>
+
+
+<p>``` xml</p>
+
+<pre><code>&lt;s:Rect id="background" x="0" y="{this.height/6}" height="66%" width="100%" radiusX="10" radiusY="10"&gt;
+&lt;s:filters&gt;
+    &lt;s:DropShadowFilter blurX="16" blurY="16"/&gt;
+&lt;/s:filters&gt;
+&lt;s:stroke&gt;
+    &lt;s:SolidColorStroke weight="3"/&gt;
+&lt;/s:stroke&gt;
+    &lt;s:fill&gt;
+    &lt;s:LinearGradient rotation="-90"&gt;
+        &lt;s:GradientEntry color="#bbbbbb"/&gt;
+        &lt;s:GradientEntry color="#ffffff"/&gt;
+        &lt;/s:LinearGradient&gt;
+    &lt;/s:fill&gt;
+&lt;/s:Rect&gt;
+&lt;s:Rect x="0" y="{this.height/6}" height="66%" width="60%" radiusX="10" radiusY="10"&gt;
+&lt;s:filters&gt;
+    &lt;s:DropShadowFilter blurX="8" blurY="8" angle="0"/&gt;
+&lt;/s:filters&gt;
+&lt;s:stroke&gt;
+    &lt;s:SolidColorStroke weight="3"/&gt;
+&lt;/s:stroke&gt;
+&lt;s:fill&gt;
+    &lt;!--- @private --&gt;
+    &lt;s:LinearGradient rotation="-90"&gt;
+        &lt;s:GradientEntry color="#000000"/&gt;
+        &lt;s:GradientEntry color="#444444"/&gt;
+    &lt;/s:LinearGradient&gt;
+    &lt;!-- &lt;s:SolidColor color="#333333"/&gt; --&gt;
+&lt;/s:fill&gt;
+&lt;/s:Rect&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>As you can see, percentages and binding are used to create skins for my components that are appropriately scaled regardless of the dimensions of the device.  Not having to create skin resources for each device and orientation is a tremendous time saver.  Especially for someone like myself who has no patience or talent for it.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+
+
+<p>Lesson for the day: with a little forethought and a penchant for Adobe Air, magic can happen.  OK, maybe not magic, but you'll have more time to explore the possibility of creating magic now that you won't be wasting it on porting your mobile apps.  Yes, I know, I've griped a bit lately about Flex Hero on <a href="http://twitter.com/#!/tonylukasavage" target="_blank">twitter</a>, but there are undoubtedly some things it does very well.</p>
+
+<p>In fact, if you think about it, anyone that openly supports Adobe and their efforts to create a viable cross-platform mobile development environment has done very well with it.  I'm trying to think of who isn't supporting it?  Who's at the "core" of the issue?  I feel like day to day they are trying to keep the doctor away.  Supporting Adobe should be as appealing as American pie.  Oh well, hopefully some day they will have their thinking jolted like Isaac Newton did from a falling piece of fruit.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello, Blackberry Playbook!]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/27/hello--blackberry-playbook-/"/>
+    <updated>2011-01-27T09:04:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/27/hello--blackberry-playbook-</id>
+    <content type="html"><![CDATA[<p>Time to say "Hello, World!" to the newest kid on the tablet device block, the <a href="http://us.blackberry.com/playbook-tablet/?CPID=KNC-kw328210_p6&amp;HBX_PK=rim|43b44ecc-8ee6-6429-a24f-000072e4f275" target="_blank">BlackBerry Playbook</a>.  Why bother developing for a tablet that isn't even publicly available yet?  Because Research in Motion (RIM) is offering <a href="http://us.blackberry.com/developers/tablet/playbook_offer.jsp" target="_blank">free Playbooks to developers</a> who create "useful" applications for it.  Thats right, if you join the RIM vendor list (free registration for a limited time only) and submit a quality app, you will receive a free Playbook.  Great incentive to bring developers to your platform.</p>
+
+<p>So how do you get started? Go to the P<a href="http://us.blackberry.com/developers/tablet/" target="_blank">laybook developers site</a> and follow the instructions there.  Be warned, though, that its not the simplest setup.  Right now RIM has workflows for developing Playbook apps in Blackberry WebWorks and Adobe Air (via Flash Builder <a href="http://www.adobe.com/support/flex/downloads_updaters.html#flex4" target="_blank">4.0.1</a> or "<a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Burrito</a>").  For my first go around I chose the <a href="http://us.blackberry.com/developers/tablet/adobe.jsp" target="_blank">Flash Builder 4.0.1 workflow</a>.</p>
+
+<p>Wanna take a quick peek at the code involved with the Hello World (seen above) for this workflow?</p>
+
+<h3>AIRHelloWorld.as</h3>
+
+<p>``` as3
+package
+{</p>
+
+<pre><code>import flash.display.Sprite;
+import flash.events.MouseEvent;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import qnx.ui.buttons.Button;
+import qnx.ui.buttons.LabelButton;
+
+// The following metadata specifies the size and properties of the canvas that
+// this application should occupy on the BlackBerry PlayBook screen.
+[SWF(width="1024", height="600", backgroundColor="#cccccc", frameRate="30")]
+public class AIRHelloWorld extends Sprite
+{
+    public function AIRHelloWorld()
+    {
+        var helloButton:LabelButton = new LabelButton();
+        helloButton.label = "Hello World!";
+        helloButton.x = (stage.stageWidth - helloButton.width)/2;
+        helloButton.y = (stage.stageHeight - helloButton.height)/2;
+
+        var myFormat:TextFormat = new TextFormat();
+        myFormat.color = 0xAA0000;
+        myFormat.size = 24;
+        myFormat.italic = true;
+        myFormat.align = "center";
+
+        var text:TextField = new TextField();
+        text.text = "Close";
+        text.setTextFormat(myFormat);
+
+        var closeButton:Button = new Button();
+        closeButton.addChild(text);
+        closeButton.addEventListener(MouseEvent.CLICK, closeWindow);
+        closeButton.x = (stage.stageWidth - closeButton.width)/2;
+        closeButton.y = helloButton.y - helloButton.height;
+
+        addChild(helloButton);
+        addChild(closeButton);
+
+        stage.nativeWindow.visible = true;
+    }
+
+    private function closeWindow(event:MouseEvent):void{
+        stage.nativeWindow.close();
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>All of you AS3 and Flash developers should be pretty pleased.  You get the comforts of your language of choice with the ability to access native QNX components; the best of both worlds.</p>
+
+<h2>Setup Pitfalls</h2>
+
+<p>I can't stress enough that you need to follow the instructions exactly or you won't get it working.  I speak from experience.  Perhaps you can save yourself a few minutes (or hours) of searching for the resolution to the cryptic errors you may encounter by looking at the problems I ran into.  But really, all of these could be avoided by following the instructions exactly as written.</p>
+
+<h3>The Flash Builder 4.0.1 update must be installed</h3>
+
+<p>They only mention 4.0.1 about a dozen times but I figured "how important can a point release be?".  Turns out, very.  You'll see this if you ignore it too:</p>
+
+<p><code>
+An internal error occurred during: "Launching AIRHelloWorld".
+com.adobe.flexide.launching.air.ApolloLaunchConfiguration.getAIRProfile()Ljava/lang/String;
+</code></p>
+
+<p>Just download and install the <a href="http://www.adobe.com/support/flex/downloads_updaters.html#flex4" target="_blank">Flash Builder 4.0.1 update</a> and all will be resolved.</p>
+
+<h2 style="text-decoration:underline;">Adobe Air 2.5 must be installed</h2>
+
+
+<p>Again, they are clear as day about this, but you need to install the <a href="http://www.adobe.com/products/air/sdk/" target="_blank">Adobe Air 2.5 SDK</a>.  The version that comes with Flash Builder 4 is only 2.0.2, or might be 1.5, I can't remember off hand.  You can find the version of Air your BlackBerry Tablet SDK is installed against by looking at the app config XML file (AIRHelloWorld-app.xml) in your project.  The first node, <strong>application</strong>, indicates the Air version used:</p>
+
+<p><code>xml
+&lt;application xmlns="http://ns.adobe.com/air/application/2.5"&gt;
+</code></p>
+
+<p>In any case, if its not the right version you have to install Air 2.5 or you'll see an error similar to this:</p>
+
+<p><code>
+Error: Cannot find node: versionNumber
+</code></p>
+
+<p>This is because the versionNumber node in your app configuration isn't supported before Air 2.5.  In order to fix this error, you need to reinstall the BlackBerry Tablet SDK and make sure to point it at the directory of <a href="http://www.adobe.com/products/air/sdk/" target="_blank">Adobe Air 2.5</a> during the install.  If someone knows a better way to do it without having to reinstall the Blackberry Tablet SDK I'm all ears.</p>
+
+<h3>Put your Playbook Simulator in Development Mode</h3>
+
+<p>Even if you remember to put your Playbook Simulator in Development Mode as per the instructions, you'll probably forget (like me) that you need to do that whenever you restart the simulator.  I'm not aware of a way to set Development Mode ON by default.  Here's the error you'll see:</p>
+
+<p><code>
+Using icon: C:\development\AIRHelloWorld\bin-debug\blackberry-tablet-icon.png
+Package created: C:\development\AIRHelloWorld/AIRHelloWorld.bar
+Sending Install and Launch request...
+Error: Device is not in the development mode. Switch to Development from Security settings on the device.
+</code></p>
+
+<p>All you have to do is follow the instructions <a href="http://docs.blackberry.com/en/developers/deliverables/21877/Enable_development_mode_1359171_11.jsp" target="_blank">here</a>, which will tell you to do the following:</p>
+
+<ol>
+<li>Activate the Playbook Simulator</li>
+<li>Click the gear icon at the top right</li>
+<li>Click "Security"</li>
+<li>Click "General" under "Security Settings"</li>
+<li>Toggle "Development Mode" to <strong>ON</strong> under "Development Settings"</li>
+</ol>
+
+
+<br>
+
+
+<h2>Summary</h2>
+
+<p>That's all I got so far. It looks like a terrific platform and is really engaging a lot of the development community by integrating native access through external SDKs.  Soon as my plate clears up a bit I'm gonna hit this full steam and add myself to the list of the <del datetime="2011-01-27T13:49:44+00:00">lucky</del> talented developers (like <a href="http://www.jasonfincanon.com/" target="_blank">Jason Fincanon</a>) getting themselves a free Playbook.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Video: Google Project, Flash Builder 4, and Subclipse]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse/"/>
+    <updated>2010-09-13T07:36:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse</id>
+    <content type="html"><![CDATA[<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/DYcEm2KCSeM?fs=1&amp;hl=en_US" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/DYcEm2KCSeM?fs=1&amp;hl=en_US" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+
+<p>You'll get to see exactly how to create a Google Project Hosting Subversion repository, install the <a href="http://subclipse.tigris.org/" target="_blank">Subclipse SVN plugin</a> for Flash Builder 4, and integrate the repository into your development environment.</p>
+
+<p>You'll have to forgive the very amateur nature of the video, this was my first time using <a href="http://www.adobe.com/products/captivate/" target="_blank">Adobe Captivate</a> .  Its a pretty intuitive software, but I'm totally ignorant to the finer points of video guide creation.  I'm sure that will start to change in the near future, though, especially if people actually take the time to watch this one.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Flash Builder 4: addElement() instead of addChild()]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/07/27/flash-builder-4--addelement---instead-of-addchild--/"/>
+    <updated>2010-07-27T07:56:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/07/27/flash-builder-4--addelement---instead-of-addchild--</id>
+    <content type="html"><![CDATA[<p>Here's a quick tip for those of you who are also switching to Flex 4.x/Flash Builder 4 from Flex 3.x/Flex Builder 3.  In the past when you wanted to add a Flash DisplayObject to the main Application canvas you'd wrap the DisplayObject in a UIComponent, then add the UIComponent to the Application as a child, like this:</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">var sprite:Sprite = new Sprite();
+var ui:UIComponent = new UIComponent();
+ui.addChild(sprite);
+this.addChild(ui);</code></pre>
+
+
+<br>
+
+
+<p>Try that in Flash Builder 4 and you'll encounter a fun error that looks like this:</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">Error: addChild() is not available in this class. Instead, use
+addElement() or modify the skin, if you have one.</code></pre>
+
+
+<br>
+
+
+<p>To resolve it, simply change the last line of the previous code to use addElement() instead (change in <span style="color: #ff0000;">red</span>):</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">var sprite:Sprite = new Sprite();
+var ui:UIComponent = new UIComponent();
+ui.addChild(sprite);
+<span style="color: #ff0000;">this.addElement(ui);</span></code></pre>
+
+
+<br>
+
+]]></content>
+  </entry>
+  
+</feed>

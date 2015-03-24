@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: featured | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/featured/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA["3D in Flash" and "Away3D 3.6 Essentials"]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/01/-3d-in-flash--and--away3d-3-6-essentials-/"/>
+    <updated>2011-03-01T10:31:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/01/-3d-in-flash--and--away3d-3-6-essentials-</id>
+    <content type="html"><![CDATA[<p>There's been a lot of talk as of this weekend about 3D in Flash, due to Adobe's announcement that <a href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/">Flash Player 11 is now available at Adobe Labs</a>.  Included in Flash Player is the much anticipated "Molehill" 3D API.  To get an idea of how huge of a leap in terms of rendering this is for Flash, take a look at some of <a href="http://savagelook.com/blog/away3d/adobe-molehill-3d-api-videos">these videos</a> I posted a few months back.  Or better yet, experience it yourself by playing "Zombie Tycoon"!</p>
+
+<p>Right in step with Adobe's announcement came one from the Away3D team.  They unveiled the alpha version of <a href="http://away3d.com/away3d-4-0-alpha-release-broomstick">Away3D 4.0 "Broomstick"</a>.  This is the first version of my favorite 3D Flash engine that leverages the power of the Adobe "Molehill" API.  Check out the <a href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/features/molehill.html">Adobe Labs page for Molehill</a> to see more of what Away3D will let you do, without having to get into the nitty, gritty details of Molehill.</p>
+
+<p>In order to get a jump start on your Away3D development, I'd highly suggest picking up one (or both, like me) of these books: "The Essential Guide to 3D in Flash" and "Away3D 3.6 Essentials".  Both are great guides to getting started with Away3D,  as well as 3D graphics in Flash in general.  While no longer the latest and greatest, they will undoubtedly continue to give great insight for aspiring Away3D developers.</p>
+
+<p>As these are both great texts, I'm not going to put their attributes side by side and compare every detail.  Instead I'm just going to point out the highlights of each.  You really can't go wrong with either.</p>
+
+<h2><strong>"Away3D 3.6 Essentials" Highlights</strong></h2>
+
+
+<ul>
+    <li>The clearest highlight is without question the <span style="color: #ff0000;">choice of technical reviewer... Tony Lukasavage (see also, me).</span></li>
+    <li>Matthew Casperson is the author and his <a href="http://www.brighthub.com/hubfolio/matthew-casperson.aspx" target="_blank">brighthub.com work</a> was the home for some of my earliest lessons in Away3D. Great demos and tutorials.</li>
+    <li>Gives an extremely detailed look at the objects in Away3D, even laying out the initialization objects for many of the classes.  May not sound like a big deal, but Away3D makes heavy use of init objects for class constructors.  The only way to know how to use them without a reference is to go digging through the source.</li>
+    <li>Answers one of the most frequently asked questions in Away3D with a simple chart: Which lights affect which materials?</li>
+    <li>While both books discuss and explain model animation, this book delves into the sometimes baffling territory of how to properly export rigged models from popular modeling and animation program for use with Away3D.  In most cases its not as simple or intuitive as you might expect and this little extra help can go a long way.</li>
+    <li>This book branches out a little further than "3D in Flash", discussing topics like particle engines, pixelbender shaders, and postprocessing as they pertain to Away3D.</li>
+</ul>
+
+
+<p>&nbsp;</p>
+
+<h2>"The Essential Guide to 3D in Flash" Highlights</h2>
+
+
+<ul>
+    <li>The authors are none other than <a href="http://www.infiniteturtles.co.uk/blog/" target="_blank">Rob Bateman</a> and <a href="http://richardolsson.se/" target="_blank">Richard Olsson</a>, cofounder and core developer for Away3D.  There's no disputing that getting the information from the crafters of the engine cannot be beat.</li>
+    <li>Includes set up instructions for <a href="https://www.cleverbridge.com/429/?affiliate=15006&amp;scope=cart&amp;cart=71011" target="_blank">FDT</a>.</li>
+    <li>While "Away3D 3.6 Essentials" gives a brief look at the differences between point, directional, and ambient lights, "3D in Flash" gives a very detailed description of each.  Paragraphs of information and easy to grasp visuals paint a much more clear picture of just how light works.</li>
+    <li>Contains a great example of how you can programmatically animate rigged models.  In some cases even when you follow all the rules, imported animations don't work quite right.  This valuable example lets you take the animation into your own hands.</li>
+</ul>
+
+
+<p>I could go on with more, but beyond this, its just splitting hairs.  Both books are so good it's a great choice either way.</p>
+
+<p>If you are serious about picking up Away3D for 3D Flash development and want the quickest path to success, either one will do just fine.  Just be sure to follow it all and actually code along with the examples.  That's where a lot of the real value in these books lies.  And be sure you make it to the end where possibly the most important topic lies for each book: performance.  But then again, with the coming of "Molehill", those performance concerns might not be quite so critical anymore.</p>
+]]></content>
+  </entry>
+  
+</feed>

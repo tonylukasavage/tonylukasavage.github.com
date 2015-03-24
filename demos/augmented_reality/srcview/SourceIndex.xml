@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of augmented_reality</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="away3dlite" icon="packageIcon" expanded="true">
+				<node label="arcane.as" icon="actionScriptIcon" url="source/away3dlite/arcane.as.html"/>
+			</node>
+			<node label="away3dlite.animators" icon="packageIcon" expanded="true">
+				<node label="BonesAnimator.as" icon="actionScriptIcon" url="source/away3dlite/animators/BonesAnimator.as.html"/>
+				<node label="MovieMesh.as" icon="actionScriptIcon" url="source/away3dlite/animators/MovieMesh.as.html"/>
+			</node>
+			<node label="away3dlite.animators.bones" icon="packageIcon" expanded="true">
+				<node label="Bone.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/Bone.as.html"/>
+				<node label="Channel.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/Channel.as.html"/>
+				<node label="SkinController.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/SkinController.as.html"/>
+				<node label="SkinVertex.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/SkinVertex.as.html"/>
+			</node>
+			<node label="away3dlite.animators.frames" icon="packageIcon" expanded="true">
+				<node label="Frame.as" icon="actionScriptIcon" url="source/away3dlite/animators/frames/Frame.as.html"/>
+			</node>
+			<node label="away3dlite.cameras" icon="packageIcon" expanded="true">
+				<node label="Camera3D.as" icon="actionScriptIcon" url="source/away3dlite/cameras/Camera3D.as.html"/>
+				<node label="HoverCamera3D.as" icon="actionScriptIcon" url="source/away3dlite/cameras/HoverCamera3D.as.html"/>
+				<node label="TargetCamera3D.as" icon="actionScriptIcon" url="source/away3dlite/cameras/TargetCamera3D.as.html"/>
+			</node>
+			<node label="away3dlite.cameras.lenses" icon="packageIcon" expanded="true">
+				<node label="AbstractLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/AbstractLens.as.html"/>
+				<node label="OrthogonalLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/OrthogonalLens.as.html"/>
+				<node label="PerspectiveLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/PerspectiveLens.as.html"/>
+				<node label="ZoomFocusLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/ZoomFocusLens.as.html"/>
+			</node>
+			<node label="away3dlite.containers" icon="packageIcon" expanded="true">
+				<node label="ObjectContainer3D.as" icon="actionScriptIcon" url="source/away3dlite/containers/ObjectContainer3D.as.html"/>
+				<node label="Scene3D.as" icon="actionScriptIcon" url="source/away3dlite/containers/Scene3D.as.html"/>
+				<node label="View3D.as" icon="actionScriptIcon" url="source/away3dlite/containers/View3D.as.html"/>
+			</node>
+			<node label="away3dlite.core.base" icon="packageIcon" expanded="true">
+				<node label="Face.as" icon="actionScriptIcon" url="source/away3dlite/core/base/Face.as.html"/>
+				<node label="Mesh.as" icon="actionScriptIcon" url="source/away3dlite/core/base/Mesh.as.html"/>
+				<node label="Object3D.as" icon="actionScriptIcon" url="source/away3dlite/core/base/Object3D.as.html"/>
+				<node label="SortType.as" icon="actionScriptIcon" url="source/away3dlite/core/base/SortType.as.html"/>
+			</node>
+			<node label="away3dlite.core.clip" icon="packageIcon" expanded="true">
+				<node label="Clipping.as" icon="actionScriptIcon" url="source/away3dlite/core/clip/Clipping.as.html"/>
+				<node label="RectangleClipping.as" icon="actionScriptIcon" url="source/away3dlite/core/clip/RectangleClipping.as.html"/>
+			</node>
+			<node label="away3dlite.core.render" icon="packageIcon" expanded="true">
+				<node label="BasicRenderer.as" icon="actionScriptIcon" url="source/away3dlite/core/render/BasicRenderer.as.html"/>
+				<node label="FastRenderer.as" icon="actionScriptIcon" url="source/away3dlite/core/render/FastRenderer.as.html"/>
+				<node label="Renderer.as" icon="actionScriptIcon" url="source/away3dlite/core/render/Renderer.as.html"/>
+			</node>
+			<node label="away3dlite.core.utils" icon="packageIcon" expanded="true">
+				<node label="Cast.as" icon="actionScriptIcon" url="source/away3dlite/core/utils/Cast.as.html"/>
+				<node label="Debug.as" icon="actionScriptIcon" url="source/away3dlite/core/utils/Debug.as.html"/>
+			</node>
+			<node label="away3dlite.debug" icon="packageIcon" expanded="true">
+				<node label="AwayStats.as" icon="actionScriptIcon" url="source/away3dlite/debug/AwayStats.as.html"/>
+			</node>
+			<node label="away3dlite.events" icon="packageIcon" expanded="true">
+				<node label="ClippingEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/ClippingEvent.as.html"/>
+				<node label="Loader3DEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/Loader3DEvent.as.html"/>
+				<node label="MaterialEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/MaterialEvent.as.html"/>
+				<node label="MouseEvent3D.as" icon="actionScriptIcon" url="source/away3dlite/events/MouseEvent3D.as.html"/>
+				<node label="ParserEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/ParserEvent.as.html"/>
+			</node>
+			<node label="away3dlite.lights" icon="packageIcon" expanded="true">
+				<node label="AbstractLight3D.as" icon="actionScriptIcon" url="source/away3dlite/lights/AbstractLight3D.as.html"/>
+				<node label="DirectionalLight3D.as" icon="actionScriptIcon" url="source/away3dlite/lights/DirectionalLight3D.as.html"/>
+				<node label="PointLight3D.as" icon="actionScriptIcon" url="source/away3dlite/lights/PointLight3D.as.html"/>
+			</node>
+			<node label="away3dlite.loaders" icon="packageIcon" expanded="true">
+				<node label="AbstractParser.as" icon="actionScriptIcon" url="source/away3dlite/loaders/AbstractParser.as.html"/>
+				<node label="AWData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/AWData.as.html"/>
+				<node label="Collada.as" icon="actionScriptIcon" url="source/away3dlite/loaders/Collada.as.html"/>
+				<node label="Loader3D.as" icon="actionScriptIcon" url="source/away3dlite/loaders/Loader3D.as.html"/>
+				<node label="Max3DS.as" icon="actionScriptIcon" url="source/away3dlite/loaders/Max3DS.as.html"/>
+				<node label="MD2.as" icon="actionScriptIcon" url="source/away3dlite/loaders/MD2.as.html"/>
+				<node label="MQO.as" icon="actionScriptIcon" url="source/away3dlite/loaders/MQO.as.html"/>
+			</node>
+			<node label="away3dlite.loaders.data" icon="packageIcon" expanded="true">
+				<node label="AnimationData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/AnimationData.as.html"/>
+				<node label="BoneData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/BoneData.as.html"/>
+				<node label="ChannelData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/ChannelData.as.html"/>
+				<node label="ContainerData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/ContainerData.as.html"/>
+				<node label="FaceData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/FaceData.as.html"/>
+				<node label="GeometryData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/GeometryData.as.html"/>
+				<node label="MaterialData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/MaterialData.as.html"/>
+				<node label="MeshData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/MeshData.as.html"/>
+				<node label="MeshMaterialData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/MeshMaterialData.as.html"/>
+				<node label="ObjectData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/ObjectData.as.html"/>
+			</node>
+			<node label="away3dlite.loaders.utils" icon="packageIcon" expanded="true">
+				<node label="AnimationLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/AnimationLibrary.as.html"/>
+				<node label="ChannelLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/ChannelLibrary.as.html"/>
+				<node label="GeometryLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/GeometryLibrary.as.html"/>
+				<node label="MaterialLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/MaterialLibrary.as.html"/>
+				<node label="TextureLoader.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/TextureLoader.as.html"/>
+				<node label="TextureLoadQueue.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/TextureLoadQueue.as.html"/>
+			</node>
+			<node label="away3dlite.materials" icon="packageIcon" expanded="true">
+				<node label="BitmapFileMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/BitmapFileMaterial.as.html"/>
+				<node label="BitmapMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/BitmapMaterial.as.html"/>
+				<node label="ColorMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/ColorMaterial.as.html"/>
+				<node label="Dot3BitmapMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/Dot3BitmapMaterial.as.html"/>
+				<node label="Material.as" icon="actionScriptIcon" url="source/away3dlite/materials/Material.as.html"/>
+				<node label="MovieMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/MovieMaterial.as.html"/>
+				<node label="WireColorMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/WireColorMaterial.as.html"/>
+				<node label="WireframeMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/WireframeMaterial.as.html"/>
+			</node>
+			<node label="away3dlite.primitives" icon="packageIcon" expanded="true">
+				<node label="AbstractPrimitive.as" icon="actionScriptIcon" url="source/away3dlite/primitives/AbstractPrimitive.as.html"/>
+				<node label="Cone.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Cone.as.html"/>
+				<node label="Cube6.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Cube6.as.html"/>
+				<node label="Cylinder.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Cylinder.as.html"/>
+				<node label="LineSegment.as" icon="actionScriptIcon" url="source/away3dlite/primitives/LineSegment.as.html"/>
+				<node label="Plane.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Plane.as.html"/>
+				<node label="RegularPolygon.as" icon="actionScriptIcon" url="source/away3dlite/primitives/RegularPolygon.as.html"/>
+				<node label="Skybox6.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Skybox6.as.html"/>
+				<node label="Sphere.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Sphere.as.html"/>
+				<node label="Torus.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Torus.as.html"/>
+				<node label="Trident.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Trident.as.html"/>
+			</node>
+			<node label="away3dlite.sprites" icon="packageIcon" expanded="true">
+				<node label="AlignmentType.as" icon="actionScriptIcon" url="source/away3dlite/sprites/AlignmentType.as.html"/>
+				<node label="Sprite3D.as" icon="actionScriptIcon" url="source/away3dlite/sprites/Sprite3D.as.html"/>
+			</node>
+			<node label="away3dlite.templates" icon="packageIcon" expanded="true">
+				<node label="BasicTemplate.as" icon="actionScriptIcon" url="source/away3dlite/templates/BasicTemplate.as.html"/>
+				<node label="FastTemplate.as" icon="actionScriptIcon" url="source/away3dlite/templates/FastTemplate.as.html"/>
+				<node label="Template.as" icon="actionScriptIcon" url="source/away3dlite/templates/Template.as.html"/>
+			</node>
+			<node label="com.transmote.flar" icon="packageIcon" expanded="true">
+				<node label="COPYING.txt" url="source/com/transmote/flar/COPYING.txt"/>
+				<node label="FLARManager.as" icon="actionScriptIcon" url="source/com/transmote/flar/FLARManager.as.html"/>
+				<node label="flarManagerInternal.as" icon="actionScriptIcon" url="source/com/transmote/flar/flarManagerInternal.as.html"/>
+			</node>
+			<node label="com.transmote.flar.marker" icon="packageIcon" expanded="true">
+				<node label="FLARMarker.as" icon="actionScriptIcon" url="source/com/transmote/flar/marker/FLARMarker.as.html"/>
+				<node label="FLARMarkerEvent.as" icon="actionScriptIcon" url="source/com/transmote/flar/marker/FLARMarkerEvent.as.html"/>
+			</node>
+			<node label="com.transmote.flar.pattern" icon="packageIcon" expanded="true">
+				<node label="FLARPattern.as" icon="actionScriptIcon" url="source/com/transmote/flar/pattern/FLARPattern.as.html"/>
+				<node label="FLARPatternLoader.as" icon="actionScriptIcon" url="source/com/transmote/flar/pattern/FLARPatternLoader.as.html"/>
+			</node>
+			<node label="com.transmote.flar.source" icon="packageIcon" expanded="true">
+				<node label="FLARCameraSource.as" icon="actionScriptIcon" url="source/com/transmote/flar/source/FLARCameraSource.as.html"/>
+				<node label="FLARLoaderSource.as" icon="actionScriptIcon" url="source/com/transmote/flar/source/FLARLoaderSource.as.html"/>
+				<node label="IFLARSource.as" icon="actionScriptIcon" url="source/com/transmote/flar/source/IFLARSource.as.html"/>
+			</node>
+			<node label="com.transmote.flar.utils" icon="packageIcon" expanded="true">
+				<node label="FLARManagerConfigLoader.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/FLARManagerConfigLoader.as.html"/>
+				<node label="FLARProxy.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/FLARProxy.as.html"/>
+			</node>
+			<node label="com.transmote.flar.utils.geom" icon="packageIcon" expanded="true">
+				<node label="FLARAlternativaGeomUtils.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/geom/FLARAlternativaGeomUtils.as.html"/>
+				<node label="FLARAwayGeomUtils.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/geom/FLARAwayGeomUtils.as.html"/>
+				<node label="FLARGeomUtils.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/geom/FLARGeomUtils.as.html"/>
+				<node label="FLARPVGeomUtils.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/geom/FLARPVGeomUtils.as.html"/>
+				<node label="FLARSandyGeomUtils.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/geom/FLARSandyGeomUtils.as.html"/>
+			</node>
+			<node label="com.transmote.flar.utils.smoother" icon="packageIcon" expanded="true">
+				<node label="FLARMatrixSmoother_Average.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/smoother/FLARMatrixSmoother_Average.as.html"/>
+				<node label="IFLARMatrixSmoother.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/smoother/IFLARMatrixSmoother.as.html"/>
+			</node>
+			<node label="com.transmote.flar.utils.threshold" icon="packageIcon" expanded="true">
+				<node label="DrunkHistogramThresholdAdapter.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/threshold/DrunkHistogramThresholdAdapter.as.html"/>
+				<node label="DrunkWalkThresholdAdapter.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/threshold/DrunkWalkThresholdAdapter.as.html"/>
+				<node label="HistogramThresholdAdapter.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/threshold/HistogramThresholdAdapter.as.html"/>
+				<node label="IntegralImageThresholdAdapter.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/threshold/IntegralImageThresholdAdapter.as.html"/>
+				<node label="IThresholdAdapter.as" icon="actionScriptIcon" url="source/com/transmote/flar/utils/threshold/IThresholdAdapter.as.html"/>
+			</node>
+			<node label="com.transmote.utils.time" icon="packageIcon" expanded="true">
+				<node label="FramerateDisplay.as" icon="actionScriptIcon" url="source/com/transmote/utils/time/FramerateDisplay.as.html"/>
+				<node label="Timeout.as" icon="actionScriptIcon" url="source/com/transmote/utils/time/Timeout.as.html"/>
+			</node>
+			<node label="jp.nyatla.as3utils" icon="packageIcon" expanded="true">
+				<node label="NyAS3Const_Inherited.as" icon="actionScriptIcon" url="source/jp/nyatla/as3utils/NyAS3Const_Inherited.as.html"/>
+				<node label="NyAS3Utils.as" icon="actionScriptIcon" url="source/jp/nyatla/as3utils/NyAS3Utils.as.html"/>
+				<node label="NyMultiFileLoader.as" icon="actionScriptIcon" url="source/jp/nyatla/as3utils/NyMultiFileLoader.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3" icon="packageIcon" expanded="true">
+				<node label="NyARException.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/NyARException.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core" icon="packageIcon" expanded="true">
+				<node label="NyARCode.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/NyARCode.as.html"/>
+				<node label="NyARMat.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/NyARMat.as.html"/>
+				<node label="NyARVec.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/NyARVec.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.analyzer.histogram" icon="packageIcon" expanded="true">
+				<node label="INyARHistogramAnalyzer_Threshold.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/analyzer/histogram/INyARHistogramAnalyzer_Threshold.as.html"/>
+				<node label="NyARHistogramAnalyzer_SlidePTile.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/analyzer/histogram/NyARHistogramAnalyzer_SlidePTile.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.analyzer.raster" icon="packageIcon" expanded="true">
+				<node label="NyARRasterAnalyzer_Histogram.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/analyzer/raster/NyARRasterAnalyzer_Histogram.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.analyzer.raster.threshold" icon="packageIcon" expanded="true">
+				<node label="INyARRasterThresholdAnalyzer.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/analyzer/raster/threshold/INyARRasterThresholdAnalyzer.as.html"/>
+				<node label="NyARRasterThresholdAnalyzer_SlidePTile.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/analyzer/raster/threshold/NyARRasterThresholdAnalyzer_SlidePTile.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.labeling" icon="packageIcon" expanded="true">
+				<node label="NyARLabelInfo.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/labeling/NyARLabelInfo.as.html"/>
+				<node label="NyARLabelInfoStack.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/labeling/NyARLabelInfoStack.as.html"/>
+				<node label="NyARLabelOverlapChecker.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/labeling/NyARLabelOverlapChecker.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.labeling.rlelabeling" icon="packageIcon" expanded="true">
+				<node label="NyARLabeling_Rle.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/labeling/rlelabeling/NyARLabeling_Rle.as.html"/>
+				<node label="NyARRleLabelFragmentInfo.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/labeling/rlelabeling/NyARRleLabelFragmentInfo.as.html"/>
+				<node label="NyARRleLabelFragmentInfoStack.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/labeling/rlelabeling/NyARRleLabelFragmentInfoStack.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.match" icon="packageIcon" expanded="true">
+				<node label="INyARMatchPatt.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/match/INyARMatchPatt.as.html"/>
+				<node label="NyARMatchPatt_Color_WITHOUT_PCA.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/match/NyARMatchPatt_Color_WITHOUT_PCA.as.html"/>
+				<node label="NyARMatchPattDeviationBlackWhiteData.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/match/NyARMatchPattDeviationBlackWhiteData.as.html"/>
+				<node label="NyARMatchPattDeviationColorData.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/match/NyARMatchPattDeviationColorData.as.html"/>
+				<node label="NyARMatchPattResult.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/match/NyARMatchPattResult.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.param" icon="packageIcon" expanded="true">
+				<node label="INyARCameraDistortionFactor.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/param/INyARCameraDistortionFactor.as.html"/>
+				<node label="NyARCameraDistortionFactor.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/param/NyARCameraDistortionFactor.as.html"/>
+				<node label="NyARObserv2IdealMap.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/param/NyARObserv2IdealMap.as.html"/>
+				<node label="NyARParam.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/param/NyARParam.as.html"/>
+				<node label="NyARPerspectiveProjectionMatrix.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/param/NyARPerspectiveProjectionMatrix.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.pca2d" icon="packageIcon" expanded="true">
+				<node label="INyARPca2d.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/pca2d/INyARPca2d.as.html"/>
+				<node label="NyARPca2d_MatrixPCA_O2.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/pca2d/NyARPca2d_MatrixPCA_O2.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.pickup" icon="packageIcon" expanded="true">
+				<node label="INyARColorPatt.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/pickup/INyARColorPatt.as.html"/>
+				<node label="NyARColorPatt_Perspective.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/pickup/NyARColorPatt_Perspective.as.html"/>
+				<node label="NyARColorPatt_Perspective_O2.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/pickup/NyARColorPatt_Perspective_O2.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.raster" icon="packageIcon" expanded="true">
+				<node label="INyARRaster.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/INyARRaster.as.html"/>
+				<node label="NyARBinRaster.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/NyARBinRaster.as.html"/>
+				<node label="NyARGrayscaleRaster.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/NyARGrayscaleRaster.as.html"/>
+				<node label="NyARRaster.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/NyARRaster.as.html"/>
+				<node label="NyARRaster_BasicClass.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/NyARRaster_BasicClass.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.raster.rgb" icon="packageIcon" expanded="true">
+				<node label="INyARRgbRaster.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/rgb/INyARRgbRaster.as.html"/>
+				<node label="NyARRgbRaster.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/rgb/NyARRgbRaster.as.html"/>
+				<node label="NyARRgbRaster_BasicClass.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/raster/rgb/NyARRgbRaster_BasicClass.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.rasterfilter" icon="packageIcon" expanded="true">
+				<node label="INyARRasterFilter.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterfilter/INyARRasterFilter.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.rasterfilter.gs2bin" icon="packageIcon" expanded="true">
+				<node label="INyARRasterFilter_Gs2Bin.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterfilter/gs2bin/INyARRasterFilter_Gs2Bin.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.rasterfilter.rgb2bin" icon="packageIcon" expanded="true">
+				<node label="INyARRasterFilter_Rgb2Bin.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterfilter/rgb2bin/INyARRasterFilter_Rgb2Bin.as.html"/>
+				<node label="NyARRasterFilter_ARToolkitThreshold.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterfilter/rgb2bin/NyARRasterFilter_ARToolkitThreshold.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.rasterfilter.rgb2gs" icon="packageIcon" expanded="true">
+				<node label="INyARRasterFilter_Rgb2Gs.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterfilter/rgb2gs/INyARRasterFilter_Rgb2Gs.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.rasterreader" icon="packageIcon" expanded="true">
+				<node label="INyARRgbPixelReader.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterreader/INyARRgbPixelReader.as.html"/>
+				<node label="NyARRgbPixelReader_INT1D_X8R8G8B8_32.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/rasterreader/NyARRgbPixelReader_INT1D_X8R8G8B8_32.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.squaredetect" icon="packageIcon" expanded="true">
+				<node label="NyARContourPickup.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARContourPickup.as.html"/>
+				<node label="NyARCoord2Linear.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARCoord2Linear.as.html"/>
+				<node label="NyARCoord2SquareVertexIndexes.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARCoord2SquareVertexIndexes.as.html"/>
+				<node label="NyARSquare.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARSquare.as.html"/>
+				<node label="NyARSquareContourDetector.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARSquareContourDetector.as.html"/>
+				<node label="NyARSquareContourDetector_IDetectMarkerCallback.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARSquareContourDetector_IDetectMarkerCallback.as.html"/>
+				<node label="NyARSquareContourDetector_Rle.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARSquareContourDetector_Rle.as.html"/>
+				<node label="NyARSquareStack.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/squaredetect/NyARSquareStack.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.transmat" icon="packageIcon" expanded="true">
+				<node label="INyARTransMat.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/INyARTransMat.as.html"/>
+				<node label="NyARRectOffset.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/NyARRectOffset.as.html"/>
+				<node label="NyARTransMat.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/NyARTransMat.as.html"/>
+				<node label="NyARTransMatResult.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/NyARTransMatResult.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.transmat.optimize" icon="packageIcon" expanded="true">
+				<node label="NyARPartialDifferentiationOptimize.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/optimize/NyARPartialDifferentiationOptimize.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.transmat.rotmatrix" icon="packageIcon" expanded="true">
+				<node label="NyARRotMatrix.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/rotmatrix/NyARRotMatrix.as.html"/>
+				<node label="NyARRotVector.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/rotmatrix/NyARRotVector.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.transmat.solver" icon="packageIcon" expanded="true">
+				<node label="INyARTransportVectorSolver.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/solver/INyARTransportVectorSolver.as.html"/>
+				<node label="NyARTransportVectorSolver.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/transmat/solver/NyARTransportVectorSolver.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.types" icon="packageIcon" expanded="true">
+				<node label="NyARBufferType.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARBufferType.as.html"/>
+				<node label="NyARDoublePoint2d.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARDoublePoint2d.as.html"/>
+				<node label="NyARDoublePoint3d.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARDoublePoint3d.as.html"/>
+				<node label="NyARHistogram.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARHistogram.as.html"/>
+				<node label="NyARIntPoint2d.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARIntPoint2d.as.html"/>
+				<node label="NyARIntRect.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARIntRect.as.html"/>
+				<node label="NyARIntSize.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARIntSize.as.html"/>
+				<node label="NyARLinear.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/NyARLinear.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.types.matrix" icon="packageIcon" expanded="true">
+				<node label="INyARDoubleMatrix.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/matrix/INyARDoubleMatrix.as.html"/>
+				<node label="NyARDoubleMatrix22.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/matrix/NyARDoubleMatrix22.as.html"/>
+				<node label="NyARDoubleMatrix33.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/matrix/NyARDoubleMatrix33.as.html"/>
+				<node label="NyARDoubleMatrix34.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/matrix/NyARDoubleMatrix34.as.html"/>
+				<node label="NyARDoubleMatrix44.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/matrix/NyARDoubleMatrix44.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.types.stack" icon="packageIcon" expanded="true">
+				<node label="NyARIntPointStack.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/stack/NyARIntPointStack.as.html"/>
+				<node label="NyARIntRectStack.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/stack/NyARIntRectStack.as.html"/>
+				<node label="NyARObjectStack.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/types/stack/NyARObjectStack.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.core.utils" icon="packageIcon" expanded="true">
+				<node label="NyAREquationSolver.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/utils/NyAREquationSolver.as.html"/>
+				<node label="NyARMath.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/utils/NyARMath.as.html"/>
+				<node label="NyARPerspectiveParamGenerator_O1.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/core/utils/NyARPerspectiveParamGenerator_O1.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.detector" icon="packageIcon" expanded="true">
+				<node label="NyARCustomSingleDetectMarker.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/detector/NyARCustomSingleDetectMarker.as.html"/>
+				<node label="NyARDetectMarker.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/detector/NyARDetectMarker.as.html"/>
+				<node label="NyARSingleDetectMarker.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/detector/NyARSingleDetectMarker.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.nyidmarker" icon="packageIcon" expanded="true">
+				<node label="NyIdMarkerParam.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/NyIdMarkerParam.as.html"/>
+				<node label="NyIdMarkerPattern.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/NyIdMarkerPattern.as.html"/>
+				<node label="NyIdMarkerPickup.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/NyIdMarkerPickup.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.nyidmarker.data" icon="packageIcon" expanded="true">
+				<node label="INyIdMarkerData.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/data/INyIdMarkerData.as.html"/>
+				<node label="INyIdMarkerDataEncoder.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/data/INyIdMarkerDataEncoder.as.html"/>
+				<node label="NyIdMarkerData_RawBit.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/data/NyIdMarkerData_RawBit.as.html"/>
+				<node label="NyIdMarkerDataEncoder_RawBit.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/nyidmarker/data/NyIdMarkerDataEncoder_RawBit.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.processor" icon="packageIcon" expanded="true">
+				<node label="SingleARMarkerProcesser.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/processor/SingleARMarkerProcesser.as.html"/>
+				<node label="SingleNyIdMarkerProcesser.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/processor/SingleNyIdMarkerProcesser.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.utils" icon="packageIcon" expanded="true">
+				<node label="TransformedBitmapPickup.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/utils/TransformedBitmapPickup.as.html"/>
+			</node>
+			<node label="jp.nyatla.nyartoolkit.as3.utils.as3" icon="packageIcon" expanded="true">
+				<node label="ArrayUtils.as" icon="actionScriptIcon" url="source/jp/nyatla/nyartoolkit/as3/utils/as3/ArrayUtils.as.html"/>
+			</node>
+			<node label="net.hires.debug" icon="packageIcon" expanded="true">
+				<node label="Stats.as" icon="actionScriptIcon" url="source/net/hires/debug/Stats.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit" icon="packageIcon" expanded="true">
+				<node label="FLARException.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/FLARException.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core" icon="packageIcon" expanded="true">
+				<node label="FLARCode.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/FLARCode.as.html"/>
+				<node label="FLARMat.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/FLARMat.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.analyzer.raster" icon="packageIcon" expanded="true">
+				<node label="FLARRasterAnalyzer_Histogram.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/analyzer/raster/FLARRasterAnalyzer_Histogram.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.analyzer.raster.threshold" icon="packageIcon" expanded="true">
+				<node label="FLARRasterThresholdAnalyzer_SlidePTile.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/analyzer/raster/threshold/FLARRasterThresholdAnalyzer_SlidePTile.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.labeling.fllabeling" icon="packageIcon" expanded="true">
+				<node label="FLARLabeling.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/labeling/fllabeling/FLARLabeling.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.param" icon="packageIcon" expanded="true">
+				<node label="FLARParam.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/param/FLARParam.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.raster" icon="packageIcon" expanded="true">
+				<node label="FLARBinRaster.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/raster/FLARBinRaster.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.raster.rgb" icon="packageIcon" expanded="true">
+				<node label="FLARRgbRaster_BitmapData.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/raster/rgb/FLARRgbRaster_BitmapData.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.rasterfilter.rgb2bin" icon="packageIcon" expanded="true">
+				<node label="FLARRasterFilter_Threshold.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/rasterfilter/rgb2bin/FLARRasterFilter_Threshold.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.rasterreader" icon="packageIcon" expanded="true">
+				<node label="FLARRgbPixelReader_BitmapData.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/rasterreader/FLARRgbPixelReader_BitmapData.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.squaredetect" icon="packageIcon" expanded="true">
+				<node label="FLARSquare.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/squaredetect/FLARSquare.as.html"/>
+				<node label="FLARSquareContourDetector.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/squaredetect/FLARSquareContourDetector.as.html"/>
+				<node label="FLContourPickup.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/squaredetect/FLContourPickup.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.transmat" icon="packageIcon" expanded="true">
+				<node label="FLARTransMatResult.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/transmat/FLARTransMatResult.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.core.types" icon="packageIcon" expanded="true">
+				<node label="FLARDoublePoint3d.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/types/FLARDoublePoint3d.as.html"/>
+				<node label="FLARIntSize.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/core/types/FLARIntSize.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.detector" icon="packageIcon" expanded="true">
+				<node label="FLARMultiMarkerDetector.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/detector/FLARMultiMarkerDetector.as.html"/>
+				<node label="FLARSingleMarkerDetector.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/detector/FLARSingleMarkerDetector.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.processor" icon="packageIcon" expanded="true">
+				<node label="FLSingleARMarkerProcesser.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/processor/FLSingleARMarkerProcesser.as.html"/>
+				<node label="FLSingleNyIdMarkerProcesser.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/processor/FLSingleNyIdMarkerProcesser.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.support.alternativa3d" icon="packageIcon" expanded="true">
+				<node label="FLARCamera3D.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/alternativa3d/FLARCamera3D.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.support.away3d" icon="packageIcon" expanded="true">
+				<node label="FLARBaseNode.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/away3d/FLARBaseNode.as.html"/>
+				<node label="FLARCamera3D.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/away3d/FLARCamera3D.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.support.away3d_lite" icon="packageIcon" expanded="true">
+				<node label="FLARCamera3D.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/away3d_lite/FLARCamera3D.as.html"/>
+				<node label="FLARLens.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/away3d_lite/FLARLens.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.support.pv3d" icon="packageIcon" expanded="true">
+				<node label="FLARBaseNode.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/pv3d/FLARBaseNode.as.html"/>
+				<node label="FLARCamera3D.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/pv3d/FLARCamera3D.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.support.sandy" icon="packageIcon" expanded="true">
+				<node label="FLARBaseNode.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/sandy/FLARBaseNode.as.html"/>
+				<node label="FLARCamera3D.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/support/sandy/FLARCamera3D.as.html"/>
+			</node>
+			<node label="org.libspark.flartoolkit.utils" icon="packageIcon" expanded="true">
+				<node label="ArrayUtil.as" icon="actionScriptIcon" url="source/org/libspark/flartoolkit/utils/ArrayUtil.as.html"/>
+			</node>
+			<node label="resources">
+				<node label="flar">
+					<node label="patterns">
+						<node label="patt001.pat" url="source/resources/flar/patterns/patt001.pat"/>
+						<node label="patt001.png" icon="imageIcon" url="source/resources/flar/patterns/patt001.png.html"/>
+					</node>
+					<node label="FLARCameraParams.dat" url="source/resources/flar/FLARCameraParams.dat"/>
+					<node label="flarConfig.xml" url="source/resources/flar/flarConfig.xml.txt"/>
+					<node label="invert.pbj" url="source/resources/flar/invert.pbj"/>
+					<node label="invert.pbk" url="source/resources/flar/invert.pbk"/>
+				</node>
+				<node label="cmro.3DS" url="source/resources/cmro.3DS"/>
+				<node label="Cmro_tex.png" icon="imageIcon" url="source/resources/Cmro_tex.png.html"/>
+			</node>
+			<node label="Away3DLiteSprite.as" icon="actionScriptIcon" url="source/Away3DLiteSprite.as.html"/>
+			<node label="FlarUIC.mxml" icon="mxmlIcon" url="source/FlarUIC.mxml.html"/>
+			<node selected="true" label="sandbox.mxml" icon="mxmlAppIcon" url="source/sandbox.mxml.html"/>
+		</node>
+	</nodes>
+</index>

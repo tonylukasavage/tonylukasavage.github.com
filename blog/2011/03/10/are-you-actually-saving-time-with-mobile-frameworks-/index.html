@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Are You Actually Saving Time With Mobile Frameworks? - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="The Short, Blunt Version DISCLAIMER: Don&#8217;t leave me nasty comments if this is all you read. Most of the available &#8220;cross platform&#8221; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/03/10/are-you-actually-saving-time-with-mobile-frameworks-/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Are You Actually Saving Time With Mobile Frameworks?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-10T10:37:00-05:00" pubdate data-updated="true">Mar 10<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>The Short, Blunt Version</h2>
+
+
+<p><strong>DISCLAIMER</strong>: Don&#8217;t leave me nasty comments if this is all you read.</p>
+
+<p>Most of the available &#8220;cross platform&#8221; mobile frameworks are not as universally and uniformly compatible as they would be announced.  There are inconsistencies that make &#8220;code once, run everywhere&#8221; very unlikely without at least some tweaking.  The time spent fitting an app to one, universal mold can often force a sacrifice of even more time, quality, and usability.</p>
+
+<p>Using HTML/CSS/JS for mobile development is seen as an advantage only to those who already have a great deal of experience with it.  I say this from a pure language perspective as it carries the obvious advantage of providing portable, standards based code.  If you don&#8217;t have this experience with Javascript, but do have the talent and/or diversity of background necessary to learn the languages to develop natively, do so.</p>
+
+<p>I&#8217;m not saying you can&#8217;t build a multi-platform, high quality app with a mobile framework.  I am saying that it is not quite as easy as it may appear on paper.  This may seem counter-intuitive, but <span style="color: #ff0000;">as the complexity of your project grows, the less effective a &#8220;code once, run everywhere&#8221; approach will be</span>.  That said, most mobile frameworks do a terrific job of making small to medium sized projects available to a large audience in a short amount of time.</p>
+
+<p>For the quick feature comparison of the mobile frameworks I&#8217;ll talk about below, check out my prior post, &#8220;Appcelerator vs. PhoneGap vs. Adobe Air&#8221;.</p>
+
+<hr />
+
+
+
+
+<h2>Naivity</h2>
+
+
+<p>I approached the world of mobile development with the thought that a cross platform development framework was the one true path.  I mean, how else could a single developer keep up with the plethora of mobile OSes, SDKs, and devices?  And with that notion, I went forward in search of the silver bullet framework that would give me the coveted &#8220;code once, run everywhere&#8221; solution.</p>
+
+<p>But as you may have expected, I haven&#8217;t found it.  With my tunnel-vision focus on cross platform development I neglected to pay attention to the multitude of other key factors that can cost developers time.  I also neglected the fact that deploying to every mobile device imaginable is almost never the goal of a particular app.</p>
+
+<p>So what are the problems I&#8217;ve run into?  How have they cost me time?  Does this outweigh the potential time saved with the &#8220;code once, run everywhere&#8221;?  Is &#8220;code once, run everywhere&#8221; really achievable for most apps?  Let&#8217;s dig into these topics and see how they could impact your potential mobile development workflow.</p>
+
+<hr/>
+
+
+
+
+<h2>Most frameworks are babies</h2>
+
+
+<p>Let&#8217;s take a look at the 3 frameworks I&#8217;ve looked at so far:</p>
+
+<ul>
+    <li><strong>Appcelerator</strong> - mobile SDK started in 2009</li>
+    <li><strong>PhoneGap</strong> - started in 2008</li>
+    <li><strong>Adobe Air &amp; Flex Hero</strong> - Air for Android and the iOS packager came out in 2010.  Flex &#8220;Hero&#8221; is still beta.</li>
+</ul>
+
+
+<p>As you can see, all of these frameworks are very young.  And with that youth comes ambition, which in turn can lead to cut corners.  The  competion is fierce in a new and growing market. They know what they need to stand out: <span style="color: #ff0000;">features</span>.  Stability and adherence to standards aren&#8217;t quite as eye-catching as an app that can leverage cool mobile APIs like geolocation and accelerometers.</p>
+
+<p>It seems that in many cases the frameworks are spreading themselves thin at the expense of solid compatibility and stability.</p>
+
+<h2>How &#8220;Cross Platform&#8221; Are These Frameworks?</h2>
+
+
+<p>Here&#8217;s the mobile OSes aforementioned claim to support:</p>
+
+<ul>
+    <li><strong>Appcelerator</strong> - iOS, Android, Blackberry (beta)</li>
+    <li><strong>PhoneGap</strong> - iOS, Android, Blackberry, WebOS, Symbian</li>
+    <li><strong>Adobe Air &amp; Flex Hero</strong> - iOS, Android, Blackberry Playbook</li>
+</ul>
+
+
+<p>Now here&#8217;s been my experience with each so far, your mileage may vary.  I will try to keep it as high level as possible.</p>
+
+<ul>
+    <li><strong>Appcelerator</strong> - iOS is their flagship.  You can tell by the very Mac-ish look to their Titanium Developer project application that this is their focus.  Appcelerator does iOs very well.  Android on the other hand has been a bit frustrating.  Many features and even core functionality are lagging behind in Android in terms of stability.  Simple things like orientation lock and layouts work well in iOS but not so much in Android.  This leads to inconsistent behavior between the two platforms, which is kinda the whole point of the framework.
+
+I have not yet tried Blackberry development, but if Android is a production release and has these issues, I worry what I may run into.</li>
+    <li><strong>PhoneGap</strong> - <span style="color: #ff0000;">This is the one framework I&#8217;ve experimented with so far that has a relatively uniform experience across all its supported platforms</span>.  The core functionality is there, operates the same, and with a consistent level of performance.  Granted PhoneGap is an entirely contained web app and has no native UI component access, though <a href="http://docs.phonegap.com/" target="_blank">most APIs are supported</a>.  This, though, should be the expected experience with a cross platform mobile app.  Give me the same thing on every device to which I deploy!</li>
+    <li><strong>Adobe Air &amp; Flex Hero</strong> - Because these mobile apps run against the Adobe Air runtime you get a nearly identical experience across the supported platforms.  Flex Hero comes with a wide array of mobile components for your use, though some are notable missing.  The big hitch with consistency is performance.
+
+Blackberry Playbook development churns out great, performant content.  Blackberry made available an AS3 SDK along with the ability to use Flex Hero.  Because of this forethought and respect for the existing technology, Flash/Flex developers are really enjoying this platform and I think users will too.
+
+On Android, Air performs OK.  There&#8217;s just enough lag on transitions and load time to drive you nuts as a developer, but likely won&#8217;t be a deal breaker for users.
+
+iOS seems to be a sore point for some developers.  The performance is reported to be less than desirable when compared with the other supported platforms.  Also, the <a href="http://labs.adobe.com/technologies/packagerforiphone/" target="_blank">Adobe iOS packager</a> that allows you to deploy Adobe Air mobile applications to iOS currently only supports Air 2.0, leaving out some popular APIs like camera and video.  We are all familiar with the battles between Apple and Adobe and why these performance issues exist.  The users don&#8217;t care though and are likely to turn away from apps that seem sluggish as these might.</li>
+</ul>
+
+
+<p>So as you can see, &#8220;cross platform&#8221; and &#8220;code once, run everywhere&#8221; aren&#8217;t quite as cut and dry as we would be led to believe.  I&#8217;m not saying that frameworks should be dismissed for these reasons, but they simplicity of universal deployment and satisfactory user experience in many cases is overstated.</p>
+
+<h2>Do You Really Need To Support All Those Mobile OSes</h2>
+
+
+<p>I could ramble on about market share, market viability, and targeted deployment, but I&#8217;ll just let these few charts do the talking and let you render your own decision:</p>
+
+<h2>Javascript</h2>
+
+
+<p>I&#8217;m not here to start a holy war about whether or not Javascript is quality language.  We all know the effectiveness of a programming language is largely determined by the person wielding it.  But let&#8217;s be honest, Javascript is no Java, C#, or even Objective-C.  And with the exception of Adobe Air and Flex Hero, almost all mobile frameworks use HTML/CSS/JS as their technology stack.</p>
+
+<p>There&#8217;s no classes, no types, and the available IDEs and debugging facilities are weak in comparison to its native language SDK counterparts.  As I hear many of my Flash/Flex friends saying from time to time, its a reminder of all that was wrong with the original version of Actionscript.  jQuery and other frameworks make it more tolerable, but its still tough sledding when you are accustomed to a more full featured language.</p>
+
+<h2>Debugging</h2>
+
+
+<p>This is where you are ging to spend the majority of your life as a developer.  If you don&#8217;t, you&#8217;re a better dev than I.  And let me tell you something: debugging sucks in Javascript.  Compound this with the fact that it is pretty much impossible to debug Javascript on a mobile device and you have a recipe for may, many lost hours chasing bugs.</p>
+
+<p>Let&#8217;s look at Appcelerator and PhoneGap: <span style="color: #ff0000;"><del datetime="2011-03-10T18:24:52+00:00">They have no ability to debug on a device</del></span> (I&#8217;ve had suggestions to try <a href="http://pmuellr.github.com/weinre/" target="_blank">WEINRE</a> and <a href="http://jsconsole.com/remote-debugging.html" target="_blank">JSConsole</a>).  Appcelerator often refers to a &#8220;debug&#8221; function you can use, but it is simply a logging capability called debugging.  With PhoneGap the suggested method of debugging is running your code against the desktop version of Webkit and using its debugging capabilities.  Neither of these situation is very ideal.</p>
+
+<p>Adobe Air and Flex Hero debug the way you would expect an application to be debugged.  Air can do full integrated, on-device debugging in a number of IDEs (<a href="http://www.jdoqocy.com/click-4249024-10772054" target="_top">Flash Builder</a> and <a href="https://www.cleverbridge.com/429/?affiliate=15006&amp;scope=cart&amp;cart=71011" target="_blank">FDT</a> spring to mind).  This is what should be expected.  While Javascript based mobile frameworks are using web technology, they can no longer expect developer to abide by the web&#8217;s workflow.  When developing native apps we want application debugging, not web debugging.</p>
+
+<p>Do not underestimate the impact that poor debugging capabilities will have on not only the timeline of your project, but also the quality.  In both cases, you just might be better served going the native route.</p>
+
+<h2>2 Layers Of Potential Bugs</h2>
+
+
+<p>We all know that Android, iOS, Blackberry, and any other mobile OS you may encounter is going to have bugs and quirks in its SDK.  The same could be said of all software.  If you are using a mobile framework to develop against these SDKs, you now have 2 layers of potential bugs and quirks.  It can often be difficult and time consuming to determine which one is the culprit&#8230; after you&#8217;ve ruled out your own code of course!</p>
+
+<p>While PhoneGap and Adobe Air suffer from this to a degree, the impact is less on these two frameworks.  This is because they make no attempt to handle native components.  They rely on your own HTML/CSS/JS or Flex/AS3 components respectively to serve your UI.  Some see this as a drawback and taking away from the native user experience.  I, on the other hand, see it as a step towards true uniformity in your app.  <span style="color: #ff0000;">You need to make a decision: Do I want a native or uniform experience?</span></p>
+
+<p>Appcelerator suffers more from this situation.  By taking their unique approach of offering a Javascript SDK by which you can create native components, you are given the opportunity to create a native experience without having to engage in native development.  This is very appealing to many developers.  I know it was to me.  The unfortunate side-effect of this is that you many times will not get exactly what you would expect out of a component.  Due to the need to abstract functionality in order to make one code set apply to many different mobile OS components, you may find configurability difficult.  Determining whether something is misbahving in your app because of your code, your framework, or your SDK becomes quite troubling.</p>
+
+<hr/>
+
+
+
+
+<h2>Summary</h2>
+
+
+<p>I gave the summary at the beginning, since I don&#8217;t know if a lot of you have the stomach for this much negativity in one blog post.  There was a lot to say and detail, but the short, blunt intro summary is my current sentiment on the state of mobile development.</p>
+
+<p>Just to be clear, its not all gloom and doom for mobile frameworks.  Check out the post I did a little while back detailing all the areas where these mobile frameworks can make your life much easier.  And these frameworks are getting better everyday.  PhoneGap is quickly <a href="http://wiki.phonegap.com/w/page/28291160/roadmap-planning" target="_blank">closing the gap</a> (pun) between itself and the other mobile frameworks in terms of features.  Appcelerator is making some major moves by creating a community of Titans to bring more notoriety to the cause.  They are also due to release the first public beta of their new IDE, a fusion between <a href="http://www.appcelerator.com/" target="_blank">Titanium Developer</a> and <a href="http://www.aptana.com/" target="_blank">Aptana</a>, sure to help the current state of Javascript development.  And Adobe is aggressively garnering support for its <a href="http://labs.adobe.com/" target="_blank">pre-release programs</a> for Air, Flash Player, and Flash Builder.  I believe new features along with improved performance across all platforms is going to be the fruit of this labor.</p>
+
+<p>So I haven&#8217;t given up yet and will continue to actively pursue these platforms.  I may wait for a bit more dust to settle though before engaging in a large scale project with any of them.  I&#8217;m sure folks braver than I are more than able to have success doing so right now.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-10T10:37:00-05:00" pubdate data-updated="true">Mar 10<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/air/'>air</a>, <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/html5/'>html5</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/phonegap/'>phonegap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/03/09/tethering---android-development---fail/" title="Previous Post: Tethering + Android Development = FAIL">&laquo; Tethering + Android Development = FAIL</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/03/14/android--getting-your-keystore-from-a-p12-certificate/" title="Next Post: Android: Getting your keystore from a p12 certificate">Android: Getting your keystore from a p12 certificate &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

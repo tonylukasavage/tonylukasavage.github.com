@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of away3d_motion</title>
+	<nodes>
+		<node label="src">
+			<node icon="mxmlAppIcon" selected="true" label="away3d_motion.as" url="source/away3d_motion.as.html"/>
+			<node icon="imageIcon" label="ice.jpg" url="source/ice.jpg.html"/>
+			<node icon="imageIcon" label="lava.jpg" url="source/lava.jpg.html"/>
+			<node icon="imageIcon" label="starfield2.jpg" url="source/starfield2.jpg.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 664K)" url="away3d_motion.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: webgl | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/webgl/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2013/04/10/web-based-stl-viewing-three-dot-js/"/>
+    <updated>2013-04-10T10:50:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2013/04/10/web-based-stl-viewing-three-dot-js</id>
+    <content type="html"><![CDATA[<p><a class="fancybox.iframe" href="http://tonylukasavage.github.com/images/github_stl.png" ><img src="http://tonylukasavage.github.com/images/github_stl.png" style="width:33%; float:right; margin-left:10px;"></a></p>
+
+<p><strong>Get the full demo:</strong> <a href="https://github.com/tonylukasavage/jsstl">jsstl on Github</a></p>
+
+<p>Recently Github announced that they were <a href="https://github.com/blog/1465-stl-file-viewing">integrating a web-based STL viewer into their interface</a>. The <a href="http://en.wikipedia.org/wiki/STL_(file_format)">STL file format</a> has become very well known as of late do to the growing popularity of 3D printing among makers. STL is the format of choice for most 3D printing devices and is as such the format used by almost all accompanying software. So whether you want to print, manage STL files, or convert them to some other format, you need to get to know them well.</p>
+
+<!-- more -->
+
+
+<p>Seeing as how I'm not a maker but I am intrigued by the 3D printing process, about a year ago I implemented a pure Javascript STL parser (both ascii and binary format) and web-based renderer. It's far from polished, but more than usable. Go ahead and check it out <a href="https://github.com/tonylukasavage/jsstl">on Github</a>. It makes use of a few cool technologies, including <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays">Javascript typed arrays</a>, WebGL, and <a href="http://threejs.org/">three.js</a>.</p>
+
+<h2>Binary Parsing</h2>
+
+<p>Parsing the ascii format of STL files was pretty straight forward based on the <a href="http://en.wikipedia.org/wiki/STL_(file_format)#ASCII_STL">specification</a>. Verbose, but easy. The binary format on the other hand was a bit trickier. Javascript isn't exactly known for its robust binary data handling. Despite this shortcoming, I really wanted to see if I could handle this in pure Javascript. Enter <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays">Javascript typed arrays</a>.</p>
+
+<div class="warning">Javascript typed arrays are a relatively new addition to some major browsers (see also, IE). Check compatibility here: <a href="http://caniuse.com/typedarrays">caniuse.com/typedarrays</a></div>
+
+
+<p>I won't go into it all too deeply here, other than to say that they make binary parsing possible in Javascript. ArrayBuffers represent a generic, fixed-length data buffer, in this case used to store the data from a binary formatted STL file. The DataView in turn exposes a low-level interface for reading, manipulating, and writing ArrayBuffers. Both are used in conjunction to read and pull apart the binary STL into a format that can be used by the web-based rendering engine.</p>
+
+<p>This small snippet below shows how a binary STL file can be read using the DataView. Be sure to check out the APIs for <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/DataView">DataView</a> and <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays/ArrayBuffer">ArrayBuffer</a> to get the full scope of what they can do.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// &quot;stl&quot; represents a raw STL binary read from HTTP response data</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">parseStlBinary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stl</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// create three.js geometry object, discussed later</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">geo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// The stl binary is read into a DataView for processing</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">dv</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DataView</span><span class="p">(</span><span class="nx">stl</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span> <span class="c1">// 80 == unused header</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">isLittleEndian</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Read a 32 bit unsigned integer</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">triangles</span> <span class="o">=</span> <span class="nx">dv</span><span class="p">.</span><span class="nx">getUint32</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">triangles</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Get the normal for this triangle by reading 3 32 but floats</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">normal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">(</span>
+</span><span class='line'>        <span class="nx">dv</span><span class="p">.</span><span class="nx">getFloat32</span><span class="p">(</span><span class="nx">offset</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">),</span>
+</span><span class='line'>        <span class="nx">dv</span><span class="p">.</span><span class="nx">getFloat32</span><span class="p">(</span><span class="nx">offset</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">),</span>
+</span><span class='line'>        <span class="nx">dv</span><span class="p">.</span><span class="nx">getFloat32</span><span class="p">(</span><span class="nx">offset</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>    <span class="nx">offset</span> <span class="o">+=</span> <span class="mi">12</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Get all 3 vertices for this triangle, each represented</span>
+</span><span class='line'>    <span class="c1">// by 3 32 bit floats.</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">geo</span><span class="p">.</span><span class="nx">vertices</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+</span><span class='line'>            <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">(</span>
+</span><span class='line'>                <span class="nx">dv</span><span class="p">.</span><span class="nx">getFloat32</span><span class="p">(</span><span class="nx">offset</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">),</span>
+</span><span class='line'>                <span class="nx">dv</span><span class="p">.</span><span class="nx">getFloat32</span><span class="p">(</span><span class="nx">offset</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">),</span>
+</span><span class='line'>                <span class="nx">dv</span><span class="p">.</span><span class="nx">getFloat32</span><span class="p">(</span><span class="nx">offset</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="nx">isLittleEndian</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>        <span class="p">);</span>
+</span><span class='line'>        <span class="nx">offset</span> <span class="o">+=</span> <span class="mi">12</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// there&#39;s also a Uint16 &quot;attribute byte count&quot; that we</span>
+</span><span class='line'>    <span class="c1">// don&#39;t need, it should always be zero.</span>
+</span><span class='line'>    <span class="nx">offset</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create a new face for from the vertices and the normal</span>
+</span><span class='line'>    <span class="nx">geo</span><span class="p">.</span><span class="nx">faces</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Face3</span><span class="p">(</span><span class="nx">i</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="nx">i</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">i</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="nx">normal</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// continue parsing STL faces for rendering...</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Rendering</h2>
+
+<p>Since STLs represent real objects, they obviously need to be rendered in 3 dimensions. On the web we have a few choices for that, but I'm going to let my framework of choice do the selection for me. In this case I used <a href="http://threejs.org/">three.js</a>. Three.js has exposed a 3D rendering API in Javascript that is compatible with both WebGL and the HTML5 canvas element. In this way you can gracefully fail back to canvas when operating in a browser that does not support the higher performing WebGL.</p>
+
+<p>It's not dumb luck that I chose to use this terrific library, I've used it before. Over a year ago I used three.js and <a href="http://www.appcelerator.com/platform/titanium-platform/">Titanium</a> to create an experimental 3D demonstration across multiple mobile devices using socket communication in realtime. Instead of trying to explain it all, you can check out the screencast I did regarding it below. This is part 3 of a 3 part series. Click <a href="http://vimeopro.com/appcelerator/forging-titanium/video/32976053">here</a> to check out the previous parts.</p>
+
+<iframe src="http://player.vimeo.com/video/32976053" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p>So needless to say I was already primed to use it again. In the STL viewer I would be using it to render the 3D triangle information from the STL files into faces of a mesh. This turned out to be pretty easy with three.js. The snippet below shows how I took the data I read from the STL in the <a href="#parsing">Binary Parsing</a> section above and then used it to render a series of triangles that would compose a mesh of the STL object.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">mesh</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// the &quot;geo&quot; object we filled with normals and vertices above</span>
+</span><span class='line'><span class="nx">geo</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// create a material for the mesh</span>
+</span><span class='line'><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">overdraw</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">color</span><span class="o">:</span> <span class="mh">0xaa0000</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shading</span><span class="o">:</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">FlatShading</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And that's it. The hard part was done creating that <code>geo</code> object. We now have the <code>mesh</code> object to which we can add to a prepared three.js scene. For the full code, check the <a href="https://github.com/tonylukasavage/jsstl">repo</a>.</p>
+
+<h2>The Result</h2>
+
+<p>To keep things interesting, naturally I chose a weird, frankenstein of an STL in <a href="http://www.thingiverse.com/thing:10367">octocat</a> that I found on <a href="http://www.thingiverse.com">thingiverse.com</a> for my testing. I did this for 3 reasons.</p>
+
+<ol>
+<li>It was too unusual and cool to pass up.</li>
+<li>It had both the ascii and binary format available.</li>
+<li>It's composed of almost 38,000 triangles. I wanted to see how well a web-based 3D renderer could handle a complex model.</li>
+</ol>
+
+
+<p>So without further ado, here's the end result, provided <a href="http://caniuse.com/typedarrays">your browser supports it</a>. Feel free to use, bend, mold, and/or steal this code as you like. A <a href="https://twitter.com/tonylukasavage">digital high five</a> would be nice, but is not required.</p>
+
+<iframe src="http://tonylukasavage.github.com/projects/stl_viewer/index.html" width="100%" height="300"></iframe>
+
+]]></content>
+  </entry>
+  
+</feed>

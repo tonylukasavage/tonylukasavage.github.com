@@ -1,0 +1,56 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>TargetCamera3D.as</title>
+<link rel="stylesheet" type="text/css" href="../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">cameras</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">arcane</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">cameras</span>.<span class="ActionScriptDefault_Text">lenses</span>.<span class="ActionScriptOperator">*</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">core</span>.<span class="ActionScriptDefault_Text">base</span>.<span class="ActionScriptOperator">*</span>;
+    
+    <span class="ActionScriptReserved">use</span> <span class="ActionScriptReserved">namespace</span> <span class="ActionScriptDefault_Text">arcane</span>;
+    
+    <span class="ActionScriptASDoc">/**
+    * Extended camera used to automatically look at a specified target object.
+    * 
+    * @see away3dlite.containers.View3D
+    */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">TargetCamera3D</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">Camera3D</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptReserved">override</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">update</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">target</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">lookAt</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">target</span>.<span class="ActionScriptDefault_Text">transform</span>.<span class="ActionScriptDefault_Text">matrix3D</span>.<span class="ActionScriptDefault_Text">position</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptReserved">super</span>.<span class="ActionScriptDefault_Text">update</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+        * The 3d object targeted by the camera.
+        */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">target</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Object3D</span>;
+        
+        <span class="ActionScriptASDoc">/**
+        * Creates a new &lt;code&gt;TargetCamera3D&lt;/code&gt; object.
+         * 
+         * @param focus        Defines the distance from the focal point of the camera to the viewing plane.
+         * @param zoom        Defines the overall scale value of the view.
+         * @param target    The 3d object targeted by the camera.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">TargetCamera3D</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">focus</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> 10, <span class="ActionScriptDefault_Text">zoom</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> 100, <span class="ActionScriptDefault_Text">target</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Object3D</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>, <span class="ActionScriptDefault_Text">lens</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">AbstractLens</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">focus</span>, <span class="ActionScriptDefault_Text">zoom</span>, <span class="ActionScriptDefault_Text">lens</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">target</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">target</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Object3D</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+
+<span class="ActionScriptBracket/Brace">}</span>   
+</pre></body>
+</html>

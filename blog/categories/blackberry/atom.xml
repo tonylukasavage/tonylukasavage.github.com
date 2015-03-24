@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blackberry | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/blackberry/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Deeper Look at Appcelerator and PhoneGap]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap/"/>
+    <updated>2011-04-20T12:58:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap</id>
+    <content type="html"><![CDATA[<h2><span style="font-size: 20px; font-weight: bold;">Overview</span></h2>
+
+
+<p>I'd like to start by saying that I think it's important that both of these frameworks exist.  The more I worked with each, the more I found that it wasn't a simple question of which mobile framework was better.  Both have some of the features a cross platform framework should have, and each shines in areas that the other frankly does not.  And that will be the focus of this analysis.  What are the key aspects to a great cross platform mobile framework, and how do <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> and <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> stack up.</p>
+
+<h1>Cross Platform Support</h1>
+
+
+<p>So this is why we're all here right? Code once, run every where.  That's what we want.  Well in this case, one of these solutions gets you a lot closer than the other.</p>
+
+<p>This is PhoneGap's bread and butter.  By leveraging web views native to the mobile devices, PhoneGap allows you to build as an app as complex and modern as you want while providing the ability to have it gracefully degrade for lower end devices, all in the same code base.  This degradation can be controlled via CSS or even dynamically with javascript and media queries.  You can use the same design and development principles that have guided cross browser development for years.  And the list of mobile platforms they support (which includes iOS, Android, Blackberry, webOS, and Symbian)  is definitely worth bragging about.</p>
+
+<p>Appcelerator, on the other hand, does iOS really, really well.  Android brings some additional headaches and quirks.  Blackberry is still in the beta stage.  They are actually creating native code based on their Javascript API, so the quirks will likely always exist. Appcelerator will constantly be one step behind/removed in their efforts to integrate native functionality.  No fault of their own, it's just the nature of their product.</p>
+
+<p>This is why I think emphasis on Appcelerator being a cross platform framework is misleading.  <strong>While it CAN be a cross platform framework, it is not by nature</strong>.  I mean, how can it be? One of its main selling points is access to native UI components, something that is obviously not part of a cross platform solution.  One code base for multiple mobile platforms is totally a possibility with Appcelerator, but you will likely sacrifice a lot of what makes it great (coming in the following sections) to get to that lowest common denominator.</p>
+
+<h1>Defined Workflow</h1>
+
+
+<p>The product will only be as good as the tools that support, particularly when you are trying to appeal to an audience as large as mobile developers.  In this respect, Appcelerator is the clear winner.</p>
+
+<p>Earlier this year Appcelerator announced that they had acquired the web development IDE <a href="http://www.aptana.com/" target="_blank">Aptana</a>. Before this point you were stuck with <a href="http://www.appcelerator.com/products/" target="_blank">Titanium Developer</a> which did the job, but was only a project deployment tool, not a true IDE.  Just this month they introduced the first version of the new <a href="http://preview.appcelerator.com/studio/" target="_blank">Titanium Studio</a>, an integration of Titanium Developer and Aptana.  There were a few bugs to wrestle with the earliest versions of this software, but I must say that I am loving it.  It has truly integrated the development and deployment workflow, making it more organized and efficient.  It has built in update checking for not only the studio but also the Titanium SDKs.  Oh, and <strong>did I mention that all of this is free</strong>?</p>
+
+<p>PhoneGap leaves you to your own tools and workflow.  A plus for some, but I would imagine its a minus for those of us who don't come from primarily a web development background.  They give you some direction in the <a href="http://www.phonegap.com/tools" target="_blank">Tools</a> section of their website, but its not what you would call a workflow.  It a different approach, basically leaving the developer to determine what libraries, IDE, touch frameworks, etc... are most appropriate for their project.  This can be problematic for two reasons. 1, new mobile developers are not going to know which tools are the most appropriate and 2, there are A LOT of available touch and JS libraries out there for mobile development.  Choosing can be a project in its own rite. All that said, <a href="http://twitter.com/#!/brianleroux" target="_blank">Brian Leroux</a> of <a href="http://www.nitobi.com/" target="_blank">Nitobi</a>, the makers of PhoneGap, created the <a href="http://xuijs.com/" target="_blank">XUIJS library</a>. Its what I'm using and I'm really digging it so far.</p>
+
+<h1>Programming Language</h1>
+
+
+<p>Admit it Appcelerator developers, you aren't interested in the Javascript API so much as you are interested in <strong>NOT</strong> writing Objective-C!  Yeah, me too.</p>
+
+<p>You would think this topic would be a deadlock, right?  Its just Appcelerator's Javascript API versus PhoneGap's use of the standard web stack of HTML/CSS/JS.  It basically the same thing... or is it?  Remember how I said in the last section that PhoneGap gives you free reign to choose whatever framework you want for development?  Well, Appcelerator doesn't, and it is definitely to the chagrin of many Javascript savvy developers.</p>
+
+<p>PhoneGap is HTML/CSS/JS.  Anything you can do with it on a normal web page you can do in a mobile browser's web view.  This means any chunk of Javascript you find anywhere that you like can potentially be integrated into you app.  This ranges from your favorite frameworks like <a href="http://jquery.com/" target="_blank">jQuery</a> and <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, mobile  libraries like <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, or even graphical ones like Grant Skinner's <a href="http://easeljs.com/" target="_blank">EaselJS</a> or one of these many <a href="http://javascript.open-libraries.com/multimedia/3d/fantastic-javascript-3d-libraries/" target="_blank">3D libraries</a>.  Performance and device support permitting, you can use any Javascript you want.</p>
+
+<p>Appcelerator's API unfortunately is purely Javascript, is has no ties to the DOM.  But wait, doesn't the most popular Javascript library in the world assume the presence of the DOM window and document?! Yep, that's right, <strong>you can't use any part of jQuery that requires the DOM</strong> (which is almost all of it) in your Appcelerator code.  The one exception is that you can still use jQuery and other DOM reliant libraries in a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium.UI.WebView</a>, but you can't use it with the actual Appcelerator API.  Annoying to me, but I can see this being REALLY aggravating  to long time web developers accustomed to using jQuery with everything.</p>
+
+<h1>Deployment Support</h1>
+
+
+<p>If you've spent any time in mobile development, you know that deploying your finished app to markets and app stores can be a truly daunting task.  There's certificates, app signing, icons, logos, promotional images, supporting text, and the task of keeping it all organized.  It can quickly become a mess.  While both Appcelerator and PhoneGap both give you detailed instructions on how to build app store ready apps from your development environment and offer professional services, <strong>PhoneGap takes it one huge step further</strong>.</p>
+
+<p><a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a> is currently a free beta service that you need to get your ass signed up for now.  While I highly encourage you to check it out for yourself, here's the insanely easy workflow:</p>
+
+<ol>
+    <li>Upload you PhoneGap project to PhoneGap Build (or use its Github integration)</li>
+    <li>Configure your platform specific accounts with certificates and signing keys (all PhoneGap supported platforms available)</li>
+    <li>Watch as PhoneGap Build creates deployable binaries for each of these platforms and delivers you download links for each</li>
+</ol>
+
+
+<p>Now that is the type of workflow I'm looking for! A quick note on step #2 is that iOS is the only platform that requires a certificate to get a testable binary.  You'll want to set up certificates and keys before you deploy the the market/app store, but you can test the binary without them.</p>
+
+<h1>Speed of Development</h1>
+
+
+<p>All this flexibility and platform support has to bite PhoneGap in the ass somewhere, right?  Speed of development, if you can't tell by it name, is another place that Appcelerator excels.</p>
+
+<p>Appcelerator allows developers to start building an app that looks, feels, and performs like a native one very quickly.  Some of the big reasons are the following:</p>
+
+<ul>
+    <li>Their Javascript API is infinitely easier than Objective-C, and some might also say Java (but not me)</li>
+    <li>Tons of ready-to-use native UI components</li>
+    <li>You are not required to adhere to the MVC architectural pattern</li>
+    <li>The double-edged sword of loosely typed Javascript allows you to create custom components like table views and rows very easily</li>
+    <li>The new Titanium Studio gives you one place to develop and build for multiple platforms</li>
+</ul>
+
+
+<p>&nbsp;</p>
+
+<iframe src="http://player.vimeo.com/video/8730218?title=0&amp;byline=0&amp;portrait=0&amp;color=9a0707" width="400" height="225" frameborder="0"></iframe>
+
+
+<p>PhoneGap, though, is a bare bones framework.  It looks to provide mobile API support (things like location, accelerometer, etc...) across all major vendors.  The UI is left up to you and your chops as a web developer.  To that end <strong>most people are left to go find another touch framework to layer on top of PhoneGap</strong>.  <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>, <a href="http://jqtouch.com/" target="_blank">JQTouch</a> are all popular options.  There's even efforts to create <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">web based "native" components</a>.  You can also take my route and build most of it from scratch using <a href="http://xuijs.com/" target="_blank">XUIJS</a>.</p>
+
+<p>The long and short is that if you are only building for iOS, or maybe also Android, Appcelerator will likely get you from concept to completion faster than PhoneGap.</p>
+
+<h1>Documentation</h1>
+
+
+<p>Documentation is key when undertaking any new technology.  Both frameworks have their ups and downs here.</p>
+
+<p>Appcelerator maintains a newly improved collection of there documentation on their <a href="http://wiki.appcelerator.org/display/guides/Home#" target="_blank">new Confluence site</a>.  While it is fairly comprehensive, it is also a bit jumbled, particularly the <a href="http://wiki.appcelerator.org/display/guides/Getting+Started+with+Titanium" target="_blank">"Getting Started" section</a>.  Its all there if you have the patience to find what you are looking for.  You'll find installation, setup, examples, tutorials, the works.  You can also find a comprehensive listing of their <a href="http://developer.appcelerator.com/apidoc/mobile/latest" target="_blank">mobile API here</a>.  The problems I see with their documentation are the following:</p>
+
+<ul>
+    <li>Its sometimes hard to tell what version of their SDK examples apply to</li>
+    <li>Often Titanium objects have properties that don't apply, or don't behave as the documentation indicates</li>
+    <li>You are sometimes left digging through the Q &amp; A section to find the quirks for specific Titanium objects</li>
+    <li>Examples given for Titanium objects are WAY too simplistic</li>
+    <li>How 'bout a few more "Hello, World!" scale tutorials before you throw us at the <a href="https://github.com/appcelerator/KitchenSink/" target="_blank">Kitchen Sink</a>?!</li>
+    <li>Im sure this will change after the Titanium Studio release gets some traction, but the "Getting Started" section is still using Titanium Developer as its chosen workflow</li>
+</ul>
+
+
+<p><strong>PhoneGap's <a href="http://www.phonegap.com/start" target="_blank">"Get Started" section</a> is a thing of beauty</strong>.  In a very clean, concise layout, the PhoneGap site walks you through how to set up your computer for each individual platform you wish to develop for.  It list requirements, toolsets, and easy to follow instructions.  It helps ease the intimidation that can come with trying to develop for so many platforms. Once you get it up and running, PhoneGap's <a href="http://docs.phonegap.com/" target="_blank">API documentation</a> is incredibly easy to follow.  A simple layout lists everything PhoneGap is capable of doing.  Clicking on these capabilities then takes you to the API specific documentation that lists usage, examples, device support, and any quirks that are currently known.  It takes a lot of the guess work and frustration out of the inevitable troubleshooting that ensues with cross platform mobile development.</p>
+
+<p>&nbsp;</p>
+
+<p>PhoneGap definitely shines in the documentation department.  In all fairness, though, Appcelerator has a hell of a lot more to document.  PhoneGap's lack of UI components accounts for a large part of its documentation being so easy to follow.</p>
+
+<h1>Community</h1>
+
+
+<p>An active and knowledgable community is one of my biggest factors in choosing any technology.  Appcelerator and PhoneGap both have a wiki and blog, and also offer these a few more resources.</p>
+
+<p>Appcelerator has their <a href="http://developer.appcelerator.com/questions/created" target="_blank">Q &amp; A section</a> of their site.  It allows users to submit questions about Appcelerator to the community.  Users can submit answers, vote on others' answers, and receive points and badges for participation.  If StackOverflow has taught us anything, its that people like being rewarded for participation, no matter how meaningless.  On top of this free resource, they also offer training, certification, and professional services for those looking to take their Appcelerator'ing to the next level.  I hand out on Twitter a lot, so its worth mentioning that you can get some great help and info regarding Appcelerator by following <a href="http://twitter.com/#!/appcelerator" target="_blank">@appcelerator</a>, <a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a>, <a href="http://twitter.com/#!/aaronksaunders" target="_blank">@aaronksaunders</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a>.</p>
+
+<p>PhoneGap maintains a connection with the community with their <a href="http://groups.google.com/group/phonegap" target="_blank">Google Group</a> and on IRC at <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">irc.freenode.net #phonegap</a>.  They also offer <a href="http://www.phonegap.com/services" target="_blank">professional services and training</a>.  The core of the PhoneGap team is very involved with the community and I've often been found chatting with <a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>, <a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>, <a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>, and <a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a> on Twitter.</p>
+
+<p>Other than wishing PhoneGap had some kind of a forum system better than a Google group, I think both frameworks do a very good job of listening to and staying engaged in the community.</p>
+
+<h1>Extensibility</h1>
+
+
+<p>No developer I have ever known is just happy with the tools he's given.  We want to be able to add to and modify anything we get our hands on.  Both frameworks are very extendable via modules and offer open source licenses, though PhoneGap's option of <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">"New" BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT license</a> is a little nicer than Appcelerator's <a href="http://www.opensource.org/licenses/apache2.0.php" target="_blank">Apache 2.0 license</a>.</p>
+
+<p>Appcelerator offers <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+Android" target="_blank">Android</a> and <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+iOS" target="_blank">iOS</a> module development guides.  These allow you to build native components in their native SDKs and then be able to access them in your Appcelerator app via the Javascript API.  Anywhere Appcelerator falls short in terms of supporting any API or UI component, you are free to pick it up and make it happen.  Its not the simplest process and effectively removes the possibility of  cross platform code, but can be a strong tool for a single platform scenario.</p>
+
+<p><strong>UPDATE</strong>: In addition, Tony Guntharp also gave me this blog post detailing how modules can be developed in other languages as well: <a href="http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html">http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html</a></p>
+
+<p>PhoneGap also supports additional modules, or plugins, to its framework in the same fashion that Appcelerator does.  You can develop native code and then write hooks back to PhoneGap to access it in your project.  Again, this undoes any cross platform compatibility unless you make the native component for all supported platforms.  There's a <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">guide to creating plugins found here</a>.</p>
+
+<p><strong>Appcelerator on Github:</strong> <a href="https://github.com/appcelerator" target="_blank">https://github.com/appcelerator</a>
+<strong>PhoneGap on Github:</strong> <a href="https://github.com/phonegap/phonegap" target="_blank">https://github.com/phonegap/phonegap</a></p>
+
+<h1>Summary</h1>
+
+
+<p>So as I stated at the beginning, I think both of these frameworks are important and have their place in the mobile landscape.  From my personal perspective, as they both stand now, PhoneGap is the true cross platform solution.  <a href="http://twitter.com/#!/fling" target="_blank">Brian Fling</a>, author of <a href="http://oreilly.com/catalog/9780596155452" target="_blank">"Mobile Design and Development"</a>, rang the point home throughout his book that the future of mobile development lies in web based applications that adhere to a structure of graceful degradation.  I initially thought he was a web developer who didn't want to learn Objective-C or Java.  After spending some time with native development and multiple cross platform frameworks, I find myself coming to the same conclusion.</p>
+
+<p>But that's not to say that PhoneGap is the end all, be all of mobile development.  I happen to think that for iOS &amp; Android projects, Appcelerator could likely be your best choice.  Unless you have prior experience with Objective-C, I would advise anyone with even a basic knowledge of Javascript to give it a shot before resorting to native development.  Trust me, you won't miss Interface Builder, and outlets, and actions, and all kinds of other iOS MVC fun.  Oh, and you're sure to enjoy the native UI and performance that Titanium uniquely provides.</p>
+
+<p><strong>NOTE:</strong> I would have liked to include Adobe Air as I did in my past comparison, but I honestly have not used it in 2+ months and there have been serious changes since.  I've been focusing on cross platform solutions that can hit the big three mobile devices out there: Android, iOS, and Blackberry.  Soon as Blackberry supports Adobe Air you better believe I'm coming back to re-evaluate it.  I'll take AS3 and/or Flex over HTML/CSS/JS any day.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Developer's Icon &amp; Image Checklist]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist/"/>
+    <updated>2011-03-24T09:51:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist</id>
+    <content type="html"><![CDATA[<h2>Overview</h2>
+
+
+<p>If there's one thing I've learned from delving into iOS, Android, and Blackberry app development, it's that there's a lot more to creating a mobile app than just coding it.  One of the things that can catch you off guard, especially if you are devoid of design ability like me, is the amount of icons and images necessary to deploy your apps.  This becomes even more daunting when you intend to deploy to multiple platforms.</p>
+
+<p>The other concern is that it isn't always evident from the development tools how many different graphics you need to account for all scenarios.  A new iOS developer will likely be unaware that you need a 58x58 pixel icon for iPhone 4 Spotlight and Settings.  To attempt to alleviate some of this confusion, I put together these charts to detail what I know so far about the graphics required for submitting mobile apps to the various Android, iOS, and Blackberry markets.</p>
+
+<h2>Icons</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android</td>
+<td width="15%">iOS</td>
+<td width="15%">Blackberry Playbook</td>
+<td width="45%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">29x29</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone Settings and Spotlight, iPad Settings</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">36x36</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">low pixel density icon</td>
+</tr>
+<tr>
+<td class="leftHeader">48x48</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">medium pixel density icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">50x50</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPad Spotlight. iOS will trim 1 pixel off each side and add a drop shadow, making it 48x48</td>
+</tr>
+<tr>
+<td class="leftHeader">57x57</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">58x58</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone 4 Settings and Spotlight</td>
+</tr>
+<tr>
+<td class="leftHeader">64x64</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional small custom document icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">72x72</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Android high pixel density icon, iPad icon</td>
+</tr>
+<td class="leftHeader">86x86</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">standard Playbook icon. It will trim 5 pixels off each side, making it 76x76</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">96x96</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">114x114</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone 4 icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">144x144</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">320x320</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional large custom document icon</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<br><br>
+
+
+
+
+<h2>Distribution Images</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android Market</td>
+<td width="15%">Apple App Store</td>
+<td width="15%">Blackberry App World</td>
+<td width="15%">Amazon App Store</td>
+<td width="30%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">screenshot sizes</td>
+<td>320x480, 480x800, 480x854, 1280x800</td>
+<td><strong>iPhone</strong>: 320x480, 480x320, 320x460, 480x300 <strong>iPhone 4</strong>: 640x960, 960x640 <strong>iPad</strong>: 768x1024, 1024x768, 748x1024, 1004x768</td>
+<td>640x640 or smaller</td>
+<td>480x854, 854x480</td>
+<td class="notes">required # of screenshots:
+<strong>Android</strong>: at least 2
+<strong>Apple</strong>: at least 1
+<strong>Blackberry</strong>: 1-50
+<strong>Amazon</strong>: 3-10</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">114x114</td>
+<td></td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">device icon</td>
+</tr>
+<tr>
+<td class="leftHeader">180x120</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Promotional graphic (no alpha)</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">480x480</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Product icon that should match your 86x86 icon</td>
+</tr>
+<tr>
+<td class="leftHeader">512x512</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">Large/High resolution product icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">1024x500</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Feature graphic for market</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h2>Additional Notes</h2>
+
+
+<p><strong>For Android</strong>, your 36x36, 48x48, and 72x72 pixel icons should be placed in the <strong>drawable-ldpi</strong>, <strong>drawable-mdpi</strong>, and <strong>drawable-hdpi</strong> folders of your Android project respectively.  Be sure to specify the name of the file you will be using in the <strong>android:icon</strong> attribute of the <strong><application></strong> element in your AndroidManifest.xml file.  Android also allows you to include a promotional video.</p>
+
+<p><strong>For iOS</strong> you simply need to add your appropriately sized and named icons to your <strong>Resources</strong> directory in your XCode project.  Here's a mapping of the icon sizes to the required name of the icon file. <strong>NOTE</strong>: There is purposely no extension on the 512x512 iTunesArtwork file.</p>
+
+<ul>
+<li>29x29 - Icon-Small.png</li>
+<li>50x50 - Icon-Small-50.png</li>
+<li>57x57 - Icon.png</li>
+<li>58x58 - Icon-Small@2x.png</li>
+<li>72x72 - Icon-72.png</li>
+<li>114x114 - Icon@2x.png</li>
+<li>512x512 - iTunesArtwork</li>
+</ul>
+
+
+<p><strong>For Blackberry Playbook</strong>, you need to specify the name of your 86x86 application icon in your application's <strong>blackberry-tablet.xml</strong> file.  Below is a sample of how you would set that up.</p>
+
+<p>``` xml
+<qnx></p>
+
+<pre><code>&lt;icon&gt;
+    &lt;image&gt;86x86.png&lt;/image&gt;
+&lt;/icon&gt;
+&lt;publisher&gt;My Company&lt;/publisher&gt;
+&lt;category&gt;core.games&lt;/category&gt;
+&lt;splashscreen&gt;my_splashscreen.jpg&lt;/splashscreen&gt;
+</code></pre>
+
+<p></qnx>
+```</p>
+
+<p><strong>For the Amazon App Store</strong> you can also submit promotional images of various sizes and up to 5 promotional videos.</p>
+
+<h2>Summary</h2>
+
+
+<p>So as you can see, you've got a lot to consider when it comes to presenting your mobile application to the masses.  As a developer, I'm looking for the simple solution here.  For me, the easiest thing to do was use this <a href="http://www.command-tab.com/2008/09/20/iphone-and-ipod-touch-icon-template/" target="_blank">512x512 iOS icon template</a>, create my icon, and scale it down to all the required sizes.  If you happen to be reading this post and know a better/easier workflow, please let me know.</p>
+
+<p>Here's a few references to check out to get some additional information on mobile app icons and market images:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/library/safari/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html" target="_blank">iOS Human Interface Guidelines - Custom Icon and Image Creation Guidelines</a></li>
+<li><a href="http://developer.apple.com/library/ios/#qa/qa1686/_index.html" target="_blank">App Icons on iPad and iPhone</a></li>
+<li><a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design.html" target="_blank">Android Icon Design Guidelines</a></li>
+<li><a href="http://docs.blackberry.com/en/developers/deliverables/22301/Designing_application_icons_tablet_1401556_11.jsp" target="_blank">Blackberry Playbook - Designing Application Icons</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Repper for Blackberry Playbook with Full Source]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/23/repper-for-blackberry-playbook-with-full-source/"/>
+    <updated>2011-03-23T09:09:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/23/repper-for-blackberry-playbook-with-full-source</id>
+    <content type="html"><![CDATA[<h2>The Code</h2>
+
+
+<ul style="padding-top: 20px; padding-bottom: 20px;">
+    <li><a href="https://github.com/tonylukasavage/Repper-playbook" target="_blank">Repper-playbook on Github</a> -- Full source code and Flash Builder "Burrito" project files</li>
+</ul>
+
+
+
+
+<h2>The Overview</h2>
+
+
+<p>I mentioned this week that if you hustle you can still get yourself a <a href="http://us.blackberry.com/developers/tablet/playbook_offer.jsp" target="_blank">free Blackberry Playbook</a>.  Just follow <a href="http://savagelook.com/blog/actionscript3/procrastinators-guide-to-a-free-blackberry-playbook">my procrastinator's guide</a> and you could very well still have enough time to make it.  I also made posted a while ago the incredibly simple process of porting <a href="https://market.android.com/details?id=air.Repper" target="_blank">Repper</a>, my fitness calculator mobile app written with <a href="http://labs.adobe.com/technologies/flexsdk_hero/" target="_blank">Flex "Hero"</a>, to the Playbook.  If that wasn't enough for you, here's one more bit of charity to motivate to try and beat that March 31st, 2011 deadline to submit an app for a free Playbook.</p>
+
+<p>In the <a href="https://github.com/tonylukasavage/Repper-playbook" target="_blank">Github link</a> at the top I've included the full source and project files for Flash Builder "Burrito" for Repper.  Yep, everything it took to make a Playbook app that was submitted and approved is included within.  Take a look, pull it down, load it up, and see how a simple, functional app can get you a free tablet.  If you are wondering what your time is worth in comparison to the effort necessary, the model that developers are likely to receive (16 GB) is being priced at $500.  Seems a fair trade for a few hours of your time.</p>
+
+<p>So now you have a guide to getting a Blackberry Playbook app submitted as quickly as possible and full source code for a project that has already been approved.  Pair that with the fact that I've not heard of one functional app not being approved, you are completely out of excuses to not cash in on this offer.  Dig in and get it done.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Procrastinator's Guide to a Free Blackberry Playbook]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/21/procrastinator-s-guide-to-a-free-blackberry-playbook/"/>
+    <updated>2011-03-21T16:28:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/21/procrastinator-s-guide-to-a-free-blackberry-playbook</id>
+    <content type="html"><![CDATA[<p>This past week my fitness calculator app, Repper, was approved for the Blackberry App World.  In return for enduring Research in Motion's arduous app submission process, I will be awarded with a free <a href="http://us.blackberry.com/playbook-tablet/" target="_blank">Blackberry Playbook</a> once they are officially released to the public.  Because I'm so pleased with this news, I thought I would share what I perceive as the easiest route to getting your hands on a free Playbook yourself.</p>
+
+<p><span style="color: #ff0000;">You only have til March 31st to submit your app</span>, according to the <a href="http://us.blackberry.com/developers/tablet/playbook_offer.jsp" target="_blank">latest version of their offer</a>.  While this date has been pushed back a number of times, I suspect this may be the hard deadline.  You don't need to be approved by the due date, you just need to have your app submitted.  You may think I'm exaggerating here, but creating the app is the easy part, submitting is the real pain in the ass.</p>
+
+<p>So before I get into too many boring details, let me lay out the list of things you need to do in order to reduce the amount of surprise time sucks you will encounter:</p>
+
+<ul>
+    <li><a href="https://appworld.blackberry.com/isvportal/signup/signupterms.seam?pageIndex=1&amp;cid=295177" target="_blank">Sign up to be a Blackberry vendor</a></li>
+    <li><a href="https://www.blackberry.com/SignedKeys/" target="_blank">Get your code signing keys</a></li>
+    <li><a href="http://us.blackberry.com/developers/tablet/adobe.jsp" target="_blank">Follow the getting started guide</a> for setting up your AS3/Flex development environment (or <a href="http://us.blackberry.com/developers/tablet/webworks.jsp" target="_blank">WebWorks</a> if that's your thing)</li>
+    <li>Convert an existing AS3/Flex project or create a new app (<strong>IF YOU ONLY READ ONE SECTION, READ THIS</strong>)</li>
+    <li><a href="http://docs.blackberry.com/en/developers/deliverables/23959/Signing_your_application_1422721_11.jsp" target="_blank">Sign</a> and submit your app to the Blackberry App World through the <a href="https://appworld.blackberry.com/isvportal/home/login.seam?pageIndex=1&amp;cid=296029" target="_blank">vendor portal</a>.</li>
+    <li>Wait for approval</li>
+</ul>
+
+
+<p>The steps necessary are listed in a very specific order to maximize efficiency, particularly becoming a vendor and getting code signing keys.  Read the section below detailing each step to find out why.  So again, <strong>DO THE STEPS IN ORDER</strong>, it will save you time in the end.</p>
+
+<h2>Sign up to be a Blackberry vendor</h2>
+
+
+<p>This is simple enough. You just need to fill out a form with relevant personal information do that Blackberry has a record of who you are.  In the early stages of this process you actually needed to submit a notarized letter, if you were an individual and not a company, in order to complete the registration.  From what I understand this is no longer required so it should make your life a little easier.</p>
+
+<p><span style="color: #ff0000;">Blackberry is also waiving their usual $200 registration fee for developers during this period</span>.  So whether or not you plan to hit this deadline, it may be worthwhile just to sign up and get in for free.</p>
+
+<p>You will do this first because this process may take a few business days to complete.  They review the vendor registration submissions and Blackberry has not been terribly quick with approvals at any step in this process.  In fact, that is the most common complaint about the app submission process so far is simply how long it takes to complete.  So get this done first and don't wait for approval to move on to the next step.</p>
+
+<h2>Get your code signing keys</h2>
+
+
+<p>This is another step that is as simple as filling out forms, but again requires Blackberry's intervention to approve.  Also bear in mind that the code signing key you will receive will only work on one workstation once registered and cannot be transfered to another workstation.  You have to request another key is you want it to work on another workstation.  I have requested 2 keys thus far and both have taken at least 2 business days to arrive via email.</p>
+
+<p><span style="color: #ff0000;">Like the last step, get this done now and don't wait for the key to arrive to move on</span>.  Hopefully by the time you are ready to submit your app to the App World you'll have received your vendor approval and signing key.</p>
+
+<h2>Follow the Getting Started Guide</h2>
+
+
+<p>I'm not going to go into a great deal of detail here because the Blackberry documentation lays it out very well.  Just follow <a href="http://us.blackberry.com/developers/tablet/adobe.jsp" target="_blank">the guide found here</a> and you'll be fast on your way to your Blackberry Playbook "Hello, World!".</p>
+
+<p>One thing to keep in mind is that you must be building against the 0.9.4 SDK. I initially made the mistake of hanging on to the old 0.9.3 SDK and Blackberry has requested that I rebuild against the latest version before being able to make my app available on the App World.  Its not a huge deal, but will require you to go through the whole app update process if you don't do it right the first time.  That said, they still extended me the offer of the free Playbook without yet having made this change.</p>
+
+<h2>Create your app</h2>
+
+
+<p>I know, I'm trivializing what sounds like a big step.  But here's the thing: <span style="color: #ff0000;">I've not heard of one Playbook app that has been turned down due to perceived usefulness or quality</span>.  The only apps that I have heard being rejected are ones that actually don't work.  This is common in the case of people trying to implement multitouch or gesture support when the simulator does not properly emulate the behavior.</p>
+
+<p>In other words, put together a simple application that is useful to a niche group.  Or better yet, convert an existing AS3 or Flex Hero project to a Playbook app.  Check out my prior post to see how I did this in literally seconds.</p>
+
+<p>For me, Repper was a no brainer.  It is a simple fitness calculator that determines your 1-15 rep max on exercises.  It was originally built using Flex Hero in Air for Android.  Its currently available on the <a href="https://market.android.com/details?id=air.Repper" target="_blank">Android Market</a> if you wanna take a look at it there.  You can see there is no rocket science.  Blackberry has no high expectations for the functionality of an app for which developers have no device.  KISS is the key factor here.  Wait til you have one of these Playbooks in your hand before you try to get really creative with it.</p>
+
+<p>Don't get me wrong, I'm not encouraging fart app development here.  I'm just saying that at this point in the game Blackberry is happy handing out Playbooks to competent, motivated developers.  The quality of this one app is not what they are banking on.  They are hoping that with their generous gesture that they may woo more than a handful of mobile developers to spend their time on Blackberry Playbook apps rather than iPad or Android tablets.</p>
+
+<p>In short, no excuses.  Create a useful, simple app.  Its not that hard and you know it.</p>
+
+<h2>Submit your app to the App World</h2>
+
+
+<p>Before digging into the specifics of the submission and signing process, here's the things you'll need:</p>
+
+<ul>
+    <li>Your signing certificate (CSJ file)</li>
+    <li>A less than 4000 character description of your app</li>
+    <li>A 480x480 product image for the App World</li>
+    <li>At least one screenshot that is no larger than 640x640</li>
+    <li>An 86x86 PNG icon, which includes a 5 pixel transparent buffer around it.  This effectively makes the icon content 76x76 or less.</li>
+</ul>
+
+
+<p>First you are going to sign your release build of your application using your CSJ signing certificate.  This is an intimidating and somewhat complex process.  I highly suggest picking from the choices at the bottom of their <a href="http://docs.blackberry.com/en/developers/deliverables/23959/Signing_your_application_1422721_11.jsp" target="_blank">code signing guide</a> and following them to the letter.  I personally had no problems with the workflow for signing apps through Flash Builder 4.5 "Burrito", but I've heard that some people had issues.  The safest route might be to follow the command line instructions for the entire process.  Again I emphasize, follow the instructions to the letter and don't try to frankenstein multiple guides together, it makes it harder to troubleshoot the issues.</p>
+
+<p>After you have successfully signed your app, you just need to submit it to the App World through the <a href="https://appworld.blackberry.com/isvportal/home/login.seam?pageIndex=1&amp;cid=297207" target="_blank">vendor portal</a>. Just go to "Manage Products" and click the "Add Product..." button.  You will be walked through the steps necessary to submit your signed BAR app file.  So long as you have all the items I mentioned above in the list, and a successfully signed app, it should be pretty smooth sailing.  Finding these things out during the submission process was quite frustrating.</p>
+
+<p>Carve out at least an hour for the above process, because it will take some time.  The code signing can be especially time consuming from the command line, but it seems to be the one sure fire way to get the app successfully signed.</p>
+
+<p>If you followed my advice and became a vendor and requested your signing keys first, you won't find yourself waiting for days once you've reached this part of the process... like I did.</p>
+
+<h2>Wait for approval</h2>
+
+
+<p>Now that you finally have your app submitted, you just have to sit back and relax... and relax.... and relax... and do your taxes... and ge your car inspected... and renew your driver's license... you get the idea.  It takes a LONG time to get approved.  I've not heard of anyone getting their first app approved in under 2.5 weeks, with many waiting as long as 7.  But once again, as long as you get the app submitted before the deadline, you are still eligible for the free Playbook.</p>
+
+<p>Once you finally do get approved you'll receive an email telling you as much.  It may also include additional steps you must take in order for your app to be made available in the App World, like mine did.  Shortly following this, for me it was a day later, you'll receive a congratulations notice for your free Playbook.  Included in this email should be a link to a purchase order for your Playbook with a cost of $0.00.  <span style="color: #ff0000;">I have not heard of a single case where an app was approved but the developer did not receive a free Playbook offer</span>.  Fill it out, send it in, and join us in the patient wait for the release date.</p>
+
+<p>Hope you follow these steps and find yourself with your very own free Blackberry Playbook too!  Let me know if you happen upon success yourself.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blackberry Playbook Simulator Tips]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/02/23/blackberry-playbook-simulator-tips/"/>
+    <updated>2011-02-23T09:41:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/02/23/blackberry-playbook-simulator-tips</id>
+    <content type="html"><![CDATA[<h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+<p>Interested in <a href="http://us.blackberry.com/playbook-tablet/?CPID=KNC-kw328392_p6&amp;HBX_PK=rim|005248ec-5d49-ba89-6310-0000150c9969" target="_blank">Blackberry Playbook</a> development?  Well you should be if you want to <a href="http://us.blackberry.com/developers/tablet/v_offer.jsp" target="_blank">get one for free</a>.  And to get one for free, you need to develop for it before the device is even available.  How do we do that?  With the freely available <a href="http://docs.blackberry.com/en/developers/deliverables/25068/Configure_VM_BB_tablet_simulator_1347134_11.jsp" target="_blank">simulator</a>.</p>
+
+<p>While Blackberry does a good job of getting you up and running with their <a href="http://docs.blackberry.com/en/developers/deliverables/25068/" target="_blank">Getting Started guide</a>, they leave a few useful tidbits out about the simulator itself.  How do you minimize apps?  How do you change the orientation of the simulator?  Before we answer that you need to know one bit of information.  The "<strong>bezel</strong>" in the simulator is the black area surrounding the actual Blacberry Playbook OS running in your VMWare virtual machine player.  This is important to know as it is the area where many useful gestures start and end for the simulator.</p>
+
+<p>Now with that in mind, here's a list of items I've found so far that will help you move a little faster in your Playbook development.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Tips</span></h1>
+
+
+<ul>
+    <li><strong>Minimize your running app</strong> by holding the mouse button down while over the bottom bezel, then dragging it up into your app, like a touch "swipe".  The simulator doesn't have an easy, built-in way to close apps once you open them in development.  This tip will let you get back to your Playbook interface if you haven't already coded a custom close or minimize into your app.</li>
+    <li><strong>Change orientation</strong> by doing the same as above, but end your "swipe" in the bottom right hand corner of your app.</li>
+    <li><strong>Cycle through currently open apps</strong> by mouse "swiping" from either the left or right bezel into your app.  As you might expect this will transition you to the next open app horizontally.</li>
+    <li><strong>Quickly find your simulator's IP address</strong> by clicking the hammer icon at the top of the simulator's active screen.</li>
+</ul>
+
+
+<p>And that's what I've got so far.  I'll be sure to update if I find more.  Please share your own tips for the simulator as well.  Good luck and have fun with this cool new device.</p>
+]]></content>
+  </entry>
+  
+</feed>

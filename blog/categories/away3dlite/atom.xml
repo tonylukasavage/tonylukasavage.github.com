@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: away3dlite | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/away3dlite/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA["3D in Flash" and "Away3D 3.6 Essentials"]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/01/-3d-in-flash--and--away3d-3-6-essentials-/"/>
+    <updated>2011-03-01T10:31:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/01/-3d-in-flash--and--away3d-3-6-essentials-</id>
+    <content type="html"><![CDATA[<p>There's been a lot of talk as of this weekend about 3D in Flash, due to Adobe's announcement that <a href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/">Flash Player 11 is now available at Adobe Labs</a>.  Included in Flash Player is the much anticipated "Molehill" 3D API.  To get an idea of how huge of a leap in terms of rendering this is for Flash, take a look at some of <a href="http://savagelook.com/blog/away3d/adobe-molehill-3d-api-videos">these videos</a> I posted a few months back.  Or better yet, experience it yourself by playing "Zombie Tycoon"!</p>
+
+<p>Right in step with Adobe's announcement came one from the Away3D team.  They unveiled the alpha version of <a href="http://away3d.com/away3d-4-0-alpha-release-broomstick">Away3D 4.0 "Broomstick"</a>.  This is the first version of my favorite 3D Flash engine that leverages the power of the Adobe "Molehill" API.  Check out the <a href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/features/molehill.html">Adobe Labs page for Molehill</a> to see more of what Away3D will let you do, without having to get into the nitty, gritty details of Molehill.</p>
+
+<p>In order to get a jump start on your Away3D development, I'd highly suggest picking up one (or both, like me) of these books: "The Essential Guide to 3D in Flash" and "Away3D 3.6 Essentials".  Both are great guides to getting started with Away3D,  as well as 3D graphics in Flash in general.  While no longer the latest and greatest, they will undoubtedly continue to give great insight for aspiring Away3D developers.</p>
+
+<p>As these are both great texts, I'm not going to put their attributes side by side and compare every detail.  Instead I'm just going to point out the highlights of each.  You really can't go wrong with either.</p>
+
+<h2><strong>"Away3D 3.6 Essentials" Highlights</strong></h2>
+
+
+<ul>
+    <li>The clearest highlight is without question the <span style="color: #ff0000;">choice of technical reviewer... Tony Lukasavage (see also, me).</span></li>
+    <li>Matthew Casperson is the author and his <a href="http://www.brighthub.com/hubfolio/matthew-casperson.aspx" target="_blank">brighthub.com work</a> was the home for some of my earliest lessons in Away3D. Great demos and tutorials.</li>
+    <li>Gives an extremely detailed look at the objects in Away3D, even laying out the initialization objects for many of the classes.  May not sound like a big deal, but Away3D makes heavy use of init objects for class constructors.  The only way to know how to use them without a reference is to go digging through the source.</li>
+    <li>Answers one of the most frequently asked questions in Away3D with a simple chart: Which lights affect which materials?</li>
+    <li>While both books discuss and explain model animation, this book delves into the sometimes baffling territory of how to properly export rigged models from popular modeling and animation program for use with Away3D.  In most cases its not as simple or intuitive as you might expect and this little extra help can go a long way.</li>
+    <li>This book branches out a little further than "3D in Flash", discussing topics like particle engines, pixelbender shaders, and postprocessing as they pertain to Away3D.</li>
+</ul>
+
+
+<p>&nbsp;</p>
+
+<h2>"The Essential Guide to 3D in Flash" Highlights</h2>
+
+
+<ul>
+    <li>The authors are none other than <a href="http://www.infiniteturtles.co.uk/blog/" target="_blank">Rob Bateman</a> and <a href="http://richardolsson.se/" target="_blank">Richard Olsson</a>, cofounder and core developer for Away3D.  There's no disputing that getting the information from the crafters of the engine cannot be beat.</li>
+    <li>Includes set up instructions for <a href="https://www.cleverbridge.com/429/?affiliate=15006&amp;scope=cart&amp;cart=71011" target="_blank">FDT</a>.</li>
+    <li>While "Away3D 3.6 Essentials" gives a brief look at the differences between point, directional, and ambient lights, "3D in Flash" gives a very detailed description of each.  Paragraphs of information and easy to grasp visuals paint a much more clear picture of just how light works.</li>
+    <li>Contains a great example of how you can programmatically animate rigged models.  In some cases even when you follow all the rules, imported animations don't work quite right.  This valuable example lets you take the animation into your own hands.</li>
+</ul>
+
+
+<p>I could go on with more, but beyond this, its just splitting hairs.  Both books are so good it's a great choice either way.</p>
+
+<p>If you are serious about picking up Away3D for 3D Flash development and want the quickest path to success, either one will do just fine.  Just be sure to follow it all and actually code along with the examples.  That's where a lot of the real value in these books lies.  And be sure you make it to the end where possibly the most important topic lies for each book: performance.  But then again, with the coming of "Molehill", those performance concerns might not be quite so critical anymore.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Away3d People, Places, and Tutorials]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/11/29/away3d-people--places--and-tutorials/"/>
+    <updated>2010-11-29T08:33:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/11/29/away3d-people--places--and-tutorials</id>
+    <content type="html"><![CDATA[<p>2 things brought about this post:</p>
+
+<ol><li>The increased popularity of <a href="http://away3d.com">Away3D</a> with the announcement of <a href="http://savagelook.com/blog/away3d/adobe-molehill-3d-api-videos" target="_blank">"Molehill" at AdobeMax 2010</a>.</li><li>The scarcity and disarray of some of Away3D's greatest resources for learning and inspiration.</li></ol>
+
+
+<p>To fix this I am going to create a collection here of the best available blogs, links, tutorials, demos, and videos from the Away3D community.  With a little help from you, the visitors to this blog, of course.  So <span style="color:#ff0000;">PLEASE</span>, if I miss a team member or a good blog, leave a comment and I'll add it to the list.  OK, here we go.</p>
+
+<h2>The twitter list</h2>
+
+<p><a href="http://twitter.com/#!/tonylukasavage/away3d">http://twitter.com/#!/tonylukasavage/away3d</a></p>
+
+<p>Let me know if you want to be added.</p>
+
+<h2>The Project</h2>
+
+<ul>
+<li><a href="http://away3d.com">Away3D.com</a> - The official Away3D Flash Engine site</li>
+<li><a href="http://away3d.com/tutorials">Away3D tutorials</a> - A list of useful, though slightly dated, tutorials for the engine</li>
+<li><a href="http://groups.google.com/group/away3d-dev?pli=1">Away3D Developers Google Group</a> - A growing community where Away3D developers and newbies can interact and ask questions, often addressed by the core team members themselves.</li>
+</ul>
+
+
+<h2>The Team</h2>
+
+<ul>
+<li><a href="http://www.infiniteturtles.co.uk/blog/">Rob Bateman</a> - Away3D founder, lead developer, and co-author of <a href="http://flash3dbook.com/">"The Essential Guide to 3D in Flash"</a></li>
+<li><a href="http://blog.closier.nl/">Fabrice Closier</a> - Away3D developer and creator of <a href="http://www.closier.nl/prefab/">Prefab</a>, the Away3D modeler and workflow enhancer.</li>
+<li><a href="http://www.flashten.com/">Peter Kapelyan</a> - Away3D developer</li>
+<li><a href="http://www.geepers.co.uk/">Greg Caldwell</a> - Away3D documentation, and the inspiration for my <a href="http://savagelook.com/blog/away3d/reflection-in-away3d-take-2">reflection in Away3D demo</a>.</li>
+<li><a href="http://evo.bombsquad.org/">Jalava</a> - Away3D bitmap rendering</li>
+<li><a href="http://sleepydesign.blogspot.com/">Katopz</a> - Away3D developer and Collada animation</li>
+<li><a href="http://www.lidev.com.ar/?s=away3d">Li</a> - Away3D developer and vector text/shapes</li>
+<li><a href="http://blog.richardolsson.se/">Richard Olsson</a> - Away3D developer and co-author of <a href="http://flash3dbook.com/">"The Essential Guide to 3D in Flash"</a></li>
+<li><a href="http://www.derschmale.com/">David Lenaert</a> - Flash 10 shaders and Pixelbender</li>
+</ul>
+
+
+<h2>The blogs, devs, and links</h2>
+
+<ul>
+<li><a href="http://savagelook.com/blog/tag/away3d">Tony Lukasavage</a> (me) - A blog full of Away3D demos, code, and overall goodness.</li>
+<li><a href="http://www.flashmagazine.com/Tutorials/category/away3d/">Flash Tutorials (Away3D)</a> - A great collection of Away3D tutorials to help you get started.</li>
+<li><a href="http://www.unitzeroone.com/blog/?s=away3d">Ralph Hauwert</a> - Flash 3D wizard with some good Away3D content.</li>
+<li><a href="http://www.inear.se/?s=away3d">Einar Öberg</a> - Great Flash developer with some awesome Away3D projects.</li>
+<li><a href="http://www.everyday3d.com/blog/index.php/category/3d/away3d-3d/">Bartek Drozdz</a> - Now mostly a <a href="http://unity3d.com/" target="_blank">Unity3D</a> blog, it still contains some real Away3D gems.</li>
+<li><a href="http://www.allforthecode.co.uk/aftc/forum/user/modules/forum/welcome.php?index=4">Darcey Lloyd</a> - This site has mountains of great Away3d demos and instructional content.</li>
+<li><a href="http://www.brighthub.com/hubfolio/matthew-casperson/tags/away3d.aspx">Matthew Casperson</a> - Tons of detailed demos and how-to's for Away3D</li>
+<li><a href="http://www.harrynorthover.com/blog/?s=away3d">Harry Northover</a> - A bit dated, but still has some good, basic Away3D examples.</li>
+<li><a href="http://blog.alladvanced.net/category/away3d/">Advanced Mediocrity</a> - A handful of cool Away3D examples</li>
+<li><a href="http://jasonbejot.com/category/away3d">Jason Begot</a> - A couple of great Away3D samples, and he was the inspiration for my <a href="http://savagelook.com/blog/away3d/away3d-mesh-morphing">mesh morphing demo</a>.</li>
+<li><a href="http://www.exey.ru/blog/">Exey Panteleev</a> - Flash 3D developer with some Away3D demos, and he inspired my <a href="http://savagelook.com/blog/away3d/dynamic-heightmaps-in-away3d">dynamic height demo</a>.</li>
+<li><a href="http://blog.tartiflop.com/category/away3d/">blog.tartiflop</a> - Pretty old Away3D stuff, but it still contains some very useful content for understanding the engine.</li>
+<li><a href="http://www.flash-3d.net/">flash-3d.net</a> - A growing collection of Away3D tutorials and examples ported from Papervision3D.</li>
+<li><a href="http://john-wilson.110mb.com/">John Wilson</a> - Nice collection of Away3D demos and samples.</li>
+<li><a href="http://www.mcfunkypants.com/">McFunkyPants</a> - Indie game developer content with some great Flash 3D material (Including insight on Molehill).</li>
+</ul>
+
+
+<h2>The books</h2>
+
+<ul>
+<li><a href="http://flash3dbook.com/">"The Essential Guide to 3D in Flash"</a> - written by Rob Bateman and Richard Olsson</li>
+<li><a href="https://www.packtpub.com/creating-detailed-animated-and-interactive-3D-worlds-with-away3D-3-6-essentials/book">"Away3D 3.6 Essentials"</a> - written by Matthew Casperon</li>
+<li><a href="http://izibook.eyrolles.com/produit/1094/9782212416244/La%203D%20en%20Flash%20avec%20Away3D">"La 3D en Flash avec Away3D"</a> - written by Sylvain Godbert</li>
+</ul>
+
+
+<h2>The games, videos, and extras</h2>
+
+<ul>
+<li><a href="http://www.influxis.com/battlecell/">BattleCell</a> - The incredible Away3D, multi-player, first person shooter.  Grab a friend and blow sh!t up!</li>
+<li><a href="http://savagelook.com/blog/away3d/adobe-molehill-3d-api-videos">"Molehill" demo videos </a>- Get a preview at the amazing advances coming to Flash 3D</li>
+<li><a href="http://www.thetechlabs.com/tech-tutorials/3d/away3d-shootemup-tutorial-sound-effects/">Away3D Shoot 'Em Up with sound</a> - A lengthy tutorial on game building and sound for Away3D.</li>
+<li><a href="http://gestureworks.com/support-tutorials/multitouch-away3d-application/">Gesture Works</a> - Shows how to add multi-touch support to your Away3D applications</li>
+<li><a href="http://www.infiniteturtles.co.uk/blog/away3d-lite-on-the-nexus-one">Away3D Mobile</a> - See Away3DLite running on mobile devices</li>
+</ul>
+
+
+<p>This list is far from exhaustive and I would <span style="color:#ff0000;">love it</span> if my readers would contribute.  Let me hear what your other Away3D resources are.  I'm all ears.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adobe "Molehill" 3D API Videos]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/11/24/adobe--molehill--3d-api-videos/"/>
+    <updated>2010-11-24T11:32:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/11/24/adobe--molehill--3d-api-videos</id>
+    <content type="html"><![CDATA[<p>In the wake of the <a href="http://adamkinney.posterous.com/molehill-video-new-flash-3d-api-from-adobemax" target="_blank">Adobe Flash "Molehill" 3D API</a> being unveiled at AdobeMax this year, interest in 3D Flash has exploded.  Rather than bore you with why I think this is so interesting (though I must mention that it uses the GPU), here's some videos to give you an idea of how incredible this API is going to be:</p>
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/szaXvTsoeVs?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/szaXvTsoeVs?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/9LAN5GHm5eM?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/9LAN5GHm5eM?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-8526874234699762";
+/* 728x90, created 12/20/10 */
+google_ad_slot = "5105934733";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+
+
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/tgwi0lWgX8w?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/tgwi0lWgX8w?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/m053MqzstVg?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/m053MqzstVg?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-8526874234699762";
+/* 728x90, created 12/20/10 */
+google_ad_slot = "5105934733";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+
+
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/hCXxCD_GYTA?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/hCXxCD_GYTA?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+
+
+<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/s0Nu1OaBXa8?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/s0Nu1OaBXa8?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+<p>Yes, I know, it IS awesome.  But be patient kids, the word is a painfully vague "mid 2011" beta release.  In the meantime, though, start sharpening with your 3D Flash engine of choice because Adobe has already stated that its going to let the community build the engines.  And believe me, <a href="http://away3d.com" target="_blank">Away3D</a>, <a href="http://alternativaplatform.com/en/alternativa3d/" target="_blank">Alternativa</a>, and a handful of others will be waiting with their Molehill-ready engines as soon as it is released.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Johnny Cash in Flash]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/27/johnny-cash-in-flash/"/>
+    <updated>2010-09-27T09:56:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/27/johnny-cash-in-flash</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/cash/cash.html" class="fancybox.iframe"><img title="face_picking" src="http://tonylukasavage.github.com/images/cash.jpg" alt="" width="559" height="421" /></a></p>
+
+
+<p>→ <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/cash/cash.html">Click here</a> or the image above for the demo.
+&rarr; View the <a href="http://tonylukasavage.github.com/demos/cash/srcview/index.html">source code</a>.
+<b>NOTE:</b> You'll need to download <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a>, <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a>, and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> to compile the code.</p>
+
+<p>Inspired by the legendary Johnny Cash I decided to dive into a few AS3 development topics I haven't gotten to yet to create a 3d equalizer and tribute to the Man in Black.  Those topics, along with some other more familiar ones, include:</p>
+
+<ul>
+    <li>Playing audio in Flash with Sound and SoundChannel</li>
+    <li>Using the <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/media/SoundMixer.html" target="_blank">SoundMixer</a> to generate values based on the audio</li>
+    <li>Searching for images with the Google API via <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a></li>
+    <li>Creating a PHP proxy for beating <a href="http://www.onegiantmedia.com/as3---load-a-remote-image-from-any-domain-with-no-security-sandbox-errors" target="_blank">Flash cross-domain security issues</a></li>
+    <li>Using <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> for speedy 3d visualization (I even get 15 FPS on my phone!)</li>
+    <li>Using <a href="http://www.closier.nl/prefab/" target="_blank">Prefab</a> to export 3d models as native AS3 code for Away3d or Away3dLite.</li>
+</ul>
+
+
+<p>This demo has a good bit more code than I usually post up.  It also uses a couple external libraries, namely <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a> (3d rendering), <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a> (Google API), and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> (super useful AS3 utilities).  Rather than overwhelm you with mountains of tutorial-like rambling, instead I'll leave this demo here to be enjoyed, make the source code available, and break down each of these topics into smaller tutorials/guides in the near future.</p>
+
+<p>Sometimes your muse doesn't need to be even slightly related to your field of creativity.  In fact, that can often make for the most interesting inspiration.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JigLib Flash and Away3D]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/07/jiglib-flash-and-away3d/"/>
+    <updated>2010-09-07T16:00:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/07/jiglib-flash-and-away3d</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/jiglib_away3d/jiglib_away3d.html" class="fancybox.iframe"><img title="jiglib_away3d" src="http://tonylukasavage.github.com/images/jiglib_big.jpg" alt="" width="556" height="323" /></a></p>
+
+
+<p>&rarr; Click the above image or <a href="http://tonylukasavage.github.com/demos/jiglib_away3d/jiglib_away3d.html">here</a> to play the demo
+&rarr; <a href="http://tonylukasavage.github.com/demos/jiglib_away3d/srcview/index.html">View the source code</a></p>
+
+<h1>The Overview</h1>
+
+
+<p>Toying around with <a href="http://www.jiglibflash.com/blog/" target="_blank">JigLib Flash</a> in <a href="http://away3d.com" target="_blank">Away3D</a> today was both interesting and sobering.  For those who don't know, JigLib is a 3D physics engine, and JigLib Flash is the AS3 port of it.  While my expectations weren't too high since this is complex mathematical processing in Flash, I was hoping for a little more.  Don't get me wrong, though, there's some very cool potential here.  Be sure to check the tutorials and demos added by people who didn't give up quite as quickly as me: <a href="http://www.jiglibflash.com/blog/2009/07/23/collection-of-jiglibflash-examplestutorials-3d-physic-engine/" target="_blank">JigLib Flash demos and tutorials</a>.  I particularly enjoyed some of the car physics demos using this library.</p>
+
+<p>I was setting out to do a basic Jenga-like game.  Its just a tower of zig zagging blocks, 3 blocks to a row, 18 rows total.  It quickly became evident that this just wasn't going to happen.  After about 4 rows of blocks the frame rate dropped down into single digits and there was tons of "jitter" among the blocks in the scene.  I assume the jitter has to do with the fact that Flash can't process the collisions fast enough and Jiglib is trying to correct rigid body penetrations.  I did A LOT of tinkering with the <a href="http://code.google.com/p/jiglibflash/source/browse/trunk/fp10/src/jiglib/cof/JConfig.as" target="_blank">JConfig</a> settings, which are a group of static settings that manipulate how the physics is calculated, but couldn't make it work for me.  In the end, I think JigLib Flash just needs a lot of work on "stacking" and rigid bodies with many simultaneous points of contact.</p>
+
+<p>OK, now that I've had my purge of frustration, let me at least talk about a half decent example of Away3D and JigLib running very well together.  In the demo at the top of this post I just have a whole bunch of spheres falling into a box with JigLib taking care of the collisions.  It works very well and even maintains a good frame rate.  So good in fact that I even took the time to add some simple shadows to the falling spheres.</p>
+
+<h1>The Code</h1>
+
+
+<p>&rarr; <a href="http://tonylukasavage.github.com/demos/jiglib_away3d/srcview/index.html">full source code (download link at bottom)</a>
+jiglib_away3d.mxml:</p>
+
+<div style="height:400px; overflow:auto;">
+
+``` as3
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*"
+                creationComplete="init();" frameRate="60" height="600" width="800"
+                viewSourceURL="srcview/index.html">
+    <mx:Script>
+        &lt;![CDATA[
+            import away3d.primitives.Plane;
+            import away3d.core.base.Mesh;
+            import __AS3__.vec.Vector;
+            import away3d.materials.BitmapMaterial;
+            import jiglib.physics.RigidBody;
+            import jiglib.plugin.away3d.*;
+            import mx.core.UIComponent;
+            import away3d.primitives.Sphere;
+            import away3d.core.math.Number3D;
+            import away3d.core.utils.Cast;
+
+            private var _physics:Away3DPhysics;
+            private var _shadows:Vector.<Plane> = new Vector.<Plane>();
+            private var _bodies:Vector.<RigidBody> = new Vector.<RigidBody>();
+            [Embed("shadow.png")] private var pngShadow:Class;
+            [Embed("water.jpg")] private var jpgPaper:Class;
+
+            private function init():void {
+                if (stage) {
+                    initAway3D();
+                } else {
+                    this.addEventListener(Event.ADDED_TO_STAGE, function(e:Event):void { initAway3D(); });
+                }
+            }
+
+            private function initAway3D():void {
+                stage.quality = flash.display.StageQuality.LOW;
+                stage.scaleMode = StageScaleMode.NO_SCALE;
+                _drawBackground();
+
+                // prepare physics
+                var walls:Vector.<RigidBody> = new Vector.<RigidBody>();
+                _physics = new Away3DPhysics(away3dMain.view, 5);
+                walls.push(_physics.createCube({width:1000, height:10, depth:1000}));
+                walls.push(_physics.createCube({width:10, height:1000, depth:1000}));
+                walls.push(_physics.createCube({width:1000, height:1000, depth:10}));
+                walls.push(_physics.createCube({width:10, height:1000, depth:1000}));
+
+                var sprite:Sprite = new Sprite();
+                var matrix:Matrix = new Matrix();
+                matrix.createGradientBox(512,512,0,0,0);
+                sprite.graphics.beginGradientFill("radial", [0xdddddd,0x000000], [1,1], [0,255], matrix);
+                sprite.graphics.drawRect(0,0,512,512);
+                sprite.graphics.endFill();
+                var bmd:BitmapData = new BitmapData(512,512,false);
+                bmd.draw(sprite);
+                var mat:BitmapMaterial = new BitmapMaterial(bmd);
+
+                for (var j:uint = 0; j < walls.length; j++) {
+                    var body:RigidBody = walls[j];
+                    var mesh:Mesh = Away3dMesh(body.skin).mesh;
+                    body.movable = false;
+                    mesh.material = mat;
+                    mesh.ownCanvas = true;
+                    mesh.pushback = true;
+
+                    switch(j) {
+                        case 1:
+                            body.x = 505;
+                            body.y = 495;
+                            break;
+                        case 2:
+                            body.z = 505;
+                            body.y = 495;
+                            break;
+                        case 3:
+                            body.x = -505;
+                            body.y = 495;
+                            break;
+                    }
+                }
+
+                var paper:BitmapMaterial = new BitmapMaterial(Cast.bitmap(jpgPaper));
+                for (var i:int = 0; i < 20; i++) {
+                    var sphere:RigidBody = _physics.createSphere({radius:30, segmentsW:6, segmentsH:6});
+                    _bodies.push(sphere);
+                    sphere.x = 100 - Math.random() * 200;
+                    sphere.y = 700 + Math.random() * 3000;
+                    sphere.z = 200 - Math.random() * 100;
+                    sphere.material.restitution = 1;
+
+                    // This is how to access the engine specific mesh/do3d
+                    _physics.getMesh(sphere).material = paper;
+
+                    var plane:Plane = new Plane({material:new BitmapMaterial(Cast.bitmap(pngShadow)), height:80, width:80, bothsides:true});
+                    plane.ownCanvas = true;
+                    plane.pushback = true;
+                    plane.filters = [new BlurFilter(8,8)];
+                    plane.blendMode = BlendMode.SUBTRACT;
+                    away3dMain.view.scene.addChild(plane);
+                    _shadows.push(plane);
+                }
+
+                // create away3d scene
+                away3dMain.title = "SavageLook.com -- Away3D JigLib Demo";
+                away3dMain.camera.position = new Number3D(0, 700, -1500);
+                away3dMain.camera.lookAt(new Number3D(0,0,0));
+
+                // assign pre and post render functions
+                away3dMain.preRender = function():void {
+                    for (var k:uint = 0; k < _shadows.length; k++) {
+                        if (_shadows[k].x > 505 || _shadows[k].x < -505 || _shadows[k].z > 505 || _shadows[k].z < -505 || _bodies[k].y < -10) {
+                            _shadows[k].visible = false;
+                        } else {
+                            _shadows[k].x = _bodies[k].x;
+                            _shadows[k].z = _bodies[k].z;
+                        }
+                    }
+                    _physics.step();
+                };
+                away3dMain.postRender = function():void { trace("postRender"); };
+            }
+
+            private function _drawBackground():void {
+                var sprite:Sprite = new Sprite();
+                var ui:UIComponent = new UIComponent();
+                var matrix:Matrix = new Matrix();
+
+                matrix.createGradientBox(this.width, this.height, Math.PI/2, 0, 0);
+                sprite.graphics.beginGradientFill("linear", [0x888888, 0xffffff], [1,1], [0,255], matrix);
+                sprite.graphics.drawRect(0, 0, this.width, this.height);
+                sprite.graphics.endFill();
+                ui.addChild(sprite);
+                this.addChildAt(ui, 0);
+            }
+        ]]&gt;
+    </mx:Script>
+    <local:AwayUIC id="away3dMain"  x="0" y="0" height="600" width="800"/>
+</mx:Application>
+```
+</div>
+
+
+<p>AwayUIC.mxml:</p>
+
+<div style="height:400px; overflow:auto;">
+
+``` as3
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+    <mx:Script>
+        &lt;![CDATA[
+            import away3d.debug.AwayStats;
+            import away3d.core.math.Number3D;
+            import away3d.cameras.TargetCamera3D;
+            import away3d.containers.View3D;
+            import away3d.core.render.Renderer;
+
+            public var view:View3D;
+            public var camera:TargetCamera3D;
+            public var doRender:Boolean;
+            private var _title:String;
+            private var _link:String;
+            private var _titleText:TextField;
+
+            public var preRender:Function = null;
+            public var postRender:Function = null;
+
+            override protected function createChildren():void {
+                super.createChildren();
+                doRender = true;
+
+                // setup camera
+                camera = new TargetCamera3D();
+                camera.position = new Number3D(0, 0, -1000);
+                camera.lookAt(new Number3D(0,0,0));
+
+                // setup view
+                view = new View3D({camera:camera, renderer:Renderer.BASIC});
+                view.x = this.unscaledWidth/2;
+                view.y = this.unscaledHeight/2;
+                this.addChild(view);
+
+                // add stats and title
+                var stats:AwayStats = new AwayStats(view);
+                this.addChild(stats);
+                _title = "SavageLook.com";
+                _link = "http://savagelook.com/blog";
+                _setText();
+
+                this.addEventListener(Event.ENTER_FRAME, function(e:Event):void { _render(); });
+            }
+
+            private function _setText():void {
+                if (_titleText == null) {
+                    _titleText = new TextField();
+                    this.addChild(_titleText);
+                }
+
+                _titleText.text = _title;
+                _titleText.setTextFormat(new TextFormat("arial", 14, 0xffffff, false, false, false, _link));
+                _titleText.x = 150;
+                _titleText.y = 10;
+                _titleText.width = _titleText.textWidth * 1.1;
+                _titleText.filters = [new DropShadowFilter()];
+            }
+
+            public function get link():String {
+                return _link;
+            }
+
+            public function set link(value:String):void {
+                _link = value;
+                _setText();
+            }
+
+            public function get title():String {
+                return _title;
+            }
+
+            public function set title(value:String):void {
+                _title = value;
+                _setText();
+            }
+
+            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+                super.updateDisplayList(unscaledWidth, unscaledHeight);
+                view.x = unscaledWidth/2;
+                view.y = unscaledHeight/2;
+
+                if (view.stage) {
+                    _render();
+                }
+            }
+
+            private function _render():void {
+                if (doRender) {
+                    if (preRender != null) {
+                        preRender();
+                    }
+                    view.render();
+                    if (postRender != null) {
+                        postRender();
+                    }
+                }
+            }
+        ]]&gt;
+    </mx:Script>
+</mx:UIComponent>
+```
+
+</div>
+
+
+
+
+<h1>The Summary</h1>
+
+
+<p>My hasty opinion in this case is that JigLib is fun to play with, but don't get excited about doing anything super complex... yet.  I follow a few of the developers and contributors and they are constantly working on it.  They even just recently added support for <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> so you can use all that quick rendering goodness along with it.  I fully intend to follow this project closely as it matures.</p>
+]]></content>
+  </entry>
+  
+</feed>

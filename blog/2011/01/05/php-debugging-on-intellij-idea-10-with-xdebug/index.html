@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PHP Debugging on IntelliJ IDEA 10 with XDebug - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="The Overview So after being told by my peers that print_r() was adequate, I embarked on a quest to get true PHP debugging working in a reputable IDE &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PHP Debugging on IntelliJ IDEA 10 with XDebug</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-05T08:33:00-05:00" pubdate data-updated="true">Jan 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>The Overview</h2>
+
+<p>So after being told by my peers that print_r() was adequate, I embarked on a quest to get true PHP debugging working in a reputable IDE.  Recently I&#8217;ve heard nothing but good things about <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA 10</a>, so I decided that would be my test subject.  Don&#8217;t let the &#8220;J&#8221; fool you, while Java is its focus, this bad boy handles an array of languages and markups, including ActionScript, PHP, Groovy, Scala, Python/Jython, Ruby/JRuby, Clojure, Javascript, and HTML.</p>
+
+<p><span style="color:#ff0000;">If you are a serious PHP developer and have not given debugging a fair chance, or a chance at all, you are killing yourself</span>.  So let&#8217;s do this thing from the ground up.  WAMP, XDebug, IntelliJ, and magic.  Follow these steps (for Windows) to reach my recent state of elightenment and PHP debugging bliss.</p>
+
+<p>By the way, I almost gave up on IntelliJ entirely due to problems with debugging until <a href="http://www.kilometer0.com" target="_blank">Alex Petrescu</a> (<a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>) talked me down from the edge.  I&#8217;m very grateful as IntelliJ is proving to be an excellent IDE.</p>
+
+<h2>Step By Step</h2>
+
+<ol>
+<li>Download and install <a href="http://www.wampserver.com/en/" target="_blank">WAMP</a> (I installed to <strong>C:\wamp</strong>)</li>
+<li>After installing WAMP, create a file named <strong>C:\wamp\www\info.php</strong> that contains the following code:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span> <span class="nb">phpinfo</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+<li>Open the <a href="http://localhost/info.php" target="_blank">http://localhost/info.php</a> in a browser to get your PHP configuration.
+</li><li>
+Now view the source of the page in your browser.  Copy the entire contents of the source to your clipboard.
+</li>
+<li>Goto the <a href="http://www.xdebug.org/find-binary.php" target="_blank">XDebug Tailored Installation Instructions</a> and paste your PHP configuration source into the text box then click &#8220;analyse my phpinfo() output&#8221;.
+</li>
+<li>Follow the resulting instructions for adding XDebug to your PHP installation.  Once you make those changes, make sure the new section of your php.ini looks like this (as per a <strong>C:\wamp</strong> installation):
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>XDebug<span class="o">]</span>
+</span><span class='line'><span class="nv">zend_extension</span><span class="o">=</span><span class="s2">&quot;&lt;this is the path that the XDebug installation instructions gave you&gt;&quot;</span>
+</span><span class='line'>xdebug.remote_enable<span class="o">=</span><span class="nb">true</span>
+</span><span class='line'>xdebug.remote_port<span class="o">=</span>9000
+</span><span class='line'>xdebug.profiler_enable<span class="o">=</span>1
+</span><span class='line'>xdebug.profiler_output_dir<span class="o">=</span><span class="s2">&quot;c:\wamp\logs&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+<li>Download and install <a href="http://www.jetbrains.com/idea/download/index.html" target="_blank">IntelliJ IDEA 10 Ultimate Edition</a> (trial).  It may not be necessary, but I included all the available extensions.</li>
+<li>Setup a basic PHP project in IntelliJ IDEA 10
+<ol style="list-style-type: upper-alpha;">
+<li>Goto <strong>File -> New Project&#8230;</strong></li>
+<li>Select <strong>Create project from scratch</strong> and click Next</li>
+<li>Enter a name for your project and select <strong>Project Module</strong> under the Select Type heading and click <strong>Next</strong></li>
+<li>Select &#8220;do not create source directory&#8221; and click <strong>Next</strong></li>
+<li>Click <strong>Finish</strong> then <strong>OK</strong> when asked about starting a project without a JDK assigned.</li>
+</ol>
+<li>Create a PHP file to test debugging</li>
+<ol style="list-style-type: upper-alpha;">
+<li>In the project panel on the left side, right click the project name and goto <strong>New -> PHP File</strong> </li>
+<li>Enter a name for your PHP file and click <strong>OK</strong></li>
+<li>In the code panel on the right, enter the following and save the file:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nv">$a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+</ol>
+<li>Click the vertical bar between the project panel and the code panel next to the following line to create a red breakpoint:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$a = 0;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</li>
+<li>Copy the PHP file you created in step #9 to your WAMP www directory (<strong>C:\wamp\www</strong>)</li>
+<li>Right click on the PHP file name in the project panel, then goto <strong>Debug -> filename.php on server</strong></li>
+<li>In the resulting window, click the dotted button next to the <strong>Server</strong> dropdown</li>
+<li>Setup your deployment settings
+<ol style="list-style-type: upper-alpha;">
+<li>Select <strong>Local</strong> from the access type dropdown</li>
+<li>Click the <strong>Mappings</strong> tab and under &#8220;web path on server&#8221; enter a single slash &#8220;/&#8221; to specify the WAMP root.  Click <strong>OK</strong> and then <strong>OK</strong> again to finish the configuration.</li>
+</ol>
+<li>Right click on your PHP file in the project panel again and goto &#8221;<strong>Run on server</strong>&#8221; or &#8221;<strong>Debug on server</strong>&#8221;.  I&#8217;ve had inconsistent behavior using it, so try both if one doesn&#8217;t work.</li>
+<li>If all went according to plan, a browser should open and execution should stop at your breakpoint.  If you look at your debug panel on the bottom on IntelliJ you should now see your PHP globals laid out.  Congrats, you made it!</li>
+</ol>
+
+
+<h2>The Summary</h2>
+
+<p>I know, its not exactly a walk in the park, but <span style="color:#ff0000;">its well worth the work to not have to pollute your code with copious print_r() calls</span>.  You can now have full access over your PHP as you would with any other enterprise level language and debugger.  I didn&#8217;t go into any specific detail here, but I plan in the future to discuss all the ins and outs of PHP debugging in IntelliJ IDEA 10.  Its looks to be a great IDE thus far.</p>
+
+<p>If you have any questions, which is likely since I ran into some inconsistent behavior, feel free to comment and I&#8217;ll try to answer back as quickly as possible.  Hopefully you&#8217;ll never even need to ask.</p>
+
+<p>Happy PHP debugging!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-05T08:33:00-05:00" pubdate data-updated="true">Jan 5<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/debugging/'>debugging</a>, <a class='category' href='/blog/categories/intellij/'>intellij</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/wamp/'>wamp</a>, <a class='category' href='/blog/categories/xdebug/'>xdebug</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/01/03/qr-to-ar--using-qr-codes-to-serve-augmented-reality-markers/" title="Previous Post: QR to AR: Using QR Codes to serve Augmented Reality Markers">&laquo; QR to AR: Using QR Codes to serve Augmented Reality Markers</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/01/11/8-steps-for-being-an-asshole-effectively/" title="Next Post: 8 Steps for being an Asshole Effectively">8 Steps for being an Asshole Effectively &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

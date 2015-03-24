@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: subversion | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/subversion/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Video: Google Project, Flash Builder 4, and Subclipse]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse/"/>
+    <updated>2010-09-13T07:36:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse</id>
+    <content type="html"><![CDATA[<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/DYcEm2KCSeM?fs=1&amp;hl=en_US" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/DYcEm2KCSeM?fs=1&amp;hl=en_US" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+
+<p>You'll get to see exactly how to create a Google Project Hosting Subversion repository, install the <a href="http://subclipse.tigris.org/" target="_blank">Subclipse SVN plugin</a> for Flash Builder 4, and integrate the repository into your development environment.</p>
+
+<p>You'll have to forgive the very amateur nature of the video, this was my first time using <a href="http://www.adobe.com/products/captivate/" target="_blank">Adobe Captivate</a> .  Its a pretty intuitive software, but I'm totally ignorant to the finer points of video guide creation.  I'm sure that will start to change in the near future, though, especially if people actually take the time to watch this one.</p>
+]]></content>
+  </entry>
+  
+</feed>

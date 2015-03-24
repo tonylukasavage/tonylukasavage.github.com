@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: centos | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/centos/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting Up Wireless on Centos 5]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/11/11/setting-up-wireless-on-centos-5/"/>
+    <updated>2010-11-11T20:40:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/11/11/setting-up-wireless-on-centos-5</id>
+    <content type="html"><![CDATA[<p>Centos isn't exactly the best Linux desktop distro.  <a href="http://www.ubuntu.com/" target="_blank">Ubuntu</a>, <a href="http://fedoraproject.org/get-fedora" target="_blank">Fedora</a>, or <a href="http://www.linuxmint.com/" target="_blank">Mint</a> jump to mind as better alternatives.  But that's not Centos's fault as its core focus is stability.  For this reason, Centos is purposely a bit behind the times and only adds proven functionality to its core, as well as its published package repositories.</p>
+
+<p>Unfortunately, though, I need a C++ development environment that will suit a Centos server project I'm working on.  Wireless network connectivity was the first hurdle I ran into.  No out of the box support for my HP laptop.  In fact, when trying to enable the wireless interface on my laptop I got nothing but a very cryptic error message:</p>
+
+<pre lang="dos">[root@localhost ~]# ifup wlan0
+Determining IP information for wlan0...SIOCSIFFLAGS: No such file or directory.</pre>
+
+
+<p>Helpful, I know.  But with a little bit of research I found the <a href="http://wiki.centos.org/HowTos/Laptops/Wireless" target="_blank">setting up wireless</a> section of the Centos laptop FAQs.  In here it states Centos does not come with the required wireless firmware for any laptops that don't allow its free distribution.  This then leaves it up to us, the users, to track it down and install it.  Here's how:</p>
+
+<ol>
+    <li>Open up your <strong><em>/etc/sysconfig/hwconf</em></strong> and find the entry for your wireless card.  You can speed this up by searching for the device name of your card, <strong>wlan0</strong> in my case, or entries that have the class <strong>NETWORK</strong>.  The entry you want will look something like this:
+
+```
+class: NETWORK
+bus: PCI
+detached: 0
+device: wlan0
+driver: iwl3945
+desc: "Intel Corporation PRO/Wireless 3945ABG [Golan] Network Connection"
+network.hwaddr: xx:xx:xx:xx:xx:xx
+vendorId: 8086
+deviceId: 4222
+subVendorId: 103c
+subDeviceId: 135b
+pciType: 1
+pcidom:    0
+pcibus:  2
+pcidev:  0
+pcifn:  0
+```
+
+</li>
+    <li>In your wireless card's entry, locate the name of the driver used.  In my case it was <strong>iwl3945</strong>.
+```
+driver: iwl3945
+```
+
+</li>
+    <li>Goto <a href="http://wiki.centos.org/HowTos/Laptops/Wireless">http://wiki.centos.org/HowTos/Laptops/Wireless</a> and follow the instructions for your particular wireless driver.  In most cases this involves <a href="http://wiki.centos.org/AdditionalResources/Repositories/RPMForge?action=show&amp;redirect=Repositories/RPMForge" target="_blank">setting up RPMForge for yum</a>, using yum to install driver firmware, then enabling the driver module.</li>
+    <li>(OPTIONAL) Disable your network and wpa_supplicant services and enable the NetworkManager.
+
+```
+[root@localhost ~]# chkconfig network off
+[root@localhost ~]# service network stop
+[root@localhost ~]# chkconfig wpa_supplicant off
+[root@localhost ~]# service wpa_supplicant stop
+[root@localhost ~]# chkconfig NetworkManager on
+[root@localhost ~]# service NetworkManager start
+```
+
+</li>
+</ol>
+
+
+<p>And there you have it, wireless connectivity on your Centos 5 desktop.  Not exactly a breeze, but it's not rocket science either once you know the steps involved.  Why do I have a feeling this will soon become a series or articles related to things that should be easy but aren't on desktop Centos?</p>
+]]></content>
+  </entry>
+  
+</feed>

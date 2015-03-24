@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: performance | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/performance/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[3DS in Away3D]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/09/3ds-in-away3d/"/>
+    <updated>2010-08-09T21:28:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/09/3ds-in-away3d</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/3ds_load/sandbox.html" class="fancybox.iframe"><img title="3DS Load Demo" src="http://tonylukasavage.github.com/images/torusknot1.jpg" alt="" width="423" height="349" /></a></p>
+
+
+<p>I'm starting to cook up a few game ideas with some friends of mine and I wanted to get a sense of what Away3D could really do.  To start, I made this very basic example of Away3D loading a fairly high poly 3DS file with minimal animation.  More specifically, it's a rotating, 2880 poly, torus knot with a wire frame material.  While Away3D isn't really made to handle models with this many polys, it gives me an idea of how it will handle a total polycount of about 3000.</p>
+
+<p><strong>Featured Away3D code</strong>: Max3DS.load() and WireColorMaterial</p>
+
+<p>Click the image above to access the example.  You can right click on the example and click "view source" to,  you guessed it, view the source.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D: SavageLook.com 1.0]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/08/08/away3d--savagelook-com-1-0/"/>
+    <updated>2010-08-08T09:43:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/08/08/away3d--savagelook-com-1-0</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/projects/savagelook_1.0/index.html" class="fancybox.iframe"><img title="savagelook_1.0" src="http://tonylukasavage.github.com/images/savagelook_1.0.jpg" alt="" width="480" height="319" /></a></p>
+
+
+<p>Originally this project was the main page for savagelook.com, but I decided it to shuffle to "projects" on my blog.  While it is was a very cool showcase of the things I had learned so far using <a href="http://away3d.com/" target="_blank">Away3D</a>, <a href="http://flintparticles.org/" target="_blank">Flint particles</a>, <a href="http://www.libspark.org/wiki/saqoosha/FLARToolKit/en" target="_blank">FLARToolkit</a>, <a href="http://words.transmote.com/wp/flarmanager/" target="_blank">FLARManager</a>, <a href="http://www.greensock.com/tweenmax/" target="_blank">TweenMax </a>&amp; <a href="http://www.greensock.com/timelinemax/" target="_blank">TimelineMax</a>, its not really practical for a main interface... yet.  Here's the things I learned in this initial undertaking that I plan to apply to all future projects involving Away3D(Lite), particularly when the average user is the target audience:</p></p>
+
+<ul>
+    <li><strong>Performance ALWAYS has to be on your mind</strong>.  There's nothing more annoying to users than low frame rates.  Many of my next points relate directly to this.</li>
+    <li><strong>Use Renderer.BASIC as your view's renderer whenever feasible</strong>.  You will take an immediate performance hit trying to use the smarter z-sorting renderers (CORRECT_Z_ORDER or INTERSECTING_OBJECTS)</li>
+    <li><strong>Control the size of the view</strong>.  While a resizeable view that fills the browser seem great, you can take a nasty performance hit on high resolutions.  For example, this project runs like a champ with a standard 800x600 or 1024x768 resolution.  When I jump it up to  1680x1050, though, things start to get a little choppy.</li>
+    <li><strong>3D particles are a whore on resources</strong>.  Fake 3D effects with 2D whenever possible.  You can literally get 100x (or more) particles in 2D and maintain the same frame rate as 3D.</li>
+    <li><strong>Use simultaneous tweens judiciously</strong>.  There were noticeable slow downs in my intro animations when more than one tween was operating at a time.</li>
+    <li><strong>Learn your z-sorting and plan it from the beginning</strong>.  I can't tell you how much time I wasted restructuring my scene and code because I didn't take the time to learn Frustum clipping, ownCanvas, pushback, pushfront, and screenZoffset before starting.</li>
+    <li><strong>Interactivity and camera motion impacts performance.</strong> Static scenes will allow for far more polys at a good frame rate than dynamic ones.  Keeping the camera static or using mouseEnabled = false on your objects may help.</li>
+    <li><strong>Users expect 2D dialogs and text.</strong> Use them whenever feasible to convey information to the user.</li>
+    <li><strong>Make sure you clean up your unused objects</strong>.  "scene.removeChild(obj)" and "obj = null" should become your best friend.</li>
+    <li><strong>Reuse objects and materials whenever possible</strong>.  Its a lot easier and less expensive to toggle the visibility of a relatively simple object rather than destroy and recreate it every time.</li>
+    <li><strong>Only render when you need to</strong>.  When I use 2D layout for the "Bio" section, I stop rendering the covered 3D scene to help performance.</li>
+    <li><strong>Use texture baking or similar techniques to fake lighting</strong>.  Real-time lighting, while cool, chews up a lot of resources.  If it isn't critical, fake it.</li>
+    <li><strong>Materials with alphas process slower.</strong></li>
+    <li><strong>When all else fails, hit the </strong><a href="http://groups.google.com/group/away3d-dev?hl=en" target="_blank"><strong>Away3D Dev list</strong></a><strong>.</strong> It may not have the fastest responses, but there's no better place to get help and guidance.</li>
+</ul>
+
+
+<p>I'm sure there's lots more I picked up in the process, but that's a pretty good assessment.  Hopefully this helps anyone getting started on their own Away3D projects.</p>
+
+<p>I don't have any specific plans to make version 2.0 of the savagelook.com 3D interface, but I've got a few ideas rolling around in my head.  The key factors will be simplicity, speed, more pseudo-3D effects using 2D, and use of Away3DLite.  I'm hoping to really represent Away3D next time.</p>
+]]></content>
+  </entry>
+  
+</feed>

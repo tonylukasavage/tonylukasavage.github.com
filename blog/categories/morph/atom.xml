@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: morph | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/morph/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D Mesh Morphing]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/30/away3d-mesh-morphing/"/>
+    <updated>2010-09-30T08:50:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/30/away3d-mesh-morphing</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_morph/away3d_morph.html" class="fancybox.iframe"><img title="away3d_morph" src="http://tonylukasavage.github.com/images/morph.jpg" alt="" width="561" height="355" /></a></p>
+
+
+<p>→ <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_morph/away3d_morph.html">Click here</a> or the image above for the demo.
+→ View the <a href="http://tonylukasavage.github.com/demos/away3d_morph/srcview/index.html">source code</a>.</p>
+
+<p>As I have a way of doing, I immediately started working on a better demo upon finishing the last one on height maps in Away3D.  In this demo I use simple bitmap transitioning and my modified Away3D SkinExtrude class (SavageLookSkinExtrude) to create a morphing effect.  Basically one mesh's vertices will smoothly transition to the position of the next mesh's vertices based on the given height maps.</p>
+
+<p>I mentioned <a href="http://exey.ru/blog/home/fluid-simulation-pv3d-and-away3d" target="_blank">Exey Panteleev's fluid simulation in PaperVision3D and Away3D</a> in my last post as a method superior to dynamic height maps for creating a flowing, fluid mesh in Away3D.  I still stand by the point.  But as shown in this demo, dynamic height maps offer many more possibilities as provided by the control you have over the 2D height maps.  In fact, you can have a designer, with no knowledge of Away3D of 3D math, create your height maps and you can handle the morphing.</p>
+
+<p>The shapes you can morph are only limited by your imagination... OK, that's not entirely true.  The shapes will be limited by your ability to create, or find, height maps that suit your needs.  Also, with this method you are limited to morphing the plane that is the base of the SkinExtrude, or in this case the SavageLookSkinExtrude.  Morphing other 3D meshes or primitives is beyond the scope of this technique, and to be honest, beyond my expertise at this point in time.</p>
+
+<p>Even with those limitations, though, this method offers some really eye catching dimension to the toolkit of a hopelessly code driven 3D artist like myself.  Play around with it and let me know if you come up with something cool.  I'd love to see this method work with some more interesting height maps, like facial maps.</p>
+
+<p><strong>NOTE:</strong> I'm currently inquiring on the <a href="http://groups.google.com/group/away3d-dev/browse_thread/thread/f5dd17752c1d051f" target="_blank">Away3D Dev list</a> how to get the subdivision size of the SkinExtrude smaller so that I can get more accuracy and precision.  Unfortunately as it stands triangles start to disappear when the subdivision size goes lower than 20.  I'll update this post if we come up with a solution.  Please let me know if you come up with one yourself.</p>
+]]></content>
+  </entry>
+  
+</feed>

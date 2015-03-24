@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: archive | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/archive/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Joys of Screen Scraping]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2012/03/01/the-joys-of-screen-scraping/"/>
+    <updated>2012-03-01T15:14:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2012/03/01/the-joys-of-screen-scraping</id>
+    <content type="html"><![CDATA[<h2>Knucklehead Up and Running Again</h2>
+
+
+<p>For about a week there my MMA fighter app for Android, <a href="https://market.android.com/details?id=com.savagelook.knucklehead" target="_blank">Knucklehead</a>, has been out of commission. The reason is that the site that I scrape for data, <a href="http://sherdog.com" target="_blank">Sherdog</a> was completely redesigned. I needed to rework a lot of my PHP-based screen scraping code to make it work. My PHP is rusty, but fortunately, my regular expression chops are always sharp. In any case, it's back to working order now.</p>
+
+<p>Maybe with a little luck I can get people to re-rate those 1-star ratings I got while it was down. If not, perhaps I can guilt people into giving me good ratings by saying that it's my newborn son's fault I didn't get to it sooner. I mean, really, are you going to give the father of this child a hard time? Don't be so heartless. :)</p>
+
+<p><a href="http://tonylukasavage.github.com/images/charlie.png"><img src="http://tonylukasavage.github.com/images/charlie.png" alt="" title="charlie" width="600" height="400" class="alignnone size-full wp-image-3507" /></a></p>
+
+<h2 style="padding-top:20px;">Screen Scraping Tips</h2>
+
+
+<p>As we all know, screen scraping is pretty much the most <span style="color:#a00">volatile</span> way to supply your apps with data. While no amount of planning can permanently future-proof your screen scraper, there's some things you can do to make it easier.</p>
+
+<ul style="padding-bottom:20px;">
+    <li><strong>Define a data model for what you are scraping</strong>. What made my project relatively easy to get working again was that I had a clearly defined data model shared by both the backend and frontend. In my case, this is a LAMP stack and distributed Android app respectively. Now my users don't need to download a new version of my app in order to get the fix. It just works now.</li>
+    <li><strong>Code the scraper on a backend proxy</strong>, not in the app itself. That way, when your scraper inevitably gets broken at some point (after a year in my case), you only need to change the code in one place. This goes hand-in-hand with defining a data model.</li>
+    <li><strong>Keep it simple stupid</strong>. Don't over-architect a screen scraper. Most data processing code will change over time, but a screen scraper may need a total rewrite at some point. Put all your software engineering skills into controlling what leaves the scraper, but play it pretty loose with what the scraper is going to be processing.</li>
+    <li><strong>Using JSON? You better be using <a href="http://jsonlint.com" target="_blank">jsonlint.com</a> too</strong>. jsonlint.com can save you a lot of time and aggravation when it comes to creating and processing your scraped data. Not only does it validate your JSON, but it will also pretty print it so it's easy to read through yourself.</li>
+</ul>
+
+
+<p>That's just a couple things that made fixing my scraper a lot less painful. You guys out there have any tips? I'd love to hear them. All things being equal, I hope I never have to screen scrape for data ever again. But since that's pretty unlikely, it's good to be prepared for the inevitable obstacles that scraping will present.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Path menu with Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2012/02/15/path-menu-with-appcelerator-titanium/"/>
+    <updated>2012-02-15T20:57:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2012/02/15/path-menu-with-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<h2>Here we go again...</h2>
+
+
+<p>Yep, another cross-post from the Appcelerator blog. This time it shows off how I managed to implement the dynamic and unique <a href="https://path.com" target="_blank">Path</a> menu in Titanium. From a single code base the menu is fully functional, with native performance, on both Android and iOS.</p>
+
+<ul style="padding-bottom:20px;">
+<li><a href="http://developer.appcelerator.com/blog/2012/02/forging-titanium-episode-22-path-like-menu.html" target="_blank">Original blog post</a></li>
+<li><a href="https://github.com/appcelerator-developer-relations/Forging-Titanium/tree/master/ep-022" target="_blank">Full source code on Github</a></li>
+</ul>
+
+
+
+
+<h2>Video</h2>
+
+
+
+
+<iframe src="http://player.vimeo.com/video/36846582?title=0&amp;byline=0&amp;portrait=0" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[3D, Sockets, and Native Android with Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/12/02/3d--sockets--and-native-android-with-appcelerator-titanium/"/>
+    <updated>2011-12-02T09:22:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/12/02/3d--sockets--and-native-android-with-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<p>Yeah, yet another cross-post from the Appcelerator Developer blog. This was a fun one, though, where I got to show off some really cool features and functionality of the <a href="http://wiki.appcelerator.org/display/guides/Quick+Start" target="_blank">Titanium platform</a>. There's a lot covered so it's stretched over a 3 part series. I've brought them all together here for your viewing pleasure. The <b>original blog post links</b> included with each video contain links for all the source code and references associated with each video.</p>
+
+<p>Here's the 10 second summary of each part:</p>
+
+<ol>
+  <li>Create a <a href="http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide" target="_blank">native Android module</a> to determine a device's physical orientation as <a href="http://en.wikipedia.org/wiki/Azimuth#Navigation" target="_blank">azimuth</a>, pitch, and roll</li>
+  <li>Use the above data to animate and render a 3D model using a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium WebView</a> &lt;canvas&gt; and <a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js</a></li>
+  <li>Represent this 3D model on multiple remote client devices simultaneously using high volume, realtime network communication via <a href="http://wiki.appcelerator.org/display/guides/Sockets" target="_blank">Titanium Sockets</a></li>
+</ol>
+
+
+
+
+<hr>
+
+
+<h2>Part 1 - Native Android Module</h2>
+
+
+<p><b>>>></b> <a href="http://developer.appcelerator.com/blog/2011/11/forging-titanium-episode-14-twisti-part-1-android-module.html">Original blog post</a></p>
+
+<iframe src="http://player.vimeo.com/video/31868247?title=0&amp;byline=0&amp;portrait=0" width="600" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<hr>
+
+
+
+
+<h2>Part 2 - 3D With Three.js</h2>
+
+
+<p><b>>>></b> <a href="http://developer.appcelerator.com/blog/2011/11/forging-titanium-episode-15-twisti-part-2-3d-with-three-js.html">Original blog post</a></p>
+
+<iframe src="http://player.vimeo.com/video/32102962?title=0&amp;byline=0&amp;portrait=0" width="600" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<hr>
+
+
+
+
+<h2>Part 3 - Sockets</h2>
+
+
+<p><b>>>></b> <a href="http://developer.appcelerator.com/blog/2011/12/forging-titanium-episode-16-twisti-part-3-sockets.html">Original blog post</a></p>
+
+<iframe src="http://player.vimeo.com/video/32976053?title=0&amp;byline=0&amp;portrait=0" width="600" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Forms with Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/10/14/forms-with-appcelerator-titanium/"/>
+    <updated>2011-10-14T07:49:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/10/14/forms-with-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<p>I don't cross post often from the <a href="http://developer.appcelerator.com/blog/" target="_blank">developer blog over at Appcelerator</a>, but people seem to be liking this screencast so I thought I'd share. I put together some code and a video showing off how you can you use cross platform design, modular Javascript, and of course, Titanium to deliver a simplified interface for creating forms in your mobile apps. Aside from it being easy for developers to implement, there's also a special focus on making the forms as easy to navigate as possible for the end user.</p>
+
+<p>I've tried not to overpopulate this blog with Appcelerator content ever since joining them as a platform evangelist. I think I've earned an Appcelerator post though after talking exclusively about PhoneGap and Adobe in my last one though. ;-)</p>
+
+<iframe src="http://player.vimeo.com/video/30387041?title=0&amp;byline=0&amp;portrait=0" width="600" height="340" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+
+
+
+
+<h2>Additional Resources</h2>
+
+
+<ul>
+<li><a href="https://github.com/appcelerator-developer-relations/Forging-Titanium/tree/master/ep-010/Forms">Forms app on Github</a></li>
+<li><a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-1-commonjs-modules.html">Forging Titanium Episode 1: CommonJS Modules</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adobe &amp; PhoneGap: Makes Sense, Mostly]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/10/10/adobe--amp--phonegap--makes-sense--mostly/"/>
+    <updated>2011-10-10T07:57:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/10/10/adobe--amp--phonegap--makes-sense--mostly</id>
+    <content type="html"><![CDATA[
+
+<h2>Adobe Acquires Nitobi</h2>
+
+
+
+
+<p>So if you haven't heard yet, <a href="http://www.phonegap.com/2011/10/03/nitobi-enters-into-acquisition-agreement-with-adobe-2/">Adobe acquired Nitobi</a>, the company that is responsible for PhoneGap. This was announced at Adobe's big <a href="http://max.adobe.com/">MAX conference</a>. If you are unfamiliar with PhoneGap, then this post is going to be wildly uninteresting to you. At a high level, they provide a cross platform mobile development solution that leverages native webviews with HTML5, CSS, and Javascript to create native mobile apps.</p>
+
+
+
+
+<h2>Not Hard To See Coming</h2>
+
+
+
+
+<p>Well, for one thing, Adobe was obviously hedging its bets on Flash/Air's viability in the long term with mobile when they started introducing HTML5 capabilities through <a href="http://labs.adobe.com/technologies/edge/">Edge</a>. I mean, if Adobe's planning to offer interactive, Flash-like development with HTML5, who is going to believe that Flash itself has a real future with mobile? Or as Gizmodo put it, <a href="http://gizmodo.com/5826448/adobe-ditches-flash-for-adobe-edge">Adobe Edge may become the beginning of the end for Flash</a>. Yeah, it will likely always exist, but it is <em>not</em> the de facto standard for delivering interactive web (or mobile) content anymore.</p>
+
+
+
+
+<iframe width="630" height="473" src="http://www.youtube.com/embed/8FnNtX73v8k" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+<p>And of course there's the whole Adobe Air for mobile thing. Android was obliging enough to make Air a first class citizen. Install Air, run Air apps... simple. And while the Adobe Air install is a bit hefty, it's hardly something worth worrying about with today's storage capabilities on mobile devices.</p>
+
+
+
+
+<blockquote class="pquote">
+    <p>"Flash has been labeled an outlaw and Air is smuggled in like an illegal immigrant"</p>
+</blockquote>
+
+
+
+
+<p>The more harrowing journey for Adobe has been iOS. Basically, Flash has been labeled an outlaw and Air is smuggled in like an illegal immigrant. There's been a staring contest between Adobe and Apple for a while now, but I think it's safe to say Adobe blinked. Apple has continually proven that is has the most marketable mobile devices available, and has done so without any back pedaling on what they will and will not allow (minus <a href="http://www.apple.com/pr/library/2010/09/09Statement-by-Apple-on-App-Store-Review-Guidelines.html">letting 3rd parties build apps</a>).</p>
+
+
+
+
+<p>Something had to give if Adobe was going to get a real foothold in the mobile world, and it obviously wasn't coming in the form of their current solutions. Enter PhoneGap...</p>
+
+
+
+
+<h2>But PhoneGap is not Without Its Challenges</h2>
+
+
+
+
+<p>PhoneGap fills a lot of holes for Adobe, but its going to need a lot of help itself. I think PhoneGap has gone about as far as it can on its own. It has achieved its goal of abstracting most native functionality for many different mobile platforms, but starting developers are wanting more. </p>
+
+
+
+
+<p>PhoneGap has no user interface components. This is <strong><em>not</em></strong> fun for new developers... or veteran ones for that matter. You need to build everything from scratch or go out and find a UI framework that works for you. The 2 front-runners, <a href="http://www.sencha.com/products/touch/">Sencha Touch</a> and <a href="http://jquerymobile.com/">jQuery Mobile</a>, bring their own glitches and idiosyncrasies. Also, now you find yourself learning 2 frameworks that have a noticeable lack of cross-over documentation. </p>
+
+
+
+
+<p>There's also a seemingly purposeful lack of direction in terms of tooling and best practices. New developers, often web developers, are left to their own devices to find the workflow that works best for them. There's no sanctioned IDE or set of tools suggested from PhoneGap to build your mobile apps. Infinite flexibility can be a real drag when you just want to know the most effective way to get things done.</p>
+
+
+
+
+<h2>But let's put this even more plainly...</h2>
+
+
+
+
+<p>What are the pros and cons of <b>PhoneGap</b>?</p>
+
+
+
+
+<table>
+<tr><td><span style="font-weight:bold; font-size:14px; color:#880000">Pros</span></td><td><span style="font-weight:bold; font-size:14px; color:#880000">Cons</span></td></tr>
+<tr>
+<td style="width:300px; vertical-align:top;">
+<ul><li>Terrific mobile platform compatibility</li>
+<li>It's an open, standards-based solution</li>
+<li>Ease of entry for existing web developers</li>
+<li>Large existing userbase for the above reason</li></ul>
+</td>
+<td style="width:300px; vertical-align:top;">
+<ul style="margin-bottom:0; padding-bottom:0;">
+<li>No clear direction on UI, tooling, or best practices</li>
+<li>performance is limited by webview</li>
+<li>Platform disparities</li>
+<li>Documentation is brief and sometimes lacking</li></ul>
+</td>
+</tr>
+</table>
+
+
+
+
+<p>And what are the pros and cons of <b>Adobe</b>?</p>
+
+
+
+
+<table>
+<tr><td><span style="font-weight:bold; font-size:14px; color:#880000">Pros</span></td><td><span style="font-weight:bold; font-size:14px; color:#880000">Cons</span></td></tr>
+<tr>
+<td style="width:300px; vertical-align:top;">
+<ul><li>High quality tools for integrating development and design workflows</li>
+<li>With Flash and Flex, they've been delivering visual and UI sugar for a long time now</li>
+<li>They've been rocking interaction before &lt;canvas&gt; was in diapers</li>
+<li>They run nearly identical user experiences on each platform via Flash/Air</li>
+<li>Their documentation is nothing if not expansive</li>
+<li>A vehemently loyal community</li></ul>
+</td>
+<td style="width:300px; vertical-align:top;">
+<ul><li>Weak mobile platform compatibility. Android made Air a first class citizen, but we all know the story with iOS. </li>
+<li>The majority of Adobe's tools and SDKs are closed and proprietary</li>
+<li>Has not seen a lot of fresh blood lured in by their current mobile development offerings</li>
+<li>You gotta pick up AS3 if you want to be effective</li></ul>
+</td>
+</tr>
+</table>
+
+
+
+
+<p>Anyone else seeing a pretty clear yin-yang thing going on here?</p>
+
+
+
+
+<h2>So What Does It All Mean?</h2>
+
+
+
+
+<p>Well, for one thing, it means <a href="http://arstechnica.com/open-source/news/2011/10/phonegap-to-become-an-apache-project-as-adobe-acquires-nitobi.ars">PhoneGap is becoming an Apache project</a>. Yep, they are donating PhoneGap to Apache, which puts them one step closer to their altruistic goal of PhoneGap itself becoming obsolete. PhoneGap's own Brian Leroux stated in his <a href="http://www.slideshare.net/brianleroux/phonegap-10">PhoneGap 1.0 presentation</a> that:</p>
+
+
+
+
+<blockquote>
+  <p style="font-weight:bold;">"The purpose of PhoneGap is for PhoneGap to cease to exist"</p>
+</blockquote>
+
+
+
+
+<p>Why, oh why, did Adobe buy it then? I think it's because they want to be your one stop shop for purchasing IDEs, frameworks, professional services, etc... Adobe is likely banking on the ongoing popularity of PhoneGap and web-based native mobile development. "Web-based native"... sounds a little like an oxymoron, but whatever.</p>
+
+
+
+
+<h2>A Match Made in Heaven, Right?</h2>
+
+
+
+
+<p>Sounds like a perfect match. The 2 companies seem to complement each other very well. But...</p>
+
+
+
+
+<p>There's just a few questions I still have regarding the acquisition. Rather than drone on any longer inserting my own conjecture, I'll just list my questions here and leave them as talking points for you, my readers. </p>
+
+
+
+
+<blockquote class="pquote" style="float:right;">
+    <p>"I can already hear the `It's back to AS1` complaints starting..."</p>
+</blockquote>
+
+
+
+
+<ul>
+<li>What happens to Flash/Air for mobile? It obviously won't be forsaken, but this can't sit real well with developers who have so far devoted themselves to this workflow.</li>
+<li>How does Adobe deal with the inevitability that current developers will revolt against using Javascript? I can already hear the "It's back to AS1" complaints starting...</li>
+<li>Does Adobe even have any interest in getting existing AS3 developers using PhoneGap? I know they are saying that they weill support both solutions, but come on, someone is gonna get more love than the other.</li>
+<li>How long until we finally see a defined workflow and IDE for PhoneGap. Is Dreamweaver integration the best we get?</li>
+<li>What will the PhoneGap guys do next? They are actively working to put themselves out of a job, so I'm curious what the next move is.  </li>
+</ul>
+
+
+
+
+<h2>What's Next?</h2>
+
+
+
+
+<p>I have no clue, but it's sure to be interesting. I'm hoping for good things on both sides as it's only going to make mobile development in general more exciting. </p>
+
+
+
+
+<p>Will Adobe's ability to create great tools translate to mobile success? Will PhoneGap's strict adherence to the open web model jive well with Adobe's history of closed, proprietary tools? Will the inevitable merge of the open web  and existing Adobe community be a bumpy one? </p>
+
+
+
+
+<p>Stay tuned...</p>
+
+]]></content>
+  </entry>
+  
+</feed>

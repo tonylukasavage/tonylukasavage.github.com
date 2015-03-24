@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Automata: Conway's "Game of Life" using Appcelerator Titanium - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Get the source: Automata on Github Every once in a while I like to engage in some wildly impractical coding experiments. You know the sort, the &# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2013/07/29/automata-conways-game-of-life-using-appcelerator-titanium/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Automata: Conway's "Game of Life" using Appcelerator Titanium</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T11:23:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a class="fancybox.iframe" href="/images/automata.png" ><img src="/images/automata.png" style="width:33%; float:right; margin-left:10px;"></a></p>
+
+<p><strong>Get the source:</strong> <a href="https://github.com/tonylukasavage/Automata">Automata on Github</a></p>
+
+<p>Every once in a while I like to engage in some wildly impractical coding experiments. You know the sort, the &#8220;Hey, I got Gentoo running on my toaster!&#8221; stuff. Today&#8217;s experiement was implementing <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway&#8217;s Game of Life</a> using nothing more than <a href="http://www.appcelerator.com/platform/titanium-platform/">Appcelerator Titanium</a> views and deploying it to iOS. Let me explain a bit more why this is a <span style="font-weight:bold; color:#a00;">ridiculous</span> idea&#8230;</p>
+
+<!-- more -->
+
+
+<h2>Why It&#8217;s A Bad Idea</h2>
+
+<h4><em>So</em> Not What Titanium Is Built For</h4>
+
+<p>Titanium makes high-quality, cross-platform mobile applications leveraging native UI and functionality. It does exceptionally well with data-driven apps that make heavy use of the underlying mobile platform&#8217;s own UI. It will win the app bake-off against any other cross-platform mobile framework there is, and often times native counterparts as well.</shamelessemployerpromotion></p>
+
+<p>It is, however, <em>not</em> well-suited for any type of gaming. It is not a rendering canvas. It is not a game/particle engine. It has no standard render loop like you would expect in those aforementioned tools. Implementing any kind of graphical game-like experience is <span style="font-weight:bold; color:#a00;">ill-advised</span>. But sometimes ill can be a good thing. Just ask the Beastie Boys (RIP MCA).</p>
+
+<p>Despite that fact, you should see what the Appcelerator-funded Lanica is doing with the <a href="http://lanica.co/products/">Platino</a>. Now <em>there&#8217;s</em> a game engine. Be sure to hit up <a href="https://twitter.com/carlosicaza">Carlos Icaza</a>, former co-founder/CEO of Ansca (makers of the <a href="http://www.coronalabs.com/products/corona-sdk/">Corona SDK</a>), if you want more info about it.</p>
+
+<p>But I digress&#8230;</p>
+
+<h4>Titanium Has Webviews!</h4>
+
+<p>Any normal person implementing this in Titanium would use a webview. Why? Because webviews, depending on the platform, actually have rendering facilities for these exact type of experiences. You could use an HTML5 canvas or even a WebGL surface to render this zero-person game, like I did with my experiment rendering <a href="https://github.com/tonylukasavage/jsstl">3D STL files on the web</a>, just like Github.</p>
+
+<h2>Why It&#8217;s A Good Idea</h2>
+
+<p>Because writing code to see &#8220;what if&#8221; is what makes a <span style="font-weight:bold; color:#a00;">hacker</span> a <span style="font-weight:bold; color:#a00;">hacker</span>.</p>
+
+<h2>Automata</h2>
+
+<p>Here&#8217;s a test run of Automata on my iPhone Simulator (6.1) using Titanium SDK 3.1.1. As you can see, as the number of live cells dwindles, the speed increases drastically, as is to be expected. Despite it&#8217;s limitations, Titanium makes for a pretty cool demo of this game.</p>
+
+<iframe src="http://player.vimeo.com/video/71266653" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<h2>The Blood And Guts</h2>
+
+<p>In order to implement the Game of Life with nothing more than Appcelerator Titanium <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View">Views</a> I needed to do the following:</p>
+
+<h4>Implement a crude render loop.</h4>
+
+<p>And by crude, I mean really crude, along the lines of:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// render current generation of cells</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// calculate next generation based on current state</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This so far only plays well with iOS. The perpetual while loop seems to prevent the UI from updating on Titanium&#8217;s other supported platforms. Perhaps some toying around with <code>setInterval</code> or other timing methods could alleviate this limitation.</p>
+
+<h4>Implement The Game Of Life Algorithm</h4>
+
+<p>I needed to execute the game in performance-conscious JavaScript. I&#8217;m sure someone can squeeze a little more performance out of this, but this section accounts for less than 1% of the actual execution time. It doesn&#8217;t really seem worth the time investment to push it further.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">getNextState</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">alive</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">xm1</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">xp1</span> <span class="o">=</span> <span class="nx">x</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nx">xSize</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">ym1</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">yp1</span> <span class="o">=</span> <span class="nx">y</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nx">ySize</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">xm1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">ym1</span> <span class="o">&amp;&amp;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">yp1</span> <span class="o">&amp;&amp;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">xp1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">ym1</span> <span class="o">&amp;&amp;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">yp1</span> <span class="o">&amp;&amp;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">ym1</span> <span class="o">&amp;&amp;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">yp1</span> <span class="o">&amp;&amp;</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A cell&#39;s next generation is alive if:</span>
+</span><span class='line'>  <span class="c1">// - It is currently alive and has 2-3 adjacent cells</span>
+</span><span class='line'>  <span class="c1">// - it is current dead, but has exactly 3 neighboring cells</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="nx">alive</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">count</span> <span class="o">===</span> <span class="mi">2</span> <span class="o">||</span> <span class="nx">count</span> <span class="o">===</span> <span class="mi">3</span><span class="p">))</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="nx">alive</span> <span class="o">&amp;&amp;</span> <span class="nx">count</span> <span class="o">===</span> <span class="mi">3</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Handle Titanium&#8217;s UI state</h4>
+
+<p>Titanium&#8217;s UI handling of each cell needed to be handled in an even more performance-conscious manner, as this is where over 99% of the execution time would eventually end up. The views are wrapped in a plain JS object in order to keep track of state and toggle the UI&#8217;s dead/alive rendering as infrequently as possible. The single <code>cell.proxy.visible</code> assignment below accounts for over 99% of the total execution time on each loop. Future versions of Titanium are actually planning to make these &#8220;native bridge crossings&#8221; much faster. Automata can serve as a bar by which some of these improvements can be measured.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// render current generation</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">xSize</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">ySize</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">cell</span> <span class="o">=</span> <span class="nx">cells</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// minimze number of times we need to modify the proxy object</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">cell</span><span class="p">.</span><span class="nx">alive</span> <span class="o">!==</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">lastAlive</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">cell</span><span class="p">.</span><span class="nx">proxy</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">alive</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// save the state</span>
+</span><span class='line'>      <span class="nx">cell</span><span class="p">.</span><span class="nx">lastAlive</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">alive</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Final Notes</h2>
+
+<ul>
+<li>Despite abusing Titanium to no end, it was still able to render the game.</li>
+<li>Titanium UI proxies are where the majority of execution time is consumed. This is true of all Titanium apps. It would be interesting to see if it was possible to make tweaks to the native bridge crossing to speed this particular app up significantly. (batching updates, custom APIs via modules)</li>
+<li>Changing <code>opacity</code> instead of <code>visible</code> had no discernable affect on performance.</li>
+<li>Creating the live cells on-demand, rather than all cells up front, resulted in slower performance. In this particular case, the initial overhead of creating all possible cells suits the app much better.</li>
+<li>I&#8217;m curious if anyone out there has any clever ideas for speeding this up. I&#8217;m all ears.</li>
+</ul>
+
+
+<h2>Resources &amp; Links</h2>
+
+<ul>
+<li>Source Code: <a href="https://github.com/tonylukasavage/Automata">https://github.com/tonylukasavage/Automata</a></li>
+<li>Carlos Icaza presenting Lanica&#8217;s Platino: <a href="http://player.vimeo.com/video/52802376">http://player.vimeo.com/video/52802376</a></li>
+<li>Conway&#8217;s Game of Life: <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">http://en.wikipedia.org/wiki/Conway&#8217;s_Game_of_Life</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T11:23:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/titanium/'>titanium</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/10/web-based-stl-viewing-three-dot-js/" title="Previous Post: Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays">&laquo; Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/13/ti-mocha-mocha-testing-support-for-titanium/" title="Next Post: ti-mocha: Mocha testing support for Titanium">ti-mocha: Mocha testing support for Titanium &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tonylukasavage';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tonylukasavage.github.com/blog/2013/07/29/automata-conways-game-of-life-using-appcelerator-titanium/';
+        var disqus_url = 'http://tonylukasavage.github.com/blog/2013/07/29/automata-conways-game-of-life-using-appcelerator-titanium/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1836 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="SVN Commit Fun I know, I know, I should be using Git. Well, I do. I use it for everything I have under my control. Unfortunately, like many, I still &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/page/4/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/02/svn-commit-that-ignores-unversioned-files/">SVN commit that ignores unversioned files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-02T14:20:00-04:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>SVN Commit Fun</h2>
+
+<p>I know, I know, I should be using <a href="http://git-scm.com/">Git</a>.  Well, I do. I use it for everything I have under my control.  Unfortunately, like many, I still have obligations that require me to use SVN on a regular basis.  And when I roll with SVN, I roll command line.  No, its not an elitist, terminal God point of view.  I happen to like <a href="http://tortoisesvn.net/" target="_blank">TortoiseSVN</a>, but 90% of my SVN versioned work is on Linux servers.</p>
+
+<p>If you&#8217;re like me, you&#8217;ll find yourself frequently using this lazy command line syntax inside your project directory to catch all your changes in one commit:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn commit * -m <span class="s2">&quot;you should always leave a message!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And there&#8217;s a very good chance you&#8217;ve run into this error, or something similar:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn: Commit failed <span class="o">(</span>details follow<span class="o">)</span>:
+</span><span class='line'>svn: <span class="s1">&#39;/path/to/unversioned_file&#39;</span> is not under version control
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As it turns out, there doesn&#8217;t appear to be a way to ignore unversioned files in the <em>svn commit</em> options.  Now before you sart leaving comments about the <strong>svn:ignore</strong> property of the SVN configuration, realize that it only applies to the <em>svn add</em>, <em>svn import</em>, and <em>svn status</em> commands.  It has no impact on <em>svn commit</em> calls so we need another solution.</p>
+
+<p>To that end, I put together a simple one-liner shell script to perform an SVN commit on all versioned files within the current directory, ignoring all unversioned files.  Here it is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn status | grep ^<span class="o">[</span>^?<span class="o">]</span> | awk <span class="s1">&#39;{print $2}&#39;</span> | xargs svn commit -m <span class="s2">&quot;my commit message&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case that makes no sense, it performs the following operations:</p>
+
+<ol>
+<li>Call <em>svn status</em> to get a full list of relevant project files.</li>
+<li>The question mark (?) in <em>svn status</em> signifies an unversioned file. The <em>grep</em> regular expression only matches files that do not start with that question mark.</li>
+<li>Use <em>awk</em> to print the second column from the <em>svn status</em> call, which is the filename.</li>
+<li>Use <em>xargs</em> to feed the filename list from <em>awk</em> to our <em>svn commit</em> call.</li>
+</ol>
+
+
+<p>You can take this all one step further (as I have) and turn it into a bash script accepting your commit message as its only argument (signified by the <strong>${1}</strong>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>svn status | grep ^<span class="o">[</span>^?<span class="o">]</span> | awk <span class="s1">&#39;{print $2}&#39;</span> | xargs svn commit -m <span class="s2">&quot;${1}&quot;</span>;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you go, happy SVN&#8217;ing.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/02/android-quick-tip--edittext-with-done-button-that-closes-the-keyboard/">Android Quick Tip: EditText with DONE Button That Closes the Keyboard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-02T09:17:00-04:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Android Quick Tip</h2>
+
+<p>Close the keyboard when you click &#8216;DONE&#8217;&#8230; seems like a simple task, right? Unfortunately, clicking &#8216;DONE&#8217; or the &#8216;RETURN&#8217; button in even a single line Android EditText will not drop focus and close the soft keyboard.  In most cases it will just generate a new line of text.  So what do you have to do if you want to close the soft keyboard by clicking &#8216;DONE&#8217;?</p>
+
+<p>First you need to set the <strong>android:imeOptions</strong> attribute equal to <strong>&#8220;actionDone&#8221;</strong> for your target EditText as seen below.  That will change your &#8216;RETURN&#8217; button in your EditText&#8217;s soft keyboard to a &#8216;DONE&#8217; button.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">* example_edittext.xml</span><br></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;EditText</span>
+</span><span class='line'>    <span class="na">android:id=</span><span class="s">&quot;@+id/edittext_done&quot;</span>
+</span><span class='line'>    <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>    <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>    <span class="na">android:hint=</span><span class="s">&quot;Enter some text&quot;</span>
+</span><span class='line'>    <span class="na">android:imeOptions=</span><span class="s">&quot;actionDone&quot;</span>
+</span><span class='line'>    <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we need to create a custom <a href="http://developer.android.com/reference/android/widget/TextView.OnEditorActionListener.html" target="_blank">OnEditorActionListener</a> for the target EditText that will recognize when the &#8216;DONE&#8217; button has been clicked.  In it we override the <a href="http://developer.android.com/reference/android/widget/TextView.html#onEditorAction(int)" target="_blank">onEditorAction()</a> method, get an instance of the <a href="http://developer.android.com/reference/android/view/inputmethod/InputMethodManager.html" target="_blank">InputMethodManager</a>, and use it to close the soft keyboard.  Here&#8217;s the code for the custom OnEditorActionListener class:</p>
+
+<p><span style="font-weight:bold; font-size:125%;">* DoneOnEditorActionListener.java</span><br></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">DoneOnEditorActionListener</span> <span class="kd">implements</span> <span class="n">OnEditorActionListener</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onEditorAction</span><span class="o">(</span><span class="n">TextView</span> <span class="n">v</span><span class="o">,</span> <span class="kt">int</span> <span class="n">actionId</span><span class="o">,</span> <span class="n">KeyEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">actionId</span> <span class="o">==</span> <span class="n">EditorInfo</span><span class="o">.</span><span class="na">IME_ACTION_DONE</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">InputMethodManager</span> <span class="n">imm</span> <span class="o">=</span> <span class="o">(</span><span class="n">InputMethodManager</span><span class="o">)</span><span class="n">v</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">INPUT_METHOD_SERVICE</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">imm</span><span class="o">.</span><span class="na">hideSoftInputFromWindow</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">getWindowToken</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now go to the onCreate() method of the Activity that contains the target EditText.  We&#8217;ll call it <strong>SampleActivity</strong> here.  In here you will assign the new <strong>DoneOnEditorActionListener</strong> to the target EditText via the <a href="http://developer.android.com/reference/android/widget/TextView.html#setOnEditorActionListener(android.widget.TextView.OnEditorActionListener)" target="_blank">setOnEditorActionListener()</a> method.</p>
+
+<p><span style="font-weight:bold; font-size:125%;">* SampleActivity.java</span><br></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">sample_activity_layout</span><span class="o">);</span> <span class="c1">// sample_activity_layout contains our target EditText, target_edittext</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">EditText</span> <span class="n">targetEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">target_edittext</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">targetEditText</span><span class="o">.</span><span class="na">setOnEditorActionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">DoneOnEditorActionListener</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// The rest of the onCreate() code</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And there you go, your target EditText field will now close the soft keyboard whenever you click the &#8216;DONE&#8217; button.  Very handy and not too difficult.  Enjoy.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/01/android-quick-tip--tiling-a-background-image/">Android Quick Tip: Tiling a Background Image</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-01T13:55:00-04:00" pubdate data-updated="true">Jun 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Android Quick Tip</h2>
+
+<p>Often times you&#8217;ll want to tile, or repeat, a small image as the background of an Android view or layout.  This is just like using the &#8216;background-image&#8217; and &#8216;background-repeat&#8217; CSS options, and almost as easy.  First and most importantly, you&#8217;ll need an image to tile.  If you don&#8217;t have one of your own, use the one below (right click and &#8220;Save Image&#8221;).</p>
+
+<h2>carbon_fibre.gif</h2>
+
+<p><a href="/images/carbon_fibre.gif"><img class="size-full wp-image-2977" title="Carbon Fiber tile" src="/images/carbon_fibre.gif" alt="Carbon Fiber tile" width="24" height="22" /></a></p>
+
+<p>Now, in your project&#8217;s <strong>res/drawable</strong> path, create a file named <strong>tile_background.xml</strong>.  Fill the file with the following XML:</p>
+
+<h2>tile_background.xml</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+</span><span class='line'><span class="nt">&lt;bitmap</span>
+</span><span class='line'>    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'>    <span class="na">android:src=</span><span class="s">&quot;@drawable/carbon_fibre&quot;</span>
+</span><span class='line'>    <span class="na">android:tileMode=</span><span class="s">&quot;repeat&quot;</span>
+</span><span class='line'>    <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now all you have to do is set the <strong>android:background</strong> attribute of your target view or layout to the tile_background.xml drawable id, like so:</p>
+
+<h2>sample_layout.xml</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;LinearLayout</span>
+</span><span class='line'>    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'>    <span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
+</span><span class='line'>    <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>    <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>    <span class="na">android:background=</span><span class="s">&quot;@drawable/tile_background&quot;</span>
+</span><span class='line'>    <span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And if <strong>sample_layout.xml</strong> was the assigned content view for your main activity, you would see this when you started your app:</p>
+
+<p><a href="/images/device.png"><img src="/images/device-168x300.png" alt="tiled" title="tiled" width="168" height="300" class="alignnone size-medium wp-image-2987" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/05/31/android-quick-tip--remove-listview-dividers/">Android Quick Tip: Remove ListView Dividers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-31T12:59:00-04:00" pubdate data-updated="true">May 31<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Quick Tip</h2>
+
+<p>If you want to remove the dividers from an Android ListView, execute the following code on your ListView object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ListView</span> <span class="n">listView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ListView</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">your_listview_id</span><span class="o">);</span>
+</span><span class='line'><span class="n">listView</span><span class="o">.</span><span class="na">setDivider</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span><span class='line'><span class="n">listView</span><span class="o">.</span><span class="na">setDividerHeight</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or if you are trying to remove dividers from a ListActivity, do this in your onCreate() method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">this</span><span class="o">.</span><span class="na">getListView</span><span class="o">.</span><span class="na">setDivider</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span><span class='line'><span class="k">this</span><span class="o">.</span><span class="na">getListView</span><span class="o">.</span><span class="na">setDividerHeight</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And there you go, no more dividers.  Enjoy.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/05/25/review--phonegap-is-web-based--appcelerator-is-pure-javascript/">Review: PhoneGap is Web-based, Appcelerator is Pure Javascript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-25T10:57:00-04:00" pubdate data-updated="true">May 25<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What&#8217;s The Difference?</h2>
+
+<p>I&#8217;ve seen a lot of confusion out there on what the actual distinction is between <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> and <a href="http://www.appcelerator.com/" target="_blank">Appcelerator Titanium</a> in terms of programming.  Both state that they provide cross-platform mobile development frameworks driven by a Javascript core.  How different can they be?  Turns out, <strong>very</strong>.</p>
+
+<p>The fundamental difference is that PhoneGap is a web based solution where Appcelerator Titanium is a pure Javascript API that creates native code.  As I&#8217;ve gone over the differences between these 2 in detail before, I&#8217;m going to very strictly stick to the topic of how their code works.  Since people seem to love charts so much, here&#8217;s a quick review to show the divergence between the two frameworks:</p>
+
+<table border="1" class="compare_table" cellspacing="0">
+    <tr class="compare_title">
+        <td>&nbsp;</td>
+        <td>PhoneGap</td>
+        <td>Appcelerator Titanium</td>
+                <td>Notes</td>
+    </tr>
+    <tr>
+        <td>Javascript API</td>
+        <td><img src="/images/yes.gif"/></td>
+        <td><img src="/images/yes.gif"/></td>
+                <td>PhoneGap&#8217;s API interacts as typical JS does in your web code. Appcelerator Titanium API is <strong>NOT</strong> web code, it is used to interact with native code.</td>
+    </tr>
+    <tr>
+        <td>Supports HTML5/CSS3</td>
+        <td><img src="/images/yes.gif"/></td>
+        <td><img src="/images/no.jpg"/></td>
+                <td>PhoneGap is a web app that runs in a native web browser view.</td>
+    </tr>
+    <tr>
+        <td>Supports Web Standards</td>
+        <td><img src="/images/yes.gif"/></td>
+        <td><img src="/images/no.jpg"/></td>
+                <td>PhoneGap looks, feels, and develops like a standard web page. It is also subject to the same browser compatibility concerns.</td>
+    </tr>
+    <tr>
+        <td>Supports DOM based<br>JS libraries</td>
+        <td><img src="/images/yes.gif"/></td>
+        <td><img src="/images/no.jpg"/></td>
+                <td>JS libraries that reference the DOM, like <a href="http://jquery.com/" target="_blank">jQuery</a>, <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, or any of the new <a href="http://processingjs.org/" target="_blank">&lt;canvas&gt; based libs</a> will only work with Appcelerator Titanium webviews</td>
+    </tr>
+    <tr>
+        <td>Native Code</td>
+        <td><img src="/images/no.jpg"/></td>
+        <td><img src="/images/yes.gif"/></td>
+                <td>Appcelerator Titanium creates a truly native app via a JS API that maps to native code. </td>
+    </tr>
+    <tr>
+        <td>Native UI/Performance</td>
+        <td><img src="/images/no.jpg"/></td>
+        <td><img src="/images/yes.gif"/></td>
+                <td>Appcelerator Titanium performance is limited only by the device. PhoneGap&#8217;s is limited by the device&#8217;s web view.</td>
+    </tr>
+</table>
+
+
+<h2>What Does This Mean?</h2>
+
+<ul>
+    <li>Web developers will have a much easier transition going to PhoneGap than they would Appcelerator Titanium.</li>
+    <li>Application developers without serious web development chops will likely gravitate towards Appcelerator Titanium.  Why learn HTML, CSS, and Javascript when you can just learn Javascript?</li>
+    <li>Designer work will be tougher to integrate into an Appcelerator project as all the layouts and assets are done programmatically. PhoneGap, on the other hand is effectively web development, which designers have been working with for a very long time.</li>
+    <li>Appcelerator is always going to win on performance.</li>
+    <li>There will be an inevitable flood of web developers calling themselves mobile developers because they are familiar with PhoneGap. Beware.</li>
+    <li>Appcelerator has a much deeper and more complex integration with each mobile platform.
+        <ul>
+            <li><strong>Pros</strong>: Native look, feel, and performance</li>
+            <li><strong>Cons</strong>: Platform compatibility will be achieved more slowly. Much harder to &#8220;code once, deploy everywhere&#8221;.</li>
+        </ul>
+    </li>
+</ul>
+
+
+<h2>Summary</h2>
+
+<p>The above is a hyper-condensed review of the whole story.  As always, I encourage you to try both of these platforms.  They both excel in many areas and offer unique features.  Neither is the wrong choice, but depending on your scenario, one might be better suited than the other.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/05/19/display-images-from-the-internet-in-android/">Display Images from the Internet in Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-19T12:59:00-04:00" pubdate data-updated="true">May 19<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>The Overview</h2>
+
+<p>I&#8217;ll make my usual yammering quick so you can get straight to the good stuff.  This is just a snippet to show you how you can display an image from the Internet in your native Android app via ImageView.  This is ideal in a few situations, namely when you need to keep app size and initial load time down, or if it isn&#8217;t feasible to locally store all the images your app will use.</p>
+
+<br>
+
+
+<h2>The Code</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">savagelook</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.net.MalformedURLException</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.graphics.drawable.Drawable</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.widget.ImageView</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShowImageActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// YOUR_LAYOUT is the name of your layout resource</span>
+</span><span class='line'>        <span class="c1">// IMAGEVIEW_ID is your ImageView in YOUR_LAYOUT</span>
+</span><span class='line'>        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">YOUR_LAYOUT</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">ImageView</span> <span class="n">imageView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageView</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">IMAGEVIEW_ID</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">imageView</span><span class="o">.</span><span class="na">setImageDrawable</span><span class="o">(</span><span class="n">createDrawableFromURL</span><span class="o">(</span><span class="s">&quot;http://savagelook.com/misc/sl_drop2.png&quot;</span><span class="o">));</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">Drawable</span> <span class="nf">createDrawableFromURL</span><span class="o">(</span><span class="n">String</span> <span class="n">urlString</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">Drawable</span> <span class="n">image</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">urlString</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="o">(</span><span class="n">InputStream</span><span class="o">)</span><span class="n">url</span><span class="o">.</span><span class="na">getContent</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">image</span> <span class="o">=</span> <span class="n">Drawable</span><span class="o">.</span><span class="na">createFromStream</span><span class="o">(</span><span class="n">is</span><span class="o">,</span> <span class="s">&quot;src&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MalformedURLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// handle URL exception</span>
+</span><span class='line'>      <span class="n">image</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// handle InputStream exception</span>
+</span><span class='line'>      <span class="n">image</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">image</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/05/11/9-things-to-know-about-phonegap/">9 things to know about PhoneGap</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-11T14:07:00-04:00" pubdate data-updated="true">May 11<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>The People</h2>
+
+<p>As it turns out, the co-founders and core developers of PhoneGap are pretty accessible guys.  Who better to know when it comes to using a framework than the authors?  Everything from basic &#8220;getting started&#8221; questions to more complex topics from me have been addressed directly by one or more of their team.   While there&#8217;s probably a ton of people I&#8217;m not mentioning, these few guys in particular have been exceedingly helpful.</p>
+
+<ul>
+    <li>Andre Charland (<a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>)</li>
+    <li>Brian Leroux (<a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>)</li>
+    <li>Dave Johnson (<a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a>)</li>
+    <li>Michael Brooks (<a href="http://twitter.com/#!/mwbrooks" target="_blank">@mwbrooks</a>)</li>
+    <li>Fil Maj (<a href="http://twitter.com/#!/filmaj" target="_blank">@filmaj</a>)</li>
+    <li>And the PhoneGap Twitter account (<a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>)</li>
+</ul>
+
+
+<p>I&#8217;m a Twitter fiend so that&#8217;s generally where I find these guys, but make sure you also check out their <a href="http://groups.google.com/group/phonegap" target="_blank">google group</a> and <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">IRC</a>.  I&#8217;ve said this before&#8230; if you are doing PhoneGap development and aren&#8217;t following this crew on Twitter, then you&#8217;re an idiot.</p>
+
+<h2>PhoneGap Build</h2>
+
+<p>So you hear about all these frameworks that do cross platform mobile development, &#8220;code once, run everywhere&#8221;, and everything just magically works.  Well&#8230; it ain&#8217;t that simple.  You&#8217;ve got SDK installations, developer &amp; signing certificates, build chains, and custom project layouts to worry about with each platform.  While this can become a nightmare to manage, PhoneGap makes a pretty epic effort to help with their currently free, beta service called <a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a>.</p>
+
+<p>PhoneGap Build will allow you to give them the web code that drives your app and in return you will get App Store deployable binaries back for all the platforms listed in interface snapshot above.  You don&#8217;t have to install all the SDKs.  You don&#8217;t need to worry about any platform specific setup.  It is actually that simple.</p>
+
+<p>I highly suggest setting up an account right this second, especially if you are just starting out as a mobile developer.  <strong>The time consuming, and often frustrating, nature of multi-platform testing and deployment is easy to underestimate</strong>.  When you&#8217;re learning the ropes of mobile APIs and the finer points of app creation, the last thing you want to worry about is every individual SDK&#8217;s varying degrees of compatibility.  Which leads me to my next section&#8230;</p>
+
+<h2>PhoneGap Generate</h2>
+
+<p>If you are like most mobile developers, you are a (proud) owner of the 4+ GB behemoth of a download <a href="https://developer.apple.com/xcode/" target="_blank">XCode 4</a>.  The good news is that you can build apps for iOS 4+ with it.  The bad news is that <strong>XCode 4&#8217;s default configuration settings are not compatible with PhoneGap</strong>, and it can be a bit complicated to resolve.  Here&#8217;s the bloody path I took to <a href="http://groups.google.com/group/phonegap/browse_thread/thread/544f44883f9e22b6?pli=1" target="_blank">get XCode 4 building my PhoneGap apps</a>.</p>
+
+<p>But in their constant efforts to make the build process easier on developers, PhoneGap came up with a short term solution.  Instead of hacking up your XCode 4 project files, let PhoneGap do it for you!  Enter <a href="https://build.phonegap.com/generate" target="_blank">PhoneGap Generate</a>.  Its an extension of the PhoneGap Build site that will, given a project name, generate an XCode 4 compatible project for you.  While it&#8217;s not an ideal situation, it can save you some of the headaches I endured trying to do it myself.  Hopefully the PhoneGap distribution will have this resolved in the near future.</p>
+
+<h2>Cordova</h2>
+
+<p>Now we&#8217;re getting to the real goodies.  <a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a> is without question the single biggest boost to my PhoneGap development workflow.  Think PhoneGap Build with no need for the cloud.</p>
+
+<p><a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a>, in Brian Leroux&#8217;s (author) own description, is</p>
+
+<blockquote>A PhoneGap project toolchain that automates common tasks for building cross platform mobile projects with OS X.
+
+Automate common development workflow tasks such as: compiling, debugging, testing, releasing and other things in between. As an added benefit projects generated with Cordova create a consistent, predictable, easy to understand and therefor extend software project. A number of conventions are introduced removing the need for mobile developers to relearn their tools or, worse, rebuild them for every project.</blockquote>
+
+
+<p>Be warned, Cordova is young and best used by those with a good understanding of how PhoneGap works in terms of project layout, building, testing, and deployment.  It also helps a great deal if you understand these concepts as they relate to each platform (i.e., Android, iOS, Blackberry, etc&#8230;) you plan to target.  And you&#8217;ll need to me comfortable with the Terminal on Mac OS.  If I haven&#8217;t scared you off yet, read on.</p>
+
+<p>Basically, you can build and test PhoneGap apps for multiple platforms with simple Terminal commands.  No more creating projects in XCode or Eclipse just to conform to a specific platform.  You can choose your favorite web development IDE (<a href="http://www.aptana.com/" target="_blank">Aptana</a> for me) and do all your work there.  When you&#8217;re done, <strong>just run one simple command from the command line and it will build for iOS, Android, and even Blackberry</strong> (with a Windows VM).  Check out this short demo from Brian Leroux to see what I mean.</p>
+
+<iframe width="560" height="349" src="http://www.youtube.com/embed/nxgM19HCytg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Yeah, its low level and it doesn&#8217;t have a pretty GUI, but man this project has massively improved my efficiency in terms of cross platform testing.  I&#8217;m hoping more people see this project and hop on board, and even contribute like I did (Blackberry support).  A tool like this can really be a game changer in terms of what a single developer can do for a mobile app spanning a multitude of platforms.</p>
+
+<h2>You don&#8217;t have to use Platform-specific IDEs</h2>
+
+<p><img class="size-full wp-image-2881 alignright" title="Web IDEs" src="http://savagelook.com/blog/wp-content/uploads/2011/05/textmate_vs_aptana.png" alt="Web IDEs" width="250" height="113" /></p>
+
+<p>According to the PhoneGap docs on the <a href="http://www.phonegap.com/start" target="_blank">&#8220;Get Started&#8221; page</a>, I need XCode if I want to build iPhone/iPad apps, Eclipse for Android, a Windows based IDE for Blackberry, its a serious pain in the ass.  But these are web based solutions, right?  <strong>Why in God&#8217;s name would I want to endure XCode and Eclipse as web development IDEs?!</strong>  I wouldn&#8217;t, and I don&#8217;t have to.</p>
+
+<p style="text-align: left;">You&#8217;ve got 2 options when it comes to developing your apps if you don&#8217;t want to use the platform specific IDEs (and you shouldn&#8217;t).</p>
+
+
+
+
+<ol>
+    <li>Develop your web code in your IDE of choice.  When its at a point you want to test it on a specific platform, copy the web code into a PhoneGap project built in the platform specific IDE.  For example, if you like <a href="http://macromates.com/" target="_blank">TextMate</a>, do all the web coding in TextMate and when you are ready to test it on Android, copy the web code into the assets/www path of your Eclipse Android project.  Run and test from there.</li>
+    <li>Use <a href="https://github.com/brianleroux/cordova" target="_blank">Cordova</a>. You can do your web code in your IDE of choice and simply run &#8216;make debug&#8217;. In the current incarnation of Cordova, this will open your web code in the iPhone, Android, and Blackberry simulators.  Reference the <a href="https://github.com/brianleroux/Cordova/blob/master/README.md" target="_blank">Cordova Github README.md </a> for more details on usage.  In the near future I&#8217;m planning a blog post on that very subject.</li>
+</ol>
+
+
+<p>The long and short of it is that the platform specific IDE workflows are not optimal for web development.  Find the tools that best suit you and your web development style, use them, and only spend your time in platform specific IDEs when necessary.  The time you save using a full featured, web-focused IDE makes up for the less-than-fun process of having to copy and paste code to platform specific IDEs.  You save even more time if you use Cordova.  Have I pimped Cordova enough yet?</p>
+
+<h2>The Supported APIs (per platform)</h2>
+
+<p>So as you probably already know, you can find all of PhoneGap&#8217;s documented mobile API support at <a href="http://docs.phonegap.com/" target="_blank">docs.phonegap.com</a>. What you might not be aware of is that they have done a really good job of documenting which APIs are supported by which platforms.</p>
+
+<p>On a function by function basis, the &#8220;Supported Platforms&#8221; section lets you know down to the OS version which platforms support it.  The trailing &#8220;Quirks&#8221; section let&#8217;s you know which platforms may not behave as expected.  Not only that, but the &#8220;Quirks&#8221; are typically accompanied by workarounds to make your life a little easier.</p>
+
+<p>If you are doing cross platform mobile development, get used to the fact that you are going to be spending time dealing with inconsistencies, regardless of framework choice.  Having documentation with this level of detail will surely decrease that time, as well as prevent you from hitting unforeseen dead-ends in your app development.  RTFM, its worth it.</p>
+
+<h2>PhoneGap can technically do anything</h2>
+
+<p>PhoneGap does its best to expose platform specific mobile APIs in a bare bones, clean, abstracted manner.  While this does create a reliable experience in development, it does leave some things you might want off the table.  The big thing, for example, is native UI components.  While &#8220;native&#8221; anything seems to be contradictory to  cross platform development, its still a common request (see <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> or even this <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">PhoneGap based solution</a>).  So how do you go about offering platform specific functionality in a PhoneGap app?  With plugins.</p>
+
+<p>Plugins allow you to write native code for a specific platform in order to extend the PhoneGap framework.  For example, you could write code for handling <a href="https://github.com/phonegap/phonegap-plugins/tree/master/Android/BarcodeScanner" target="_blank">bar code scanning in Java for Android</a>, then write some Javascript to hook your native code to the PhoneGap framework, then use this native functionality in one of your PhoneGap apps.  OK, I didn&#8217;t give an entirely clear account of what is necessary, so just reference the <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">PhoneGap wiki for details on plugin development</a>.  The wiki currently contains step by step instructions for Android, iOS, and Blackberry.  Here&#8217;s the resources you should be checking out.</p>
+
+<ul>
+    <li><a href="http://wiki.phonegap.com/w/page/36753494/How-to-Create-a-PhoneGap-Plugin-for-Android" target="_blank">How to Create a PhoneGap Plugin for Android</a></li>
+    <li><a href="http://wiki.phonegap.com/w/page/36753496/How-to-Create-a-PhoneGap-Plugin-for-IPhone" target="_blank">How to Create a PhoneGap Plugin for iPhone</a></li>
+    <li><a href="http://wiki.phonegap.com/w/page/35799737/How-To-Create-a-PhoneGap-Plugin-for-BlackBerry-WebWorks" target="_blank">How to Create a PhoneGap Plugin for Blackberry WebWorks</a></li>
+    <li>Jesse MacFadyen&#8217;s (<a href="http://twitter.com/#!/purplecabbage" target="_blank">@purplecabbage</a>) collection of <a href="https://github.com/purplecabbage/phonegap-plugins" target="_blank">PhoneGap plugins on Github</a></li>
+</ul>
+
+
+<h2>They Want You!</h2>
+
+<p>PhoneGap is an open source project.  Very open source in fact.  As though the <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT</a> licenses weren&#8217;t liberal enough, PhoneGap gives you the choice of applying either to your work.  As long as you keep their copyright notices in your code and don&#8217;t use their name to promote your product, you can use their code however you wish, commercially or otherwise.</p>
+
+<p>How does PhoneGap benefit from this? Well, licensing like this tends to create bi-directional generosity.  By this I mean the community commonly contributes to PhoneGap and its plugins and tools.  You can go to Github right now and fork your own copy of the whole PhoneGap framework (among other things) at the <a href="https://github.com/phonegap" target="_blank">PhoneGap Github account</a>.</p>
+
+<p>So if you use PhoneGap and write some custom code you think others can benefit from, consider giving back to keep the spirit of open source alive.  Otherwise you&#8217;re a jack ass.</p>
+
+<h2>weinre</h2>
+
+<p>Can&#8217;t believe I forgot this one.  I&#8217;ll make this brief as your best bet is to read more at its website: (<a href="http://pmuellr.github.com/weinre/" target="_blank">http://pmuellr.github.com/weinre/</a>).</p>
+
+<p>Basically, weinre lets you debug web pages remotely.  What does this mean for PhoneGap?  This means <strong>you can debug your native PhoneGap apps either on device or simulator</strong>.  It alleviates one of the biggest time sucks of web based mobile development, which is the silent dismissal of malfunctioning Javascript calls.  But now instead of your exceptions going the way of /dev/null, you can debug and log your execution as you would any other application.  Oh, and Cordova has weinre built in.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap/">A Deeper Look at Appcelerator and PhoneGap</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-20T12:58:00-04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><span style="font-size: 20px; font-weight: bold;">Overview</span></h2>
+
+
+<p>I&#8217;d like to start by saying that I think it&#8217;s important that both of these frameworks exist.  The more I worked with each, the more I found that it wasn&#8217;t a simple question of which mobile framework was better.  Both have some of the features a cross platform framework should have, and each shines in areas that the other frankly does not.  And that will be the focus of this analysis.  What are the key aspects to a great cross platform mobile framework, and how do <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> and <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> stack up.</p>
+
+<h1>Cross Platform Support</h1>
+
+
+<p>So this is why we&#8217;re all here right? Code once, run every where.  That&#8217;s what we want.  Well in this case, one of these solutions gets you a lot closer than the other.</p>
+
+<p>This is PhoneGap&#8217;s bread and butter.  By leveraging web views native to the mobile devices, PhoneGap allows you to build as an app as complex and modern as you want while providing the ability to have it gracefully degrade for lower end devices, all in the same code base.  This degradation can be controlled via CSS or even dynamically with javascript and media queries.  You can use the same design and development principles that have guided cross browser development for years.  And the list of mobile platforms they support (which includes iOS, Android, Blackberry, webOS, and Symbian)  is definitely worth bragging about.</p>
+
+<p>Appcelerator, on the other hand, does iOS really, really well.  Android brings some additional headaches and quirks.  Blackberry is still in the beta stage.  They are actually creating native code based on their Javascript API, so the quirks will likely always exist. Appcelerator will constantly be one step behind/removed in their efforts to integrate native functionality.  No fault of their own, it&#8217;s just the nature of their product.</p>
+
+<p>This is why I think emphasis on Appcelerator being a cross platform framework is misleading.  <strong>While it CAN be a cross platform framework, it is not by nature</strong>.  I mean, how can it be? One of its main selling points is access to native UI components, something that is obviously not part of a cross platform solution.  One code base for multiple mobile platforms is totally a possibility with Appcelerator, but you will likely sacrifice a lot of what makes it great (coming in the following sections) to get to that lowest common denominator.</p>
+
+<h1>Defined Workflow</h1>
+
+
+<p>The product will only be as good as the tools that support, particularly when you are trying to appeal to an audience as large as mobile developers.  In this respect, Appcelerator is the clear winner.</p>
+
+<p>Earlier this year Appcelerator announced that they had acquired the web development IDE <a href="http://www.aptana.com/" target="_blank">Aptana</a>. Before this point you were stuck with <a href="http://www.appcelerator.com/products/" target="_blank">Titanium Developer</a> which did the job, but was only a project deployment tool, not a true IDE.  Just this month they introduced the first version of the new <a href="http://preview.appcelerator.com/studio/" target="_blank">Titanium Studio</a>, an integration of Titanium Developer and Aptana.  There were a few bugs to wrestle with the earliest versions of this software, but I must say that I am loving it.  It has truly integrated the development and deployment workflow, making it more organized and efficient.  It has built in update checking for not only the studio but also the Titanium SDKs.  Oh, and <strong>did I mention that all of this is free</strong>?</p>
+
+<p>PhoneGap leaves you to your own tools and workflow.  A plus for some, but I would imagine its a minus for those of us who don&#8217;t come from primarily a web development background.  They give you some direction in the <a href="http://www.phonegap.com/tools" target="_blank">Tools</a> section of their website, but its not what you would call a workflow.  It a different approach, basically leaving the developer to determine what libraries, IDE, touch frameworks, etc&#8230; are most appropriate for their project.  This can be problematic for two reasons. 1, new mobile developers are not going to know which tools are the most appropriate and 2, there are A LOT of available touch and JS libraries out there for mobile development.  Choosing can be a project in its own rite. All that said, <a href="http://twitter.com/#!/brianleroux" target="_blank">Brian Leroux</a> of <a href="http://www.nitobi.com/" target="_blank">Nitobi</a>, the makers of PhoneGap, created the <a href="http://xuijs.com/" target="_blank">XUIJS library</a>. Its what I&#8217;m using and I&#8217;m really digging it so far.</p>
+
+<h1>Programming Language</h1>
+
+
+<p>Admit it Appcelerator developers, you aren&#8217;t interested in the Javascript API so much as you are interested in <strong>NOT</strong> writing Objective-C!  Yeah, me too.</p>
+
+<p>You would think this topic would be a deadlock, right?  Its just Appcelerator&#8217;s Javascript API versus PhoneGap&#8217;s use of the standard web stack of HTML/CSS/JS.  It basically the same thing&#8230; or is it?  Remember how I said in the last section that PhoneGap gives you free reign to choose whatever framework you want for development?  Well, Appcelerator doesn&#8217;t, and it is definitely to the chagrin of many Javascript savvy developers.</p>
+
+<p>PhoneGap is HTML/CSS/JS.  Anything you can do with it on a normal web page you can do in a mobile browser&#8217;s web view.  This means any chunk of Javascript you find anywhere that you like can potentially be integrated into you app.  This ranges from your favorite frameworks like <a href="http://jquery.com/" target="_blank">jQuery</a> and <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, mobile  libraries like <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, or even graphical ones like Grant Skinner&#8217;s <a href="http://easeljs.com/" target="_blank">EaselJS</a> or one of these many <a href="http://javascript.open-libraries.com/multimedia/3d/fantastic-javascript-3d-libraries/" target="_blank">3D libraries</a>.  Performance and device support permitting, you can use any Javascript you want.</p>
+
+<p>Appcelerator&#8217;s API unfortunately is purely Javascript, is has no ties to the DOM.  But wait, doesn&#8217;t the most popular Javascript library in the world assume the presence of the DOM window and document?! Yep, that&#8217;s right, <strong>you can&#8217;t use any part of jQuery that requires the DOM</strong> (which is almost all of it) in your Appcelerator code.  The one exception is that you can still use jQuery and other DOM reliant libraries in a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium.UI.WebView</a>, but you can&#8217;t use it with the actual Appcelerator API.  Annoying to me, but I can see this being REALLY aggravating  to long time web developers accustomed to using jQuery with everything.</p>
+
+<h1>Deployment Support</h1>
+
+
+<p>If you&#8217;ve spent any time in mobile development, you know that deploying your finished app to markets and app stores can be a truly daunting task.  There&#8217;s certificates, app signing, icons, logos, promotional images, supporting text, and the task of keeping it all organized.  It can quickly become a mess.  While both Appcelerator and PhoneGap both give you detailed instructions on how to build app store ready apps from your development environment and offer professional services, <strong>PhoneGap takes it one huge step further</strong>.</p>
+
+<p><a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a> is currently a free beta service that you need to get your ass signed up for now.  While I highly encourage you to check it out for yourself, here&#8217;s the insanely easy workflow:</p>
+
+<ol>
+    <li>Upload you PhoneGap project to PhoneGap Build (or use its Github integration)</li>
+    <li>Configure your platform specific accounts with certificates and signing keys (all PhoneGap supported platforms available)</li>
+    <li>Watch as PhoneGap Build creates deployable binaries for each of these platforms and delivers you download links for each</li>
+</ol>
+
+
+<p>Now that is the type of workflow I&#8217;m looking for! A quick note on step #2 is that iOS is the only platform that requires a certificate to get a testable binary.  You&#8217;ll want to set up certificates and keys before you deploy the the market/app store, but you can test the binary without them.</p>
+
+<h1>Speed of Development</h1>
+
+
+<p>All this flexibility and platform support has to bite PhoneGap in the ass somewhere, right?  Speed of development, if you can&#8217;t tell by it name, is another place that Appcelerator excels.</p>
+
+<p>Appcelerator allows developers to start building an app that looks, feels, and performs like a native one very quickly.  Some of the big reasons are the following:</p>
+
+<ul>
+    <li>Their Javascript API is infinitely easier than Objective-C, and some might also say Java (but not me)</li>
+    <li>Tons of ready-to-use native UI components</li>
+    <li>You are not required to adhere to the MVC architectural pattern</li>
+    <li>The double-edged sword of loosely typed Javascript allows you to create custom components like table views and rows very easily</li>
+    <li>The new Titanium Studio gives you one place to develop and build for multiple platforms</li>
+</ul>
+
+
+<p>&nbsp;</p>
+
+<iframe src="http://player.vimeo.com/video/8730218?title=0&amp;byline=0&amp;portrait=0&amp;color=9a0707" width="400" height="225" frameborder="0"></iframe>
+
+
+<p>PhoneGap, though, is a bare bones framework.  It looks to provide mobile API support (things like location, accelerometer, etc&#8230;) across all major vendors.  The UI is left up to you and your chops as a web developer.  To that end <strong>most people are left to go find another touch framework to layer on top of PhoneGap</strong>.  <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>, <a href="http://jqtouch.com/" target="_blank">JQTouch</a> are all popular options.  There&#8217;s even efforts to create <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">web based &#8220;native&#8221; components</a>.  You can also take my route and build most of it from scratch using <a href="http://xuijs.com/" target="_blank">XUIJS</a>.</p>
+
+<p>The long and short is that if you are only building for iOS, or maybe also Android, Appcelerator will likely get you from concept to completion faster than PhoneGap.</p>
+
+<h1>Documentation</h1>
+
+
+<p>Documentation is key when undertaking any new technology.  Both frameworks have their ups and downs here.</p>
+
+<p>Appcelerator maintains a newly improved collection of there documentation on their <a href="http://wiki.appcelerator.org/display/guides/Home#" target="_blank">new Confluence site</a>.  While it is fairly comprehensive, it is also a bit jumbled, particularly the <a href="http://wiki.appcelerator.org/display/guides/Getting+Started+with+Titanium" target="_blank">&#8220;Getting Started&#8221; section</a>.  Its all there if you have the patience to find what you are looking for.  You&#8217;ll find installation, setup, examples, tutorials, the works.  You can also find a comprehensive listing of their <a href="http://developer.appcelerator.com/apidoc/mobile/latest" target="_blank">mobile API here</a>.  The problems I see with their documentation are the following:</p>
+
+<ul>
+    <li>Its sometimes hard to tell what version of their SDK examples apply to</li>
+    <li>Often Titanium objects have properties that don&#8217;t apply, or don&#8217;t behave as the documentation indicates</li>
+    <li>You are sometimes left digging through the Q &amp; A section to find the quirks for specific Titanium objects</li>
+    <li>Examples given for Titanium objects are WAY too simplistic</li>
+    <li>How &#8216;bout a few more &#8220;Hello, World!&#8221; scale tutorials before you throw us at the <a href="https://github.com/appcelerator/KitchenSink/" target="_blank">Kitchen Sink</a>?!</li>
+    <li>Im sure this will change after the Titanium Studio release gets some traction, but the &#8220;Getting Started&#8221; section is still using Titanium Developer as its chosen workflow</li>
+</ul>
+
+
+<p><strong>PhoneGap&#8217;s <a href="http://www.phonegap.com/start" target="_blank">&#8220;Get Started&#8221; section</a> is a thing of beauty</strong>.  In a very clean, concise layout, the PhoneGap site walks you through how to set up your computer for each individual platform you wish to develop for.  It list requirements, toolsets, and easy to follow instructions.  It helps ease the intimidation that can come with trying to develop for so many platforms. Once you get it up and running, PhoneGap&#8217;s <a href="http://docs.phonegap.com/" target="_blank">API documentation</a> is incredibly easy to follow.  A simple layout lists everything PhoneGap is capable of doing.  Clicking on these capabilities then takes you to the API specific documentation that lists usage, examples, device support, and any quirks that are currently known.  It takes a lot of the guess work and frustration out of the inevitable troubleshooting that ensues with cross platform mobile development.</p>
+
+<p>&nbsp;</p>
+
+<p>PhoneGap definitely shines in the documentation department.  In all fairness, though, Appcelerator has a hell of a lot more to document.  PhoneGap&#8217;s lack of UI components accounts for a large part of its documentation being so easy to follow.</p>
+
+<h1>Community</h1>
+
+
+<p>An active and knowledgable community is one of my biggest factors in choosing any technology.  Appcelerator and PhoneGap both have a wiki and blog, and also offer these a few more resources.</p>
+
+<p>Appcelerator has their <a href="http://developer.appcelerator.com/questions/created" target="_blank">Q &amp; A section</a> of their site.  It allows users to submit questions about Appcelerator to the community.  Users can submit answers, vote on others&#8217; answers, and receive points and badges for participation.  If StackOverflow has taught us anything, its that people like being rewarded for participation, no matter how meaningless.  On top of this free resource, they also offer training, certification, and professional services for those looking to take their Appcelerator&#8217;ing to the next level.  I hand out on Twitter a lot, so its worth mentioning that you can get some great help and info regarding Appcelerator by following <a href="http://twitter.com/#!/appcelerator" target="_blank">@appcelerator</a>, <a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a>, <a href="http://twitter.com/#!/aaronksaunders" target="_blank">@aaronksaunders</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a>.</p>
+
+<p>PhoneGap maintains a connection with the community with their <a href="http://groups.google.com/group/phonegap" target="_blank">Google Group</a> and on IRC at <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">irc.freenode.net #phonegap</a>.  They also offer <a href="http://www.phonegap.com/services" target="_blank">professional services and training</a>.  The core of the PhoneGap team is very involved with the community and I&#8217;ve often been found chatting with <a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>, <a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>, <a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>, and <a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a> on Twitter.</p>
+
+<p>Other than wishing PhoneGap had some kind of a forum system better than a Google group, I think both frameworks do a very good job of listening to and staying engaged in the community.</p>
+
+<h1>Extensibility</h1>
+
+
+<p>No developer I have ever known is just happy with the tools he&#8217;s given.  We want to be able to add to and modify anything we get our hands on.  Both frameworks are very extendable via modules and offer open source licenses, though PhoneGap&#8217;s option of <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">&#8220;New&#8221; BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT license</a> is a little nicer than Appcelerator&#8217;s <a href="http://www.opensource.org/licenses/apache2.0.php" target="_blank">Apache 2.0 license</a>.</p>
+
+<p>Appcelerator offers <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+Android" target="_blank">Android</a> and <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+iOS" target="_blank">iOS</a> module development guides.  These allow you to build native components in their native SDKs and then be able to access them in your Appcelerator app via the Javascript API.  Anywhere Appcelerator falls short in terms of supporting any API or UI component, you are free to pick it up and make it happen.  Its not the simplest process and effectively removes the possibility of  cross platform code, but can be a strong tool for a single platform scenario.</p>
+
+<p><strong>UPDATE</strong>: In addition, Tony Guntharp also gave me this blog post detailing how modules can be developed in other languages as well: <a href="http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html">http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html</a></p>
+
+<p>PhoneGap also supports additional modules, or plugins, to its framework in the same fashion that Appcelerator does.  You can develop native code and then write hooks back to PhoneGap to access it in your project.  Again, this undoes any cross platform compatibility unless you make the native component for all supported platforms.  There&#8217;s a <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">guide to creating plugins found here</a>.</p>
+
+<p><strong>Appcelerator on Github:</strong> <a href="https://github.com/appcelerator" target="_blank">https://github.com/appcelerator</a>
+<strong>PhoneGap on Github:</strong> <a href="https://github.com/phonegap/phonegap" target="_blank">https://github.com/phonegap/phonegap</a></p>
+
+<h1>Summary</h1>
+
+
+<p>So as I stated at the beginning, I think both of these frameworks are important and have their place in the mobile landscape.  From my personal perspective, as they both stand now, PhoneGap is the true cross platform solution.  <a href="http://twitter.com/#!/fling" target="_blank">Brian Fling</a>, author of <a href="http://oreilly.com/catalog/9780596155452" target="_blank">&#8220;Mobile Design and Development&#8221;</a>, rang the point home throughout his book that the future of mobile development lies in web based applications that adhere to a structure of graceful degradation.  I initially thought he was a web developer who didn&#8217;t want to learn Objective-C or Java.  After spending some time with native development and multiple cross platform frameworks, I find myself coming to the same conclusion.</p>
+
+<p>But that&#8217;s not to say that PhoneGap is the end all, be all of mobile development.  I happen to think that for iOS &amp; Android projects, Appcelerator could likely be your best choice.  Unless you have prior experience with Objective-C, I would advise anyone with even a basic knowledge of Javascript to give it a shot before resorting to native development.  Trust me, you won&#8217;t miss Interface Builder, and outlets, and actions, and all kinds of other iOS MVC fun.  Oh, and you&#8217;re sure to enjoy the native UI and performance that Titanium uniquely provides.</p>
+
+<p><strong>NOTE:</strong> I would have liked to include Adobe Air as I did in my past comparison, but I honestly have not used it in 2+ months and there have been serious changes since.  I&#8217;ve been focusing on cross platform solutions that can hit the big three mobile devices out there: Android, iOS, and Blackberry.  Soon as Blackberry supports Adobe Air you better believe I&#8217;m coming back to re-evaluate it.  I&#8217;ll take AS3 and/or Flex over HTML/CSS/JS any day.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/31/swipes--or--flings---for-navigation-in-android/">Swipes, or &#8220;Flings&#8221;, for Navigation in Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-31T10:35:00-04:00" pubdate data-updated="true">Mar 31<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Download the Project</h2>
+
+
+<ul style="margin-bottom:20px;"><li><a href="http://savagelook.com/misc/Fling.zip"><strong>Eclipse project and full source for &#8220;Fling&#8221;</strong></a></li></ul>
+
+
+
+
+<h2>Overview</h2>
+
+
+<p>I&#8217;ll keep the narrative on this one brief and get you right to the good stuff.  I wanted to be able to navigate through the activities in an Android app just like Tweetdeck.  One swipe of the finger and you quickly transition to the next column.  Take a look at how it looks when you swipe your finger from right to left.</p>
+
+<p>In Android, they call this a &#8220;fling&#8221;.  Think of a fling as a touch and drag with a specific direction and speed threshold.  Once that speed threshold is surpassed, the fling is triggered.  Here&#8217;s the bare bones code necessary to get fling gestures working in your Android app.  Also, I use custo animations based on the ones from the Android SDK to determine how my activities will transition.  A left to right fling should obviously have the opposite appearance as a right to left fling.  Big thanks to <a href="http://stackoverflow.com/questions/937313/android-basic-gesture-detection" target="_blank">this post</a> as it makes up a majority of the logic and code in this sample.</p>
+
+<h2>src/MainActivity.java</h2>
+
+
+<p>This is where the heavy lifting is done.  The important things to note are the use of a custom gesture listener to handle our fling event and the use of <a href="http://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)" target="_blank">overridePendingTransition()</a> to apply our custom transition animations to the activity we just started.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">savagelook</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.content.Intent</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.view.GestureDetector</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.view.GestureDetector.SimpleOnGestureListener</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.view.MotionEvent</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SWIPE_MIN_DISTANCE</span> <span class="o">=</span> <span class="mi">120</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SWIPE_MAX_OFF_PATH</span> <span class="o">=</span> <span class="mi">250</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SWIPE_THRESHOLD_VELOCITY</span> <span class="o">=</span> <span class="mi">200</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">GestureDetector</span> <span class="n">gestureDetector</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/** Called when the activity is first created. */</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">gestureDetector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GestureDetector</span><span class="o">(</span><span class="k">new</span> <span class="n">MyGestureDetector</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">View</span> <span class="n">mainview</span> <span class="o">=</span> <span class="o">(</span><span class="n">View</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">mainView</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Set the touch listener for the main view to be our custom gesture listener</span>
+</span><span class='line'>        <span class="n">mainview</span><span class="o">.</span><span class="na">setOnTouchListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnTouchListener</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onTouch</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">,</span> <span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">if</span> <span class="o">(</span><span class="n">gestureDetector</span><span class="o">.</span><span class="na">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">});</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">class</span> <span class="nc">MyGestureDetector</span> <span class="kd">extends</span> <span class="n">SimpleOnGestureListener</span> <span class="o">{</span>
+</span><span class='line'>        <span class="nd">@Override</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onFling</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">e1</span><span class="o">,</span> <span class="n">MotionEvent</span> <span class="n">e2</span><span class="o">,</span> <span class="kt">float</span> <span class="n">velocityX</span><span class="o">,</span> <span class="kt">float</span> <span class="n">velocityY</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">getBaseContext</span><span class="o">(),</span> <span class="n">MainActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">e1</span><span class="o">.</span><span class="na">getY</span><span class="o">()</span> <span class="o">-</span> <span class="n">e2</span><span class="o">.</span><span class="na">getY</span><span class="o">())</span> <span class="o">&gt;</span> <span class="n">SWIPE_MAX_OFF_PATH</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// right to left swipe</span>
+</span><span class='line'>            <span class="k">if</span><span class="o">(</span><span class="n">e1</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="n">e2</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">SWIPE_MIN_DISTANCE</span> <span class="o">&amp;&amp;</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">velocityX</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">SWIPE_THRESHOLD_VELOCITY</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">overridePendingTransition</span><span class="o">(</span>
+</span><span class='line'>          <span class="n">R</span><span class="o">.</span><span class="na">anim</span><span class="o">.</span><span class="na">slide_in_right</span><span class="o">,</span>
+</span><span class='line'>          <span class="n">R</span><span class="o">.</span><span class="na">anim</span><span class="o">.</span><span class="na">slide_out_left</span>
+</span><span class='line'>          <span class="o">);</span>
+</span><span class='line'>          <span class="c1">// right to left swipe</span>
+</span><span class='line'>            <span class="o">}</span>  <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">e2</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">-</span> <span class="n">e1</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">SWIPE_MIN_DISTANCE</span> <span class="o">&amp;&amp;</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">velocityX</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">SWIPE_THRESHOLD_VELOCITY</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">overridePendingTransition</span><span class="o">(</span>
+</span><span class='line'>          <span class="n">R</span><span class="o">.</span><span class="na">anim</span><span class="o">.</span><span class="na">slide_in_left</span><span class="o">,</span>
+</span><span class='line'>          <span class="n">R</span><span class="o">.</span><span class="na">anim</span><span class="o">.</span><span class="na">slide_out_right</span>
+</span><span class='line'>          <span class="o">);</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// It is necessary to return true from onDown for the onFling event to register</span>
+</span><span class='line'>        <span class="nd">@Override</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onDown</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>res/layout/main.xml</h2>
+
+
+<p>A standard main.xml. The only change you&#8217;ll find here is that we&#8217;ve given the main view, our LinearLayout, an ID so it is accessible in MainActivity.java.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'>    <span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
+</span><span class='line'>    <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>    <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>    <span class="na">android:id=</span><span class="s">&quot;@+id/mainView&quot;</span>
+</span><span class='line'>    <span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;TextView</span>
+</span><span class='line'>      <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>            <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:text=</span><span class="s">&quot;@string/hello&quot;</span>
+</span><span class='line'>  <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>AndroidManifest.xml</h2>
+
+
+<p>Again, a standard manifest with one small change.  I added <strong>android:noHistory=&#8221;true&#8221;</strong> so that as we load new activities with each fling, the view stack doesn&#8217;t grow out of control.  You can remove this if you would like to go back to a previous activity after each fling using the back button.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'>      <span class="na">package=</span><span class="s">&quot;com.savagelook&quot;</span>
+</span><span class='line'>      <span class="na">android:versionCode=</span><span class="s">&quot;1&quot;</span>
+</span><span class='line'>      <span class="na">android:versionName=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;application</span> <span class="na">android:icon=</span><span class="s">&quot;@drawable/icon&quot;</span> <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&quot;.MainActivity&quot;</span>
+</span><span class='line'>                  <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span>
+</span><span class='line'>                  <span class="na">android:noHistory=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;intent-filter&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.action.MAIN&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.category.LAUNCHER&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/intent-filter&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/activity&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/application&gt;</span>
+</span><span class='line'><span class="nt">&lt;/manifest&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>res/anim/slide_in_right.xml</h2>
+
+
+<p>This along with the next 3 animations are the custom transition animations used to move our activities in and out with each fling.  They are just copies of the animations in the Android SDK.  In my case, they were found in <strong>ANDROID_SDK/platforms/android-8/data/res/anim</strong>.  Create your own <strong>anim</strong> folder under <strong>res</strong> in your project and add these there.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;set</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;translate</span> <span class="na">android:fromXDelta=</span><span class="s">&quot;50%p&quot;</span> <span class="na">android:toXDelta=</span><span class="s">&quot;0&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;alpha</span> <span class="na">android:fromAlpha=</span><span class="s">&quot;0.0&quot;</span> <span class="na">android:toAlpha=</span><span class="s">&quot;1.0&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/set&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>res/anim/slide_out_right.xml</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;set</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;translate</span> <span class="na">android:fromXDelta=</span><span class="s">&quot;0&quot;</span> <span class="na">android:toXDelta=</span><span class="s">&quot;50%p&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;alpha</span> <span class="na">android:fromAlpha=</span><span class="s">&quot;1.0&quot;</span> <span class="na">android:toAlpha=</span><span class="s">&quot;0.0&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/set&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>res/anim/slide_in_left.xml</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;set</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;translate</span> <span class="na">android:fromXDelta=</span><span class="s">&quot;-50%p&quot;</span> <span class="na">android:toXDelta=</span><span class="s">&quot;0&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;alpha</span> <span class="na">android:fromAlpha=</span><span class="s">&quot;0.0&quot;</span> <span class="na">android:toAlpha=</span><span class="s">&quot;1.0&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/set&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>res/anim/slide_out_left.xml</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;set</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;translate</span> <span class="na">android:fromXDelta=</span><span class="s">&quot;0&quot;</span> <span class="na">android:toXDelta=</span><span class="s">&quot;-50%p&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;alpha</span> <span class="na">android:fromAlpha=</span><span class="s">&quot;1.0&quot;</span> <span class="na">android:toAlpha=</span><span class="s">&quot;0.0&quot;</span>
+</span><span class='line'>            <span class="na">android:duration=</span><span class="s">&quot;@android:integer/config_mediumAnimTime&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/set&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>Summary</h2>
+
+
+<p>Its a little more work than you might expect for this functionality, but you do get a lot of opportunities to tinker with it.  You can change the speed threshold for when flings occur.  You can change both the current and incoming transition animations. You can even get creative and make transitions based on vertical or diagonal flings as well.  Thats the beauty, and sometimes curse, of Android: near infinite flexibility.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist/">Mobile Developer&#8217;s Icon &amp; Image Checklist</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-24T09:51:00-04:00" pubdate data-updated="true">Mar 24<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Overview</h2>
+
+
+<p>If there&#8217;s one thing I&#8217;ve learned from delving into iOS, Android, and Blackberry app development, it&#8217;s that there&#8217;s a lot more to creating a mobile app than just coding it.  One of the things that can catch you off guard, especially if you are devoid of design ability like me, is the amount of icons and images necessary to deploy your apps.  This becomes even more daunting when you intend to deploy to multiple platforms.</p>
+
+<p>The other concern is that it isn&#8217;t always evident from the development tools how many different graphics you need to account for all scenarios.  A new iOS developer will likely be unaware that you need a 58x58 pixel icon for iPhone 4 Spotlight and Settings.  To attempt to alleviate some of this confusion, I put together these charts to detail what I know so far about the graphics required for submitting mobile apps to the various Android, iOS, and Blackberry markets.</p>
+
+<h2>Icons</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android</td>
+<td width="15%">iOS</td>
+<td width="15%">Blackberry Playbook</td>
+<td width="45%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">29x29</td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone Settings and Spotlight, iPad Settings</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">36x36</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">low pixel density icon</td>
+</tr>
+<tr>
+<td class="leftHeader">48x48</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">medium pixel density icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">50x50</td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPad Spotlight. iOS will trim 1 pixel off each side and add a drop shadow, making it 48x48</td>
+</tr>
+<tr>
+<td class="leftHeader">57x57</td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">58x58</td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone 4 Settings and Spotlight</td>
+</tr>
+<tr>
+<td class="leftHeader">64x64</td>
+<td></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional small custom document icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">72x72</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Android high pixel density icon, iPad icon</td>
+</tr>
+<td class="leftHeader">86x86</td>
+<td></td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">standard Playbook icon. It will trim 5 pixels off each side, making it 76x76</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">96x96</td>
+<td></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">114x114</td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone 4 icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">144x144</td>
+<td></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">320x320</td>
+<td></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional large custom document icon</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<br><br>
+
+
+
+
+<h2>Distribution Images</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android Market</td>
+<td width="15%">Apple App Store</td>
+<td width="15%">Blackberry App World</td>
+<td width="15%">Amazon App Store</td>
+<td width="30%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">screenshot sizes</td>
+<td>320x480, 480x800, 480x854, 1280x800</td>
+<td><strong>iPhone</strong>: 320x480, 480x320, 320x460, 480x300 <strong>iPhone 4</strong>: 640x960, 960x640 <strong>iPad</strong>: 768x1024, 1024x768, 748x1024, 1004x768</td>
+<td>640x640 or smaller</td>
+<td>480x854, 854x480</td>
+<td class="notes">required # of screenshots:
+<strong>Android</strong>: at least 2
+<strong>Apple</strong>: at least 1
+<strong>Blackberry</strong>: 1-50
+<strong>Amazon</strong>: 3-10</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">114x114</td>
+<td></td>
+<td></td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">device icon</td>
+</tr>
+<tr>
+<td class="leftHeader">180x120</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Promotional graphic (no alpha)</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">480x480</td>
+<td></td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Product icon that should match your 86x86 icon</td>
+</tr>
+<tr>
+<td class="leftHeader">512x512</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Large/High resolution product icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">1024x500</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Feature graphic for market</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h2>Additional Notes</h2>
+
+
+<p><strong>For Android</strong>, your 36x36, 48x48, and 72x72 pixel icons should be placed in the <strong>drawable-ldpi</strong>, <strong>drawable-mdpi</strong>, and <strong>drawable-hdpi</strong> folders of your Android project respectively.  Be sure to specify the name of the file you will be using in the <strong>android:icon</strong> attribute of the <strong><application></strong> element in your AndroidManifest.xml file.  Android also allows you to include a promotional video.</p>
+
+<p><strong>For iOS</strong> you simply need to add your appropriately sized and named icons to your <strong>Resources</strong> directory in your XCode project.  Here&#8217;s a mapping of the icon sizes to the required name of the icon file. <strong>NOTE</strong>: There is purposely no extension on the 512x512 iTunesArtwork file.</p>
+
+<ul>
+<li>29x29 - Icon-Small.png</li>
+<li>50x50 - Icon-Small-50.png</li>
+<li>57x57 - Icon.png</li>
+<li>58x58 - Icon-Small@2x.png</li>
+<li>72x72 - Icon-72.png</li>
+<li>114x114 - Icon@2x.png</li>
+<li>512x512 - iTunesArtwork</li>
+</ul>
+
+
+<p><strong>For Blackberry Playbook</strong>, you need to specify the name of your 86x86 application icon in your application&#8217;s <strong>blackberry-tablet.xml</strong> file.  Below is a sample of how you would set that up.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;qnx&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;icon&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;image&gt;</span>86x86.png<span class="nt">&lt;/image&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/icon&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;publisher&gt;</span>My Company<span class="nt">&lt;/publisher&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;category&gt;</span>core.games<span class="nt">&lt;/category&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;splashscreen&gt;</span>my_splashscreen.jpg<span class="nt">&lt;/splashscreen&gt;</span>
+</span><span class='line'><span class="nt">&lt;/qnx&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>For the Amazon App Store</strong> you can also submit promotional images of various sizes and up to 5 promotional videos.</p>
+
+<h2>Summary</h2>
+
+
+<p>So as you can see, you&#8217;ve got a lot to consider when it comes to presenting your mobile application to the masses.  As a developer, I&#8217;m looking for the simple solution here.  For me, the easiest thing to do was use this <a href="http://www.command-tab.com/2008/09/20/iphone-and-ipod-touch-icon-template/" target="_blank">512x512 iOS icon template</a>, create my icon, and scale it down to all the required sizes.  If you happen to be reading this post and know a better/easier workflow, please let me know.</p>
+
+<p>Here&#8217;s a few references to check out to get some additional information on mobile app icons and market images:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/library/safari/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html" target="_blank">iOS Human Interface Guidelines - Custom Icon and Image Creation Guidelines</a></li>
+<li><a href="http://developer.apple.com/library/ios/#qa/qa1686/_index.html" target="_blank">App Icons on iPad and iPhone</a></li>
+<li><a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design.html" target="_blank">Android Icon Design Guidelines</a></li>
+<li><a href="http://docs.blackberry.com/en/developers/deliverables/22301/Designing_application_icons_tablet_1401556_11.jsp" target="_blank">Blackberry Playbook - Designing Application Icons</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tonylukasavage';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of away3d_HeightMapModifier</title>
+	<nodes>
+		<node label="src">
+			<node label="resource">
+				<node label="hm">
+					<node icon="imageIcon" label="hm1.jpg" url="source/resource/hm/hm1.jpg.html"/>
+					<node icon="imageIcon" label="hm2.jpg" url="source/resource/hm/hm2.jpg.html"/>
+					<node icon="imageIcon" label="hm3.jpg" url="source/resource/hm/hm3.jpg.html"/>
+					<node icon="imageIcon" label="hm4.jpg" url="source/resource/hm/hm4.jpg.html"/>
+				</node>
+				<node label="skybox">
+					<node icon="imageIcon" label="back.jpg" url="source/resource/skybox/back.jpg.html"/>
+					<node icon="imageIcon" label="bottom.jpg" url="source/resource/skybox/bottom.jpg.html"/>
+					<node icon="imageIcon" label="front.jpg" url="source/resource/skybox/front.jpg.html"/>
+					<node icon="imageIcon" label="left.jpg" url="source/resource/skybox/left.jpg.html"/>
+					<node icon="imageIcon" label="right.jpg" url="source/resource/skybox/right.jpg.html"/>
+					<node icon="imageIcon" label="top.jpg" url="source/resource/skybox/top.jpg.html"/>
+				</node>
+				<node icon="imageIcon" label="chrome.jpg" url="source/resource/chrome.jpg.html"/>
+				<node icon="imageIcon" label="enviro2.jpg" url="source/resource/enviro2.jpg.html"/>
+			</node>
+			<node icon="mxmlAppIcon" selected="true" label="away3d_HeightMapModifier.mxml" url="source/away3d_HeightMapModifier.mxml.html"/>
+			<node icon="mxmlIcon" label="Away3dUIComponent.mxml" url="source/Away3dUIComponent.mxml.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 1937K)" url="away3d_HeightMapModifier.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex4_sdk_download">
+	</sdklink>
+</index>

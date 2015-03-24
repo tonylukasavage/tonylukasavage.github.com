@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Inspecting SQLite databases on Android and iOS - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="One aspect of my current project, the Alloy MVC framework for building cross-platform mobile apps, is simple integration with local storage via &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2013/04/08/inspecting-sqlite-databases-on-android-and-ios/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Inspecting SQLite databases on Android and iOS</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-08T10:30:00-04:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="right" src="/images/sqlite_logo.png"></p>
+
+<p>One aspect of my current project, the <a href="https://github.com/appcelerator/alloy">Alloy MVC framework</a> for building cross-platform mobile apps, is simple integration with local storage via SQLite databases. SQLite is a powerful and relatively simple way to store data for offline use, or just to cache remote data to speed up interactions. Unfortunately, the current data and structure of SQLite databases can sometimes be tricky to ascertain when housed on mobile devices, emulators, and simulators. This is especially true when developing for multiple platforms and having gone through multiple iterations of your data structure.</p>
+
+<!-- more -->
+
+
+<p>Jump to: <a href="#sqlite3">sqlite3 command</a> | <a href="#android">Android</a> | <a href="#ios">iOS</a> | <a href="#inspecting">SQLite database inspection</a></p>
+
+<p>There&#8217;s some common things it would be great to know quickly about your deployed databases, like:</p>
+
+<ul>
+<li>What SQLite database files are installed?</li>
+<li>What tables are created on those databases?</li>
+<li>What is the structure of the tables? Primary keys?</li>
+<li>What records are present on the tables? This is critical in determining if you model layer is working as expected.</li>
+</ul>
+
+
+<p>In order to make this a little less painful of an experience, let&#8217;s take a look at a very simple way to inspect SQLite databases, and where we can find those databases on various mobile platforms. First we&#8217;ll need a tool to actually interact with a SQLite database&#8230;</p>
+
+<p><a name="sqlite3"></a></p>
+
+<h2>sqlite3</h2>
+
+<p>My weapon of choice is generally the command line. For that reason I tend to stick to the <a href="http://www.sqlite.org/download.html">sqlite3</a> command line tool. It comes preloaded on Mac OSX and is available for all other major OSes. Interacting with a SQLite database becomes as easy as:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sqlite3 /path/to/database
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt; .tables
+</span><span class='line'>table1
+</span><span class='line'>table2
+</span><span class='line'>table3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can quickly get to know the rest of the commands by executing <code>.help</code> in the sqlite3 prompt. Remember to include the <code>.</code> before the name of the command.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sqlite3
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt; .help
+</span><span class='line'>.backup ?DB? FILE      Backup DB (default &quot;main&quot;) to FILE
+</span><span class='line'>.bail ON|OFF           Stop after hitting an error.  Default OFF
+</span><span class='line'>.databases             List names and files of attached databases
+</span><span class='line'>.dump ?TABLE? ...      Dump the database in an SQL text format
+</span><span class='line'>                         If TABLE specified, only dump tables matching
+</span><span class='line'>                         LIKE pattern TABLE.
+</span><span class='line'>.echo ON|OFF           Turn command echo on or off
+</span><span class='line'>.exit                  Exit this program
+</span><span class='line'>.explain ?ON|OFF?      Turn output mode suitable for EXPLAIN on or off.
+</span><span class='line'>                         With no args, it turns EXPLAIN on.
+</span><span class='line'>.header(s) ON|OFF      Turn display of headers on or off
+</span><span class='line'>.help                  Show this message
+</span><span class='line'>.import FILE TABLE     Import data from FILE into TABLE
+</span><span class='line'>.indices ?TABLE?       Show names of all indices
+</span><span class='line'>                         If TABLE specified, only show indices for tables
+</span><span class='line'>                         matching LIKE pattern TABLE.
+</span><span class='line'>.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+</span><span class='line'>.mode MODE ?TABLE?     Set output mode where MODE is one of:
+</span><span class='line'>                         csv      Comma-separated values
+</span><span class='line'>                         column   Left-aligned columns.  (See .width)
+</span><span class='line'>                         html     HTML &lt;table&gt; code
+</span><span class='line'>                         insert   SQL insert statements for TABLE
+</span><span class='line'>                         line     One value per line
+</span><span class='line'>                         list     Values delimited by .separator string
+</span><span class='line'>                         tabs     Tab-separated values
+</span><span class='line'>                         tcl      TCL list elements
+</span><span class='line'>.nullvalue STRING      Print STRING in place of NULL values
+</span><span class='line'>.output FILENAME       Send output to FILENAME
+</span><span class='line'>.output stdout         Send output to the screen
+</span><span class='line'>.prompt MAIN CONTINUE  Replace the standard prompts
+</span><span class='line'>.quit                  Exit this program
+</span><span class='line'>.read FILENAME         Execute SQL in FILENAME
+</span><span class='line'>.restore ?DB? FILE     Restore content of DB (default &quot;main&quot;) from FILE
+</span><span class='line'>.schema ?TABLE?        Show the CREATE statements
+</span><span class='line'>                         If TABLE specified, only show tables matching
+</span><span class='line'>                         LIKE pattern TABLE.
+</span><span class='line'>.separator STRING      Change separator used by output mode and .import
+</span><span class='line'>.show                  Show the current values for various settings
+</span><span class='line'>.stats ON|OFF          Turn stats on or off
+</span><span class='line'>.tables ?TABLE?        List names of tables
+</span><span class='line'>                         If TABLE specified, only list tables matching
+</span><span class='line'>                         LIKE pattern TABLE.
+</span><span class='line'>.timeout MS            Try opening locked tables for MS milliseconds
+</span><span class='line'>.vfsname ?AUX?         Print the name of the VFS stack
+</span><span class='line'>.width NUM1 NUM2 ...   Set column widths for &quot;column&quot; mode
+</span><span class='line'>.timer ON|OFF          Turn the CPU timer measurement on or off
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a name="android"></a></p>
+
+<h2>Android</h2>
+
+<div class="info">INFO: This section assumes you have an android SDK toolkit on your path.</div>
+
+
+<p>The nice thing about the Android interface is that we can use a single command to find the SQLite databases on both emulators and devices. Assuming you have an open emulator and/or connected Android devices, execute <code>adb devices</code> to get a listing of their serial numbers.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ adb devices
+</span><span class='line'>List of devices attached
+</span><span class='line'>emulator-5560   device
+</span><span class='line'>MYSERIAL        device
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now connecting to an emulator or device is easy. Just pick the target serial number and execute <code>adb -s MYSERIAL shell</code>. We&#8217;ll use this shell for the duration of the :</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ adb -s MYSERIAL shell
+</span><span class='line'>#
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All commands from here on in will assume you are already connected via <code>adb shell</code>.</p>
+
+<p>Now that we&#8217;re connected to the target Android device/emulator, let&#8217;s get a list of the SQLite databases installed on our target app. To find that, we&#8217;ll first need our target app&#8217;s ID. It&#8217;s typically a domain name format, like <code>com.somedomain.someapp</code>. If you don&#8217;t know how to find your app ID, you can always list the installed apps on your device/emulator with the adb shell and search there:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'># ls data/data
+</span><span class='line'>com.android.email
+</span><span class='line'>com.android.alarmclock
+</span><span class='line'>com.android.settings
+</span><span class='line'>com.google.android.apps.maps
+</span><span class='line'>com.android.wallpaper.livepicker
+</span><span class='line'>com.android.vending
+</span><span class='line'>com.android.htmlviewer
+</span><span class='line'>...
+</span><span class='line'>com.appcelerator.Harness
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we&#8217;ll use <code>com.appcelerator.Harness</code> as the target app, which happens to be the test harness app I used for testing <a href="https://github.com/appcelerator/alloy">Alloy</a>. Now we just need to list the databases installed on this app:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'># ls data/data/com.appcelerator.Harness/databases
+</span><span class='line'>users
+</span><span class='line'>Titanium
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we find 2 installed databases, <code>users</code> and <code>Titanium</code>. Congrats, you found your Android SQLite databases. To start inspecting, you just need to open up the database file with the <code>sqlite3</code> command while in the adb shell. That is, Android already has <code>sqlite3</code> available at its shell, so you can use it directly from the shell:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'># sqlite3 data/data/com.appcelerator.Harness/databases
+</span><span class='line'>SQLite version 3.6.22
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you&#8217;ve got yourself full access to the live SQLite database on your Android emulator/device. To take a look at a handful of useful ways to inspect your database from the sqite3 prompt, check out the <a href="#inspecting">inspecting your SQLite database</a> section.</p>
+
+<p><a name="ios"></a></p>
+
+<h2>iOS</h2>
+
+<div class="info">INFO: These instructions are relevant to OS X 10.8.2, other versions may vary.</div>
+
+
+<p>Unlike Android, you&#8217;ll have to take a different approach in locating your SQLite database(s) depending on whether you are inspecting a simulator or device. It&#8217;s actually pretty easy on the simulator. Devices, on the other hand, are a bit more of a pain in the ass to work with with respect to SQLite databases. So it goes with iOS.</p>
+
+<h3>Simulator</h3>
+
+<p>To find a SQLite database on an iPhone/iPad simulator, let&#8217;s first track down a listing of all the installed applications. To find this you&#8217;ll need your current Mac username as well as the iOS version of the simulator you are running. For this example let&#8217;s assume the following:</p>
+
+<ul>
+<li>My username is <strong>tlukasavage</strong></li>
+<li>iOS SDK version is <strong>6.1</strong></li>
+</ul>
+
+
+<p>To list the applications we now execute the following. You can use Finder, but I prefer the CLI:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ cd /Users/tlukasavage/Library/Application\ Support/iPhone\ Simulator/6.1/Applications
+</span><span class='line'>$ ls
+</span><span class='line'>25D2F0D4-B225-4E19-A830-4EE6DB0093A0
+</span><span class='line'>70F04874-8486-46FE-AD01-DFD04CB3B361
+</span><span class='line'>A8D5AC32-4C09-452D-8DC0-BCA15178721F
+</span><span class='line'>4A84AB30-3306-4108-93BE-A9AC3217A89B
+</span><span class='line'>88045DAE-C8F1-4B58-8E0D-B382C8E5D0FC
+</span><span class='line'>D1F75E68-C8A7-442E-A5E5-8485ACD4420B
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you need to select which app ID is the one that corresponds to your installed app. For this example, we&#8217;ll assume it&#8217;s <code>25D2F0D4-B225-4E19-A830-4EE6DB0093A0</code>. Once you&#8217;ve determined that, we&#8217;ll dig a little bit deeper to find the actual location of that app&#8217;s SQLite databases. Bear in mind, if the following directories don&#8217;t exist in your app, you likely don&#8217;t actually have a SQLite database installed. We&#8217;ll continue from the previous code block:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ cd 25D2F0D4-B225-4E19-A830-4EE6DB0093A0/Library/Private\ Documents
+</span><span class='line'>$ ls
+</span><span class='line'>_alloy_.sqlite
+</span><span class='line'>some_other_db.sqlite
+</span><span class='line'>test.sqlite
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hey look, there&#8217;s our databases! Now that we have the location, opening up the databases is as easy as issuing the <code>sqlite3</code> command:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sqlite3 _alloy_.sqlite
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now hop to the <a href="#inspecting">inspecting your SQLite database</a> section to see what you can do with it.</p>
+
+<h3>Device</h3>
+
+<div class="info">INFO: This section assumes you have XCode 4+.</div>
+
+
+<p>It&#8217;s unfortunate, but on iOS we don&#8217;t really have a good CLI method for accessing the on-device SQLite database like we do with Android. For this, we&#8217;ll need to crack open Xcode, and more specifically Organizer.</p>
+
+<p>Open up Xcode and then hit <code>SHIFT+CMD+2</code> or go to <code>Window -&gt; Organizer</code> to open up Organizer. In there we&#8217;ll find a listing of your currently configured iOS devices. Follow these steps to retrieve the SQLite database (and additional application data) on your target device:</p>
+
+<ol>
+<li>Select the device in the left panel, in my case <strong>Tony Lukasavage&#8217;s iPad</strong>.</li>
+<li>Expand the device and select <strong>Applications</strong>.</li>
+<li>In the top right panel select your target application, in this case <strong>Harness</strong>.</li>
+<li>In the &#8220;Data Files in Sandbox&#8221; panel, make sure your SQLite database file is present under the &#8220;Library/Private Documents&#8221; folder. In this case it&#8217;s <strong>_alloy_.sqlite</strong>.</li>
+<li>Download the application data in a &#8220;xcappdata&#8221; file by clicking on the <strong>Download</strong> button at the bottom of Organizer. It should save the file with a long file name that includes your app&#8217;s ID and a timestamp. In this case, mine is <strong>com.appcelerator.Harness 2013-04-07 13.24.32.633.xcappdata</strong>.</li>
+</ol>
+
+
+<p><img src="/images/organizer1.png"></p>
+
+<p>Now that you have the app data downloaded, we just need to navigate to the embedded SQLite database and you&#8217;ll be free to use <code>sqlite3</code> on it. Assuming you downloaded the xcappdata file to your current path, this is how you would find it:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ cd com.appcelerator.Harness\ 2013-04-07\ 13.24.32.633.xcappdata/AppData/Library/Private\ Documents
+</span><span class='line'>$ sqlite3 _alloy_.sqlite
+</span><span class='line'>SQLite version 3.7.12 2012-04-03 19:43:07
+</span><span class='line'>Enter &quot;.help&quot; for instructions
+</span><span class='line'>Enter SQL statements terminated with a &quot;;&quot;
+</span><span class='line'>sqlite&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Though a bit more effort than the simulator, you now have full access to the SQLite database from your iOS device. Move on to the next section for some tips of what you can do with it to learn more about your app.</p>
+
+<p><a name="inspecting"></a></p>
+
+<h2>Inspecting the SQLite database</h2>
+
+<p>Now that you&#8217;ve found your app&#8217;s SQLite database, here&#8217;s a hadful of useful commands to inspect its state and contents. While it takes various methods to access these database files, interacting is exactly the same on all when using the <code>sqlite3</code> tool.</p>
+
+<h3>Commands</h3>
+
+<figure class='code'><figcaption><span>List tables installed on current database  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; .tables
+</span><span class='line'>
+</span><span class='line'>android_metadata  migrations        users
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Show CREATE statement for table &#8220;users&#8221;  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; .schema users
+</span><span class='line'>
+</span><span class='line'>CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,color TEXT);
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Show table info for table &#8220;users&#8221;  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; pragma table_info(&#39;users&#39;);
+</span><span class='line'>
+</span><span class='line'>cid | name | type | notnull | dflt_value | pk
+</span><span class='line'>0|id|INTEGER|0||1
+</span><span class='line'>1|name|TEXT|0||0
+</span><span class='line'>2|color|TEXT|0||0
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>SELECT rows from table &#8220;users&#8221;  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>sqlite&gt; SELECT * FROM users;
+</span><span class='line'>
+</span><span class='line'>1|Tony|blue
+</span><span class='line'>2|Chris|red
+</span><span class='line'>3|Bryan|red
+</span><span class='line'>4|Christian|blue
+</span><span class='line'>5|Ingo|orange
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is only a very small sampling of quick things you can check to find the current state of your SQLite databases. For more details on the full functionality of the sqlite3 command, be sure to check out the <a href="http://www.sqlite.org/docs.html">full documentation</a>.</p>
+
+<h2>Additional Tools</h2>
+
+<h3>SQLite Manager</h3>
+
+<p>I&#8217;d highly suggest taking the time to learn the CLI and the syntax of SQLite itself. If, however, you prefer a GUI&#8230;</p>
+
+<p><img src="/images/sqlite_manager.png" alt="SQLite Manager screenshots" /></p>
+
+<p>Honestly, I&#8217;m not a huge fan of Firefox, but it has one nice thing going for it: <a href="https://addons.mozilla.org/en-us/firefox/addon/sqlite-manager/">SQLite Manager</a>. SQLite Manager is a Firefox add-on that provides a simple, clean interface for interacting with SQLite databases. Not much in the way of bells and whistles, but hey, this is SQLite, there&#8217;s not a lot of bells and whistles in the first place. The nice part about it is it&#8217;s free and it will work anywhere Firefox will.</p>
+
+<p>You can choose and SQLite app you like, but I recommend this one for the sake of its price, availability, and simplicity. If you aren&#8217;t a command line warrior, this is a solid tool to lean on.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-08T10:30:00-04:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/sqlite/'>sqlite</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/26/flashback-my-old-away3d-experiments/" title="Previous Post: Flashback: My Old Away3D Experiments">&laquo; Flashback: My Old Away3D Experiments</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/10/web-based-stl-viewing-three-dot-js/" title="Next Post: Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays">Web-based STL Viewing: Three.js, WebGL, and Javascript Typed Arrays &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tonylukasavage';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tonylukasavage.github.com/blog/2013/04/08/inspecting-sqlite-databases-on-android-and-ios/';
+        var disqus_url = 'http://tonylukasavage.github.com/blog/2013/04/08/inspecting-sqlite-databases-on-android-and-ios/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

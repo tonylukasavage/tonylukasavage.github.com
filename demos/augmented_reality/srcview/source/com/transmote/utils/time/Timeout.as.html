@@ -1,0 +1,73 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Timeout.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptASDoc">/**
+ * call a method one time, after a specified delay.
+ * accepts optional parameters.
+ * (wraps a simple Timer implementation.)
+ * all active timeouts can be cleared via a static method. 
+ */</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span>.<span class="ActionScriptDefault_Text">transmote</span>.<span class="ActionScriptDefault_Text">utils</span>.<span class="ActionScriptDefault_Text">time</span> <span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span>.<span class="ActionScriptDefault_Text">utils</span>.<span class="ActionScriptDefault_Text">Timer</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span>.<span class="ActionScriptDefault_Text">events</span>.<span class="ActionScriptDefault_Text">TimerEvent</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">Timeout</span> <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">activeTimeouts</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Array</span>;
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">timer</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Timer</span>;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">func</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Function</span>;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">params</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Array</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">clearAllTimeouts</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Timeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span>.<span class="ActionScriptDefault_Text">length</span>;
+            <span class="ActionScriptReserved">while</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">--</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">timeout</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Timeout</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Timeout</span><span class="ActionScriptBracket/Brace">(T</span><span class="ActionScriptDefault_Text">imeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">])</span>;
+                <span class="ActionScriptDefault_Text">timeout</span>.<span class="ActionScriptDefault_Text">cancel</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">Timeout</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">func</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Function</span>, <span class="ActionScriptDefault_Text">delay</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span>, ...<span class="ActionScriptDefault_Text">params</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Array</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(!T</span><span class="ActionScriptDefault_Text">imeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">Timeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Array</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptDefault_Text">Timeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span>.<span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">func</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">func</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">params</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">params</span>;
+            
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Timer</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">delay</span>, 1<span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span>.<span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(T</span><span class="ActionScriptDefault_Text">imerEvent</span>.<span class="ActionScriptDefault_Text">TIMER_COMPLETE</span>, <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">onTimerComplete</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span>.<span class="ActionScriptDefault_Text">start</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onTimerComplete</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">evt</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">TimerEvent</span><span class="ActionScriptOperator">=</span><span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span>.<span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(T</span><span class="ActionScriptDefault_Text">imerEvent</span>.<span class="ActionScriptDefault_Text">TIMER_COMPLETE</span>, <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">onTimerComplete</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">params</span>.<span class="ActionScriptDefault_Text">length</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span> <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">func</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">params</span><span class="ActionScriptBracket/Brace">)</span>; <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptReserved">else</span> <span class="ActionScriptBracket/Brace">{</span> <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">func</span><span class="ActionScriptBracket/Brace">()</span>; <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">destroy</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">cancel</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(!</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span> <span class="ActionScriptReserved">return</span>; <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span>.<span class="ActionScriptDefault_Text">stop</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span>.<span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(T</span><span class="ActionScriptDefault_Text">imerEvent</span>.<span class="ActionScriptDefault_Text">TIMER_COMPLETE</span>, <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">onTimerComplete</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">destroy</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">destroy</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">Timeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span>.<span class="ActionScriptDefault_Text">splice</span><span class="ActionScriptBracket/Brace">(T</span><span class="ActionScriptDefault_Text">imeout</span>.<span class="ActionScriptDefault_Text">activeTimeouts</span>.<span class="ActionScriptDefault_Text">indexOf</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span><span class="ActionScriptBracket/Brace">)</span>, 1<span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">timer</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">func</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">params</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

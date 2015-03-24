@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: c/c++ | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/c-c-/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[NerdKits under my Christmas Tree!]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/28/nerdkits-under-my-christmas-tree-/"/>
+    <updated>2010-12-28T09:51:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/28/nerdkits-under-my-christmas-tree-</id>
+    <content type="html"><![CDATA[<p>Time to dive into the world of embedded programming head long with one of my favorite Christmas gifts: my <a href="http://www.nerdkits.com/">NerdKit</a>.  What's a NerdKit?  Well its basically a starter kit for bridging programming with the real world through electronics, an API, and a thorough guide for getting started.  You might have also heard of <a href="http://www.arduino.cc/">Arduino</a>, which is a similar and uses open source technology for embedded programming.</p>
+
+<p>What can you do with it?  Well, thats what I aim to find out.  In the meantime, though, you can check out the <a href="http://www.nerdkits.com/projects/">"Projects" page</a> of the NerdKits site for some pretty damn cool projects that include:</p>
+
+<ul>
+<li>iPhone controlled RC Car</li>
+<li>Morse Code decoder</li>
+<li>Digital thermometers</li>
+<li>Spark generator</li>
+<li>Computer controlled robotics and devices</li>
+</ul>
+
+
+<p>So for all you SavageLook.com faithful there's sure to be some NerdKit guides and demos to come.  Here's hoping I haven't forgotten every bit of electrical engineering I learned in college.  Forget it, I drank that knowledge clean outta my head.  I guess 3 hours/week of EE can't compete with 12 hours/week of beer pong.  Oh well, should be fun anyway!</p>
+
+<p>Oh and be sure to follow <a href="http://twitter.com/#!/nerdkits">@nerdkits</a> on twitter for all kinds of cool updates, demos, and tutorials!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Offline packet capture analysis with C/C++ &amp; libpcap]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/19/offline-packet-capture-analysis-with-c-c----amp--libpcap/"/>
+    <updated>2010-12-19T21:49:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/19/offline-packet-capture-analysis-with-c-c----amp--libpcap</id>
+    <content type="html"><![CDATA[<h2>The Overview</h2>
+
+<p>At the request of one of my faithful readers in my original article on packet capture with libpcap, I decided to post a guide to offline packet capture processing.  Why is this useful?  Because popular packet capture programs like <a href="http://www.wireshark.org/">Wireshark</a> or <a href="http://www.tcpdump.org/">tcpdump</a> can save captures to files that can be processed later.  You can then apply your specialized code to these previously captured packets.</p>
+
+<h2>The Code</h2>
+
+<p><strong>NOTE:</strong> This program makes use of the <a href="http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=view&target=http.cap">http.cap</a> Wireshark packet capture sample.</p>
+
+<p>``` cpp</p>
+
+<h1>include <iostream></h1>
+
+<h1>include &lt;pcap.h></h1>
+
+<h1>include &lt;net/ethernet.h></h1>
+
+<h1>include &lt;netinet/ip.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;netinet/tcp.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<p>using namespace std;</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet);</p>
+
+<p>int main() {</p>
+
+<pre><code>pcap_t *descr;
+char errbuf[PCAP_ERRBUF_SIZE];
+
+// open capture file for offline processing
+descr = pcap_open_offline("http.cap", errbuf);
+if (descr == NULL) {
+    cout &lt;&lt; "pcap_open_live() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+
+// start packet processing loop, just like live capture
+if (pcap_loop(descr, 0, packetHandler, NULL) &lt; 0) {
+    cout &lt;&lt; "pcap_loop() failed: " &lt;&lt; pcap_geterr(descr);
+    return 1;
+}
+
+cout &lt;&lt; "capture finished" &lt;&lt; endl;
+
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet) {</p>
+
+<pre><code>const struct ether_header* ethernetHeader;
+const struct ip* ipHeader;
+const struct tcphdr* tcpHeader;
+char sourceIp[INET_ADDRSTRLEN];
+char destIp[INET_ADDRSTRLEN];
+u_int sourcePort, destPort;
+u_char *data;
+int dataLength = 0;
+string dataStr = "";
+
+ethernetHeader = (struct ether_header*)packet;
+if (ntohs(ethernetHeader-&gt;ether_type) == ETHERTYPE_IP) {
+    ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_src), sourceIp, INET_ADDRSTRLEN);
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_dst), destIp, INET_ADDRSTRLEN);
+
+    if (ipHeader-&gt;ip_p == IPPROTO_TCP) {
+        tcpHeader = (tcphdr*)(packet + sizeof(struct ether_header) + sizeof(struct ip));
+        sourcePort = ntohs(tcpHeader-&gt;source);
+        destPort = ntohs(tcpHeader-&gt;dest);
+        data = (u_char*)(packet + sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+        dataLength = pkthdr-&gt;len - (sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+
+        // convert non-printable characters, other than carriage return, line feed,
+        // or tab into periods when displayed.
+        for (int i = 0; i &lt; dataLength; i++) {
+            if ((data[i] &gt;= 32 &amp;&amp; data[i] &lt;= 126) || data[i] == 10 || data[i] == 11 || data[i] == 13) {
+                dataStr += (char)data[i];
+            } else {
+                dataStr += ".";
+            }
+        }
+
+        // print the results
+        cout &lt;&lt; sourceIp &lt;&lt; ":" &lt;&lt; sourcePort &lt;&lt; " -&gt; " &lt;&lt; destIp &lt;&lt; ":" &lt;&lt; destPort &lt;&lt; endl;
+        if (dataLength &gt; 0) {
+            cout &lt;&lt; dataStr &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>The Breakdown</h2>
+
+<p>``` cpp</p>
+
+<h1>include <iostream></h1>
+
+<h1>include &lt;pcap.h></h1>
+
+<h1>include &lt;net/ethernet.h></h1>
+
+<h1>include &lt;netinet/ip.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;netinet/tcp.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<p>using namespace std;</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet);
+```</p>
+
+<p>These are the includes and declarations necessary for reading the packet captures.  The first 2 are self explanatory, the following 5 includes might be less so.  These are used for parsing and transforming data found in packets.  The functions and structures included in these headers are integral to packet processing and are available natively on Linux systems (Ubuntu in this case).</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>int main() {
+pcap_t *descr;
+char errbuf[PCAP_ERRBUF_SIZE];
+
+// open capture file for offline processing
+descr = pcap_open_offline("http.cap", errbuf);
+if (descr == NULL) {
+    cout &lt;&lt; "pcap_open_live() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>After entering the main execution, we go straight to opening our target packet capture file, <a href="http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=view&target=http.cap">http.cap</a>.  To do this we use <a href="http://www.manpagez.com/man/3/pcap_open_offline/">pcap_open_offline()</a> and give it the capture filename and an error buffer as parameters.  If all goes well, we get a pcap_t descriptor returned.  If not, check the error buffer for details.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>    // start packet processing loop, just like live capture
+if (pcap_loop(descr, 0, packetHandler, NULL) &lt; 0) {
+    cout &lt;&lt; "pcap_loop() failed: " &lt;&lt; pcap_geterr(descr);
+    return 1;
+}
+
+cout &lt;&lt; "capture finished" &lt;&lt; endl;
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Just like in a live packet capture, we use <a href="http://www.manpagez.com/man/3/pcap_loop/">pcap_loop()</a> to set up a handler callback for each packet to be processed. We give it the following:</p>
+
+<ul>
+<li>descr - the descriptor we just created with <a href="http://www.manpagez.com/man/3/pcap_open_offline/">pcap_open_offline()</a></li>
+<li>count - 0 (zero), to indicate there is no limit to the number of packets we want to process</li>
+<li>callback - The name of our packet handler function</li>
+<li>userdata - NULL, to indicate that we will be passing no user defined data to the callack</li>
+</ul>
+
+
+<p>When the entire file has been processed, we will print the "capture complete" message and then exit.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>void packetHandler(u_char *userData, const struct pcap_pkthdr* pkthdr, const u_char* packet) {
+const struct ether_header* ethernetHeader;
+const struct ip* ipHeader;
+const struct tcphdr* tcpHeader;
+char sourceIp[INET_ADDRSTRLEN];
+char destIp[INET_ADDRSTRLEN];
+u_int sourcePort, destPort;
+u_char *data;
+int dataLength = 0;
+string dataStr = "";
+</code></pre>
+
+<p>```</p>
+
+<p>Here we define the packet handler callback, as per the libpcap specifications.  For more details, check out my <a href="http://savagelook.com/blog/code/packet-capture-with-c-linux">original post on packet capture</a>.  The following declarations define variables that will help us parse meaningful data out of the packets.  These include packet header data, IP addresses, source/destination ports, and payload data.</p>
+
+<p>There's LOTS more useful information to be analyzed from the average packet.  Check out the structure defined in the network includes at the beginning of the code for more details.  Actually, it would probably be a hell of a lot easier to just download and fire up <a href="http://www.wireshark.org/">Wireshark</a>.  It will give you a greater appreciation for what can be learned from a packet.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>    ethernetHeader = (struct ether_header*)packet;
+if (ntohs(ethernetHeader-&gt;ether_type) == ETHERTYPE_IP) {
+    ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_src), sourceIp, INET_ADDRSTRLEN);
+    inet_ntop(AF_INET, &amp;(ipHeader-&gt;ip_dst), destIp, INET_ADDRSTRLEN);
+</code></pre>
+
+<p>```</p>
+
+<p>I'm not going to delve to deeply into the specifics of network protocols, as that could be a post... check that... that could be a book of its own.  Basically here we are parsing the ethernet header from the packet and using its type to determine if it is an IP packet or not.  We use the <a href="http://linux.about.com/library/cmd/blcmdl3_ntohs.htm">ntohs()</a> to convert the type from network byte order to host byte order.</p>
+
+<p>If it is an IP packet, we parse out the IP header and use the <a href="http://pubs.opengroup.org/onlinepubs/009695399/functions/inet_ntop.html">inet_ntop()</a> function to convert the IP addresses found in the IP header into a human readable format (i.e., xxx.xxx.xxx.xxx).  <span style="color:#ff0000">In a lot of older examples you'll see the use of <a href="http://beej.us/guide/bgnet/output/html/multipage/inet_ntoaman.html">inet_ntoa()</a>, but this is not thread-safe and is deprecated.</span></p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>    if (ipHeader-&gt;ip_p == IPPROTO_TCP) {
+        tcpHeader = (tcphdr*)(packet + sizeof(struct ether_header) + sizeof(struct ip));
+        sourcePort = ntohs(tcpHeader-&gt;source);
+        destPort = ntohs(tcpHeader-&gt;dest);
+        data = (u_char*)(packet + sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+        dataLength = pkthdr-&gt;len - (sizeof(struct ether_header) + sizeof(struct ip) + sizeof(struct tcphdr));
+</code></pre>
+
+<p>```</p>
+
+<p>Similar to above, I use the IP header to determine if this is a TCP packet (they all should be since its a HTTP capture) and then parse out the TCP header.  With the TCP header we can then determine the source and destination ports, with <a href="http://linux.about.com/library/cmd/blcmdl3_ntohs.htm">ntohs()</a> again, and then determine the contents of the packet payload.</p>
+
+<hr><br>
+
+
+<p>``` cpp</p>
+
+<pre><code>        // convert non-printable characters, other than carriage return, line feed,
+        // or tab into periods when displayed.
+        for (int i = 0; i &lt; dataLength; i++) {
+            if ((data[i] &gt;= 32 &amp;&amp; data[i] &lt;= 126) || data[i] == 10 || data[i] == 11 || data[i] == 13) {
+                dataStr += (char)data[i];
+            } else {
+                dataStr += ".";
+            }
+        }
+
+        // print the results
+        cout &lt;&lt; sourceIp &lt;&lt; ":" &lt;&lt; sourcePort &lt;&lt; " -&gt; " &lt;&lt; destIp &lt;&lt; ":" &lt;&lt; destPort &lt;&lt; endl;
+        if (dataLength &gt; 0) {
+            cout &lt;&lt; dataStr &lt;&lt; endl;
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>In the final step of the packet handler we display the results of our rudimentary analysis.  First we iterate through the bytes of the payload and save it in a format that is human friendly.  If you try to print it out with the non-printable characters in there you will get some very messy results in your console.  After this cleanup we simply output the packet data we have extracted and display it in the console.</p>
+
+<h2>The Summary</h2>
+
+<p>So now that you can process packets offline, what do you want to do with them?  I don't know about you, but aside from obvious applications to network analysis, <span style="color:#ff0000;">I'd like to use this data for trending, visualization, or even generative art and sound</span>.  But then again I'm weird.  What are you gonna do?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Packet capture with C++ &amp; Linux]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/11/17/packet-capture-with-c----amp--linux/"/>
+    <updated>2010-11-17T11:28:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/11/17/packet-capture-with-c----amp--linux</id>
+    <content type="html"><![CDATA[<p>As part of a larger project I'm working on I need to refamiliarize myself with some old friends: C and <a href="http://www.tcpdump.org/" target="_blank">libcap</a>.  While I do have a healthy dislike for coding in C, I have a much healthier respect for those who have used it to create some pretty fantastic stuff.  It still takes conscious effort to not spend all my time wrapping C code in C++ objects, but I digress.</p>
+
+<p>libpcap is a C library used to capture and analyze network packets off the wire, otherwise known as packet sniffing.  Some of the more prominent applications out there using it right now are <a href="http://www.snort.org/" target="_blank">Snort intrusion detection system</a>, <a href="http://www.wireshark.org/" target="_blank">Wireshark network analyzer</a> (formerly known as Ethereal), and the proprietor of libpcap, <a href="http://www.tcpdump.org/" target="_blank">tcpdump</a>.</p>
+
+<p>Why would you want to be able to analyze packets in code and not use one of these applications?  Because packet sniffing, in the hands of someone knowledgeable in network protocols, can be a great, non-intrusive way to gather discrete or statistical information and tie it to other coded business logic.  There's also that little, evil, <a href="http://www.blackhat.com/" target="_blank">don-your-black-hat</a>, I-wanna-be-a-hacker kind of feel to seeing packets you have no explicit reason to see.  Motives aside, let's see a simple example of how it works in Linux with a little C++ tacked on.</p>
+
+<h2>The Code</h2>
+
+<p>``` c</p>
+
+<h1>include <iostream></h1>
+
+<h1>include &lt;pcap.h></h1>
+
+<p>using namespace std;</p>
+
+<p>static int packetCount = 0;</p>
+
+<p>void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet) {</p>
+
+<pre><code>cout &lt;&lt; ++packetCount &lt;&lt; " packet(s) captured" &lt;&lt; endl;
+</code></pre>
+
+<p>}</p>
+
+<p>int main() {</p>
+
+<pre><code>char *dev;
+pcap_t *descr;
+char errbuf[PCAP_ERRBUF_SIZE];
+
+dev = pcap_lookupdev(errbuf);
+if (dev == NULL) {
+    cout &lt;&lt; "pcap_lookupdev() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+
+descr = pcap_open_live(dev, BUFSIZ, 0, -1, errbuf);
+if (descr == NULL) {
+    cout &lt;&lt; "pcap_open_live() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+
+if (pcap_loop(descr, 10, packetHandler, NULL) &lt; 0) {
+    cout &lt;&lt; "pcap_loop() failed: " &lt;&lt; pcap_geterr(descr);
+    return 1;
+}
+
+cout &lt;&lt; "capture finished" &lt;&lt; endl;
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>The Output</h2>
+
+<p><code>bash
+1 packet(s) captured
+2 packet(s) captured
+3 packet(s) captured
+4 packet(s) captured
+5 packet(s) captured
+6 packet(s) captured
+7 packet(s) captured
+8 packet(s) captured
+9 packet(s) captured
+10 packet(s) captured
+capture finished
+</code></p>
+
+<p>In this very basic example we are simply setting up a network interface to use libpcap, capturing a few packets, and exiting with a message.  Pretty vanilla, but there's a good bit going on here.  let's break it down in more detail.</p>
+
+<h2>The Breakdown</h2>
+
+<p>``` c</p>
+
+<h1>include <iostream></h1>
+
+<h1>include &lt;pcap.h></h1>
+
+<p>using namespace std;
+```</p>
+
+<p>Here along with standard includes we also include pcap.h.  This is the header file that is necessary for all libpcap operations and constants.</p>
+
+<hr><br><br>
+
+
+<p>``` c
+static int packetCount = 0;
+void packetHandler(u_char <em>userData, const struct pcap_pkthdr</em> pkthdr, const u_char* packet) {</p>
+
+<pre><code>cout &lt;&lt; ++packetCount &lt;&lt; " packet(s) captured" &lt;&lt; endl;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is the callback packet handler function that will do all the heavy lifting when it comes to network analysis.  This callback is referenced later by the <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a> function.  Every packet that pcap receives will be passed to this function.  Here's the explanation of the parameters:</p>
+
+<ul>
+    <li><strong>userData </strong>- a pointer to user defined data that can be passed into each callback, as defined in the <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a> call's 4th parameter.</li>
+    <li><strong>pkthdr </strong>- the pcap packet header that includes relevant information about the packet as it relates to pcap's capture.</li>
+    <li><strong>packet </strong>- a pointer to the actual packet that will be analyzed.</li>
+</ul>
+
+
+<p>For the sake of this example, we won't be doing any protocol analysis and will simply be counting the number of packets that pass over our listening interface.</p>
+
+<hr><br><br>
+
+
+<p>``` c
+int main() {</p>
+
+<pre><code>char *dev;
+pcap_t *descr;
+char errbuf[PCAP_ERRBUF_SIZE];
+</code></pre>
+
+<p>```</p>
+
+<p>The start of our packet capture program.</p>
+
+<ul>
+<li><strong>dev</strong> - this will hold the name of the interface on which we will sniff</li>
+<li><strong>descr</strong> - The descriptor, or handle, for the libpcap packet capture</li>
+<li><strong>errbuf</strong> - a character buffer to contain any potential errors from libpcap.  The max error size is defined by <strong>PCAP_ERRBUF_SIZE</strong> in pcap.h.</li>
+</ul>
+
+
+<hr><br>
+
+
+<p>``` c</p>
+
+<pre><code>dev = pcap_lookupdev(errbuf);
+if (dev == NULL) {
+    cout &lt;&lt; "pcap_lookupdev() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Here we use <a href="http://www.manpagez.com/man/3/pcap_lookupdev/" target="_blank">pcap_lookupdev()</a> to find an available network interface on which to sniff.  The name of the interface is returned in the <strong>dev</strong> character array.  If there is an error or if no interface is available, <a href="http://www.manpagez.com/man/3/pcap_lookupdev/" target="_blank">pcap_lookupdev()</a> returns a NULL value and fills the <strong>errbuf</strong> with the relevant error information.  Returning a failure value then populating an error buffer is common practice for libpcap functions that end in error.</p>
+
+<hr>
+
+
+<p>``` c</p>
+
+<pre><code>descr = pcap_open_live(dev, BUFSIZ, 0, -1, errbuf);
+if (descr == NULL) {
+    cout &lt;&lt; "pcap_open_live() failed: " &lt;&lt; errbuf &lt;&lt; endl;
+    return 1;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Next we create our packet capture descriptor using <a href="http://www.manpagez.com/man/3/pcap_open_live/" target="_blank">pcap_open_live()</a>.  This is how we will enable our target network interface for sniffing.  It will return a valid descriptor on success, a NULL on failure.  The parameters are as follows:</p>
+
+<ul>
+<li><strong>device</strong> - the name of the network interface to be used by libpcap for sniffing.  We found it using <a href="http://www.manpagez.com/man/3/pcap_lookupdev/" target="_blank">pcap_lookupdev()</a>.</li>
+<li><strong>snaplen</strong> - the maximum snap length, or packet size, to be handled by this descriptor.  We using the system defined <strong>BUFSIZ</strong> constant.</li>
+<li><strong>promisc</strong> - Determines whether or not the interface will listen in <a href="http://en.wikipedia.org/wiki/Promiscuous_mode" target="_blank">promiscuous mode</a>.  Promiscuous mode will analyze packets not specifically addressed for your machine, like if you were attached to a hub or a <a href="http://en.wikipedia.org/wiki/Port_mirroring" target="_blank">mirrored switch port</a>.  1 turns it on, 0 turns it off.</li>
+<li><strong>to_ms</strong> - this is the packet read timeout in milliseconds.  Specify -1 for no timeout.</li>
+<li><strong>errbuf</strong> - In case of an error, this is where a descriptive message will be left.</li>
+</ul>
+
+
+<hr>
+
+
+<p>``` c</p>
+
+<pre><code>if (pcap_loop(descr, 10, packetHandler, NULL) &lt; 0) {
+    cout &lt;&lt; "pcap_loop() failed: " &lt;&lt; pcap_geterr(descr);
+    return 1;
+}
+cout &lt;&lt; "capture finished" &lt;&lt; endl;
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>And here's the call we've been waiting for: <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a>.  This will take our pcap descriptor and start sniffing packets, sending them all to our packet handler callback function, aptly named packetHandler().  Here's <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()'s</a> parameters:</p>
+
+<ul>
+<li><strong>descr</strong> - the packet capture descriptor that we have initialized in the previous steps.</li>
+<li><strong>count</strong> - the number of packets to capture before <a href="http://www.manpagez.com/man/3/pcap_loop/" target="_blank">pcap_loop()</a> exits.  Use -1 or 0 to use no limit.</li>
+<li><strong>callback</strong> - this is the callback function that is called every time pcap sniffs a packet.  As specified above in the packetHandler() function, it receives relevant user data, pcap headers, and full packet data.  It is the work horse of the packet analysis process.  If creating a callback of your own, be sure to follow the function signature given in packetHandler().</li>
+<li><strong>userData</strong> - this is an array of unsigned bytes to be sent in with each packet.  You can use it to hold any relevant user data you would like to send to the callback as its first paramater.   You can also specify NULL if you wish to pass no user data to the callback.</li>
+</ul>
+
+
+<hr>
+
+
+<h2>The Summary</h2>
+
+<p>With this basic example you can now use C/C++ to capture network packets.  But keeping a count of packets isn't terribly interesting, is it?  No, I don't think so either.  So what should I do next?  If you managed to make it all the way to this summary, you can help me decide what aspects of packet capture or C/C++ to show case next.  Comment on one of the following or ad your own idea and I'll probably do it next!</p>
+
+<ul><li>Learn how to use <a href="http://en.wikipedia.org/wiki/Berkeley_Packet_Filter" target="_blank">Berkeley packet filters</a> to focus and make more efficient your packet sniffing.</li>
+<li>Process offline packet capture dumps from some of the other programs I mentioned earlier.  It's a critical skill for testing.</li>
+<li>Use libpcap to learn more about the interfaces on your system?</li>
+<li>Wrap this ugly C code in some much more developer friendly C++ objects.</li>
+<li>Get right into the nitty gritty and start learning how to analyze packet data.</li>
+</ul>
+
+
+<p>The choice is your's guys.</p>
+]]></content>
+  </entry>
+  
+</feed>

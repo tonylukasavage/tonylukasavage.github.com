@@ -1,0 +1,150 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>DrunkWalkThresholdAdapter.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/* 
+ * PROJECT: FLARManager
+ * http://transmote.com/flar
+ * Copyright 2009, Eric Socolofsky
+ * --------------------------------------------------------------------------------
+ * This work complements FLARToolkit, developed by Saqoosha as part of the Libspark project.
+ *    http://www.libspark.org/wiki/saqoosha/FLARToolKit
+ * FLARToolkit is Copyright (C)2008 Saqoosha,
+ * and is ported from NYARToolkit, which is ported from ARToolkit.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this framework; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * 
+ * For further information please contact:
+ *    &lt;eric(at)transmote.com&gt;
+ *    http://transmote.com/flar
+ * 
+ */</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span>.<span class="ActionScriptDefault_Text">transmote</span>.<span class="ActionScriptDefault_Text">flar</span>.<span class="ActionScriptDefault_Text">utils</span>.<span class="ActionScriptDefault_Text">threshold</span> <span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span>.<span class="ActionScriptDefault_Text">display</span>.<span class="ActionScriptDefault_Text">BitmapData</span>;
+    
+    <span class="ActionScriptASDoc">/**
+     * DrunkWalkThresholdAdapter calculates a new threshold using weighted randomization.
+     * when marker detection is poor, DrunkWalkThresholdAdapter adjusts the threshold by moving a random amount
+     * away from the current threshold value based on this.speed and this.bias.
+     * 
+     * see the following URLs for more information:
+     * http://blog.jactionscripters.com/2009/05/18/adaptive-thresholding-experiment/comment-page-1/#comment-367
+     * http://makc3d.wordpress.com/2009/07/03/alternative-to-adaptive-thresholding/
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">DrunkWalkThresholdAdapter</span> <span class="ActionScriptReserved">implements</span> <span class="ActionScriptDefault_Text">IThresholdAdapter</span> <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">MIN_VARIANCE</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> 5;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">MAX_VARIANCE</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> 50;
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_speed</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span>;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_bias</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span>;
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">adaptiveThresholdingStep</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">MIN_VARIANCE</span>;
+        
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">DrunkWalkThresholdAdapter</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">speed</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">=</span>0.3, <span class="ActionScriptDefault_Text">bias</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">=-</span>0.1<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_speed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">speed</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_bias</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">bias</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * init from a name-value paired object that contains parameters parsed from XML.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">initFromXML</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">paramsObj</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Object</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(!</span><span class="ActionScriptDefault_Text">isNaN</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">paramsObj</span>.<span class="ActionScriptDefault_Text">speed</span><span class="ActionScriptBracket/Brace">))</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">speed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">parseFloat</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">paramsObj</span>.<span class="ActionScriptDefault_Text">speed</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(!</span><span class="ActionScriptDefault_Text">isNaN</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">paramsObj</span>.<span class="ActionScriptDefault_Text">bias</span><span class="ActionScriptBracket/Brace">))</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">bias</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">parseFloat</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">paramsObj</span>.<span class="ActionScriptDefault_Text">bias</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+
+        <span class="ActionScriptASDoc">/**
+         * calculate a new threshold.
+         * @param    source                unused by DrunkWalkThresholdAdapter.
+         * @param    currentThreshold    current threshold value.
+         * @return                        new threshold value.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">calculateThreshold</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">source</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">BitmapData</span>, <span class="ActionScriptDefault_Text">currentThreshold</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">thresholdAdaptationMod</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">random</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">-</span>0.5 <span class="ActionScriptOperator">+</span> 0.5<span class="ActionScriptOperator">*</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_bias</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">adaptiveThresholdingStep</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">min</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">pow</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">adaptiveThresholdingStep</span>, 1<span class="ActionScriptOperator">+</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_speed</span><span class="ActionScriptBracket/Brace">)</span>, <span class="ActionScriptDefault_Text">MAX_VARIANCE</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">newThreshold</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">currentThreshold</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">thresholdAdaptationMod</span> <span class="ActionScriptOperator">*</span> <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">adaptiveThresholdingStep</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">newThreshold</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">max</span><span class="ActionScriptBracket/Brace">(</span>0, <span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">min</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">newThreshold</span>, 255<span class="ActionScriptBracket/Brace">))</span>;
+            
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">newThreshold</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * reset calculations.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">resetCalculations</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">currentThreshold</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">adaptiveThresholdingStep</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">MIN_VARIANCE</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * free this instance for garbage collection.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">dispose</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">//
+</span>        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * returns false;
+         * DrunkWalkThresholdAdapter runs only when confidence is low (poor marker detection).
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">runsEveryFrame</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">false</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * the speed at which the threshold changes during adaptive thresholding.
+         * larger values may increase the speed at which the markers in uneven illumination are detected,
+         * but may also result in instability in marker detection.
+         * 
+         * value must be zero or greater.  the default is 0.3.
+         * a value of zero will disable adaptive thresholding.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">speed</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_speed</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">speed</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_speed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">max</span><span class="ActionScriptBracket/Brace">(</span>0, <span class="ActionScriptDefault_Text">val</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * the direction toward which adaptive thresholding trends.
+         * lower thresholds favor environments with too little light;
+         * higher thresholds favor environments with too much light.
+         * a value of -1 will adapt only toward a lower threshold.
+         * a value of +1 will adapt only toward a higher threshold.
+         * a value of 0 will adapt randomly in both directions, with no bias.
+         * the default is -0.1, as darker environments tend to be more common
+         * for viewing web applications than oversaturated environments.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">bias</span> <span class="ActionScriptBracket/Brace">()</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_bias</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">bias</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_bias</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of normals</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="away3dlite" icon="packageIcon" expanded="true">
+				<node label="arcane.as" icon="actionScriptIcon" url="source/away3dlite/arcane.as.html"/>
+			</node>
+			<node label="away3dlite.animators" icon="packageIcon" expanded="true">
+				<node label="BonesAnimator.as" icon="actionScriptIcon" url="source/away3dlite/animators/BonesAnimator.as.html"/>
+				<node label="MovieMesh.as" icon="actionScriptIcon" url="source/away3dlite/animators/MovieMesh.as.html"/>
+			</node>
+			<node label="away3dlite.animators.bones" icon="packageIcon" expanded="true">
+				<node label="Bone.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/Bone.as.html"/>
+				<node label="Channel.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/Channel.as.html"/>
+				<node label="SkinController.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/SkinController.as.html"/>
+				<node label="SkinVertex.as" icon="actionScriptIcon" url="source/away3dlite/animators/bones/SkinVertex.as.html"/>
+			</node>
+			<node label="away3dlite.animators.frames" icon="packageIcon" expanded="true">
+				<node label="Frame.as" icon="actionScriptIcon" url="source/away3dlite/animators/frames/Frame.as.html"/>
+			</node>
+			<node label="away3dlite.cameras" icon="packageIcon" expanded="true">
+				<node label="Camera3D.as" icon="actionScriptIcon" url="source/away3dlite/cameras/Camera3D.as.html"/>
+				<node label="HoverCamera3D.as" icon="actionScriptIcon" url="source/away3dlite/cameras/HoverCamera3D.as.html"/>
+				<node label="TargetCamera3D.as" icon="actionScriptIcon" url="source/away3dlite/cameras/TargetCamera3D.as.html"/>
+			</node>
+			<node label="away3dlite.cameras.lenses" icon="packageIcon" expanded="true">
+				<node label="AbstractLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/AbstractLens.as.html"/>
+				<node label="OrthogonalLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/OrthogonalLens.as.html"/>
+				<node label="PerspectiveLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/PerspectiveLens.as.html"/>
+				<node label="ZoomFocusLens.as" icon="actionScriptIcon" url="source/away3dlite/cameras/lenses/ZoomFocusLens.as.html"/>
+			</node>
+			<node label="away3dlite.containers" icon="packageIcon" expanded="true">
+				<node label="ObjectContainer3D.as" icon="actionScriptIcon" url="source/away3dlite/containers/ObjectContainer3D.as.html"/>
+				<node label="Scene3D.as" icon="actionScriptIcon" url="source/away3dlite/containers/Scene3D.as.html"/>
+				<node label="View3D.as" icon="actionScriptIcon" url="source/away3dlite/containers/View3D.as.html"/>
+			</node>
+			<node label="away3dlite.core.base" icon="packageIcon" expanded="true">
+				<node label="Face.as" icon="actionScriptIcon" url="source/away3dlite/core/base/Face.as.html"/>
+				<node label="Mesh.as" icon="actionScriptIcon" url="source/away3dlite/core/base/Mesh.as.html"/>
+				<node label="Object3D.as" icon="actionScriptIcon" url="source/away3dlite/core/base/Object3D.as.html"/>
+				<node label="SortType.as" icon="actionScriptIcon" url="source/away3dlite/core/base/SortType.as.html"/>
+			</node>
+			<node label="away3dlite.core.clip" icon="packageIcon" expanded="true">
+				<node label="Clipping.as" icon="actionScriptIcon" url="source/away3dlite/core/clip/Clipping.as.html"/>
+				<node label="RectangleClipping.as" icon="actionScriptIcon" url="source/away3dlite/core/clip/RectangleClipping.as.html"/>
+			</node>
+			<node label="away3dlite.core.render" icon="packageIcon" expanded="true">
+				<node label="BasicRenderer.as" icon="actionScriptIcon" url="source/away3dlite/core/render/BasicRenderer.as.html"/>
+				<node label="FastRenderer.as" icon="actionScriptIcon" url="source/away3dlite/core/render/FastRenderer.as.html"/>
+				<node label="Renderer.as" icon="actionScriptIcon" url="source/away3dlite/core/render/Renderer.as.html"/>
+			</node>
+			<node label="away3dlite.core.utils" icon="packageIcon" expanded="true">
+				<node label="Cast.as" icon="actionScriptIcon" url="source/away3dlite/core/utils/Cast.as.html"/>
+				<node label="Debug.as" icon="actionScriptIcon" url="source/away3dlite/core/utils/Debug.as.html"/>
+			</node>
+			<node label="away3dlite.debug" icon="packageIcon" expanded="true">
+				<node label="AwayStats.as" icon="actionScriptIcon" url="source/away3dlite/debug/AwayStats.as.html"/>
+			</node>
+			<node label="away3dlite.events" icon="packageIcon" expanded="true">
+				<node label="ClippingEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/ClippingEvent.as.html"/>
+				<node label="Loader3DEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/Loader3DEvent.as.html"/>
+				<node label="MaterialEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/MaterialEvent.as.html"/>
+				<node label="MouseEvent3D.as" icon="actionScriptIcon" url="source/away3dlite/events/MouseEvent3D.as.html"/>
+				<node label="ParserEvent.as" icon="actionScriptIcon" url="source/away3dlite/events/ParserEvent.as.html"/>
+			</node>
+			<node label="away3dlite.lights" icon="packageIcon" expanded="true">
+				<node label="AbstractLight3D.as" icon="actionScriptIcon" url="source/away3dlite/lights/AbstractLight3D.as.html"/>
+				<node label="DirectionalLight3D.as" icon="actionScriptIcon" url="source/away3dlite/lights/DirectionalLight3D.as.html"/>
+				<node label="PointLight3D.as" icon="actionScriptIcon" url="source/away3dlite/lights/PointLight3D.as.html"/>
+			</node>
+			<node label="away3dlite.loaders" icon="packageIcon" expanded="true">
+				<node label="AbstractParser.as" icon="actionScriptIcon" url="source/away3dlite/loaders/AbstractParser.as.html"/>
+				<node label="AWData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/AWData.as.html"/>
+				<node label="Collada.as" icon="actionScriptIcon" url="source/away3dlite/loaders/Collada.as.html"/>
+				<node label="Loader3D.as" icon="actionScriptIcon" url="source/away3dlite/loaders/Loader3D.as.html"/>
+				<node label="Max3DS.as" icon="actionScriptIcon" url="source/away3dlite/loaders/Max3DS.as.html"/>
+				<node label="MD2.as" icon="actionScriptIcon" url="source/away3dlite/loaders/MD2.as.html"/>
+				<node label="MQO.as" icon="actionScriptIcon" url="source/away3dlite/loaders/MQO.as.html"/>
+			</node>
+			<node label="away3dlite.loaders.data" icon="packageIcon" expanded="true">
+				<node label="AnimationData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/AnimationData.as.html"/>
+				<node label="BoneData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/BoneData.as.html"/>
+				<node label="ChannelData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/ChannelData.as.html"/>
+				<node label="ContainerData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/ContainerData.as.html"/>
+				<node label="FaceData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/FaceData.as.html"/>
+				<node label="GeometryData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/GeometryData.as.html"/>
+				<node label="MaterialData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/MaterialData.as.html"/>
+				<node label="MeshData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/MeshData.as.html"/>
+				<node label="MeshMaterialData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/MeshMaterialData.as.html"/>
+				<node label="ObjectData.as" icon="actionScriptIcon" url="source/away3dlite/loaders/data/ObjectData.as.html"/>
+			</node>
+			<node label="away3dlite.loaders.utils" icon="packageIcon" expanded="true">
+				<node label="AnimationLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/AnimationLibrary.as.html"/>
+				<node label="ChannelLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/ChannelLibrary.as.html"/>
+				<node label="GeometryLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/GeometryLibrary.as.html"/>
+				<node label="MaterialLibrary.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/MaterialLibrary.as.html"/>
+				<node label="TextureLoader.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/TextureLoader.as.html"/>
+				<node label="TextureLoadQueue.as" icon="actionScriptIcon" url="source/away3dlite/loaders/utils/TextureLoadQueue.as.html"/>
+			</node>
+			<node label="away3dlite.materials" icon="packageIcon" expanded="true">
+				<node label="BitmapFileMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/BitmapFileMaterial.as.html"/>
+				<node label="BitmapMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/BitmapMaterial.as.html"/>
+				<node label="ColorMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/ColorMaterial.as.html"/>
+				<node label="Dot3BitmapMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/Dot3BitmapMaterial.as.html"/>
+				<node label="Material.as" icon="actionScriptIcon" url="source/away3dlite/materials/Material.as.html"/>
+				<node label="MovieMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/MovieMaterial.as.html"/>
+				<node label="WireColorMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/WireColorMaterial.as.html"/>
+				<node label="WireframeMaterial.as" icon="actionScriptIcon" url="source/away3dlite/materials/WireframeMaterial.as.html"/>
+			</node>
+			<node label="away3dlite.primitives" icon="packageIcon" expanded="true">
+				<node label="AbstractPrimitive.as" icon="actionScriptIcon" url="source/away3dlite/primitives/AbstractPrimitive.as.html"/>
+				<node label="Cone.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Cone.as.html"/>
+				<node label="Cube6.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Cube6.as.html"/>
+				<node label="Cylinder.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Cylinder.as.html"/>
+				<node label="LineSegment.as" icon="actionScriptIcon" url="source/away3dlite/primitives/LineSegment.as.html"/>
+				<node label="Plane.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Plane.as.html"/>
+				<node label="RegularPolygon.as" icon="actionScriptIcon" url="source/away3dlite/primitives/RegularPolygon.as.html"/>
+				<node label="Skybox6.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Skybox6.as.html"/>
+				<node label="Sphere.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Sphere.as.html"/>
+				<node label="Torus.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Torus.as.html"/>
+				<node label="Trident.as" icon="actionScriptIcon" url="source/away3dlite/primitives/Trident.as.html"/>
+			</node>
+			<node label="away3dlite.sprites" icon="packageIcon" expanded="true">
+				<node label="AlignmentType.as" icon="actionScriptIcon" url="source/away3dlite/sprites/AlignmentType.as.html"/>
+				<node label="Sprite3D.as" icon="actionScriptIcon" url="source/away3dlite/sprites/Sprite3D.as.html"/>
+			</node>
+			<node label="away3dlite.templates" icon="packageIcon" expanded="true">
+				<node label="BasicTemplate.as" icon="actionScriptIcon" url="source/away3dlite/templates/BasicTemplate.as.html"/>
+				<node label="FastTemplate.as" icon="actionScriptIcon" url="source/away3dlite/templates/FastTemplate.as.html"/>
+				<node label="Template.as" icon="actionScriptIcon" url="source/away3dlite/templates/Template.as.html"/>
+			</node>
+			<node label="net.hires.debug" icon="packageIcon" expanded="true">
+				<node label="Stats.as" icon="actionScriptIcon" url="source/net/hires/debug/Stats.as.html"/>
+			</node>
+			<node label="AwayUIC.mxml" icon="mxmlIcon" url="source/AwayUIC.mxml.html"/>
+			<node selected="true" label="sandbox.mxml" icon="mxmlAppIcon" url="source/sandbox.mxml.html"/>
+		</node>
+	</nodes>
+</index>

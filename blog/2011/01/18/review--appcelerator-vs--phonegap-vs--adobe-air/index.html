@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Review: Appcelerator vs. PhoneGap vs. Adobe Air - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Overview UPDATE: This was originally posted January 18th, 2011. All 3 platforms have changed immensely since. I have been charged with deciding on a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/01/18/review--appcelerator-vs--phonegap-vs--adobe-air/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Review: Appcelerator vs. PhoneGap vs. Adobe Air</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T08:43:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Overview</h2>
+
+<p><span style="font-size:18px;"><strong>UPDATE:</strong> This was originally posted January 18th, 2011. All 3 platforms have changed immensely since. </span></p>
+
+<p>I have been charged with deciding on a mobile framework for deploying a single code base to multiple devices (iPhone, iPad, Android, Blackberry).  Naturally, I was gravitating towards Adobe Air since most of my personal work these days has been in AS3.  I wanted to see what else was out there, though, and was pretty <span style="color: #ff0000;">surprised that Adobe Air wasn&#8217;t my choice in the end</span>.</p>
+
+<p>In addition to one other commercial platform I did not fully assess (too expensive), I looked at <a href="http://www.adobe.com/devnet/devices.html" target="_blank">Adobe Air for mobile</a>, <a href="http://www.appcelerator.com/" target="_blank">Titanium Appcelerator</a> and <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a>.  All are free to use frameworks for centralized mobile development.  The gist is to be able to create apps for multiple devices off the same code base.  With iPad &amp; Blackberry support, speed to market, and the ability to use Contacts &amp; Multitouch as my critical points, I began digging.</p>
+
+<h2>General Functionality</h2>
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr class="topHeader odd">
+<td width="20%"></td>
+<td width="15%">Titanium Appcelerator</td>
+<td width="15%">PhoneGap</td>
+<td width="15%">Adobe Air for Mobile</td>
+<td width="35%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">Android Support</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Adobe Air requires Android 2.2+</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">iPhone/iPad</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Adobe Air creates iOS apps with the <a href="http://labs.adobe.com/technologies/packagerforiphone/">Packager for iPhone</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Blackberry Phone</td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes">Appcelerator support is currently beta.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Blackberry Playbook</td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Appcelerator support is currently beta.</td>
+</tr>
+<tr>
+<td class="leftHeader">Symbian</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Palm</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Windows Phone 7</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"><a href="https://github.com/mrlacey/phonegap-wp7" target="_blank">phonegap-wp7</a> is a 3rd party attempt for PhoneGap.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Native UI support</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">PhoneGap and Adobe Air both require 3rd party libraries.  PhoneGap has <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">UIControls for PhoneGap</a>.  Adobe Air has <a href="http://code.google.com/p/as3iphonecomponents/" target="_blank">as3iPhoneComponents</a> and <a href="http://xperiments.es/blog/en/as3-android-flash-components/" target="_blank">android-components</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Native code support</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes">Appcelerator allows <a href="http://developer.appcelerator.com/doc/mobile/guides" target="_blank">module development</a>. PhoneGap uses <a href="https://github.com/phonegap/phonegap-plugins" target="_blank">custom Javascript handlers</a>.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Desktop deployment</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">PhoneGap has 3rd party libraries on Github: <a href="https://github.com/phonegap/phonegap-mac" target="_blank">phonegap-mac</a> &amp; <a href="https://github.com/davejohnson/phonegap-windows" target="_blank">phonegap-windows</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Deploy without Mac?</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">Adobe Air uses the <a href="http://labs.adobe.com/technologies/packagerforiphone" target="_blank">Packager for iPhone/iPad</a></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">IDE &amp; Tools</td>
+<td><a href="http://developer.appcelerator.com/tools" target="_blank">Titanium Developer</a></td>
+<td><a href="http://www.phonegap.com/tools" target="_blank">PhoneGap Tools</a></td>
+<td><a href="http://labs.adobe.com/technologies/flashbuilder_burrito/" target="_blank">Flash Builder</a>, <a href="http://www.fdt.powerflasher.com/developer-tools/fdt/home/" target="_blank">FDT</a>, <a href="http://www.flashdevelop.org/wikidocs/index.php?title=Main_Page" target="_blank">FlashDevelop</a></td>
+<td class="notes">Appcelerator has no current IDE, but recently acquired <a href="http://www.aptana.com/" target="_blank">Aptana</a></td>
+</tr>
+<tr>
+<td class="leftHeader">Interpreting</td>
+<td>Javascript mapped to native code</td>
+<td>Rendered in web view control</td>
+<td>Adobe Air runtime</td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Community Resources</td>
+<td><a href="http://developer.appcelerator.com/" target="_blank">Developer Center</a></td>
+<td><a href="http://docs.phonegap.com/" target="_blank">Docs</a>, <a href="http://wiki.phonegap.com/w/page/16494772/FrontPage" target="_blank">Wiki</a>, <a href="http://groups.google.com/group/phonegap/browse_thread/thread/314586c71c847073/65338b5ded637980?pli=1" target="_blank">IRC</a>, and <a href="http://groups.google.com/group/phonegap" target="_blank">Mailing List</a></td>
+<td><a href="http://www.adobe.com/devnet/devices.html" target="_blank">Mobile and Devices Development Center</a></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Languages used</td>
+<td>JS</td>
+<td>HTML, JS, CSS</td>
+<td>Actionscript3</td>
+<td class="notes">Appcelerator also uses PHP, Ruby, and Python for desktop app development</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Support</td>
+<td><a href="http://www.appcelerator.com/products/plans-pricing/" target="_blank">$2,189 per year per developer</a></td>
+<td><a href="http://www.nitobi.com/services/phonegap/" target="_blank">ranges from $1,000 - $25,000 per year</a></td>
+<td><a href="http://www.adobe.com/support/" target="_blank">Adobe Support</a></td>
+<td class="notes">Adobe offers no professional mobile support for apps, just their products.</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Device APIs</h2>
+
+<p>Beyond the overall support structure of the frameworks I wanted to get into the specific device API functionality.  This was a little harder to track down, but the list here should be accurate as of the writing of this post.  As I said earlier, contacts and multitouch were the only criticals, but I wanted to know what else these frameworks offered.  I&#8217;m assuming anyone reading this far would find this information valuable as well.</p>
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr class="topHeader odd">
+<td class="leftHeader" width="20%"></td>
+<td width="15%">Titanium Appcelerator</td>
+<td width="15%">PhoneGap</td>
+<td width="15%">Adobe Air for Mobile</td>
+<td class="notes" width="35%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">Accelerometer</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Geolocation</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Vibration</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Camera</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">Not yet supported Adobe Air for iPhone/iPad</td>
+</tr>
+<tr>
+<td class="leftHeader">Contacts</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Multitouch</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">SQLite</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">File System IO</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">SMS</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes">All support SMS via the &#8220;sms:&#8221; URL prefix.</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Phone API</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr>
+<td class="leftHeader">Copy/Paste</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Sounds</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">PhoneGap cannot record sounds. Adobe Air cannot record sound for iPhone/iPad</td>
+</tr>
+<tr>
+<td class="leftHeader">Bluetooth</td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td class="notes"></td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">Video Capture</td>
+<td><img src="/images/yes.gif" alt="" /></td>
+<td><img src="/images/no.jpg" alt="" /></td>
+<td><img src="/images/warn.jpg" alt="" /></td>
+<td class="notes">Adobe Air cannot record video for iPhone/iPad.</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Summary</h2>
+
+<p>That&#8217;s what I&#8217;ve got so far.  Let me know if and when some of these assessments change.  I&#8217;m also eager to hear other people&#8217;s thoughts.  Feel free to chime in.</p>
+
+<p>The long and short of my recommendations:</p>
+
+<ul>
+    <li>Go Adobe Air if performance isn&#8217;t critical and you have AS3 experience.  The tools and workflow for using pure AS3 or Flex Hero make turning out mobile apps very smooth.  Watch out for performance, particularly on iOS.</li>
+    <li>Go PhoneGap if you needed the widest range of support for devices.  If you need it to run everywhere, this is your framework. Beware of the less than stellar documentation and wiki, though.</li>
+    <li>Go Appcelerator everything else. The native UI and ability to access native code is a big win.  Also, the community, IDE, and documentation are top notch.  <span style="color: #ff0000;">Appcelerator was my choice in the end, but that doesn&#8217;t mean its right for you</span>.</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T08:43:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/adobe-air/'>adobe air</a>, <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/phonegap/'>phonegap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/01/11/8-steps-for-being-an-asshole-effectively/" title="Previous Post: 8 Steps for being an Asshole Effectively">&laquo; 8 Steps for being an Asshole Effectively</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/01/27/hello--blackberry-playbook-/" title="Next Post: Hello, Blackberry Playbook!">Hello, Blackberry Playbook! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

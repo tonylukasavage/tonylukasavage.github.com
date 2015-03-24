@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: maacbook pro | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/maacbook-pro/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New Mac User Survival Kit]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/03/new-mac-user-survival-kit/"/>
+    <updated>2011-03-03T16:41:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/03/new-mac-user-survival-kit</id>
+    <content type="html"><![CDATA[<p>OK, so I've downloaded and installed all my normal tools and apps that I have available to me on Windows: Tweetdeck, Skype, Chrome, all my IDEs (except Visual Studio), and a handful of others.  Now that I have those in place, how do I finish bridging the gap between what I still need from Windows?  How do I take it from an equivalent of my Windows laptop to something much more?</p>
+
+<p>I don't have all the answers yet, but I'll get by with a little help from my friends.  In this case I'd like to mention those friends as they have helped ramp me up in Mac knowledge a hell of a lot faster than I would have thought possible.  Big thanks out to <a href="http://twitter.com/#!/john__olson" target="_blank">@john__olson</a>, <a href="http://twitter.com/#!/s9tpepper" target="_blank">@s9tpepper</a>, <a href="http://twitter.com/#!/JayMoretti" target="_blank">@JayMoretti</a>, <a href="http://twitter.com/#!/newtriks" target="_blank">@newtriks</a>, and <a href="http://twitter.com/#!/pedramp" target="_blank">@pedramp</a>.  They pointed to most of the applications below that are making my time with Mac OS X extremely productive.</p>
+
+<h2>Survival Kit</h2>
+
+
+<ul>
+    <li><a href="http://alfredapp.com" target="_blank"><span style="font-size: 125%;">Alfred</span></a> - Alfred is a productivity booster that uses keyboard shortcuts to quickly access applications, web searches, bookmarks, and a lot more.  It searches as you type and the results are instantaneous, which is something by which this long time Windows user is stunned.  I almost passed this one by because it didn't sound like anything special.  5 minutes of using it changed that perception big time.  Don't take my word for it though, go download it yourself or at the very least check out its introductory video.
+<iframe src="http://player.vimeo.com/video/16204051?title=0&amp;byline=0&amp;portrait=0" width="620" height="250" frameborder="0"></iframe></li>
+    <li><span style="font-size: 125%;"><a href="http://toolbar.google.com/gmail-helper/notifier_mac.html" target="_blank">Gmail Notifier</a></span> - How else am I going to know whether or not I have email in my Gmail account now? Can't use Google Talk anymore (and don't need to with iChat).  There's other clients out there but this one is simple, free, and gets the job done.  However I did have occaisons where the email checking intervals took way too long, like 20+ minutes.  But there's an easy fix.  Just type the following from the Terminal, restart the Gmail Notifier, and you're good to go:
+<strong>defaults write com.google.GmailNotifier AutocheckInterval 1</strong></li>
+    <li><a href="http://homepage.mac.com/thomasw/OpenTerminal/" target="_blank"><span style="font-size: 125%;">OpenTerminal</span></a> - The website may not look like much, but I think that's because all the effort was put into the tool.  OpenTerminal adds the simple, yet powerful functionality of being able to open Terminal based on a folder in Finder, or any folder you drag onto it.
+</li>
+    <li><span style="font-size: 125%;"><a href="http://skitch.com/" target="_blank">Skitch</a></span> - Skitch is the smarter, stronger, better looking brother of Windows print screen.  It lets you quickly take snapshots of any sized portion of your screen.  In that same interface you can also add arrows, annotations, shapes, and highlights to augment you snapshots.  I've probably used this 20 times already in the 4 days I've been using this MacBook Pro.  In fact, the picture below shows how I used Skitch to make the snapshot for the OpenTerminal example above:
+</li>
+    <li><span style="font-size: 125%;"><a href="http://totalfinder.binaryage.com/" target="_blank">TotalFinder</a></span> - TotalFinder is everything that the built-in Mac OS X Finder should be.  It adds missing features and tweaks like tabbed browsing, sorting files with folders on top, dual Finder views, and many other features.  Well worth the $15 asking price for this high quality bundle that integrates into directly into the existing Finder.
+</li>
+    <li><span style="font-size: 125%;"><a href="http://wb.mysql.com/" target="_blank">MySQL Workbench</a></span> - OK, this isn't exactly critical for everyone, but it was for me.  I needed a full featured MySQL GUI client and I didn't want to pay for it.  The choices are abundant for Windows, not so much for Mac.  Lots of people suggested <a href="http://www.sequelpro.com/" target="_blank">Sequel Pro</a>, but it was way to light on features, specifically the inability to alter stored procedures inline.
+
+I had tried MySQL Workbench before for Windows and was pretty displeased with it.  it offered a great deal in terms of functionality and is the sanctioned client of MySQL, but it was very glitchy.  I had a lot of inconsistent behavior and found myself losing time instead of gaining it while using it.  Just for fun I revisited it for Mac and am very pleasantly surprised.  Everything I need to be there is there and I've run into none of the aggravating behavior problems I did before.  Plus they added "snippets" to their SQL query area, which are awesome.  I highly suggest this free tool to anyone doing database development or management from Mac.</li>
+    <li><span style="font-size: 125%;"><a href="http://www.vmware.com/products/fusion/" target="_blank">VMWare Fusion</a></span> - VMWare Fusion is a specialized virtualization software that allows you to integrate your applications from a Windows VM seamlessly into your Mac desktop.  Aside from your Windows applications appearing in standard Mac windows, you get the added compatibility of copy/paste, drag-and-drop, printing, and more.  This was huge for me since the biggest hurdle in moving completely to Mac was the fact that most of my development for my employer is C# in Visual Studio.
+</li>
+    <li><span style="font-size: 125%;"><a href="http://www.microsoft.com/mac/outlook" target="_blank">Outlook:Mac 2011</a></span> - This was critical for me.  I needed to connect to our Exchange Server to be able to fully switch over to Mac for development.  Sure I could run it in a Windows VM, but I wanted the notifications in my Dock as I often have to respond quickly.  Outlook:Mac 2011 does exactly what I need, which is exactly what Outlook does on Windows.  On additional note is that the contact email address auto hinting seems to work significantly faster on Mac.  A happily welcomed perk.
+</li>
+</ul>
+
+
+<br>
+
+
+<h2>What's Next?</h2>
+
+
+<p>Anybody else got some can't miss applications I should be using for Mac?  I'm all ears.</p>
+]]></content>
+  </entry>
+  
+</feed>

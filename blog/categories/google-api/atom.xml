@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: google api | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/google-api/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Create Your Own QR Code]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/09/create-your-own-qr-code/"/>
+    <updated>2010-12-09T11:54:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/09/create-your-own-qr-code</id>
+    <content type="html"><![CDATA[<h2>The Generator</h2>
+
+<table>
+<tr>
+<td><strong>Text for QR Code:</strong> <form onsubmit="return false;"><input type="text" id="qrvalue" value="http://tonylukasavage.com" style="width:250px;"></input>
+<button onclick="document.getElementById('qrimg').src = 'http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=' + document.getElementById('qrvalue').value;">Encode</button></form></td>
+<td><img id="qrimg" src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://tonylukasavage.com"/></td>
+</tr>
+<tr>
+<td colspan="2"><script type="text/javascript"><!--
+google_ad_client = "pub-8526874234699762";
+/* 728x90, created 12/19/10 */
+google_ad_slot = "6406672624";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></td>
+</tr>
+</table>
+
+
+<h2>The Overview</h2>
+
+<p>QR codes are basically just bar codes on steroids.  They allow you to encode up to 4,296 characters in a format that can be read by most modern bar code scanning devices.  More specifically, QR codes make it much simpler to direct smart phone users to your website (or anywhere else you want).</p>
+
+<p>So why do you want to do this?  Here's a few reasons that range in practicality:</p>
+
+<ul>
+<li>Direct mobile phones to personally hosted mobile applications (no need for market fees)</li>
+<li>Direct users from physical storefronts or magazine articles to your website</li>
+<li>Leave encoded messages for mobile users</li>
+<li>To be super cool and trendy</li>
+
+</ul>
+
+
+<h2>The Code</h2>
+
+<p>Here's the Google Chart API URL you hit in order to create your own QR code.  Pop it into a browser and it will return your image.  There are more optional criteria you can send, which are detailed in the <a href="http://code.google.com/apis/chart/docs/gallery/qr_codes.html">API's QR code section</a>.  Be sure to change the sections highlighted in <span style="color:#ff0000;">RED</span> to the values that fit your needs.</p>
+
+<div style="border:1px solid #bbbbbb; background-color:#eeeeee; padding-left:15px;">
+http://chart.apis.google.com/chart?cht=qr&chs=<span style="color:#ff0000;">HEIGHT</span>x<span style="color:#ff0000;">WIDTH</span>&chl=<span style="color:#ff0000;">YOURTEXT</span>
+</div>
+
+
+<p>Now let's say you wanted to copy my website and have your own generator.  It's pretty simple.  Here's the tiny bit of HTML and javascript I used to make it happen:</p>
+
+<p>``` html</p>
+
+<table>
+  <tr>
+    <td>
+      <strong>Text for QR Code:</strong>
+      <form onsubmit="return false;">
+        <input type="text" id="qrvalue" value="http://savagelook.com" style="width:250px;"/>
+        <button onclick="document.getElementById('qrimg').src = 'http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=' + document.getElementById('qrvalue').value;">Encode</button>
+      </form>
+    </td>
+    <td>
+      <img id="qrimg" src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com"/>
+    </td>
+  </tr>
+</table>
+
+
+<p>```</p>
+
+<p>And here's another version from <a href="http://ericharrison.info/qr/">Eric Harrison</a> with no tables</p>
+
+<p>``` html</p>
+
+<div style="padding:15px 50px;">
+  <img id="qrimg" src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=http://savagelook.com" style="float:left;margin-right:25px;" />
+  <form onsubmit="return false;">
+    <input type="text" id="qrvalue" value="http://savagelook.com" style="width:60%;font-size:125%;" /><br />
+    <input type="button" style="padding:5px;font-size:125%;margin-top:10px;" onclick="document.getElementById('qrimg').src = 'http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=' + document.getElementById('qrvalue').value;" value="Encode" />
+  </form>
+  <br style="clear:both;" />
+</div>
+
+
+<p>```</p>
+
+<p>As you can see, its not rocket science, but it sure can add a little techie flare.  Have fun and be sure to let me know if you add a QR coding to your geek repetoire!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Johnny Cash in Flash]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/27/johnny-cash-in-flash/"/>
+    <updated>2010-09-27T09:56:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/27/johnny-cash-in-flash</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/cash/cash.html" class="fancybox.iframe"><img title="face_picking" src="http://tonylukasavage.github.com/images/cash.jpg" alt="" width="559" height="421" /></a></p>
+
+
+<p>→ <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/cash/cash.html">Click here</a> or the image above for the demo.
+&rarr; View the <a href="http://tonylukasavage.github.com/demos/cash/srcview/index.html">source code</a>.
+<b>NOTE:</b> You'll need to download <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a>, <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a>, and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> to compile the code.</p>
+
+<p>Inspired by the legendary Johnny Cash I decided to dive into a few AS3 development topics I haven't gotten to yet to create a 3d equalizer and tribute to the Man in Black.  Those topics, along with some other more familiar ones, include:</p>
+
+<ul>
+    <li>Playing audio in Flash with Sound and SoundChannel</li>
+    <li>Using the <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/media/SoundMixer.html" target="_blank">SoundMixer</a> to generate values based on the audio</li>
+    <li>Searching for images with the Google API via <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a></li>
+    <li>Creating a PHP proxy for beating <a href="http://www.onegiantmedia.com/as3---load-a-remote-image-from-any-domain-with-no-security-sandbox-errors" target="_blank">Flash cross-domain security issues</a></li>
+    <li>Using <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">Away3dLite</a> for speedy 3d visualization (I even get 15 FPS on my phone!)</li>
+    <li>Using <a href="http://www.closier.nl/prefab/" target="_blank">Prefab</a> to export 3d models as native AS3 code for Away3d or Away3dLite.</li>
+</ul>
+
+
+<p>This demo has a good bit more code than I usually post up.  It also uses a couple external libraries, namely <a href="http://away3d.com/away3d-lite-v1-0-fastest-and-smallest-3d-engine-in-flash" target="_blank">away3dlite</a> (3d rendering), <a href="http://code.google.com/p/googleas3api/" target="_blank">googleas3api</a> (Google API), and <a href="http://github.com/mikechambers/as3corelib" target="_blank">AS3CoreLib</a> (super useful AS3 utilities).  Rather than overwhelm you with mountains of tutorial-like rambling, instead I'll leave this demo here to be enjoyed, make the source code available, and break down each of these topics into smaller tutorials/guides in the near future.</p>
+
+<p>Sometimes your muse doesn't need to be even slightly related to your field of creativity.  In fact, that can often make for the most interesting inspiration.</p>
+]]></content>
+  </entry>
+  
+</feed>

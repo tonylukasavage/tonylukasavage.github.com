@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Deeper Look at Appcelerator and PhoneGap - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Overview I&#8217;d like to start by saying that I think it&#8217;s important that both of these frameworks exist.  The more I worked with each, the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/04/20/a-deeper-look-at-appcelerator-and-phonegap/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Deeper Look at Appcelerator and PhoneGap</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-20T12:58:00-04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2><span style="font-size: 20px; font-weight: bold;">Overview</span></h2>
+
+
+<p>I&#8217;d like to start by saying that I think it&#8217;s important that both of these frameworks exist.  The more I worked with each, the more I found that it wasn&#8217;t a simple question of which mobile framework was better.  Both have some of the features a cross platform framework should have, and each shines in areas that the other frankly does not.  And that will be the focus of this analysis.  What are the key aspects to a great cross platform mobile framework, and how do <a href="http://www.appcelerator.com/" target="_blank">Appcelerator</a> and <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> stack up.</p>
+
+<h1>Cross Platform Support</h1>
+
+
+<p>So this is why we&#8217;re all here right? Code once, run every where.  That&#8217;s what we want.  Well in this case, one of these solutions gets you a lot closer than the other.</p>
+
+<p>This is PhoneGap&#8217;s bread and butter.  By leveraging web views native to the mobile devices, PhoneGap allows you to build as an app as complex and modern as you want while providing the ability to have it gracefully degrade for lower end devices, all in the same code base.  This degradation can be controlled via CSS or even dynamically with javascript and media queries.  You can use the same design and development principles that have guided cross browser development for years.  And the list of mobile platforms they support (which includes iOS, Android, Blackberry, webOS, and Symbian)  is definitely worth bragging about.</p>
+
+<p>Appcelerator, on the other hand, does iOS really, really well.  Android brings some additional headaches and quirks.  Blackberry is still in the beta stage.  They are actually creating native code based on their Javascript API, so the quirks will likely always exist. Appcelerator will constantly be one step behind/removed in their efforts to integrate native functionality.  No fault of their own, it&#8217;s just the nature of their product.</p>
+
+<p>This is why I think emphasis on Appcelerator being a cross platform framework is misleading.  <strong>While it CAN be a cross platform framework, it is not by nature</strong>.  I mean, how can it be? One of its main selling points is access to native UI components, something that is obviously not part of a cross platform solution.  One code base for multiple mobile platforms is totally a possibility with Appcelerator, but you will likely sacrifice a lot of what makes it great (coming in the following sections) to get to that lowest common denominator.</p>
+
+<h1>Defined Workflow</h1>
+
+
+<p>The product will only be as good as the tools that support, particularly when you are trying to appeal to an audience as large as mobile developers.  In this respect, Appcelerator is the clear winner.</p>
+
+<p>Earlier this year Appcelerator announced that they had acquired the web development IDE <a href="http://www.aptana.com/" target="_blank">Aptana</a>. Before this point you were stuck with <a href="http://www.appcelerator.com/products/" target="_blank">Titanium Developer</a> which did the job, but was only a project deployment tool, not a true IDE.  Just this month they introduced the first version of the new <a href="http://preview.appcelerator.com/studio/" target="_blank">Titanium Studio</a>, an integration of Titanium Developer and Aptana.  There were a few bugs to wrestle with the earliest versions of this software, but I must say that I am loving it.  It has truly integrated the development and deployment workflow, making it more organized and efficient.  It has built in update checking for not only the studio but also the Titanium SDKs.  Oh, and <strong>did I mention that all of this is free</strong>?</p>
+
+<p>PhoneGap leaves you to your own tools and workflow.  A plus for some, but I would imagine its a minus for those of us who don&#8217;t come from primarily a web development background.  They give you some direction in the <a href="http://www.phonegap.com/tools" target="_blank">Tools</a> section of their website, but its not what you would call a workflow.  It a different approach, basically leaving the developer to determine what libraries, IDE, touch frameworks, etc&#8230; are most appropriate for their project.  This can be problematic for two reasons. 1, new mobile developers are not going to know which tools are the most appropriate and 2, there are A LOT of available touch and JS libraries out there for mobile development.  Choosing can be a project in its own rite. All that said, <a href="http://twitter.com/#!/brianleroux" target="_blank">Brian Leroux</a> of <a href="http://www.nitobi.com/" target="_blank">Nitobi</a>, the makers of PhoneGap, created the <a href="http://xuijs.com/" target="_blank">XUIJS library</a>. Its what I&#8217;m using and I&#8217;m really digging it so far.</p>
+
+<h1>Programming Language</h1>
+
+
+<p>Admit it Appcelerator developers, you aren&#8217;t interested in the Javascript API so much as you are interested in <strong>NOT</strong> writing Objective-C!  Yeah, me too.</p>
+
+<p>You would think this topic would be a deadlock, right?  Its just Appcelerator&#8217;s Javascript API versus PhoneGap&#8217;s use of the standard web stack of HTML/CSS/JS.  It basically the same thing&#8230; or is it?  Remember how I said in the last section that PhoneGap gives you free reign to choose whatever framework you want for development?  Well, Appcelerator doesn&#8217;t, and it is definitely to the chagrin of many Javascript savvy developers.</p>
+
+<p>PhoneGap is HTML/CSS/JS.  Anything you can do with it on a normal web page you can do in a mobile browser&#8217;s web view.  This means any chunk of Javascript you find anywhere that you like can potentially be integrated into you app.  This ranges from your favorite frameworks like <a href="http://jquery.com/" target="_blank">jQuery</a> and <a href="http://www.prototypejs.org/" target="_blank">Prototype</a>, mobile  libraries like <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, or even graphical ones like Grant Skinner&#8217;s <a href="http://easeljs.com/" target="_blank">EaselJS</a> or one of these many <a href="http://javascript.open-libraries.com/multimedia/3d/fantastic-javascript-3d-libraries/" target="_blank">3D libraries</a>.  Performance and device support permitting, you can use any Javascript you want.</p>
+
+<p>Appcelerator&#8217;s API unfortunately is purely Javascript, is has no ties to the DOM.  But wait, doesn&#8217;t the most popular Javascript library in the world assume the presence of the DOM window and document?! Yep, that&#8217;s right, <strong>you can&#8217;t use any part of jQuery that requires the DOM</strong> (which is almost all of it) in your Appcelerator code.  The one exception is that you can still use jQuery and other DOM reliant libraries in a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium.UI.WebView</a>, but you can&#8217;t use it with the actual Appcelerator API.  Annoying to me, but I can see this being REALLY aggravating  to long time web developers accustomed to using jQuery with everything.</p>
+
+<h1>Deployment Support</h1>
+
+
+<p>If you&#8217;ve spent any time in mobile development, you know that deploying your finished app to markets and app stores can be a truly daunting task.  There&#8217;s certificates, app signing, icons, logos, promotional images, supporting text, and the task of keeping it all organized.  It can quickly become a mess.  While both Appcelerator and PhoneGap both give you detailed instructions on how to build app store ready apps from your development environment and offer professional services, <strong>PhoneGap takes it one huge step further</strong>.</p>
+
+<p><a href="https://build.phonegap.com/" target="_blank">PhoneGap Build</a> is currently a free beta service that you need to get your ass signed up for now.  While I highly encourage you to check it out for yourself, here&#8217;s the insanely easy workflow:</p>
+
+<ol>
+    <li>Upload you PhoneGap project to PhoneGap Build (or use its Github integration)</li>
+    <li>Configure your platform specific accounts with certificates and signing keys (all PhoneGap supported platforms available)</li>
+    <li>Watch as PhoneGap Build creates deployable binaries for each of these platforms and delivers you download links for each</li>
+</ol>
+
+
+<p>Now that is the type of workflow I&#8217;m looking for! A quick note on step #2 is that iOS is the only platform that requires a certificate to get a testable binary.  You&#8217;ll want to set up certificates and keys before you deploy the the market/app store, but you can test the binary without them.</p>
+
+<h1>Speed of Development</h1>
+
+
+<p>All this flexibility and platform support has to bite PhoneGap in the ass somewhere, right?  Speed of development, if you can&#8217;t tell by it name, is another place that Appcelerator excels.</p>
+
+<p>Appcelerator allows developers to start building an app that looks, feels, and performs like a native one very quickly.  Some of the big reasons are the following:</p>
+
+<ul>
+    <li>Their Javascript API is infinitely easier than Objective-C, and some might also say Java (but not me)</li>
+    <li>Tons of ready-to-use native UI components</li>
+    <li>You are not required to adhere to the MVC architectural pattern</li>
+    <li>The double-edged sword of loosely typed Javascript allows you to create custom components like table views and rows very easily</li>
+    <li>The new Titanium Studio gives you one place to develop and build for multiple platforms</li>
+</ul>
+
+
+<p>&nbsp;</p>
+
+<iframe src="http://player.vimeo.com/video/8730218?title=0&amp;byline=0&amp;portrait=0&amp;color=9a0707" width="400" height="225" frameborder="0"></iframe>
+
+
+<p>PhoneGap, though, is a bare bones framework.  It looks to provide mobile API support (things like location, accelerometer, etc&#8230;) across all major vendors.  The UI is left up to you and your chops as a web developer.  To that end <strong>most people are left to go find another touch framework to layer on top of PhoneGap</strong>.  <a href="http://www.sencha.com/products/touch/" target="_blank">Sencha Touch</a>, <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>, <a href="http://jqtouch.com/" target="_blank">JQTouch</a> are all popular options.  There&#8217;s even efforts to create <a href="http://nachbaur.com/blog/native-ui-controls-in-phonegap-coming-along-nicely" target="_blank">web based &#8220;native&#8221; components</a>.  You can also take my route and build most of it from scratch using <a href="http://xuijs.com/" target="_blank">XUIJS</a>.</p>
+
+<p>The long and short is that if you are only building for iOS, or maybe also Android, Appcelerator will likely get you from concept to completion faster than PhoneGap.</p>
+
+<h1>Documentation</h1>
+
+
+<p>Documentation is key when undertaking any new technology.  Both frameworks have their ups and downs here.</p>
+
+<p>Appcelerator maintains a newly improved collection of there documentation on their <a href="http://wiki.appcelerator.org/display/guides/Home#" target="_blank">new Confluence site</a>.  While it is fairly comprehensive, it is also a bit jumbled, particularly the <a href="http://wiki.appcelerator.org/display/guides/Getting+Started+with+Titanium" target="_blank">&#8220;Getting Started&#8221; section</a>.  Its all there if you have the patience to find what you are looking for.  You&#8217;ll find installation, setup, examples, tutorials, the works.  You can also find a comprehensive listing of their <a href="http://developer.appcelerator.com/apidoc/mobile/latest" target="_blank">mobile API here</a>.  The problems I see with their documentation are the following:</p>
+
+<ul>
+    <li>Its sometimes hard to tell what version of their SDK examples apply to</li>
+    <li>Often Titanium objects have properties that don&#8217;t apply, or don&#8217;t behave as the documentation indicates</li>
+    <li>You are sometimes left digging through the Q &amp; A section to find the quirks for specific Titanium objects</li>
+    <li>Examples given for Titanium objects are WAY too simplistic</li>
+    <li>How &#8216;bout a few more &#8220;Hello, World!&#8221; scale tutorials before you throw us at the <a href="https://github.com/appcelerator/KitchenSink/" target="_blank">Kitchen Sink</a>?!</li>
+    <li>Im sure this will change after the Titanium Studio release gets some traction, but the &#8220;Getting Started&#8221; section is still using Titanium Developer as its chosen workflow</li>
+</ul>
+
+
+<p><strong>PhoneGap&#8217;s <a href="http://www.phonegap.com/start" target="_blank">&#8220;Get Started&#8221; section</a> is a thing of beauty</strong>.  In a very clean, concise layout, the PhoneGap site walks you through how to set up your computer for each individual platform you wish to develop for.  It list requirements, toolsets, and easy to follow instructions.  It helps ease the intimidation that can come with trying to develop for so many platforms. Once you get it up and running, PhoneGap&#8217;s <a href="http://docs.phonegap.com/" target="_blank">API documentation</a> is incredibly easy to follow.  A simple layout lists everything PhoneGap is capable of doing.  Clicking on these capabilities then takes you to the API specific documentation that lists usage, examples, device support, and any quirks that are currently known.  It takes a lot of the guess work and frustration out of the inevitable troubleshooting that ensues with cross platform mobile development.</p>
+
+<p>&nbsp;</p>
+
+<p>PhoneGap definitely shines in the documentation department.  In all fairness, though, Appcelerator has a hell of a lot more to document.  PhoneGap&#8217;s lack of UI components accounts for a large part of its documentation being so easy to follow.</p>
+
+<h1>Community</h1>
+
+
+<p>An active and knowledgable community is one of my biggest factors in choosing any technology.  Appcelerator and PhoneGap both have a wiki and blog, and also offer these a few more resources.</p>
+
+<p>Appcelerator has their <a href="http://developer.appcelerator.com/questions/created" target="_blank">Q &amp; A section</a> of their site.  It allows users to submit questions about Appcelerator to the community.  Users can submit answers, vote on others&#8217; answers, and receive points and badges for participation.  If StackOverflow has taught us anything, its that people like being rewarded for participation, no matter how meaningless.  On top of this free resource, they also offer training, certification, and professional services for those looking to take their Appcelerator&#8217;ing to the next level.  I hand out on Twitter a lot, so its worth mentioning that you can get some great help and info regarding Appcelerator by following <a href="http://twitter.com/#!/appcelerator" target="_blank">@appcelerator</a>, <a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a>, <a href="http://twitter.com/#!/aaronksaunders" target="_blank">@aaronksaunders</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a>.</p>
+
+<p>PhoneGap maintains a connection with the community with their <a href="http://groups.google.com/group/phonegap" target="_blank">Google Group</a> and on IRC at <a href="http://webchat.freenode.net/?channels=#phonegap" target="_blank">irc.freenode.net #phonegap</a>.  They also offer <a href="http://www.phonegap.com/services" target="_blank">professional services and training</a>.  The core of the PhoneGap team is very involved with the community and I&#8217;ve often been found chatting with <a href="http://twitter.com/#!/phonegap" target="_blank">@phonegap</a>, <a href="http://twitter.com/#!/andrecharland" target="_blank">@andrecharland</a>, <a href="http://twitter.com/#!/brianleroux" target="_blank">@brianleroux</a>, and <a href="http://twitter.com/#!/davejohnson" target="_blank">@davejohnson</a> on Twitter.</p>
+
+<p>Other than wishing PhoneGap had some kind of a forum system better than a Google group, I think both frameworks do a very good job of listening to and staying engaged in the community.</p>
+
+<h1>Extensibility</h1>
+
+
+<p>No developer I have ever known is just happy with the tools he&#8217;s given.  We want to be able to add to and modify anything we get our hands on.  Both frameworks are very extendable via modules and offer open source licenses, though PhoneGap&#8217;s option of <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">&#8220;New&#8221; BSD</a> or <a href="http://www.opensource.org/licenses/mit-license" target="_blank">MIT license</a> is a little nicer than Appcelerator&#8217;s <a href="http://www.opensource.org/licenses/apache2.0.php" target="_blank">Apache 2.0 license</a>.</p>
+
+<p>Appcelerator offers <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+Android" target="_blank">Android</a> and <a href="http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+iOS" target="_blank">iOS</a> module development guides.  These allow you to build native components in their native SDKs and then be able to access them in your Appcelerator app via the Javascript API.  Anywhere Appcelerator falls short in terms of supporting any API or UI component, you are free to pick it up and make it happen.  Its not the simplest process and effectively removes the possibility of  cross platform code, but can be a strong tool for a single platform scenario.</p>
+
+<p><strong>UPDATE</strong>: In addition, Tony Guntharp also gave me this blog post detailing how modules can be developed in other languages as well: <a href="http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html">http://developer.appcelerator.com/blog/2011/04/tiphp-tipython.html</a></p>
+
+<p>PhoneGap also supports additional modules, or plugins, to its framework in the same fashion that Appcelerator does.  You can develop native code and then write hooks back to PhoneGap to access it in your project.  Again, this undoes any cross platform compatibility unless you make the native component for all supported platforms.  There&#8217;s a <a href="http://wiki.phonegap.com/w/page/36752779/PhoneGap-Plugins" target="_blank">guide to creating plugins found here</a>.</p>
+
+<p><strong>Appcelerator on Github:</strong> <a href="https://github.com/appcelerator" target="_blank">https://github.com/appcelerator</a>
+<strong>PhoneGap on Github:</strong> <a href="https://github.com/phonegap/phonegap" target="_blank">https://github.com/phonegap/phonegap</a></p>
+
+<h1>Summary</h1>
+
+
+<p>So as I stated at the beginning, I think both of these frameworks are important and have their place in the mobile landscape.  From my personal perspective, as they both stand now, PhoneGap is the true cross platform solution.  <a href="http://twitter.com/#!/fling" target="_blank">Brian Fling</a>, author of <a href="http://oreilly.com/catalog/9780596155452" target="_blank">&#8220;Mobile Design and Development&#8221;</a>, rang the point home throughout his book that the future of mobile development lies in web based applications that adhere to a structure of graceful degradation.  I initially thought he was a web developer who didn&#8217;t want to learn Objective-C or Java.  After spending some time with native development and multiple cross platform frameworks, I find myself coming to the same conclusion.</p>
+
+<p>But that&#8217;s not to say that PhoneGap is the end all, be all of mobile development.  I happen to think that for iOS &amp; Android projects, Appcelerator could likely be your best choice.  Unless you have prior experience with Objective-C, I would advise anyone with even a basic knowledge of Javascript to give it a shot before resorting to native development.  Trust me, you won&#8217;t miss Interface Builder, and outlets, and actions, and all kinds of other iOS MVC fun.  Oh, and you&#8217;re sure to enjoy the native UI and performance that Titanium uniquely provides.</p>
+
+<p><strong>NOTE:</strong> I would have liked to include Adobe Air as I did in my past comparison, but I honestly have not used it in 2+ months and there have been serious changes since.  I&#8217;ve been focusing on cross platform solutions that can hit the big three mobile devices out there: Android, iOS, and Blackberry.  Soon as Blackberry supports Adobe Air you better believe I&#8217;m coming back to re-evaluate it.  I&#8217;ll take AS3 and/or Flex over HTML/CSS/JS any day.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-20T12:58:00-04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/blackberry/'>blackberry</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/phonegap/'>phonegap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/03/31/swipes--or--flings---for-navigation-in-android/" title="Previous Post: Swipes, or "Flings", for Navigation in Android">&laquo; Swipes, or "Flings", for Navigation in Android</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/05/11/9-things-to-know-about-phonegap/" title="Next Post: 9 things to know about PhoneGap">9 things to know about PhoneGap &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

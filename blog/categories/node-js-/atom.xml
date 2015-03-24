@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: node.js, | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/node-js-/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Callback Spotting: Flexible APIs in Javascript]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/"/>
+    <updated>2014-09-24T11:53:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript</id>
+    <content type="html"><![CDATA[<p>Callbacks are a necessity when developing an asynchronous API in node.js. No, really, I <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promise</a>. To that end, here's a little trick I originally spotted in the <a href="https://github.com/joyent/node">node.js source code</a>. When creating a function that will require a callback, but has a flexible invocation signature, I always use the <code>maybeCallback()</code> function.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// you can use lodash or underscore for this</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">isFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;[object Function]&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">function</span> <span class="nx">maybeCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="nx">isFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">?</span> <span class="nx">callback</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!-- more -->
+
+
+<p>Essentially, if you give it a function, it gives you the function back. Otherwise, it gives you back a new function that quietly does nothing, unless there's an error, in which case it throws that error. Simple, right?</p>
+
+<p>In node.js, it is a standard convention that the callback for an asynchronous function is the last argument. This is simple enough with concrete APIs, like say <a href="http://nodejs.org/api/fs.html#fs_fs_stat_path_callback">fs.stat</a>:</p>
+
+<blockquote><p><strong>fs.stat(path, callback)</strong></p></blockquote>
+
+<p>There's always a <code>path</code>, and always a <code>callback</code>. No trickery needed in the API creation. But what about an API like <a href="http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback">fs.readFile</a>?</p>
+
+<blockquote><p><strong>fs.readFile(filename, [options], callback)</strong></p></blockquote>
+
+<p>There's always a <code>filename</code>, there might <code>options</code>, and there should be a <code>callback</code>. So how exactly might we structure this under-the-hood? I won't regurgitate the node.js source code here, but let's instead see how we might use <code>maybeCallback</code> to set up this API.</p>
+
+<p>```js
+function readFile(filename, options, callback) {</p>
+
+<pre><code>callback = maybeCallback(arguments[arguments.length-1]);
+if (!options || isFunction(options)) {
+    options = { /* default values */ };
+}
+
+// do stuff
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Those few lines of code do the following:</p>
+
+<ul>
+<li>Use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">arguments</a> object to find the last argument that was provided to the function.</li>
+<li>Use <code>maybeCallback()</code> on the last argument to get our callback.</li>
+<li>If <code>options</code> doens't exist, or is a function (implying that it's our callback), do your default processing of the options.</li>
+</ul>
+
+
+<p>This is a common pattern that I use all the time when creating APIs. And giving the users of your modules this flexibility is often key to not just their success, but also their delight in using your code. More users, more feedback, more pull requests, better module. You know how it goes.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: grunt | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/grunt/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Automating Appcelerator: grunt-titanium and grunt-alloy]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/01/23/automating-appcelerator-tasks-with-grunt-titanium-and-grunt-alloy/"/>
+    <updated>2014-01-23T22:04:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/01/23/automating-appcelerator-tasks-with-grunt-titanium-and-grunt-alloy</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/grunt.png" width="150" height="150" title="gruntjs" ></p>
+
+<p>If you follow me on <a href="https://twitter.com/tonylukasavage">twitter</a>, my current love affair with task management via the node.js module <a href="http://gruntjs.com/">grunt</a> is no secret. Long story short, it is a deliciously simple way to automate development tasks, with a multitude of those tasks (like <a href="https://github.com/gruntjs/grunt-contrib-jshint">linting</a>, <a href="https://github.com/gruntjs/grunt-contrib-uglify">minification</a>, <a href="https://npmjs.org/package/grunt-contrib-watch">file watching</a>, etc...) already done for you. I could babble on about it here, but I think a tweet of mine best encapsulates my experience with it.<!-- more --></p>
+
+<blockquote class="twitter-tweet" lang="en"><p>I love <a href="https://twitter.com/gruntjs">@gruntjs</a>. I now officially spend next to no time on shit that isn’t integral to the user-facing functionality of my projects.</p>&mdash; Tony Lukasavage (@tonylukasavage) <a href="https://twitter.com/tonylukasavage/statuses/414071952039772160">December 20, 2013</a></blockquote>
+
+
+<script async src="http://tonylukasavage.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<br>
+
+
+<p>In a natural fusion of my current technological entanglements, I took to creating grunt task plugins for <a href="http://www.appcelerator.com/titanium/">Appcelerator's</a> core cross-platform mobile development tools. As a result, we now have <a href="https://npmjs.org/package/grunt-titanium">grunt-titanium</a> for the Titanium CLI and <a href="https://npmjs.org/package/grunt-alloy">grunt-alloy</a> for the Alloy MVC framework. With these plugins you can now automate all functionality involved by these 2 tools, in turn letting you shift your focus onto your mobile app development, <strong>where it should be</strong>.</p>
+
+<p>For a crash course in...</p>
+
+<ul>
+<li>task automation with grunt, check out their <a href="http://gruntjs.com/getting-started">docs</a>. Seriously, <span style="color:#a00;font-weight:bold;">learn grunt</span>.</li>
+<li>Titanium and Alloy, check out Appcelerator's <a href="http://docs.appcelerator.com/titanium/latest/">guides</a> and get to building top-of-the-line, cross-platform, <strong>native</strong> mobile apps quickly and easily.</li>
+</ul>
+
+
+<p>In the meantime, though, check out these few examples of how you can use grunt-titanium and grunt-alloy to super-charge your development workflow. Bear in mind that these are excerpts from a Gruntfile.js implementation, so again, read up on grunt and check out the grunt-titanium and grunt-alloy repos to fully understand how to use these examples.</p>
+
+<p><div class="github-widget" data-repo="tonylukasavage/grunt-titanium"></div><br></p>
+
+<p><div class="github-widget" data-repo="tonylukasavage/grunt-alloy"></div><br></p>
+
+<h2>Create and build a Titanium app</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// configure the plugins</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">titanium</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">should_create</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">workspaceDir</span><span class="o">:</span> <span class="s1">&#39;.&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">should_build</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;build&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">projectDir</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">buildOnly</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Actually load this plugin&#39;s task(s).</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadTasks</span><span class="p">(</span><span class="s1">&#39;tasks&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// These plugins provide necessary tasks.</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-titanium&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;titanium&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Create and compile a Alloy app</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// configure the plugins</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">titanium</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">all</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">workspaceDir</span><span class="o">:</span> <span class="s1">&#39;.&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">alloy</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">new_app</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;new&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;app_name&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">compile</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;compile&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">platform</span><span class="o">:</span> <span class="s1">&#39;ios&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">outputPath</span><span class="o">:</span> <span class="s1">&#39;app_name&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Actually load this plugin&#39;s task(s).</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadTasks</span><span class="p">(</span><span class="s1">&#39;tasks&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// These plugins provide necessary tasks.</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-titanium&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-alloy&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;titanium&#39;</span><span class="p">,</span> <span class="s1">&#39;alloy&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Stay tuned. I'll soon be posting about how you can expand this workflow with <a href="https://github.com/tonylukasavage/ti-mocha">ti-mocha</a> to start automating the runtime testing of your Titanium and Alloy apps!</p>
+
+<p><strong>PS</strong> - <a href="https://github.com/gruntjs/grunt-contrib-clean">grunt-clean</a> is a great plugin to use for cleaning up after yourself when creating temporary Titanium/Alloy apps for test automation.</p>
+
+<h2>Resources &amp; Links</h2>
+
+<ul>
+<li>grunt-titanium on <a href="https://github.com/tonylukasavage/grunt-titanium">github</a> and <a href="https://npmjs.org/package/grunt-titanium">npm</a></li>
+<li>grunt-alloy on <a href="https://github.com/tonylukasavage/grunt-alloy">github</a> and <a href="https://npmjs.org/package/grunt-alloy">npm</a></li>
+<li>gruntjs <a href="http://gruntjs.com/">website</a></li>
+<li>Titanium SDK <a href="http://www.appcelerator.com/titanium/">website</a></li>
+<li>Titanium CLI on <a href="https://npmjs.org/package/grunt-titanium">npm</a></li>
+<li>Alloy <a href="http://www.appcelerator.com/titanium/alloy/">website</a> and <a href="https://npmjs.org/package/alloy">npm page</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

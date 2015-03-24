@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: motion blur | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/motion-blur/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D Drunk Simulator]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/10/15/away3d-drunk-simulator/"/>
+    <updated>2010-10-15T12:59:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/10/15/away3d-drunk-simulator</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_drunk/away3d_drunk.html" class="fancybox.iframe"><img title="away3d_drunk" src="http://tonylukasavage.github.com/images/drunk.jpg" alt="" width="638" height="478" /></a></p>
+
+
+<p>&rarr; <a href="http://tonylukasavage.github.com/demos/away3d_drunk/away3d_drunk.html" class="fancybox.iframe">Click here</a> or the image above for the demo.
+&rarr; View the <a href="http://tonylukasavage.github.com/demos/away3d_drunk/srcview/index.html">source code</a>.</p>
+
+<p>I decided to have a little more fun with the motion blur technique that I posted about earlier this week.  Rather than blur individual objects in the scene, I blurred the entire scene giving a you a view through beer goggles engineered in Actionscript.  And to get in the mood I poured myself a glass of Single Barrel Jack Daniel's.  OK, probably wasn't necessary, but Jack Daniel's is like bacon: it makes everything better.</p>
+
+<p>Be sure to play with the slider at the top of the demo.  Moving it from left to right will gradually increase your level of intoxication, making the motion blur more extreme and longer lasting.  This in turn has the effect of making the frame rate really low, but it actually works well in the demo because it also simulates the delayed reflexes of being wasted.  At least thats how I plan to explain away occasional single digit FPS.</p>
+
+<p>Having fun haphazardly swaying through my little 3d scene.  While this seems like a goofy effect, it probably has some pretty interesting applications in games.  It seems like a great way to simulate a "shell shocked" effect in a battle or perhaps blurred vision when moving at extremely fast speeds.  Got any other idea?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Away3D Motion Blur]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/10/14/away3d-motion-blur/"/>
+    <updated>2010-10-14T08:47:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/10/14/away3d-motion-blur</id>
+    <content type="html"><![CDATA[<p style="text-align: center;"><a href="http://tonylukasavage.github.com/demos/away3d_motion/away3d_motion.html" class="fancybox.iframe"><img title="away3d_motion" src="http://tonylukasavage.github.com/images/motionblur.jpg" alt="" width="445" height="331" /></a></p>
+
+
+<p>→ <a class="fancybox.iframe" href="http://tonylukasavage.github.com/demos/away3d_motion/away3d_motion.html">Click here</a> or the image above for the demo.
+→ View the <a href="http://tonylukasavage.github.com/demos/away3d_motion/srcview/index.html">source code</a>.</p>
+
+<p>This was a just for fun idea that popped into my head yesterday.  I'm always trying to find programmatic ways to add to the appeal of some of my 3D effects.  What better way to jazz up some 3D objects than to view them as though you're wasted?!</p>
+
+<p>I've got a lot of irons in the fire lately, so this one was quick and dirty.  Basically I create an extra View3D in which to render the "blurred" objects.  I take a snapshot of this view (50 in fact), overlay it on a separate background View3D, and use <a href="http://www.greensock.com/tweenlite/" target="_blank">TweenLite</a> to gradually fade the opacity of each snapshot.</p>
+
+<p>In the end you get this pretty neat motion blur effect on your 3D objects.  There's a lot more that could be added to this to spice it up.  If I had more time to devote to it I would add a BlurFilter toggle, which makes the motion blur look better but affects performance.  Other settings you could vary to alter the effect are:</p>
+
+<ul>
+    <li>The speed of the objects</li>
+    <li>The number of snapshots taken</li>
+    <li>How fast the snapshots fade</li>
+    <li>The scale of the fading snapshots</li>
+</ul>
+
+
+<p>and I'm sure there's more.  Try it out.  You could give your scenes a truly inebriated look by using only one View3D.  By doing this you'll motion blur the entire viewable scene.  Maybe I'll strap on some Away3D beer goggles in the future and give that a shot!  Let me know if you beat me to it.</p>
+]]></content>
+  </entry>
+  
+</feed>

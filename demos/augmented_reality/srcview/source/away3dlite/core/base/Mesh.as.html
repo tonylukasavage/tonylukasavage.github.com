@@ -1,0 +1,361 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Mesh.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">core</span>.<span class="ActionScriptDefault_Text">base</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">arcane</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">cameras</span>.<span class="ActionScriptOperator">*</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">containers</span>.<span class="ActionScriptOperator">*</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">away3dlite</span>.<span class="ActionScriptDefault_Text">materials</span>.<span class="ActionScriptOperator">*</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span>.<span class="ActionScriptDefault_Text">display</span>.<span class="ActionScriptOperator">*</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span>.<span class="ActionScriptDefault_Text">geom</span>.<span class="ActionScriptOperator">*</span>;
+    
+    <span class="ActionScriptReserved">use</span> <span class="ActionScriptReserved">namespace</span> <span class="ActionScriptDefault_Text">arcane</span>;
+    
+    <span class="ActionScriptASDoc">/**
+     * Basic geometry object
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">Mesh</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">Object3D</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_materialsDirty</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_materialsCacheList</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_vertexId</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_screenVertices</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_uvtData</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_indices</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">&gt;</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_indicesTotal</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_culling</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">String</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Face</span><span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Face</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_faceLengths</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_sort</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_vertices</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_faceMaterials</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptReserved">override</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">updateScene</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Scene3D</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">scene</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">val</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptReserved">return</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_scene</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">buildMaterials</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">true</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptDefault_Text">_scene</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_scene</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">buildMaterials</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptReserved">override</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">project</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">camera</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Camera3D</span>, <span class="ActionScriptDefault_Text">parentSceneMatrix3D</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Matrix3D</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span>.<span class="ActionScriptDefault_Text">project</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">camera</span>, <span class="ActionScriptDefault_Text">parentSceneMatrix3D</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// project the normals
+</span>            <span class="ActionScriptComment">//if (material is IShader)
+</span>            <span class="ActionScriptComment">//    _triangles.uvtData = IShader(material).getUVData(transform.matrix3D.clone());
+</span>            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(!</span><span class="ActionScriptDefault_Text">_perspCulling</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptComment">//DO NOT CHANGE vertices getter!!!!!!!
+</span>                <span class="ActionScriptDefault_Text">Utils3D</span>.<span class="ActionScriptDefault_Text">projectVectors</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_viewMatrix3D</span>, <span class="ActionScriptDefault_Text">vertices</span>, <span class="ActionScriptDefault_Text">_screenVertices</span>, <span class="ActionScriptDefault_Text">_uvtData</span><span class="ActionScriptBracket/Brace">)</span>;
+                
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_materialsDirty</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">buildMaterials</span><span class="ActionScriptBracket/Brace">()</span>;
+                
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_materialsCacheList</span>.<span class="ActionScriptDefault_Text">length</span>;
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">mat</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span>;
+                <span class="ActionScriptReserved">while</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">--</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">((</span><span class="ActionScriptDefault_Text">mat</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_materialsCacheList</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]))</span> <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptComment">//update rendering faces in the scene
+</span>                        <span class="ActionScriptDefault_Text">_scene</span>.<span class="ActionScriptDefault_Text">_materialsNextList</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">mat</span>;
+                        
+                        <span class="ActionScriptComment">//update material for this object
+</span>                        <span class="ActionScriptDefault_Text">mat</span>.<span class="ActionScriptDefault_Text">updateMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span>, <span class="ActionScriptDefault_Text">camera</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptBracket/Brace">}</span>
+                <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptASDoc">/** @private */</span>    
+        <span class="ActionScriptDefault_Text">arcane</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">buildFaces</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_faces</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_sort</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptDefault_Text">_indicesTotal</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faces</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_sort</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">=</span> 0;
+            
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faces</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_sort</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceLengths</span>.<span class="ActionScriptDefault_Text">length</span>;
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">index</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_indices</span>.<span class="ActionScriptDefault_Text">length</span>;
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">faceLength</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span>;
+            
+            <span class="ActionScriptReserved">while</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">--</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">faceLength</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceLengths</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span>;
+                
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">faceLength</span> <span class="ActionScriptOperator">==</span> 3<span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">_indicesTotal</span> <span class="ActionScriptOperator">+=</span> 3;
+                <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">faceLength</span> <span class="ActionScriptOperator">==</span> 4<span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">_indicesTotal</span> <span class="ActionScriptOperator">+=</span> 6;
+                <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Face</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span>, <span class="ActionScriptDefault_Text">i</span>, <span class="ActionScriptDefault_Text">index</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">faceLength</span>, <span class="ActionScriptDefault_Text">faceLength</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// speed up
+</span>            <span class="ActionScriptDefault_Text">_vertices</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_uvtData</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_indices</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceLengths</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faces</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_sort</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+             
+             <span class="ActionScriptDefault_Text">updateSortType</span><span class="ActionScriptBracket/Brace">()</span>;
+             
+             <span class="ActionScriptDefault_Text">_materialsDirty</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_vertexNormals</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span>;
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_material</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span>;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_bothsides</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span>;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_sortType</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">String</span>;
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">removeMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">mat</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">uint</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">mat</span>.<span class="ActionScriptDefault_Text">_id</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">_scene</span>.<span class="ActionScriptDefault_Text">_id</span><span class="ActionScriptBracket/Brace">]</span>;
+            
+            <span class="ActionScriptDefault_Text">_materialsCacheList</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">mat</span>.<span class="ActionScriptDefault_Text">_id</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">_scene</span>.<span class="ActionScriptDefault_Text">_id</span><span class="ActionScriptBracket/Brace">]]</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_materialsCacheList</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">i</span> <span class="ActionScriptOperator">+</span> 1<span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">_materialsCacheList</span>.<span class="ActionScriptDefault_Text">length</span><span class="ActionScriptOperator">--</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">addMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">mat</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">uint</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">mat</span>.<span class="ActionScriptDefault_Text">_id</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">_scene</span>.<span class="ActionScriptDefault_Text">_id</span><span class="ActionScriptBracket/Brace">]</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_materialsCacheList</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">&lt;=</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">_materialsCacheList</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">i</span> <span class="ActionScriptOperator">+</span> 1;
+            
+            <span class="ActionScriptDefault_Text">_materialsCacheList</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">mat</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">buildMaterials</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">clear</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_materialsDirty</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_scene</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">oldMaterial</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span>;
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">newMaterial</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span>;
+                
+                <span class="ActionScriptComment">//update face materials
+</span>                <span class="ActionScriptDefault_Text">_faceMaterials</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+                <span class="ActionScriptDefault_Text">_faceMaterials</span>.<span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceLengths</span>.<span class="ActionScriptDefault_Text">length</span>;
+                
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faces</span>.<span class="ActionScriptDefault_Text">length</span>;
+                <span class="ActionScriptReserved">while</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">--</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptDefault_Text">oldMaterial</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span>.<span class="ActionScriptDefault_Text">material</span>;
+                    
+                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(!</span><span class="ActionScriptDefault_Text">clear</span><span class="ActionScriptBracket/Brace">)</span>
+                        <span class="ActionScriptDefault_Text">newMaterial</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceMaterials</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">_material</span>;
+                    
+                    <span class="ActionScriptComment">//reset face materials
+</span>                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">oldMaterial</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptDefault_Text">newMaterial</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptComment">//remove old material from lists
+</span>                        <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">oldMaterial</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                            <span class="ActionScriptDefault_Text">_scene</span>.<span class="ActionScriptDefault_Text">removeSceneMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">oldMaterial</span><span class="ActionScriptBracket/Brace">)</span>;
+                            <span class="ActionScriptDefault_Text">removeMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">oldMaterial</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptBracket/Brace">}</span>
+                        
+                        <span class="ActionScriptComment">//add new material to lists
+</span>                        <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">newMaterial</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                            <span class="ActionScriptDefault_Text">_scene</span>.<span class="ActionScriptDefault_Text">addSceneMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">newMaterial</span><span class="ActionScriptBracket/Brace">)</span>;
+                            <span class="ActionScriptDefault_Text">addMaterial</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">newMaterial</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptBracket/Brace">}</span>
+                        
+                        <span class="ActionScriptComment">//set face material
+</span>                        <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span>.<span class="ActionScriptDefault_Text">material</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">newMaterial</span>;
+                    <span class="ActionScriptBracket/Brace">}</span>
+                    
+                <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptDefault_Text">_faceMaterials</span>.<span class="ActionScriptDefault_Text">fixed</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">updateSortType</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">face</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Face</span>;
+            <span class="ActionScriptReserved">switch</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_sortType</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">SortType</span>.<span class="ActionScriptDefault_Text">CENTER</span><span class="ActionScriptOperator">:</span>
+                    <span class="ActionScriptReserved">for</span> <span class="ActionScriptReserved">each</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">face</span> <span class="ActionScriptReserved">in</span> <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptBracket/Brace">)</span>
+                        <span class="ActionScriptDefault_Text">face</span>.<span class="ActionScriptDefault_Text">calculateScreenZ</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">face</span>.<span class="ActionScriptDefault_Text">calculateAverageZ</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">SortType</span>.<span class="ActionScriptDefault_Text">FRONT</span><span class="ActionScriptOperator">:</span>
+                    <span class="ActionScriptReserved">for</span> <span class="ActionScriptReserved">each</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">face</span> <span class="ActionScriptReserved">in</span> <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptBracket/Brace">)</span>
+                        <span class="ActionScriptDefault_Text">face</span>.<span class="ActionScriptDefault_Text">calculateScreenZ</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">face</span>.<span class="ActionScriptDefault_Text">calculateNearestZ</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">SortType</span>.<span class="ActionScriptDefault_Text">BACK</span><span class="ActionScriptOperator">:</span>
+                    <span class="ActionScriptReserved">for</span> <span class="ActionScriptReserved">each</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">face</span> <span class="ActionScriptReserved">in</span> <span class="ActionScriptDefault_Text">_faces</span><span class="ActionScriptBracket/Brace">)</span>
+                        <span class="ActionScriptDefault_Text">face</span>.<span class="ActionScriptDefault_Text">calculateScreenZ</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">face</span>.<span class="ActionScriptDefault_Text">calculateFurthestZ</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">default</span><span class="ActionScriptOperator">:</span>
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Determines if the faces in the mesh are sorted. Used in the &lt;code&gt;FastRenderer&lt;/code&gt; class.
+         * 
+         * @see away3dlite.core.render.FastRenderer
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">sortFaces</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+        
+        <span class="ActionScriptASDoc">/**
+         * Returns the 3d vertices used in the mesh.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">vertices</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_vertices</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Returns the faces used in the mesh.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">faces</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Face</span><span class="ActionScriptOperator">&gt;</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_faces</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+
+        
+        <span class="ActionScriptASDoc">/**
+         * Determines the global material used on the faces in the mesh.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">material</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_material</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">material</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">val</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">WireColorMaterial</span><span class="ActionScriptBracket/Brace">()</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_material</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">val</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptReserved">return</span>;
+            
+            <span class="ActionScriptDefault_Text">_material</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+            
+            <span class="ActionScriptDefault_Text">_materialsDirty</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Determines whether the faces in teh mesh are visible on both sides (true) or just the front side (false).
+         * The front side of a face is determined by the side that has it&apos;s vertices arranged in a counter-clockwise order.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">bothsides</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_bothsides</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">bothsides</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Boolean</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_bothsides</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_bothsides</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">_culling</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">TriangleCulling</span>.<span class="ActionScriptDefault_Text">NONE</span>;
+            <span class="ActionScriptBracket/Brace">}</span> <span class="ActionScriptReserved">else</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">_culling</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">TriangleCulling</span>.<span class="ActionScriptDefault_Text">POSITIVE</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Determines by which mechanism vertices are sorted. Uses the values given by the &lt;code&gt;SortType&lt;/code&gt; class. Options are CENTER, FRONT and BACK. Defaults to CENTER.
+         * 
+         * @see away3dlite.core.base.SortType
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">sortType</span><span class="ActionScriptBracket/Brace">()</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">String</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_sortType</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">sortType</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">val</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_sortType</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">val</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptReserved">return</span>;
+            
+            <span class="ActionScriptDefault_Text">_sortType</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">val</span>;
+            
+            <span class="ActionScriptDefault_Text">updateSortType</span><span class="ActionScriptBracket/Brace">()</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Creates a new &lt;code&gt;Mesh&lt;/code&gt; object.
+         * 
+         * @param material        Determines the global material used on the faces in the mesh.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">Mesh</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">material</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Material</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">()</span>;
+            
+            <span class="ActionScriptComment">// private use
+</span>            <span class="ActionScriptDefault_Text">_screenVertices</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptDefault_Text">_uvtData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptDefault_Text">_indices</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">()</span>;
+            
+            <span class="ActionScriptComment">//setup default values
+</span>            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">material</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">material</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">bothsides</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">sortType</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">SortType</span>.<span class="ActionScriptDefault_Text">CENTER</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">addFace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">vs</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Vector3D</span><span class="ActionScriptOperator">&gt;</span>,<span class="ActionScriptDefault_Text">uvs</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector</span>.<span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptOperator">&gt;</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+         <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">q</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">=</span><span class="ActionScriptDefault_Text">Math</span>.<span class="ActionScriptDefault_Text">min</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">vs</span>.<span class="ActionScriptDefault_Text">length</span>,<span class="ActionScriptDefault_Text">uvs</span>.<span class="ActionScriptDefault_Text">length</span><span class="ActionScriptBracket/Brace">)</span>;
+         <span class="ActionScriptReserved">for</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">=</span>0;<span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">&lt;</span><span class="ActionScriptDefault_Text">q</span>;<span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">++</span><span class="ActionScriptBracket/Brace">)</span>
+         <span class="ActionScriptBracket/Brace">{</span>
+           <span class="ActionScriptDefault_Text">pushV3D</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">vs</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span>,<span class="ActionScriptDefault_Text">uvs</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">])</span>;
+         <span class="ActionScriptBracket/Brace">}</span>
+         <span class="ActionScriptDefault_Text">_faceLengths</span>.<span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">q</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">pushV3D</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">v</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Vector3D</span>,<span class="ActionScriptDefault_Text">uv</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+         <span class="ActionScriptDefault_Text">_vertices</span>.<span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">v</span>.<span class="ActionScriptDefault_Text">x</span>,<span class="ActionScriptDefault_Text">v</span>.<span class="ActionScriptDefault_Text">y</span>,<span class="ActionScriptDefault_Text">v</span>.<span class="ActionScriptDefault_Text">z</span><span class="ActionScriptBracket/Brace">)</span>;
+         <span class="ActionScriptDefault_Text">_uvtData</span>.<span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">uv</span>.<span class="ActionScriptDefault_Text">x</span>,<span class="ActionScriptDefault_Text">uv</span>.<span class="ActionScriptDefault_Text">y</span>,1<span class="ActionScriptBracket/Brace">)</span>;
+         <span class="ActionScriptDefault_Text">_indices</span>.<span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span>.<span class="ActionScriptDefault_Text">_indicesTotal</span><span class="ActionScriptOperator">++</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+         * Duplicates the mesh properties to another &lt;code&gt;Mesh&lt;/code&gt; object.
+         * 
+         * @param    object    [optional]    The new object instance into which all properties are copied. The default is &lt;code&gt;Mesh&lt;/code&gt;.
+         * @return                        The new object instance with duplicated properties applied.
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">override</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">clone</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">object</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Object3D</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Object3D</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">mesh</span><span class="ActionScriptOperator">:</span><span class="ActionScriptDefault_Text">Mesh</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">object</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">Mesh</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Mesh</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptReserved">super</span>.<span class="ActionScriptDefault_Text">clone</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">mesh</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">type</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">type</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">material</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">material</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">sortType</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">sortType</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">bothsides</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">bothsides</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">_vertices</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">vertices</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">_uvtData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_uvtData</span>.<span class="ActionScriptDefault_Text">concat</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">_faceMaterials</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceMaterials</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">_indices</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_indices</span>.<span class="ActionScriptDefault_Text">concat</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">_faceLengths</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_faceLengths</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">buildFaces</span><span class="ActionScriptBracket/Brace">()</span>;
+            <span class="ActionScriptDefault_Text">mesh</span>.<span class="ActionScriptDefault_Text">buildMaterials</span><span class="ActionScriptBracket/Brace">()</span>;
+            
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">mesh</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span>
+</pre></body>
+</html>

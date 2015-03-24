@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Box2DFlashAS3 v2.1a HelloWorld - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Click the image above for the demo.
+Click here or right click on the demo to view the source code. Inspired by this clip of Box2D running on Android &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2010/08/18/box2dflashas3-v2-1a-helloworld/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Box2DFlashAS3 v2.1a HelloWorld</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-18T14:34:00-04:00" pubdate data-updated="true">Aug 18<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p style="text-align: center;"><a href="/demos/box2d/box2d.swf" class="fancybox.iframe"><img title="box2d" src="/images/box2d.jpg" alt="" width="516" height="487" /></a></p>
+
+
+<p>Click the image above for the demo.
+<a href="/demos/box2d/srcview/index.html" target="_self">Click here</a> or right click on the demo to view the source code.</p>
+
+<p>Inspired by <a href="http://www.youtube.com/watch?v=mnyynpq-TXo" target="_blank">this clip</a> of Box2D running on Android, I decided to dive into this 2D physics engine I have heard so much about.  While the version of Box2D I used is the AS3 version called <a href="http://www.box2dflash.org/" target="_blank">Box2DFlashAS3</a>, the <a href="http://www.box2d.org/" target="_blank">original version</a> is written in C++.  Basically it very simply lets you apply 2D physics to your objects, or &#8220;bodies,&#8221; in AS3.</p>
+
+<p>Most of the examples and tutorials I saw were lacking 2 things:</p>
+
+<ol>
+    <li> A way to apply sprites to my &#8220;bodies&#8221; without the use of a flash project (FLA) file.</li>
+    <li>Code that was compatible with the latest version of Box2DFlashAS3, v2.1a at the time of this post.</li>
+</ol>
+
+
+<p>So to resolve that situation, or to account for my search engine deficiency, I present the HelloWorld example from the Box2DFlashAS3 2.1a distribution modified to be pure AS3:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="kd">package</span> <span class="o">{</span>
+</span><span class='line'>  <span class="cm">/*</span>
+</span><span class='line'><span class="cm">   * Tony Lukasavage - SavageLook.com - 8/18/2010</span>
+</span><span class='line'><span class="cm">   * Box2DFlashAS3 2.1a HelloWorld example, minus the need for an accompanying FLA</span>
+</span><span class='line'><span class="cm">   *</span>
+</span><span class='line'><span class="cm">   * This the basic Box2DFlashAS3 HelloWorld.as file from the source distribution</span>
+</span><span class='line'><span class="cm">   * with some adjustments made so that you do not need an FLA file to compile and</span>
+</span><span class='line'><span class="cm">   * run the code.  A simple bonus for us pure AS3 guys.  Also a few minor modifications</span>
+</span><span class='line'><span class="cm">   * are made to account for changes between version 2.0 and 2.1, like adding a type</span>
+</span><span class='line'><span class="cm">   * for body definitions.  Finally, I threw in an click handler to toggle between</span>
+</span><span class='line'><span class="cm">   * normal and debug drawing.</span>
+</span><span class='line'><span class="cm">   *</span>
+</span><span class='line'><span class="cm">   */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">Box2D.Collision.</span><span class="o">*;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">Box2D.Collision.Shapes.</span><span class="o">*;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">Box2D.Common.Math.</span><span class="o">*;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">Box2D.Dynamics.</span><span class="o">*;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">__AS3__.vec.Vector</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">com.adobe.viewsource.ViewSource</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.display.Sprite</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.events.Event</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.events.MouseEvent</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.geom.Matrix</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.text.TextField</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">flash.text.TextFormat</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">[</span><span class="n">SWF</span><span class="o">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;800&quot;</span><span class="o">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;600&quot;</span><span class="o">,</span> <span class="n">frameRate</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="o">)]</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">class</span> <span class="n">box2d</span> <span class="kd">extends</span> <span class="n">Sprite</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_world</span><span class="p">:</span><span class="kt">b2World</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_velocityIterations</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_positionIterations</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_timeStep</span><span class="p">:</span><span class="kt">Number</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">30.0</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_showDebug</span><span class="p">:</span><span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_debugSprite</span><span class="p">:</span><span class="kt">Sprite</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">var</span> <span class="n">_bodySprites</span><span class="p">:</span><span class="kt">Vector</span><span class="o">.</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vector</span><span class="o">.();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Box2D uses meters for measurement, AS3 uses pixels.  1 meter = 30 pixels</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">var</span> <span class="n">_worldRatio</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">30</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">function </span><span class="nf">box2d</span><span class="o">()</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// Add event for main loop</span>
+</span><span class='line'>      <span class="n">addEventListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">ENTER_FRAME</span><span class="o">,</span> <span class="n">Update</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">stage</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">MouseEvent</span><span class="o">.</span><span class="na">CLICK</span><span class="o">,</span> <span class="n">onClick</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// add background gradient</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">bg</span><span class="p">:</span><span class="kt">Sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">matrix</span><span class="p">:</span><span class="kt">Matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Matrix</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">matrix</span><span class="o">.</span><span class="na">createGradientBox</span><span class="o">(</span><span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span><span class="o">,</span> <span class="n">stage</span><span class="o">.</span><span class="na">stageHeight</span><span class="o">,</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">bg</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">beginGradientFill</span><span class="o">(</span><span class="s2">&quot;linear&quot;</span><span class="o">,</span> <span class="o">[</span><span class="mh">0x9999ff</span><span class="o">,</span> <span class="mh">0xffffff</span><span class="o">],</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">],</span> <span class="o">[</span><span class="mi">0</span><span class="o">,</span> <span class="mi">255</span><span class="o">],</span> <span class="n">matrix</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">bg</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">drawRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span><span class="o">,</span> <span class="n">stage</span><span class="o">.</span><span class="na">stageHeight</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">bg</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">endFill</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">addChild</span><span class="o">(</span><span class="n">bg</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Define the gravity vector</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">gravity</span><span class="p">:</span><span class="kt">b2Vec2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2Vec2</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span> <span class="mf">10.0</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Allow bodies to sleep</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">doSleep</span><span class="p">:</span><span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Construct a world object</span>
+</span><span class='line'>      <span class="n">_world</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2World</span><span class="o">(</span><span class="n">gravity</span><span class="o">,</span> <span class="n">doSleep</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// set debug draw</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">debugDraw</span><span class="p">:</span><span class="kt">b2DebugDraw</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2DebugDraw</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">_debugSprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">addChild</span><span class="o">(</span><span class="n">_debugSprite</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">debugDraw</span><span class="o">.</span><span class="na">SetSprite</span><span class="o">(</span><span class="n">_debugSprite</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">debugDraw</span><span class="o">.</span><span class="na">SetDrawScale</span><span class="o">(</span><span class="n">_worldRatio</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">debugDraw</span><span class="o">.</span><span class="na">SetFillAlpha</span><span class="o">(</span><span class="mf">0.5</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">debugDraw</span><span class="o">.</span><span class="na">SetLineThickness</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">debugDraw</span><span class="o">.</span><span class="na">SetAlpha</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">debugDraw</span><span class="o">.</span><span class="na">SetFlags</span><span class="o">(</span><span class="n">b2DebugDraw</span><span class="o">.</span><span class="na">e_shapeBit</span> <span class="o">|</span> <span class="n">b2DebugDraw</span><span class="o">.</span><span class="na">e_jointBit</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">_world</span><span class="o">.</span><span class="na">SetDebugDraw</span><span class="o">(</span><span class="n">debugDraw</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Vars used to create bodies</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">body</span><span class="p">:</span><span class="kt">b2Body</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">bodyDef</span><span class="p">:</span><span class="kt">b2BodyDef</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">boxShape</span><span class="p">:</span><span class="kt">b2PolygonShape</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">circleShape</span><span class="p">:</span><span class="kt">b2CircleShape</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Adding sprite variable for dynamically creating body userData</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">sprite</span><span class="p">:</span><span class="kt">Sprite</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">groundHeight</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">60</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">lineStyle</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">beginFill</span><span class="o">(</span><span class="mh">0x444444</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">drawRect</span><span class="o">(-</span><span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span><span class="sr">/2, -groundHeight/</span><span class="mi">2</span><span class="o">,</span> <span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span><span class="o">,</span> <span class="n">groundHeight</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">endFill</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">bodyDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2BodyDef</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">bodyDef</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">b2Body</span><span class="o">.</span><span class="na">b2_staticBody</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">bodyDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">Set</span><span class="o">(</span><span class="n">stage</span><span class="o">.</span><span class="na">stageWidth</span> <span class="sr">/ _worldRatio / 2, (stage.stageHeight - sprite.height/2) /</span> <span class="n">_worldRatio</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">bodyDef</span><span class="o">.</span><span class="na">userData</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">addChild</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">.</span><span class="na">userData</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">boxShape</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2PolygonShape</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">boxShape</span><span class="o">.</span><span class="na">SetAsBox</span><span class="o">(</span><span class="n">sprite</span><span class="o">.</span><span class="na">width</span><span class="sr">/_worldRatio/2, sprite.height/_worldRatio/</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">fixtureDef</span><span class="p">:</span><span class="kt">b2FixtureDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2FixtureDef</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">fixtureDef</span><span class="o">.</span><span class="na">shape</span> <span class="o">=</span> <span class="n">boxShape</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">fixtureDef</span><span class="o">.</span><span class="na">friction</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">fixtureDef</span><span class="o">.</span><span class="na">density</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// static bodies require zero density</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">body</span> <span class="o">=</span> <span class="n">_world</span><span class="o">.</span><span class="na">CreateBody</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">body</span><span class="o">.</span><span class="na">CreateFixture</span><span class="o">(</span><span class="n">fixtureDef</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Add some objects</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kd">var</span> <span class="n">i</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// create generic body definition</span>
+</span><span class='line'>        <span class="n">bodyDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2BodyDef</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">bodyDef</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">b2Body</span><span class="o">.</span><span class="na">b2_dynamicBody</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">bodyDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">5</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">bodyDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="n">rX</span><span class="p">:</span><span class="kt">Number</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="n">rY</span><span class="p">:</span><span class="kt">Number</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="n">spriteX</span><span class="p">:</span><span class="kt">Number</span> <span class="o">=</span> <span class="n">rX</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="n">spriteY</span><span class="p">:</span><span class="kt">Number</span> <span class="o">=</span> <span class="n">rY</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Box</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">lineStyle</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">beginFill</span><span class="o">(</span><span class="mh">0xff6666</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">drawRect</span><span class="o">(-</span><span class="n">spriteX</span><span class="sr">/2, -spriteY/</span><span class="mi">2</span><span class="o">,</span> <span class="n">spriteX</span><span class="o">,</span> <span class="n">spriteY</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">endFill</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">bodyDef</span><span class="o">.</span><span class="na">userData</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">boxShape</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2PolygonShape</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">boxShape</span><span class="o">.</span><span class="na">SetAsBox</span><span class="o">(</span><span class="n">rX</span><span class="o">,</span> <span class="n">rY</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">shape</span> <span class="o">=</span> <span class="n">boxShape</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">density</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">friction</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">restitution</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">body</span> <span class="o">=</span> <span class="n">_world</span><span class="o">.</span><span class="na">CreateBody</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">body</span><span class="o">.</span><span class="na">CreateFixture</span><span class="o">(</span><span class="n">fixtureDef</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="c1">// Circle</span>
+</span><span class='line'>        <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">Sprite</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">lineStyle</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">beginFill</span><span class="o">(</span><span class="mh">0x44ff44</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">drawCircle</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">spriteX</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">endFill</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">bodyDef</span><span class="o">.</span><span class="na">userData</span> <span class="o">=</span> <span class="n">sprite</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">circleShape</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2CircleShape</span><span class="o">(</span><span class="n">rX</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">shape</span> <span class="o">=</span> <span class="n">circleShape</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">density</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">friction</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">fixtureDef</span><span class="o">.</span><span class="na">restitution</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">body</span> <span class="o">=</span> <span class="n">_world</span><span class="o">.</span><span class="na">CreateBody</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">body</span><span class="o">.</span><span class="na">CreateFixture</span><span class="o">(</span><span class="n">fixtureDef</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">_bodySprites</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">.</span><span class="na">userData</span> <span class="k">as</span> <span class="n">Sprite</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">addChild</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">.</span><span class="na">userData</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// enable view source</span>
+</span><span class='line'>      <span class="n">ViewSource</span><span class="o">.</span><span class="na">addMenuItem</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s2">&quot;srcview/index.html&quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="n">text</span><span class="p">:</span><span class="kt">TextField</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">TextField</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">text</span><span class="o">.</span><span class="na">text</span> <span class="o">=</span> <span class="s2">&quot;Right click to view source&quot;</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">text</span><span class="o">.</span><span class="na">setTextFormat</span><span class="o">(</span><span class="k">new</span> <span class="kt">TextFormat</span><span class="o">(</span><span class="s2">&quot;arial&quot;</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">text</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">text</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">text</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="mi">200</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">addChild</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">function </span><span class="nf">onClick</span><span class="o">(</span><span class="n">e</span><span class="o">:</span><span class="kt">MouseEvent</span><span class="o">):</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">_showDebug</span> <span class="o">=</span> <span class="o">!</span><span class="n">_showDebug</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(!</span><span class="n">_showDebug</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">_debugSprite</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">for</span> <span class="k">each</span> <span class="o">(</span><span class="kd">var</span> <span class="n">sprite</span><span class="p">:</span><span class="kt">Sprite</span> <span class="k">in</span> <span class="n">_bodySprites</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">sprite</span><span class="o">.</span><span class="na">visible</span> <span class="o">=</span> <span class="o">!</span><span class="n">_showDebug</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">function </span><span class="nf">Update</span><span class="o">(</span><span class="n">e</span><span class="o">:</span><span class="kt">Event</span><span class="o">):</span><span class="kt">void</span><span class="o">{</span>
+</span><span class='line'>      <span class="n">_world</span><span class="o">.</span><span class="na">Step</span><span class="o">(</span><span class="n">_timeStep</span><span class="o">,</span> <span class="n">_velocityIterations</span><span class="o">,</span> <span class="n">_positionIterations</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">_showDebug</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">_world</span><span class="o">.</span><span class="na">DrawDebugData</span><span class="o">();</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// Go through body list and update sprite positions/rotations</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kd">var</span> <span class="n">bb</span><span class="p">:</span><span class="kt">b2Body</span> <span class="o">=</span> <span class="n">_world</span><span class="o">.</span><span class="na">GetBodyList</span><span class="o">();</span> <span class="n">bb</span><span class="o">;</span> <span class="n">bb</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="na">GetNext</span><span class="o">()){</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">bb</span><span class="o">.</span><span class="na">GetUserData</span><span class="o">()</span> <span class="k">is</span> <span class="n">Sprite</span><span class="o">){</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="n">sprite</span><span class="p">:</span><span class="kt">Sprite</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="na">GetUserData</span><span class="o">()</span> <span class="k">as</span> <span class="n">Sprite</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="na">GetPosition</span><span class="o">().</span><span class="n">x</span> <span class="o">*</span> <span class="mi">30</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="na">GetPosition</span><span class="o">().</span><span class="n">y</span> <span class="o">*</span> <span class="mi">30</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">sprite</span><span class="o">.</span><span class="na">rotation</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="na">GetAngle</span><span class="o">()</span> <span class="o">*</span> <span class="o">(</span><span class="mi">180</span><span class="o">/</span><span class="n">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Very cool stuff that adds lots of possibilities to your Flash projects.  I can&#8217;t wait to start playing with the more complex aspects like joints, buoyancy and breakable bodies.  More intensely awesome demos sure to follow.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-18T14:34:00-04:00" pubdate data-updated="true">Aug 18<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/actionscript3/'>actionscript3</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/as3/'>as3</a>, <a class='category' href='/blog/categories/box2d/'>box2d</a>, <a class='category' href='/blog/categories/box2dflashas3/'>box2dflashas3</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/08/17/shadowbox-js-for-wordpress/" title="Previous Post: ShadowBox JS for Wordpress">&laquo; ShadowBox JS for Wordpress</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/08/23/adobe-alchemy/" title="Next Post: Adobe Alchemy">Adobe Alchemy &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

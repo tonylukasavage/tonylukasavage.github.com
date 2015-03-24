@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Titanium Developer Tips - Tony Lukasavage</title>
+  <meta name="author" content="Tony Lukasavage">
+
+  
+  <meta name="description" content="Overview First I want to start by pointing out that this Titanium Developer info will likely be moot in a short amount of time.  Titanium &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tonylukasavage.github.com/blog/2011/02/17/titanium-developer-tips/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tony Lukasavage" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+<style type="text/css">
+ul#grid {
+  padding: 0;
+  list-style: none;
+  margin: 20px auto 0;
+  width: 100%;  
+  }
+
+#grid li {
+  float: left;
+  padding: 0;
+  margin: 0 5px 10px 5px;
+  } 
+
+#grid li a {
+  display: block;
+  }
+
+#grid li img {
+  background-color: white;
+  padding: 7px; margin: 0;
+  border: 1px dotted #58595b;
+  width: 140px;
+  height: 120px;
+  }
+</style>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39965828-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup id="theHeader">
+  <h1><a href="/">Tony Lukasavage</a></h1>
+  
+    <h2>Caffeine. Whiskey. Code. Mostly the last one.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tonylukasavage.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Titanium Developer Tips</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T11:46:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1><span style="font-weight: bold; font-size: 16px;">Overview</span></h1>
+
+
+<p>First I want to start by pointing out that this <a href="http://developer.appcelerator.com/" target="_blank">Titanium Developer</a> info will likely be moot in a short amount of time.  <a href="http://www.aptana.com/" target="_blank">Titanium Appcelerator has recently acquired Aptana</a> and is likely to release an IDE with deployment integrated, thus making Titanium Developer obsolete.  It should be tremendous for the workflow, but the beta isn&#8217;t due until March and there&#8217;s no certainty as to when it will be an official release.  So for the time being, let&#8217;s make due with Titanium Developer.</p>
+
+<p>This isn&#8217;t a post on how to use Titanium Developer or develop apps with it.  For that information please reference Titanium&#8217;s own documentation:</p>
+
+<ul>
+    <li><a href="http://guides.appcelerator.com/en/getting_started.html" target="_blank">Getting Started with Appcelerator</a></li>
+    <li><a href="http://guides.appcelerator.com/en/app_structure.html" target="_blank">Appcelerator Application Project Structure</a></li>
+    <li><a href="http://developer.appcelerator.com/doc/mobile/guides" target="_blank">Appcelerator Programming Guides</a></li>
+</ul>
+
+
+<p>Also remember that <span style="color: #ff0000;">Titanium Developer is not an IDE</span>, it is just a project and deployment platform.  For creating and editing content for your apps, you&#8217;ll need your own IDE.  I&#8217;d suggest one that specializes in HTML, CSS, and Javascript.  <a href="http://macromates.com/" target="_blank">TextMate</a> seems to be the weapon of choice for Mac based Appcelerator developers (among others) and there&#8217;s a bunch out there for other OSes, like <a href="http://www.aptana.com/" target="_blank">Aptana</a>, <a href="http://www.jetbrains.com/webstorm/" target="_blank">WebStorm</a>, <a href="http://notepad-plus-plus.org/" target="_blank">Notepad++</a>, <a href="http://www.jedit.org/" target="_blank">jEdit</a>, and many more.  Obviously I&#8217;d suggest Aptana as that&#8217;s the new IDE of choice for Appcelerator.</p>
+
+<p>OK, enough back story, here&#8217;s the things to consider when using Titanium Developer and some issues you may run into.  For reference, I was using Windows XP for Android development when most of this was uncovered.  I believe Appcelerator has a more natural focus on iOS workflow, so other Windows/Android developers will benefit most from this.   <strong>HUGE</strong> thanks goes out to Tony Guntharp and Chad Auld (<a href="http://twitter.com/#!/fusion94" target="_blank">@fusion94</a> and <a href="http://twitter.com/#!/chadauld" target="_blank">@chadauld</a> respectively).  Without their help I probably would have quit Appcelerator before I got started.</p>
+
+<h1><span style="font-weight: bold; font-size: 16px;">Guide &amp; Troubleshooting</span></h1>
+
+
+<ul>
+    <li>First thing, be sure to follow the <a href="http://guides.appcelerator.com/en/getting_started.html" target="_blank">&#8220;Getting Started&#8221;</a> guide completely.  Most issues that arise with Titanium Developer are a direct result of not doing one of the things specifically mentioned in this guide.</li>
+    <li>Make sure you installed the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java JDK</a> (not just JRE) and that you add the JDK&#8217;s bin directory to your PATH environment variable.  If you don&#8217;t you are liable to run into some weird behavior in Titanium Developer including:
+<ul>
+    <li>[ERROR] JDK version &#8216;javac&#8217; is not recognized as an internal or external command</li>
+    <li>Your <strong>Run Emulator</strong> and <strong>Run on Device</strong> tabs may just appear as blank, grayed out panels</li>
+    <li>Other errors relating to compiling your application</li>
+</ul>
+</li>
+    <li>Here&#8217;s some things you <strong>MUST</strong> have if you want the <a href="https://github.com/appcelerator/KitchenSink" target="_blank">Kitchen Sink</a> app to run on Android
+<ul>
+    <li><strong>Latest Titanium Mobile SDK</strong> (1.5.1 at the time of this post): you can download and install it through the status updates in the upper right corner of Titanium Developer
+</li>
+    <li><strong>Kitchen Sink source code</strong>: Pull the source from Github for Kitchen Sink, don&#8217;t use the Downloads section.  The Kitchen Sink installed but would force close immediately after the splash screen finished on my Droid X when using the 1.5.0-update2 download.  You can use your favorite git client (like <a href="http://code.google.com/p/tortoisegit/" target="_blank">TortoiseGIT</a> for me) or just download the source as a <a href="https://github.com/appcelerator/KitchenSink/zipball/master" target="_blank">ZIP</a> or <a href="https://github.com/appcelerator/KitchenSink/tarball/master" target="_blank">TAR.GZ</a>.</li>
+    <li><strong>Google APIs by Google Inc., Android API</strong>: You can download and install this using the Android SDK and AVD Manager that comes with your Android SDK installation.  It is available through <strong>Available Packages -> Third Party Add-ons -> Google Inc. add-ons
+
+</strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong><strong> </strong></li>
+</ul>
+</li>
+    <li>Android 1.5 is no longer supported and 1.6 is going to be end-of-lifed for Appcelerator soon.  They also have no yet dug into Android Honeycomb.</li>
+    <li>Titanium Developer projects can have problems deploying caused by artifacts of old builds, old Titanium SDK versions, or iOS/Android SDK changes.  Here&#8217;s a small list of brute force troubleshooting to try and get past these issues:
+<ul>
+    <li><strong>Uninstall apps before reinstalling</strong>: This isn&#8217;t often necessary, but it is a good first measure to take when getting deployment or execution issues with an Appcelerator app.  Think of it like your sys admin telling you to reboot before he digs into the real troubleshooting.</li>
+    <li><strong>Restart Titanium Developer</strong>: see above</li>
+    <li><strong>Try deleting and re-importing your project</strong>: This will ensure that all of your profile and project specific settings are being properly applied to your project.</li>
+    <li><strong>Create a new project and copy your existing project&#8217;s content into it</strong>: Yeah, it ain&#8217;t pretty, but if the above doesn&#8217;t work this might help.  A fresh project will sometimes fix any corrupted project settings.</li>
+    <li><strong>Delete the {PROJECT_PATH}/build/android and {PROJECT_PATH}/build/iphone folder</strong>: I&#8217;ve heard this advice but had no luck with it myself.  In fact I ran into even more errors when trying to emulate or run my project on a device.  Some, though, claim it will cause a full rebuild of your project in Titanium Developer and that it can often fix any build or deployment issues.  <span style="color: #ff0000;">Try at your own risk</span>.  I would make a backup of the directories you intend to delete.</li>
+</ul>
+</li>
+</ul>
+
+
+<h1><span style="font-weight: bold; font-size: 16px;">Summary</span></h1>
+
+
+<p>While it may a bit of a bumpy road getting started, I have a feeling the investment in time will be worth it in the end.  If I was a patient person I would just wait until the new IDE beta came out and start working with he new, sanctioned workflow.  But I&#8217;m not a patient person.  Cross platform mobile development, with access to native components and near native performance, is just too cool to wait for.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Lukasavage</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T11:46:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/archive/'>archive</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/titanium/'>titanium</a>, <a class='category' href='/blog/categories/titanium-developer/'>titanium developer</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/02/09/i-m-a-titanium-titan-/" title="Previous Post: I'm a Titanium Titan!">&laquo; I'm a Titanium Titan!</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/02/21/from-air-for-android-to-blackberry-playbook-in-seconds/" title="Next Post: From Air for Android to Blackberry Playbook in seconds">From Air for Android to Blackberry Playbook in seconds &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/39ebccd822b6fb533e004ee722c38e9d?s=150" alt="Gravatar of Tony Lukasavage " title="Gravatar of Tony Lukasavage" />
+	</span>
+</section>
+
+
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tonylukasavage" class="twitter-follow-button" data-show-count="true">Follow @tonylukasavage</a>
+  
+
+<link href="/stylesheets/github-buttons.css" media="screen, projection" rel="stylesheet" type="text/css">
+<span class="github-btn" data-user="tonylukasavage" data-type="follow" data-count="1"></span>
+<script type="text/javascript" src="/javascripts/github-buttons.js"></script><style type="text/css">
+.gittip-img {
+	background-image: url(/images/gittip.png);
+	background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: transparent;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 3px;
+}
+</style>
+<p><span class="gittip-img"></span>
+<script data-gittip-username="Tony Lukasavage"
+        data-gittip-widget="button"
+        src="//gttp.co/v1.js"></script></p><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/24/good-bye-appcelerator/">Good-bye Appcelerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/24/optional-callbacks-for-flexible-apis-in-javascript/">Callback Spotting: Flexible APIs in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/21/appcelerator-api-builder-demo/">Appcelerator API Builder Demo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/29/custom-assertions-in-should-dot-js/">Custom assertions in should.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/24/f-ck-you/">F*ck You, Show Me</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tonylukasavage">@tonylukasavage</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tonylukasavage',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+ <section>
+     <h1>Twitter</h1>
+     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/tonylukasavage" data-widget-id="422932897931083776">Tweets by @tonylukasavage</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+ </section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Tony Lukasavage -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<!-- Add github repo widget -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+
+<!-- Add fancyBox main JS file -->
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- fire up fancybox -->
+<script type="text/javascript">
+(function($) {
+	$(function() {
+		$('[class*=fancybox]').fancybox();
+	});
+})(jQuery);
+</script>
+
+</body>
+</html>

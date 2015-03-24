@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wamp | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/wamp/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Debugging on IntelliJ IDEA 10 with XDebug]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug/"/>
+    <updated>2011-01-05T08:33:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/05/php-debugging-on-intellij-idea-10-with-xdebug</id>
+    <content type="html"><![CDATA[<h2>The Overview</h2>
+
+<p>So after being told by my peers that print_r() was adequate, I embarked on a quest to get true PHP debugging working in a reputable IDE.  Recently I've heard nothing but good things about <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA 10</a>, so I decided that would be my test subject.  Don't let the "J" fool you, while Java is its focus, this bad boy handles an array of languages and markups, including ActionScript, PHP, Groovy, Scala, Python/Jython, Ruby/JRuby, Clojure, Javascript, and HTML.</p>
+
+<p><span style="color:#ff0000;">If you are a serious PHP developer and have not given debugging a fair chance, or a chance at all, you are killing yourself</span>.  So let's do this thing from the ground up.  WAMP, XDebug, IntelliJ, and magic.  Follow these steps (for Windows) to reach my recent state of elightenment and PHP debugging bliss.</p>
+
+<p>By the way, I almost gave up on IntelliJ entirely due to problems with debugging until <a href="http://www.kilometer0.com" target="_blank">Alex Petrescu</a> (<a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>) talked me down from the edge.  I'm very grateful as IntelliJ is proving to be an excellent IDE.</p>
+
+<h2>Step By Step</h2>
+
+<ol>
+<li>Download and install <a href="http://www.wampserver.com/en/" target="_blank">WAMP</a> (I installed to <strong>C:\wamp</strong>)</li>
+<li>After installing WAMP, create a file named <strong>C:\wamp\www\info.php</strong> that contains the following code:
+
+``` php
+<?php phpinfo(); ?>
+```
+
+<li>Open the <a href="http://localhost/info.php" target="_blank">http://localhost/info.php</a> in a browser to get your PHP configuration.
+</li><li>
+Now view the source of the page in your browser.  Copy the entire contents of the source to your clipboard.
+</li>
+<li>Goto the <a href="http://www.xdebug.org/find-binary.php" target="_blank">XDebug Tailored Installation Instructions</a> and paste your PHP configuration source into the text box then click "analyse my phpinfo() output".
+</li>
+<li>Follow the resulting instructions for adding XDebug to your PHP installation.  Once you make those changes, make sure the new section of your php.ini looks like this (as per a <strong>C:\wamp</strong> installation):
+
+``` bash
+[XDebug]
+zend_extension="<this is the path that the XDebug installation instructions gave you>"
+xdebug.remote_enable=true
+xdebug.remote_port=9000
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir="c:\wamp\logs"
+```
+
+</li>
+<li>Download and install <a href="http://www.jetbrains.com/idea/download/index.html" target="_blank">IntelliJ IDEA 10 Ultimate Edition</a> (trial).  It may not be necessary, but I included all the available extensions.</li>
+<li>Setup a basic PHP project in IntelliJ IDEA 10
+<ol style="list-style-type: upper-alpha;">
+<li>Goto <strong>File -> New Project...</strong></li>
+<li>Select <strong>Create project from scratch</strong> and click Next</li>
+<li>Enter a name for your project and select <strong>Project Module</strong> under the Select Type heading and click <strong>Next</strong></li>
+<li>Select "do not create source directory" and click <strong>Next</strong></li>
+<li>Click <strong>Finish</strong> then <strong>OK</strong> when asked about starting a project without a JDK assigned.</li>
+</ol>
+<li>Create a PHP file to test debugging</li>
+<ol style="list-style-type: upper-alpha;">
+<li>In the project panel on the left side, right click the project name and goto <strong>New -> PHP File</strong> </li>
+<li>Enter a name for your PHP file and click <strong>OK</strong></li>
+<li>In the code panel on the right, enter the following and save the file:
+
+``` php
+<?php
+$a = 0;
+?>
+```
+
+</li>
+</ol>
+<li>Click the vertical bar between the project panel and the code panel next to the following line to create a red breakpoint:
+
+``` php
+$a = 0;
+```
+
+</li>
+<li>Copy the PHP file you created in step #9 to your WAMP www directory (<strong>C:\wamp\www</strong>)</li>
+<li>Right click on the PHP file name in the project panel, then goto <strong>Debug -> filename.php on server</strong></li>
+<li>In the resulting window, click the dotted button next to the <strong>Server</strong> dropdown</li>
+<li>Setup your deployment settings
+<ol style="list-style-type: upper-alpha;">
+<li>Select <strong>Local</strong> from the access type dropdown</li>
+<li>Click the <strong>Mappings</strong> tab and under "web path on server" enter a single slash "/" to specify the WAMP root.  Click <strong>OK</strong> and then <strong>OK</strong> again to finish the configuration.</li>
+</ol>
+<li>Right click on your PHP file in the project panel again and goto "<strong>Run on server</strong>" or "<strong>Debug on server</strong>".  I've had inconsistent behavior using it, so try both if one doesn't work.</li>
+<li>If all went according to plan, a browser should open and execution should stop at your breakpoint.  If you look at your debug panel on the bottom on IntelliJ you should now see your PHP globals laid out.  Congrats, you made it!</li>
+</ol>
+
+
+<h2>The Summary</h2>
+
+<p>I know, its not exactly a walk in the park, but <span style="color:#ff0000;">its well worth the work to not have to pollute your code with copious print_r() calls</span>.  You can now have full access over your PHP as you would with any other enterprise level language and debugger.  I didn't go into any specific detail here, but I plan in the future to discuss all the ins and outs of PHP debugging in IntelliJ IDEA 10.  Its looks to be a great IDE thus far.</p>
+
+<p>If you have any questions, which is likely since I ran into some inconsistent behavior, feel free to comment and I'll try to answer back as quickly as possible.  Hopefully you'll never even need to ask.</p>
+
+<p>Happy PHP debugging!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of carousel</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="3dgallery">
+				<node label="dispersion.avi1.jpg" icon="imageIcon" url="source/3dgallery/dispersion.avi1.jpg.html"/>
+				<node label="dispersion2.avi2.jpg" icon="imageIcon" url="source/3dgallery/dispersion2.avi2.jpg.html"/>
+				<node label="jack_glass.png" icon="imageIcon" url="source/3dgallery/jack_glass.png.html"/>
+				<node label="jack_glass_with_jack.png" icon="imageIcon" url="source/3dgallery/jack_glass_with_jack.png.html"/>
+				<node label="knot.jpg" icon="imageIcon" url="source/3dgallery/knot.jpg.html"/>
+				<node label="spin.avi3.jpg" icon="imageIcon" url="source/3dgallery/spin.avi3.jpg.html"/>
+				<node label="studio.png" icon="imageIcon" url="source/3dgallery/studio.png.html"/>
+				<node label="studio2.png" icon="imageIcon" url="source/3dgallery/studio2.png.html"/>
+				<node label="valentine.png" icon="imageIcon" url="source/3dgallery/valentine.png.html"/>
+				<node label="wine_glasses.png" icon="imageIcon" url="source/3dgallery/wine_glasses.png.html"/>
+			</node>
+			<node label="AwayUIC.mxml" icon="mxmlIcon" url="source/AwayUIC.mxml.html"/>
+			<node label="CarouselGallery.as" icon="actionScriptIcon" url="source/CarouselGallery.as.html"/>
+			<node selected="true" label="sandbox.mxml" icon="mxmlAppIcon" url="source/sandbox.mxml.html"/>
+		</node>
+	</nodes>
+</index>

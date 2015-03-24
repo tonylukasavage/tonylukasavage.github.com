@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: svn | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/svn/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SVN commit that ignores unversioned files]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/06/02/svn-commit-that-ignores-unversioned-files/"/>
+    <updated>2011-06-02T14:20:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/06/02/svn-commit-that-ignores-unversioned-files</id>
+    <content type="html"><![CDATA[<h2>SVN Commit Fun</h2>
+
+<p>I know, I know, I should be using <a href="http://git-scm.com/">Git</a>.  Well, I do. I use it for everything I have under my control.  Unfortunately, like many, I still have obligations that require me to use SVN on a regular basis.  And when I roll with SVN, I roll command line.  No, its not an elitist, terminal God point of view.  I happen to like <a href="http://tortoisesvn.net/" target="_blank">TortoiseSVN</a>, but 90% of my SVN versioned work is on Linux servers.</p>
+
+<p>If you're like me, you'll find yourself frequently using this lazy command line syntax inside your project directory to catch all your changes in one commit:</p>
+
+<p><code>bash
+svn commit * -m "you should always leave a message!"
+</code></p>
+
+<p>And there's a very good chance you've run into this error, or something similar:</p>
+
+<p><code>
+svn: Commit failed (details follow):
+svn: '/path/to/unversioned_file' is not under version control
+</code></p>
+
+<p>As it turns out, there doesn't appear to be a way to ignore unversioned files in the <em>svn commit</em> options.  Now before you sart leaving comments about the <strong>svn:ignore</strong> property of the SVN configuration, realize that it only applies to the <em>svn add</em>, <em>svn import</em>, and <em>svn status</em> commands.  It has no impact on <em>svn commit</em> calls so we need another solution.</p>
+
+<p>To that end, I put together a simple one-liner shell script to perform an SVN commit on all versioned files within the current directory, ignoring all unversioned files.  Here it is:</p>
+
+<p><code>bash
+svn status | grep ^[^?] | awk '{print $2}' | xargs svn commit -m "my commit message"
+</code></p>
+
+<p>In case that makes no sense, it performs the following operations:</p>
+
+<ol>
+<li>Call <em>svn status</em> to get a full list of relevant project files.</li>
+<li>The question mark (?) in <em>svn status</em> signifies an unversioned file. The <em>grep</em> regular expression only matches files that do not start with that question mark.</li>
+<li>Use <em>awk</em> to print the second column from the <em>svn status</em> call, which is the filename.</li>
+<li>Use <em>xargs</em> to feed the filename list from <em>awk</em> to our <em>svn commit</em> call.</li>
+</ol>
+
+
+<p>You can take this all one step further (as I have) and turn it into a bash script accepting your commit message as its only argument (signified by the <strong>${1}</strong>).</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>svn status | grep ^[<sup>?]</sup> | awk '{print $2}' | xargs svn commit -m "${1}";
+```</p>
+
+<p>There you go, happy SVN'ing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Video: Google Project, Flash Builder 4, and Subclipse]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse/"/>
+    <updated>2010-09-13T07:36:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/09/13/video--google-project--flash-builder-4--and-subclipse</id>
+    <content type="html"><![CDATA[<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/DYcEm2KCSeM?fs=1&amp;hl=en_US" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/DYcEm2KCSeM?fs=1&amp;hl=en_US" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+
+<p>You'll get to see exactly how to create a Google Project Hosting Subversion repository, install the <a href="http://subclipse.tigris.org/" target="_blank">Subclipse SVN plugin</a> for Flash Builder 4, and integrate the repository into your development environment.</p>
+
+<p>You'll have to forgive the very amateur nature of the video, this was my first time using <a href="http://www.adobe.com/products/captivate/" target="_blank">Adobe Captivate</a> .  Its a pretty intuitive software, but I'm totally ignorant to the finer points of video guide creation.  I'm sure that will start to change in the near future, though, especially if people actually take the time to watch this one.</p>
+]]></content>
+  </entry>
+  
+</feed>

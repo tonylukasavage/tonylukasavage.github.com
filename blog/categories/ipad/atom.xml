@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ipad | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/ipad/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Developer's Icon &amp; Image Checklist]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist/"/>
+    <updated>2011-03-24T09:51:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/03/24/mobile-developer-s-icon--amp--image-checklist</id>
+    <content type="html"><![CDATA[<h2>Overview</h2>
+
+
+<p>If there's one thing I've learned from delving into iOS, Android, and Blackberry app development, it's that there's a lot more to creating a mobile app than just coding it.  One of the things that can catch you off guard, especially if you are devoid of design ability like me, is the amount of icons and images necessary to deploy your apps.  This becomes even more daunting when you intend to deploy to multiple platforms.</p>
+
+<p>The other concern is that it isn't always evident from the development tools how many different graphics you need to account for all scenarios.  A new iOS developer will likely be unaware that you need a 58x58 pixel icon for iPhone 4 Spotlight and Settings.  To attempt to alleviate some of this confusion, I put together these charts to detail what I know so far about the graphics required for submitting mobile apps to the various Android, iOS, and Blackberry markets.</p>
+
+<h2>Icons</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android</td>
+<td width="15%">iOS</td>
+<td width="15%">Blackberry Playbook</td>
+<td width="45%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">29x29</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone Settings and Spotlight, iPad Settings</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">36x36</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">low pixel density icon</td>
+</tr>
+<tr>
+<td class="leftHeader">48x48</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td class="notes">medium pixel density icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">50x50</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPad Spotlight. iOS will trim 1 pixel off each side and add a drop shadow, making it 48x48</td>
+</tr>
+<tr>
+<td class="leftHeader">57x57</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">58x58</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">iPhone 4 Settings and Spotlight</td>
+</tr>
+<tr>
+<td class="leftHeader">64x64</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional small custom document icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">72x72</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Android high pixel density icon, iPad icon</td>
+</tr>
+<td class="leftHeader">86x86</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">standard Playbook icon. It will trim 5 pixels off each side, making it 76x76</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">96x96</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">114x114</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">standard iPhone 4 icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">144x144</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">Potential icon size if iPad gets a high ppi screen</td>
+</tr>
+<tr>
+<td class="leftHeader">320x320</td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/warn.jpg" alt="" /></td>
+<td></td>
+<td class="notes">optional large custom document icon</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<br><br>
+
+
+
+
+<h2>Distribution Images</h2>
+
+
+<table class="compareTable" border="1" cellspacing="0" cellpadding="0" style="margin-bottom:25px;">
+<tbody>
+<tr class="topHeader odd">
+<td width="10%"></td>
+<td width="15%">Android Market</td>
+<td width="15%">Apple App Store</td>
+<td width="15%">Blackberry App World</td>
+<td width="15%">Amazon App Store</td>
+<td width="30%">Notes</td>
+</tr>
+<tr>
+<td class="leftHeader">screenshot sizes</td>
+<td>320x480, 480x800, 480x854, 1280x800</td>
+<td><strong>iPhone</strong>: 320x480, 480x320, 320x460, 480x300 <strong>iPhone 4</strong>: 640x960, 960x640 <strong>iPad</strong>: 768x1024, 1024x768, 748x1024, 1004x768</td>
+<td>640x640 or smaller</td>
+<td>480x854, 854x480</td>
+<td class="notes">required # of screenshots:
+<strong>Android</strong>: at least 2
+<strong>Apple</strong>: at least 1
+<strong>Blackberry</strong>: 1-50
+<strong>Amazon</strong>: 3-10</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">114x114</td>
+<td></td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">device icon</td>
+</tr>
+<tr>
+<td class="leftHeader">180x120</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Promotional graphic (no alpha)</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">480x480</td>
+<td></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td class="notes">Product icon that should match your 86x86 icon</td>
+</tr>
+<tr>
+<td class="leftHeader">512x512</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td class="notes">Large/High resolution product icon</td>
+</tr>
+<tr class="odd">
+<td class="leftHeader">1024x500</td>
+<td><img src="http://tonylukasavage.github.com/images/yes.gif" alt="" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="notes">Feature graphic for market</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h2>Additional Notes</h2>
+
+
+<p><strong>For Android</strong>, your 36x36, 48x48, and 72x72 pixel icons should be placed in the <strong>drawable-ldpi</strong>, <strong>drawable-mdpi</strong>, and <strong>drawable-hdpi</strong> folders of your Android project respectively.  Be sure to specify the name of the file you will be using in the <strong>android:icon</strong> attribute of the <strong><application></strong> element in your AndroidManifest.xml file.  Android also allows you to include a promotional video.</p>
+
+<p><strong>For iOS</strong> you simply need to add your appropriately sized and named icons to your <strong>Resources</strong> directory in your XCode project.  Here's a mapping of the icon sizes to the required name of the icon file. <strong>NOTE</strong>: There is purposely no extension on the 512x512 iTunesArtwork file.</p>
+
+<ul>
+<li>29x29 - Icon-Small.png</li>
+<li>50x50 - Icon-Small-50.png</li>
+<li>57x57 - Icon.png</li>
+<li>58x58 - Icon-Small@2x.png</li>
+<li>72x72 - Icon-72.png</li>
+<li>114x114 - Icon@2x.png</li>
+<li>512x512 - iTunesArtwork</li>
+</ul>
+
+
+<p><strong>For Blackberry Playbook</strong>, you need to specify the name of your 86x86 application icon in your application's <strong>blackberry-tablet.xml</strong> file.  Below is a sample of how you would set that up.</p>
+
+<p>``` xml
+<qnx></p>
+
+<pre><code>&lt;icon&gt;
+    &lt;image&gt;86x86.png&lt;/image&gt;
+&lt;/icon&gt;
+&lt;publisher&gt;My Company&lt;/publisher&gt;
+&lt;category&gt;core.games&lt;/category&gt;
+&lt;splashscreen&gt;my_splashscreen.jpg&lt;/splashscreen&gt;
+</code></pre>
+
+<p></qnx>
+```</p>
+
+<p><strong>For the Amazon App Store</strong> you can also submit promotional images of various sizes and up to 5 promotional videos.</p>
+
+<h2>Summary</h2>
+
+
+<p>So as you can see, you've got a lot to consider when it comes to presenting your mobile application to the masses.  As a developer, I'm looking for the simple solution here.  For me, the easiest thing to do was use this <a href="http://www.command-tab.com/2008/09/20/iphone-and-ipod-touch-icon-template/" target="_blank">512x512 iOS icon template</a>, create my icon, and scale it down to all the required sizes.  If you happen to be reading this post and know a better/easier workflow, please let me know.</p>
+
+<p>Here's a few references to check out to get some additional information on mobile app icons and market images:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/library/safari/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html" target="_blank">iOS Human Interface Guidelines - Custom Icon and Image Creation Guidelines</a></li>
+<li><a href="http://developer.apple.com/library/ios/#qa/qa1686/_index.html" target="_blank">App Icons on iPad and iPhone</a></li>
+<li><a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design.html" target="_blank">Android Icon Design Guidelines</a></li>
+<li><a href="http://docs.blackberry.com/en/developers/deliverables/22301/Designing_application_icons_tablet_1401556_11.jsp" target="_blank">Blackberry Playbook - Designing Application Icons</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Development: Native vs. Adobe Air]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/07/mobile-development--native-vs--adobe-air/"/>
+    <updated>2010-12-07T08:49:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/07/mobile-development--native-vs--adobe-air</id>
+    <content type="html"><![CDATA[<p><strong>DISCLAIMER</strong>: This article is about Adobe Air as an alternative to native API mobile development.  Other mobile frameworks like <a href="http://www.appcelerator.com/">Appcelerator Titanium</a> and <a href="http://www.phonegap.com/">PhoneGap</a> are not discussed.</p>
+
+<h2>The overview</h2>
+
+<p>So you want to make an iPhone app?  Wait, you want to run it on Android too?  And any tablet?  And any desktop?  And you want to be able to reuse the code base for all of them?  OK, sounds good, now let me just get the magic elves and unicorns to take care of that for you.  <span style="color:#ff0000;">It will cost you one soul</span>.  Doesn't have to be yours.</p>
+
+<p>Or... you could use the <a href="http://www.adobe.com/products/air/sdk/">Adobe Air SDK</a>.  Yeah, Adobe Air can do all that.  Check out this video from <a href="http://blogs.adobe.com/cantrell/archives/2010/04/one_application_five_screens.html">Christian Cantrell's blog</a> where he shows how a single AS3 code base can be used to create an app for the iPad, iPhone, iPod Touch, Droid, multiple desktops, and the web.  Pretty incredible stuff for indie developers:</p>
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="640" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/22vicDlzmkI?fs=1&amp;hl=en_US&amp;rel=0" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="640" height="385" src="http://www.youtube.com/v/22vicDlzmkI?fs=1&amp;hl=en_US&amp;rel=0" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+
+<p>For those wondering how you get past the Steve Jobs stranglehold on the Apple app store with an Adobe Air app, check out the Adobe Labs project <a href="http://labs.adobe.com/technologies/packagerforiphone/">"Packager for iPhone,"</a> which also works for the iPad and iPod Touch.  He also got it running on the <a href="http://blogs.adobe.com/cantrell/archives/2010/11/running-ireverse-on-the-blackberry-playbook.html">Blackberry Playbook emulator</a>.  Its also worthy to note that Adobe Air and Flash are in the pipeline for <a href="http://wmpoweruser.com/flash-coming-to-wp7-devices-confirmed-by-adobe/">Windows Phone 7</a>, <a href="http://www.intomobile.com/2010/10/25/adobe-air-sdk-blackberry-playbook-tablet-android-ios-iphone/">Blackberry phones</a>, and many more mobile devices.</p>
+
+<p>Now if I can do this with one language and one framework rather than 1/2 a dozen, <span style="color:#ff0000;">why even bother learning the Java &amp; Android SDK, Objective-C &amp; iOS, or any other combination that may arise?</span>  At some point you have to have a better answer than "to learn it."  As with any consideration like this, there's lots of pros and cons for each side of the argument.  Here's a few things to consider.</p>
+
+<h2>on the native side...</h2>
+
+<h3>People want a uniform user experience</h3>
+
+<p>And by "people" I mean "non-technical users."  And by "uniform" I mean "native."  People want all their interface components to have the same look and feel.  Its gives apps a more intuitive nature.  While <a href="http://labs.adobe.com/technologies/flexsdk_hero/">Adobe's Flex Hero</a> interface components are uniform to Adobe Air apps, they don't represent the components found on each individual mobile device.</p>
+
+<p>You can, however, use AS3 libraries like <a href="http://code.google.com/p/as3iphonecomponents/">as3iphonecomponents</a> or <a href="http://xperiments.es/blog/en/as3-android-flash-components/">android-components</a> to preserve that native experience.  As you might be able to guess by their names, they are collections of UI components for the iPhone and Android respectively that mimic those of the native system.  While this solves the uniformity problem, it adds additional complexity to your multiscreen projects thereby undoing some of the efficiency added by the Adobe Air &amp; AS3 workflow.</p>
+
+<p>Or you could just forgo the whole uniformity thing and have a designer make all your components.</p>
+
+<h3>Native code will perform better</h3>
+
+<p>This is kind of a no-brainer.  In my experience, and in talking with mobile users, responsiveness and performance is consistently better in native mobile applications.  And not just that it is consistently better, but also that it is consistent across devices.  I've heard many complaints about packaged Flash apps running crazy slow on Apple devices but fine elsewhere.  This is especially true of resource intensive apps like games.  Granted this isn't shocking news, but it is a concern for those trying to preserve the user experience.</p>
+
+<p>But this doesn't necessarily apply to everyone.  If you are building a simple data and UI component driven app, Adobe Air should be more than enough to handle that with smooth performance.  And those resource intensive apps that may not run as well as native apps now are going to be catching up soon.  Adobe is constantly increasing performance on mobile devices.  Recently they have had a strong focus on <a href="http://blogs.adobe.com/cantrell/archives/2010/10/gpu-rendering-in-adobe-air-for-android.html">GPU processing for graphics</a> and will even be releasing a full, low level 3D API called "Molehill"</a> mid 2011.  As long as they keep this pace with performance enhancements, there's no reason to believe that Flash and Air games won't be as prevalent on mobile devices as they are on the web.</p>
+
+<h3>Steve Jobs can shut you down</h3>
+
+<p>Until just a few months ago, deploying AS3 written apps to Apple devices was impossible.  This was because Apple had a restriction that no 3rd party development tools could be used to create Apple apps.  You used the Apple sanctioned workflow or you were SOL.</p>
+
+<p>Luckily Steve came to his senses and lifted the ban and Adobe re-released the <a href="http://labs.adobe.com/technologies/packagerforiphone/">iPhone packager</a>.  But it shines light on a dangerous precedent.  There's nothing to stop him from doing it again at some point in the future.  Hell, <a href="http://www.engadget.com/2010/10/20/macbook-air-all-substance-no-flash/">MacBook Airs are not even preinstalled with Flash anymore</a>.  <span style="color:#ff0000;">If Apple drops the hammer, <strong>BOOM</strong>, there goes a significant portion of your mobile audience.</span></p>
+
+<h3>Native functionality</h3>
+
+<p>Without native coding, you are at the mercy of what Adobe has currently implemented and abstracted.  Things like <a href="http://developer.android.com/guide/topics/intents/intents-filters.html">Android Intents</a> hit the cutting room floor for the sake of creating a single framework. While Adobe does a good job of either capturing all available functionality (like Geolocation, microphones, and cameras) or creating similar functionality, it will be by nature, a step behind the advances in mobile development.  This could be offset if Adobe maintains a close relationship with the major mobile players.</p>
+
+<h2>on the adobe air side...</h2>
+
+<h3>Spend more time creating, less time battling compatibility</h3>
+
+<p>This is why we're here, isn't it?  With a single language, framework, and workflow <span style="color:#ff0000;">you can create a code base that can be applied to any device that can support Adobe Air or Flash.</span>  That should be mighty intriguing to any indie developer.  You can cut your development time down to a fraction of  what it would be if you had to learn every mobile device's framework.  You are instantly building to multiple devices and broadening your target audience with almost no additional effort.</p>
+
+<h3>Flash, Air, and AS3 resources are abundant</h3>
+
+<p>The mobile APIs out there are well documented and have strong, growing communities.  Adobe's communities, though, are even more so.  They have been around a much longer time than these relatively new APIs and are chock full of expert developers, designers, examples, and code.  The sheer volume of resources available to AS3 and Flash based projects is incredible, just look at this list of available <a href="http://www.flashrealtime.com/flash-game-library-engine-list/">game engines</a> for example.  Need inspiration?  Check out one of the many open Flash sites out there, like <a href="http://wonderfl.net">wonderfl.net</a>.</p>
+
+<p>Now lets move on to the tools invovled.  Love them or hate them, Adobe knows how to make design and development software.  Expensive, yes, but worth every penny.  They have the design to development workflow that helps apps stand out down to a science.  Let's say you don't believe me, or you don't want to pay the money.  That's fine, because there's plenty of free tools for creating Flash and Air content out there too.  Check out <a href="http://www.flashdevelop.org/wikidocs/index.php?title=Main_Page">FlashDevelop</a> or <a href="http://www.fdt.powerflasher.com/">FDT</a> for great alternatives to the Adobe suite.</p>
+
+<h3>Reuse existing AS3 code</h3>
+
+<p>I know what you're thinking: Can't I also reuse existing Java in Android or Objective-C on the iPhone?  Well yes, but not to the level that you can with AS3.  Let's say you have a game that logs top scores, uses a physics engine, and has some built in menus.  Chances are that most of these things, with some serious effort, can be translated into the mobile API of your choice.  But even if that is the case, you still need to integrate that all into the mobile API's framework, which can be a daunting task.</p>
+
+<p>With Flash or Air, though, you can literally compile or package the application AS IT IS to any mobile format that Adobe supports.  <a href="http://blogs.adobe.com/air/2010/04/adobe_air_applications_for_and.html">Wanna make your old flash game a mobile app</a>?  Run it through the appropriate compiler or packager and you are good to go, no changes necessary.  Now don't get too excited.  Chances are you will need to do some scaling and appearance tweaking in descriptor files to accommodate your target devices, but the transition is much simpler than with mobile APIs and native code.</p>
+
+<h3>Flex "Hero" and flash builder "Burrito" makes things a lot easier</h3>
+
+<p>Before the MobileApplication framework added to the <a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK">Flex SDK</a>, mobile development was very possible, but still felt like a flash app instead of a mobile app.  With Flex "Hero" Adobe focused on creating a framework for multiscreen development, but also to be able to create apps that behaved like mobile apps.</p>
+
+<p>What do I mean by "behaved like mobile apps?"  Well, mobile apps typically operate as a stack of full screen views.  Gestures or menu options are used to navigate between the views.  Things like "Back", "Menu", and "Search" buttons need to be handled in a way the user expects.  The app also needs to be able to close itself when no longer in use.  These are just a few of the things that give that mobile feel that are not typical of flash apps.  These are now present in Hero.</p>
+
+<p>And how do we simply and quickly leverage this new functionality in the Flex SDK?  With <a href="http://labs.adobe.com/technologies/flashbuilder_burrito/">Flash Builder "Burrito"</a> of course!  Burrito is currently a preview release of Flash Builder that supports the creation, development, debugging, and deployment of Air for Android apps (And you can bet other devices are just around the corner).  Complete with design view and dimension emulation for the various target Android devices it supports.  I highly suggest trying it out since its now available free for a 60 day trial.</p>
+
+<h2>The Summary</h2>
+
+<p>Condensing the majority of your mobile development down to one framework can cause one indie developer to match the work of a team of native mobile developers.  But there are drawbacks.  The factors listed above point out the potential shortcomings of an abstracted Adobe Air solution.  If you are not willing to deviate from native workflows or only need to develop for one platform, perhaps the Adobe Air path is not for you.</p>
+
+<p>If you are a mobile developer, you owe it to yourself to spend some time with Adobe Air's workflow for deploying mobile applications.  <span style="color:#ff0000;">If you are an INDIE mobile developer</span>, especially with an AS3 background, you are shooting yourself in the foot productivity-wise if you are not pursuing this further.  Here's some links to help you on your way to multiscreen development bliss:</p>
+
+<p>&rarr; <a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK">Flex SDK</a>
+&rarr; <a href="http://www.adobe.com/products/air/sdk/">Air SDK</a>
+&rarr; <a href="http://opensource.adobe.com/wiki/display/flexsdk/Hero">Flex "Hero" SDK</a>
+&rarr; <a href="http://labs.adobe.com/technologies/flashbuilder_burrito/">Flash Builder "Burrito"</a>
+&rarr; <a href="http://labs.adobe.com/technologies/packagerforiphone/">Packager for iPhone</a></p>
+
+<p>If you do go down this path, let me know, I'd love to hear your experience.  If not, why not?</p>
+]]></content>
+  </entry>
+  
+</feed>

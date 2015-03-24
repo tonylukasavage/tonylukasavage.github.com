@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: my thoughts | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/my-thoughts/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[8 Steps for being an Asshole Effectively]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/01/11/8-steps-for-being-an-asshole-effectively/"/>
+    <updated>2011-01-11T09:58:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/01/11/8-steps-for-being-an-asshole-effectively</id>
+    <content type="html"><![CDATA[<h2>Exhibit A</h2>
+
+<p>I needed information on PHP debugging in IntelliJ.  After nearly tearing my hair out trying to get it to work using online references, I pleaded to the twitter community for help.  It went something like this</p>
+
+<div style="padding-left:20px; border:1px solid #000000; background-color:#dddddd;">
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: Anybody know how to get #PHP debugging working in #IntelliJ?
+<strong>* crickets *</strong>
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: I have everything else working, I just can't get #PHP debugging in #IntelliJ. Any help?
+<strong>*crickets *</strong>
+</div>
+
+
+<p>Absolutely nothing.  It was just another drop of water in a sea of questions that never get answered on Twitter.  But I've found a way to get around this.  <span style="color:#ff0000;">Be an asshole</span>.  That's right, vent your frustration, call out the project or software you are working on, swear it off for life.  This method becomes even more effective as your number of followers grows.  Again, I paraphrase:</p>
+
+<div style="padding-left:20px; border:1px solid #000000; background-color:#dddddd;">
+<a href="http://twitter.com/#!/tonylukasavage" target="_blank">@tonylukasavage</a>: Screw #IntelliJ, #PHP debugging won't work right so I'm off to try Aptana and Eclipse.
+</div>
+
+
+<p>Within minutes I had half a dozen responses back, including one who spent 20 minutes helping me troubleshoot the process (thanks <a href="http://twitter.com/#!/SeyelentEco" target="_blank">@SeyelentEco</a>).  This is not the first time this has happened.  I asked basic questions about the <a href="http://www.phonegap.com/" target="_blank">PhoneGap</a> mobile development framework on Twitter to get only one generic response.  I "rephrased" in a less complimentary manner and within minutes had 2 of their project members messaging me.</p>
+
+<p>Why does it work like this?  <span style="color:#ff0000;">The power of negative press in social media is too powerful to ignore</span>.  These projects know that positive word of mouth and community support is their life blood.  Jeopardize that and watch people flock to your aid.</p>
+
+<h2>How To</h2>
+
+<p>Here's the checklist for being an effective asshole in social media to get information you need.</p>
+
+<ol>
+<li>The bigger your audience (AKA, followers and friends), the more likely your negative comments will be worth extinguishing.</li>
+<li># and @ on Twitter go a long way.  Target the people you have a beef with and give them a chance to retort.</li>
+<li>Be specific with your negativity. "IntelliJ sucks" would have gotten me nowhere.  Direct complaints about functionality are the way to go.</li>
+<li>Don't be stupid.  A sure fire way to get ignored is screaming "BUG" when you should RTFM.</li>
+<li>Be nice once someone does help. If they have the patience to deal with your sarcasm, they deserve your respect.</li>
+<li>Be grateful. If you do have some social media clout, be sure to praise the project after and thank the person that helped.</li>
+<li>Don't be afraid to have more than one conversation about your frustration with a product, but don't flood your stream with whining.</li>
+<li>Use sparingly. Don't be the boy who cried wolf.</li>
+</ol>
+
+
+<p>And that's pretty much all it takes.  Now remember, <span style="color:#ff0000;">the idea is to bring intelligent people into a problematic situation you are having, not to be a cantankerous prick</span>.  Play the game, but be sure to shake hands afterwards, regardless of who "wins".</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Programmers: Why do we do it?]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/22/programmers--why-do-we-do-it-/"/>
+    <updated>2010-12-22T09:30:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/22/programmers--why-do-we-do-it-</id>
+    <content type="html"><![CDATA[<p>Every now and again when suffering through a movie my wife has chosen, I manage to find one thing I really like about it.  This time the form of torture was "The Kids Are All Right".  Fantastic acting, spectacularly unentertaining story.  Anyway, while I was daydreaming about code, I heard this exchange that probably went right over the heads of most viewers.  Not the viewers fault, they were probably still reeling from the rough Mark Ruffalo on Julianne Moore action in the prior scene.</p>
+
+<p><strong>Gardener</strong>: "I have allergies."
+<strong>Jules</strong>: "Then why are you a gardener?!"
+<strong>Gardener</strong>: "Because I love the flowers."</p>
+
+<p>And then they fly right past that line, but that's the one good thing I took from this movie.  <span style="color:#ff0000;">Sometimes the things we love don't make sense and can downright make us miserable</span>, but it doesn't make us love them any less.</p>
+
+<p>In my head this philosophy plays so easily into the mind of programmer.  There's so much to dislike about programming:</p>
+
+<ul>
+<li>Entire days spent chasing bugs</li>
+<li>Short deadlines</li>
+<li>Constantly having skillsets superseded by new technology</li>
+<li>No appreciation for the work it takes outside other developers</li>
+<li>The elitist nature of many in the developer community</li>
+<li>Moronic clients</li>
+<li>Late nights, long hours in front of a glowing screen</li>
+<li>The constant inkling that some 14 year Japanese kid already did this better than you</li>
+<li>The lottery-esque likelihood of independent success</li>
+</ul>
+
+
+<p>And that's just a few.  I'm sure I'll hear a few more in the comments.</p>
+
+<p>Then why do we do it?  What is there to love about programming?  What is it about crafting together mountains of syntax that makes us come back to it every day?  I know for most of us there's a paycheck attached to it, but for plenty of us that's not the root.</p>
+
+<p>I may be getting too romantic even for my own tastes, but I think its the fact that <span style="color:#ff0000;">those who truly love programming see it as an art form</span>.  Its not just a technical pursuit, but one that allows the leveraging of one's unique talent and views.  You bring a form of personal expression into your work.  You invest yourself physically and mentally in what you do.  You suffer and toil, using code as your medium, just as other artists craft with paint or stone.  You have a personal association and pride with its creation.  <span style="color:#ff0000;">The code and its results represent you</span>.</p>
+
+<p>What do you think?  Is there really a right-brain satisfaction achieved through a love of programming.  Is it more than ones and zeros doing an assigned task?  I think so.  Otherwise, why bother?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Haters Gonna Hate: The Psyche of the Tech Zealot]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/12/13/haters-gonna-hate--the-psyche-of-the-tech-zealot/"/>
+    <updated>2010-12-13T08:43:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/12/13/haters-gonna-hate--the-psyche-of-the-tech-zealot</id>
+    <content type="html"><![CDATA[<p>Actual comments to a <a href="http://www.reddit.com/r/programming/comments/eb648/adobe_molehill_3d_api_demo_video_collection/">reddit post</a> I made regarding the Adobe Molehill 3D API</a>:</p>
+
+<p><em>"Since Adobe's making it, will it use 3x the memory and be 10x slower than webgl?"
+"Molehill? If it looks like a shitpile...."
+"HTML5 and CSS3 already do that way better."
+"wtf... games are written in C++ or C"</em></p>
+
+<p>Tech zealots, they are everywhere, particularly on discussion forums where they can make their views tactlessly clear. They have holed up in one camp and anyone using anything but their weapon of choice is clearly a moron. I'm not talking about open minded professionals with conflicting views, just those people highlighted by the pearls of wisdom above.</p>
+
+<p>But why? Why would someone be so vehemently opposed to technologies they obviously have only a stereotyped or passing knowledge of? <span style="color: #ff0000;">Insecurity of course</span>, but more specifically:</p>
+
+<h3>Lack of Skill and/or Intelligence</h3>
+
+<p>This is the most common root cause of mindless scathing comments on technology.  <span style="color:#ff0000;">The purveyor of bullshit is not smart</span> or motivated enough to speak intelligently on more than one technology topic, so all others aren't worth discussing.  His mind cannot be changed, as this would require a level of decision making and logic that is beyond him.</p>
+
+<p>This person is the manifestation of why the "ignore" function exists on forums and networks.</p>
+
+<h3>The one hit wonder</h3>
+
+<p><span style="color:#ff0000;">When <insert tech here> is your hammer, everything looks like a nail</span>.  Aside from the true idiots mentioned above, these are the second most prevalent zealots.  They have hitched their wagon to one technology and are going to ride it til the wheels fall off... and maybe even after that.  And guess what?  You need to agree that it was the right choice.</p>
+
+<p>The best way for a one hit wonder to keep himself relevant and in demand is by increasing the numbers of his clan.  Convince others that his tech is the holy grail of software development.  He will find any opportunity to insert the technology he knows well into a situation, regardless of how inappropriate it may be, and cite it as the "right" solution.</p>
+
+<p>I've had a small, basic website project in a PHP shop be diagnosed by a OHW as needing a C++ web framework.  I've seen web servers created in Perl (<a href="http://sourceforge.net/projects/lwpwserver/">OK, that was me</a>).  The point is, add more tools to your toolbox or run the risk that your hammer starts collecting dust.</p>
+
+<h3>Lack of experience, or just one bad one</h3>
+
+<p>You know the type, the person who used Actionscript once 6 years ago and hinges his beliefs of Flash, Air, and any Adobe product on that experience.  They cite shortcomings and problems that no longer exist.  They perceive any former weakness as an inevitability that the technology in question will always be a total failure.  <span style="color: #ff0000;">Windows ME sucked so there's no sense in trying Windows 7, right?</span></p>
+
+<p>But this person is not beyond help.  As easily as they dismissed the language, there is a chance they will applaud it in the future.  The trick is getting them to revisit it.  Unless this person gives the technology another try they will continue to perpetuate misinformation.</p>
+
+<h3>Fear of being made obsolete or jobless</h3>
+
+<p>In this day and age the lifetime tech job doesn't exist.  Even worse, employers are viewing programmers as interchangeable parts of a business; assuming one developer can be swapped out for another.  Then how does one remain important?  <span style="color: #ff0000;">By feigning a high level of expertise</span>.</p>
+
+<p>Unfortunately, the damage done by a developer pretending to know what he's doing doesn't end in the office.  The guy who fooled your recruiters is a pain in the ass everywhere he goes... especially the internet.  What better place is there to pretend you are smarter than someone else than in Internet forums and debates?  Its vast, anonymous, and you can pretty much say anything you want.</p>
+
+<p>So this one hit wonder is going to spend his time, as he does in the office, creating this myth of talent and expertise with anyone who will listen.  <span style="color: #ff0000;">He will unleash a deluge of buzz words</span>.  He will weave tales about wildly successful projects, of wildly varying validity.  And like at work, he will get just enough people to believe him to make your interactions with him miserable.</p>
+
+<h3>Refuse to appear "wrong"</h3>
+
+<p>You'll typically see this when a debate backs one guy into a corner, usually attributed to his own limited knowledge of the technologies in discussion.  Lots of diversions and straying from the topic at hand.  Dialogs like the following are sure fire indicators of this mentality:
+<em> </em></p>
+
+<p><em> </em></p>
+
+<p><em> </em></p>
+
+<p><em> </em></p>
+
+<p><em> </em></p>
+
+<p><em> </em></p>
+
+<p><em> </em></p>
+
+<p><em> </em></p>
+
+<p><em></p>
+
+<div style="padding-left: 25px;"><strong>Zealot</strong>: Python is just a language for blogs and little hobby websites.  You need enterprise level Java for a scalable solution.
+<strong>Normal person</strong>: That's weird, it seems to work for Google and Youtube.
+<strong>Zealot</strong>: Yeah, but only for small parts of their site.  I'm sure they use a better language for their core.
+<strong>Normal person</strong>: Nope, they have both cited that Python is the primary language used in their implementations. Check out this <a href="http://mail.python.org/pipermail/python-dev/2006-December/070323.html">post from the creator of Python about Youtube</a>.
+<strong>Zealot</strong>: Python would never work for a REAL business site though.
+<strong><Real person has given up hope></strong></div>
+
+
+<p></em></p>
+
+<p>The zealot here is blindly adhering to his perception that the technology he was bashing was "bad" for the described situation.  When proven wrong he then throws out vague, unprovable statements in an effort to remain relevant in the conversation.</p>
+
+<h3>Mob mentality</h3>
+
+<p>Misery loves company.  And the more company the more misery.  There's power in those numbers.  <span style="color: #ff0000;">A stereotype's effectiveness is directly proportional to the number of people you can get to believe it</span>.  Get enough people to chant "Java is slow," "Microsoft is evil," or "C++ is too complicated" and it can be enough to divert a person from a technology before they even try it.  And yes, I even dodged Java for a long time because of the first one.</p>
+
+<p>A person allowing themselves to fall victim to this mentality is usually a smattering of many of the above listed mentalities.  Not enough personal experience coupled with a strong allegiance to other technologies that designed with similar tasks in mind can easily make you dismissive of another.  Be vigilant and open minded.  Make your own decisions.</p>
+
+<h3>The Open Source / Vendor Zealot</h3>
+
+<p>This is a mentality I'm sure you are familiar with.  Open source zealots that can't admit that many commercial products far exceed the capabilities offered by open source alternatives.  On the other side of the coin you have vendor zealots who feel that all open source software is invariably buggy, unstable, and inferior to commercial products.</p>
+
+<p>I once brought the idea of converting IIS servers to Apache for our small web presence to one of my bosses.  His reply?  <span style="color:#ff0000;"><i>"Nobody really uses Apache anymore."</i></span>  It blew me away.  The product trusted to run ~60% of the world's websites was dismissed without a second thought due to misconceptions about open source software.</p>
+
+<p>This mentality is a really tough nut to crack.  You take a healthy respect for a technology and compound it with preconceived notions about free/paid alternatives to create unfounded animosity.  The worst part is that there's tons of people who have this mindset and will not only avoid free/paid techs, but slander them as well. Much like fixing phobias, a steady diet of forced exposure to positive events regarding the technology they fear or hate is the road to recovery.</p>
+
+<h2>Final Thought</h2>
+
+<p>If you fit one or more of the mentalities above, take a deep breath before you start hammering me with inflammatory comments.  The fact that you read the article means you are not a terminal case.  You may have a valid allegiance to a great technology.  But has it blinded you to other opportunities to learn and excel?  Have you helped perpetuate myths?</p>
+
+<p><strong><strong><em> Take a hard look at your own views and you may find yourself a little less angry at me and a little better of a developer in the end. </em></strong></strong></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of FLAW_animate</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="models">
+				<node label="tk.3DS" url="source/models/tk.3DS"/>
+			</node>
+			<node label="AwayUIC.mxml" icon="mxmlIcon" url="source/AwayUIC.mxml.html"/>
+			<node selected="true" label="sandbox.mxml" icon="mxmlAppIcon" url="source/sandbox.mxml.html"/>
+		</node>
+	</nodes>
+</index>

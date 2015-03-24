@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: appcelerator | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/appcelerator/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Good-bye Appcelerator]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2015/03/24/good-bye-appcelerator/"/>
+    <updated>2015-03-24T08:20:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2015/03/24/good-bye-appcelerator</id>
+    <content type="html"><![CDATA[<p><img src="/images/codestrong.jpg" width="640" height="360" title="castaway" ></p>
+
+<p>It's been an amazing 3.5 years, but all incredible, life-and-career-changing experiences must eventually come to an end. This week I'll be leaving my role as Senior Engineer at <a href="http://www.appcelerator.com/">Appcelerator</a> and moving on to <a href="http://innovu.com/">Innovu</a>, a new startup in my hometown of Pittsburgh.</p>
+
+<!-- more -->
+
+
+<h2>Why?</h2>
+
+<p>Pure and simple, I have an opportunity to be the Director of Software Development at an up and coming startup run by a handful of people I've come to respect and trust over the course of over a decade. I'll be choosing the technology stack, building the team from the ground up (more on that <a href="#coming">below</a>), and having an impact on company success to a degree I never have before. It's a huge career move, it's a risk, and I'm ready for both.</p>
+
+<p>Despite how obviously fantastic this opportunity is, I still labored over the idea of leaving Appcelerator. I'm going to miss the whole crew a lot. Ironically, without having worked with a bunch of brilliant people on ground-breaking tech for an amazing developer community in the meat grinder of Silicon Valley, I wouldn't have the confidence to take this next big step. I blame Appcelerator for my ambition!</p>
+
+<h2>Thank you!</h2>
+
+<p>As I've said at least a dozen times in the last week, I've taken way more from my fellow Appcelerati than I think I've given. In particular, a few people I'd really like to thank (past and present):</p>
+
+<ul>
+<li><a href="https://twitter.com/jhaynie">Jeff Haynie</a> - For giving me an amount of trust and autonomy generally reserved for family members.</li>
+<li><a href="https://twitter.com/bingomar">Ingo Muschenetz</a> &amp; <a href="https://www.linkedin.com/in/neerajgupta1">Neeraj Gupta</a> - For doing the impossible: making a hip-shooting, code-slinging engineer see that process is <strong>incredible</strong> for productivity when executed properly.</li>
+<li><a href="https://twitter.com/cb1kenobi">Chris Barber</a> &amp; <a href="https://twitter.com/dawsontoth">Dawson Toth</a> - My insecure overachiever complex never allows me to get comfortable unless I think I'm the best developer in the room. Chris &amp; Dawson never let me get comfortable.</li>
+<li><a href="https://twitter.com/kevinwhinnery">Kevin Whinnery</a> - He's my spirit animal.</li>
+<li><a href="https://twitter.com/fusion94">Tony Guntharp</a> - For taking a loud-mouthed mobile development blogger and giving him a chance to put his money where his mouth is.</li>
+<li><a href="https://twitter.com/aaronksaunders">Aaron Saunders</a> &amp; <a href="https://twitter.com/fokkezb">Fokke Zandenberg</a> - The expanse of knowledge, contribution, and material these guys generated from the community over the years had most people assuming they were employees (and Fokke is now!). Thanks for setting the bar so high for the community.</li>
+<li><strong>The Appcelerator Community</strong> - Maybe I should have put you men and women first. The community is why I joined Appcelerator, and it's what drove me most days. When you build SDKs, frameworks, and tooling for a living, you celebrate vicariously through your community's innovations and successes. Fortunately for the engineers at Appcelerator, we got to enjoy these frequently. Keep on kicking ass.</li>
+</ul>
+
+
+<p>I'm sure there's a whole bunch of people I'm forgetting to thank, so to all of you, <strong>THANK YOU!</strong></p>
+
+<h2>What about your OSS projects?</h2>
+
+<p>As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an <a href="mailto:anthony.lukasavage@gmail.com">email</a> or just ping me on <a href="https://twitter.com/tonylukasavage">twitter</a>.</p>
+
+<ul>
+<li><a href="https://github.com/tonylukasavage/ti-mocha">ti-mocha</a> - Mocha testing ported to Titanium</li>
+<li><a href="https://github.com/tonylukasavage/triple">triple</a> - REPL for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/ti-commonjs">ti-commonjs</a> - node.js-style commonjs implementation for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/grunt-titanium">grunt-titanium</a> - Grunt plugin for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/grunt-alloy">grunt-alloy</a> - Grunt plugin for Alloy</li>
+<li><a href="https://github.com/tonylukasavage/tiapp.xml">tiapp.xml</a> - node.js module for editing tiapp.xml files</li>
+<li><a href="https://github.com/tonylukasavage/path.animator">path-animator</a> &amp; <a href="https://github.com/tonylukasavage/pathmenu.js">pathmenu.js</a> - iOS native module and Titanium code for Path-like menu</li>
+<li><a href="https://github.com/tonylukasavage/ti-fs">ti-fs</a> - node.js <code>fs</code> for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/ti-console">ti-console</a> - node.js <code>console</code> for Titanium</li>
+<li><a href="https://github.com/tonylukasavage/vm-titanium">vm-titanium</a> - node.js <code>vm</code> for Titanium (experimental)</li>
+<li><a href="https://github.com/tonylukasavage/titanium-os">titanium-os</a> - node.js <code>os</code> for Titanium</li>
+</ul>
+
+
+<p><a name="coming"></a></p>
+
+<h2>Who's coming with me?</h2>
+
+<p>Now that I'm moving on to Innovu and building a new team, I'm curious if there's anybody out there (or anyone you know) who would want to come work with me? Here's some purposely terse job descriptions. I hate overly-detailed, impossible-to-meet criteria for tech jobs.</p>
+
+<p>Be smart. Want to learn. Play nice. Work hard. The rest is details.</p>
+
+<ul>
+<li><strong>Front-end Web Developer</strong> - Essentially I'm looking for someone hands-on with a strong background in web presentation and interaction. You should know what that encompasses for modern web development.</li>
+<li><strong>Javascript Developer</strong> - I want junior devs who at the very least have a good familiarity with Javascript and want to work with both node.js and web technologies. Committment to education exceeds the need for existing chops.</li>
+</ul>
+
+
+<p>Python, Postgres, and AWS experience a plus for either. Like I mentioned above, shoot me an <a href="mailto:alukasavage@innovu.com">email</a> if you're interested or know someone who might be.</p>
+
+<h2>It's not like I'm dying or anything</h2>
+
+<p>I'll be around. You know where to <a href="https://twitter.com/tonylukasavage">find me</a>. I'll still be very active in the open source community. I'll even be likely to host the local <a href="http://www.meetup.com/Pittsburgh-JavaScript/">Pittsburgh Javascript meetup</a> at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!</p>
+
+<p>In closing, I'll just leave you with this: <em>{{profound_life_and_career_insight}}</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Appcelerator API Builder Demo]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2014/07/21/appcelerator-api-builder-demo/"/>
+    <updated>2014-07-21T15:47:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2014/07/21/appcelerator-api-builder-demo</id>
+    <content type="html"><![CDATA[<p>For the last few months I've deviated from my usual <a href="http://www.appcelerator.com/platform/alloy/">Alloy</a> duties at Appcelerator. I've instead been working on an internal project with <a href="https://twitter.com/dawsontoth">Dawson Toth</a>, <a href="https://twitter.com/smurthas">Simon Murtha Smith</a>, and <a href="https://twitter.com/jhaynie">Jeff Haynie</a> (since he so quickly gets bored of being CEO). We've had a few names for it so far, but for the sake of this post I'll refer to it as <strong>API Builder</strong>.</p>
+
+<p>In short, it bridges the gap between app and API development, taking the functional links of the <a href="http://www.appcelerator.com/platform/appcelerator-platform/">Appcelerator Platform</a> and turning them into a powerful, cohesive chain. The following screencast is a (very early) preview where I'll show you the following:</p>
+
+<ul>
+<li>Creating an API against arbitrary data source(s)</li>
+<li>Publishing that API to <a href="http://docs.appcelerator.com/cloud/latest/#!/guide/node">node.acs</a></li>
+<li>Creating a secure, API-specific SDK for <a href="http://www.appcelerator.com/titanium/">Titanium</a></li>
+<li>Downloading and installing that SDK via <a href="http://www.appcelerator.com/platform/appcelerator-studio/">Appcelerator Studio</a></li>
+<li>Using that SDK to make API calls to the published node.acs endpoints</li>
+</ul>
+
+
+<p>All of that done automatically, simply by defining your API in the Appcelerator 360 dashboard. Way more to come, not publicly available yet, so stay tuned.</p>
+
+<iframe width="640" height="480" src="http://tonylukasavage.github.com//www.youtube.com/embed/6J07tU2Wejg" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Path menu with Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2012/02/15/path-menu-with-appcelerator-titanium/"/>
+    <updated>2012-02-15T20:57:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2012/02/15/path-menu-with-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<h2>Here we go again...</h2>
+
+
+<p>Yep, another cross-post from the Appcelerator blog. This time it shows off how I managed to implement the dynamic and unique <a href="https://path.com" target="_blank">Path</a> menu in Titanium. From a single code base the menu is fully functional, with native performance, on both Android and iOS.</p>
+
+<ul style="padding-bottom:20px;">
+<li><a href="http://developer.appcelerator.com/blog/2012/02/forging-titanium-episode-22-path-like-menu.html" target="_blank">Original blog post</a></li>
+<li><a href="https://github.com/appcelerator-developer-relations/Forging-Titanium/tree/master/ep-022" target="_blank">Full source code on Github</a></li>
+</ul>
+
+
+
+
+<h2>Video</h2>
+
+
+
+
+<iframe src="http://player.vimeo.com/video/36846582?title=0&amp;byline=0&amp;portrait=0" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[3D, Sockets, and Native Android with Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/12/02/3d--sockets--and-native-android-with-appcelerator-titanium/"/>
+    <updated>2011-12-02T09:22:00-05:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/12/02/3d--sockets--and-native-android-with-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<p>Yeah, yet another cross-post from the Appcelerator Developer blog. This was a fun one, though, where I got to show off some really cool features and functionality of the <a href="http://wiki.appcelerator.org/display/guides/Quick+Start" target="_blank">Titanium platform</a>. There's a lot covered so it's stretched over a 3 part series. I've brought them all together here for your viewing pleasure. The <b>original blog post links</b> included with each video contain links for all the source code and references associated with each video.</p>
+
+<p>Here's the 10 second summary of each part:</p>
+
+<ol>
+  <li>Create a <a href="http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide" target="_blank">native Android module</a> to determine a device's physical orientation as <a href="http://en.wikipedia.org/wiki/Azimuth#Navigation" target="_blank">azimuth</a>, pitch, and roll</li>
+  <li>Use the above data to animate and render a 3D model using a <a href="http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.WebView-object" target="_blank">Titanium WebView</a> &lt;canvas&gt; and <a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js</a></li>
+  <li>Represent this 3D model on multiple remote client devices simultaneously using high volume, realtime network communication via <a href="http://wiki.appcelerator.org/display/guides/Sockets" target="_blank">Titanium Sockets</a></li>
+</ol>
+
+
+
+
+<hr>
+
+
+<h2>Part 1 - Native Android Module</h2>
+
+
+<p><b>>>></b> <a href="http://developer.appcelerator.com/blog/2011/11/forging-titanium-episode-14-twisti-part-1-android-module.html">Original blog post</a></p>
+
+<iframe src="http://player.vimeo.com/video/31868247?title=0&amp;byline=0&amp;portrait=0" width="600" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<hr>
+
+
+
+
+<h2>Part 2 - 3D With Three.js</h2>
+
+
+<p><b>>>></b> <a href="http://developer.appcelerator.com/blog/2011/11/forging-titanium-episode-15-twisti-part-2-3d-with-three-js.html">Original blog post</a></p>
+
+<iframe src="http://player.vimeo.com/video/32102962?title=0&amp;byline=0&amp;portrait=0" width="600" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<hr>
+
+
+
+
+<h2>Part 3 - Sockets</h2>
+
+
+<p><b>>>></b> <a href="http://developer.appcelerator.com/blog/2011/12/forging-titanium-episode-16-twisti-part-3-sockets.html">Original blog post</a></p>
+
+<iframe src="http://player.vimeo.com/video/32976053?title=0&amp;byline=0&amp;portrait=0" width="600" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Forms with Appcelerator Titanium]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2011/10/14/forms-with-appcelerator-titanium/"/>
+    <updated>2011-10-14T07:49:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2011/10/14/forms-with-appcelerator-titanium</id>
+    <content type="html"><![CDATA[<p>I don't cross post often from the <a href="http://developer.appcelerator.com/blog/" target="_blank">developer blog over at Appcelerator</a>, but people seem to be liking this screencast so I thought I'd share. I put together some code and a video showing off how you can you use cross platform design, modular Javascript, and of course, Titanium to deliver a simplified interface for creating forms in your mobile apps. Aside from it being easy for developers to implement, there's also a special focus on making the forms as easy to navigate as possible for the end user.</p>
+
+<p>I've tried not to overpopulate this blog with Appcelerator content ever since joining them as a platform evangelist. I think I've earned an Appcelerator post though after talking exclusively about PhoneGap and Adobe in my last one though. ;-)</p>
+
+<iframe src="http://player.vimeo.com/video/30387041?title=0&amp;byline=0&amp;portrait=0" width="600" height="340" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+
+
+
+
+<h2>Additional Resources</h2>
+
+
+<ul>
+<li><a href="https://github.com/appcelerator-developer-relations/Forging-Titanium/tree/master/ep-010/Forms">Forms app on Github</a></li>
+<li><a href="http://developer.appcelerator.com/blog/2011/08/forging-titanium-episode-1-commonjs-modules.html">Forging Titanium Episode 1: CommonJS Modules</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

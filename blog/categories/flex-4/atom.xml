@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: flex 4 | Tony Lukasavage]]></title>
+  <link href="http://tonylukasavage.github.com/blog/categories/flex-4/atom.xml" rel="self"/>
+  <link href="http://tonylukasavage.github.com/"/>
+  <updated>2015-03-24T14:53:38-04:00</updated>
+  <id>http://tonylukasavage.github.com/</id>
+  <author>
+    <name><![CDATA[Tony Lukasavage]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Flash Builder 4: addElement() instead of addChild()]]></title>
+    <link href="http://tonylukasavage.github.com/blog/2010/07/27/flash-builder-4--addelement---instead-of-addchild--/"/>
+    <updated>2010-07-27T07:56:00-04:00</updated>
+    <id>http://tonylukasavage.github.com/blog/2010/07/27/flash-builder-4--addelement---instead-of-addchild--</id>
+    <content type="html"><![CDATA[<p>Here's a quick tip for those of you who are also switching to Flex 4.x/Flash Builder 4 from Flex 3.x/Flex Builder 3.  In the past when you wanted to add a Flash DisplayObject to the main Application canvas you'd wrap the DisplayObject in a UIComponent, then add the UIComponent to the Application as a child, like this:</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">var sprite:Sprite = new Sprite();
+var ui:UIComponent = new UIComponent();
+ui.addChild(sprite);
+this.addChild(ui);</code></pre>
+
+
+<br>
+
+
+<p>Try that in Flash Builder 4 and you'll encounter a fun error that looks like this:</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">Error: addChild() is not available in this class. Instead, use
+addElement() or modify the skin, if you have one.</code></pre>
+
+
+<br>
+
+
+<p>To resolve it, simply change the last line of the previous code to use addElement() instead (change in <span style="color: #ff0000;">red</span>):</p>
+
+<pre style="background:#cccccc;"><code style="color:#000000; font-weight:bold; font-size:1.1em;">var sprite:Sprite = new Sprite();
+var ui:UIComponent = new UIComponent();
+ui.addChild(sprite);
+<span style="color: #ff0000;">this.addElement(ui);</span></code></pre>
+
+
+<br>
+
+]]></content>
+  </entry>
+  
+</feed>
