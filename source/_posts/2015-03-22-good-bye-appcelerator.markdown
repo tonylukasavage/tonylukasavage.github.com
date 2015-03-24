@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Good-bye Appcelerator"
-date: 2015-03-22 08:20
+date: 2015-03-24 08:20
 comments: true
 categories: [appcelerator, titanium, innovu, javascript, oss]
 published: true
