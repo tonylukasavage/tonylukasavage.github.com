@@ -35,7 +35,7 @@ I'm sure there's a whole bunch of people I'm forgetting to thank, so to all of y
 
 ## What about your OSS projects?
 
-As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To ensure that doesn't happen, I'll be donating the following repos to the [Appcelerator organization](https://github.com/appcelerator) where they'll be maintained indefintely.
+As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an [email](mailto:anthony.lukasavage@gmail.com) or just ping me on [twitter](https://twitter.com/tonylukasavage).
 
 * [ti-mocha](https://github.com/tonylukasavage/ti-mocha) - Mocha testing ported to Titanium
 * [triple](https://github.com/tonylukasavage/triple) - REPL for Titanium
@@ -44,15 +44,10 @@ As many of you know, I've got a multitude of Appcelerator-based open source side
 * [grunt-alloy](https://github.com/tonylukasavage/grunt-alloy) - Grunt plugin for Alloy
 * [tiapp.xml](https://github.com/tonylukasavage/tiapp.xml) - node.js module for editing tiapp.xml files
 * [path-animator](https://github.com/tonylukasavage/path.animator) & [pathmenu.js](https://github.com/tonylukasavage/pathmenu.js) - iOS native module and Titanium code for Path-like menu
-
-Additionally, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an [email](mailto:anthony.lukasavage@gmail.com) or just ping me on [twitter](https://twitter.com/tonylukasavage).
-
 * [ti-fs](https://github.com/tonylukasavage/ti-fs) - node.js `fs` for Titanium
 * [ti-console](https://github.com/tonylukasavage/ti-console) - node.js `console` for Titanium
 * [vm-titanium](https://github.com/tonylukasavage/vm-titanium) - node.js `vm` for Titanium (experimental)
 * [titanium-os](https://github.com/tonylukasavage/titanium-os) - node.js `os` for Titanium
-
-_[Pier](https://twitter.com/_pier), I'm looking in your direction_
 
 <a name="coming"></a>
 ## Who's coming with me?
