@@ -68,9 +68,9 @@ Python, Postgres, and AWS experience a plus for either. Like I mentioned above, 
 
 ## It's not like I'm dying or anything
 
-I'll be around. You know where to find me. I'll still be very active in the open source community. I'll even be likely to host the local [Pittsburgh Javascript meetup][] at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!
+I'll be around. You know where to [find me](https://twitter.com/tonylukasavage). I'll still be very active in the open source community. I'll even be likely to host the local [Pittsburgh Javascript meetup][] at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!
 
-In closing, I'll just leave you with this: _{% raw %}{{profound_philosophical_career_insight}}{% endraw %}_
+In closing, I'll just leave you with this: _{% raw %}{{profound_life_and_career_insight}}{% endraw %}_
 
 
 [Appcelerator]: http://www.appcelerator.com/
