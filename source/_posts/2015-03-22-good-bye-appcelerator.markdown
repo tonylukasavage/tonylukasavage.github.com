@@ -25,7 +25,7 @@ As I've said at least a dozen times in the last week, I've taken way more from m
 
 * [Jeff Haynie][] - For giving me an amount of trust and autonomy generally reserved for family members.
 * [Ingo Muschenetz][] & [Neeraj Gupta][] - For doing the impossible: making a hip-shooting, code-slinging engineer see that process is **incredible** for productivity when executed properly.
-* [Chris Barber][] - My insecure overachiever complex never allows me to get comfortable unless I think I'm the best developer in the room. Chris never let me get comfortable.
+* [Chris Barber][] & [Dawson Toth][] - My insecure overachiever complex never allows me to get comfortable unless I think I'm the best developer in the room. Chris & Dawson never let me get comfortable.
 * [Kevin Whinnery][] - He's my spirit animal.
 * [Tony Guntharp][] - For taking a loud-mouthed mobile development blogger and giving him a chance to put his money where his mouth is.
 * [Aaron Saunders][] & [Fokke Zandenberg][] - The expanse of knowledge, contribution, and material these guys generated from the community had most people assuming they were employees (and Fokke is now!). Thanks for setting the bar so high for the community.
@@ -53,18 +53,18 @@ As many of you know, I've got a multitude of Appcelerator-based open source side
 <a name="coming"></a>
 ## Who's coming with me?
 
-Now that I'm moving on to Innovu and building a new team, I'm curious if there's anybody out there (or anyone you know) who would want to come work with me? Here's the job listings you'll care about the most. The descriptions are purposely terse because I hate overly-detailed, impossile-to-meet criteria for jobs. Be smart. Want to learn. Work hard. The rest is details.
+Now that I'm moving on to Innovu and building a new team, I'm curious if there's anybody out there (or anyone you know) who would want to come work with me? Here's some purposely terse job descriptions. I hate overly-detailed, impossile-to-meet criteria for tech jobs.
 
-* [Front-end Web Developer]()
-* [Javascript Developer]()
+Be smart. Want to learn. Play nice. Work hard. The rest is details.
 
-For the former I'm essentially looking for someone hands-on with a strong background in web presentation and interaction. You should know what that encompasses for modern web development. For the latter, I want people who at the very least have a good familiarity with Javascript and want to work with both node.js and web development. Python, Postgres, and AWS experience a plus for either.
+* **Front-end Web Developer** - Essentially I'm looking for someone hands-on with a strong background in web presentation and interaction. You should know what that encompasses for modern web development.
+* **Javascript Developer** - I want junior devs who at the very least have a good familiarity with Javascript and want to work with both node.js and web technologies. Committment to education exceeds the need for existing chops.
 
-Like I mentioned above, shoot me an [email](mailto:anthony.lukasavage@gmail.com) if you're interested or know someone who might be.
+Python, Postgres, and AWS experience a plus for either. Like I mentioned above, shoot me an [email](mailto:alukasavage@innovu.com) if you're interested or know someone who might be.
 
 ## It's not like I'm dying or anything
 
-I'll be around. You know where to find me. I'll still be very active in the open source community. I'll even be likely to host the local [Pittsburgh Javascript meetup](http://www.meetup.com/Pittsburgh-JavaScript/) at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!
+I'll be around. You know where to find me. I'll still be very active in the open source community. I'll even be likely to host the local [Pittsburgh Javascript meetup][] at the new Innovu offices in Station Square once we get set up. It's going to be a fun time!
 
 In closing, I'll just leave you with this: _{% raw %}{{profound_philosophical_career_insight}}{% endraw %}_
 
@@ -73,10 +73,12 @@ In closing, I'll just leave you with this: _{% raw %}{{profound_philosophical_ca
 [Innovu]: http://innovu.com/
 [Alloy]: https://github.com/appcelerator/alloy
 [Jeff Haynie]: https://twitter.com/jhaynie
-[Ingo Muschenetz]: https://www.linkedin.com/profile/view?id=89300
+[Ingo Muschenetz]: https://twitter.com/bingomar
 [Neeraj Gupta]: https://www.linkedin.com/in/neerajgupta1
 [Chris Barber]: https://twitter.com/cb1kenobi
+[Dawson Toth]: https://twitter.com/dawsontoth
 [Kevin Whinnery]: https://twitter.com/kevinwhinnery
 [Tony Guntharp]: https://twitter.com/fusion94
 [Aaron Saunders]: https://twitter.com/aaronksaunders
 [Fokke Zandenberg]: https://twitter.com/fokkezb
+[Pittsburgh Javascript meetup]: http://www.meetup.com/Pittsburgh-JavaScript/
