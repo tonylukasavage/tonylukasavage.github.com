@@ -4,7 +4,7 @@
   <title><![CDATA[Category: innovu | Tony Lukasavage]]></title>
   <link href="http://tonylukasavage.github.com/blog/categories/innovu/atom.xml" rel="self"/>
   <link href="http://tonylukasavage.github.com/"/>
-  <updated>2015-03-25T12:19:28-04:00</updated>
+  <updated>2015-03-25T12:23:24-04:00</updated>
   <id>http://tonylukasavage.github.com/</id>
   <author>
     <name><![CDATA[Tony Lukasavage]]></name>
@@ -50,7 +50,9 @@
 
 <h2>What about your OSS projects?</h2>
 
-<p>As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an <a href="mailto:anthony.lukasavage@gmail.com">email</a> or just ping me on <a href="https://twitter.com/tonylukasavage">twitter</a>.</p>
+<p>As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. <del>To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an <a href="mailto:anthony.lukasavage@gmail.com">email</a> or just ping me on <a href="https://twitter.com/tonylukasavage">twitter</a>.</del></p>
+
+<blockquote><p><strong>UPDATE:</strong> All projects have had volunteers step forward to continue maintaining them. Thank you so much for the extremely quick response!</p></blockquote>
 
 <h4>Thanks <a href="https://twitter.com/appcelerator">Appcelerator</a> for taking these:</h4>
 
