@@ -35,8 +35,9 @@ I'm sure there's a whole bunch of people I'm forgetting to thank, so to all of y
 
 ## What about your OSS projects?
 
-As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an [email](mailto:anthony.lukasavage@gmail.com) or just ping me on [twitter](https://twitter.com/tonylukasavage).
+As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. ~~To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an [email](mailto:anthony.lukasavage@gmail.com) or just ping me on [twitter](https://twitter.com/tonylukasavage).~~
 
+> **UPDATE:** All projects have had volunteers step forward to continue maintaining them. Thank you so much for the extremely quick response!
 
 #### Thanks [Appcelerator](https://twitter.com/appcelerator) for taking these:
 
