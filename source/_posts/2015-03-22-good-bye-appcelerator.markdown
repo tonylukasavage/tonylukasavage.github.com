@@ -38,7 +38,6 @@ I'm sure there's a whole bunch of people I'm forgetting to thank, so to all of y
 As many of you know, I've got a multitude of Appcelerator-based open source side projects. Realistically, I'm just not going to have the time to spend on many of them that they deserve. Many of these projects are regularly relied on by the community, so I don't want to see them turn to rust while others still need them. To that end, if you're interested in being made a committer/npm owner on any of the following projects, shoot me an [email](mailto:anthony.lukasavage@gmail.com) or just ping me on [twitter](https://twitter.com/tonylukasavage).
 
 
-* [triple](https://github.com/tonylukasavage/triple) - REPL for Titanium
 * [grunt-titanium](https://github.com/tonylukasavage/grunt-titanium) - Grunt plugin for Titanium
 * [grunt-alloy](https://github.com/tonylukasavage/grunt-alloy) - Grunt plugin for Alloy
 
@@ -46,6 +45,10 @@ As many of you know, I've got a multitude of Appcelerator-based open source side
 
 * [ti-mocha](https://github.com/tonylukasavage/ti-mocha) - Mocha testing ported to Titanium
 * [tiapp.xml](https://github.com/tonylukasavage/tiapp.xml) - node.js module for editing tiapp.xml files
+
+#### Thanks [Andrew McElroy](https://twitter.com/sophrinix) & [Trevor Ward](https://twitter.com/untward) for taking:
+
+* [triple](https://github.com/tonylukasavage/triple) - REPL for Titanium
 
 #### Thanks [Pier Paolo Ramon](https://twitter.com/_pier) for taking these:
 
